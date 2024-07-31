@@ -2,13 +2,13 @@ import { Metadata } from "next";
 import Image from "next/image";
 
 export const metadata: Metadata = {
-    title: "login - Cozy Care",
+    title: "Home - Cozy Care",
 };
 
 export default function Home() {
     return (
         <main>
-            Hello, login
+            Hello, home
         </main>
     );
 }

@@ -1,31 +1,13 @@
+import { Metadata } from "next";
 import Image from "next/image";
+
+export const metadata: Metadata = {
+  title: "Welcome - Cozy Care",
+};
 
 export default function Home() {
   return (
     <div>
-      <div className="flex justify-between px-28 py-4 absolute w-full">
-
-        {/* Logo */}
-        <div className="flex items-center space-x-3">
-          <Image
-            src='/favicon.ico'
-            width={40}
-            height={40}
-            alt="Ricardo"
-          />
-          <div>Cozy Care</div>
-        </div>
-
-        {/* Register */}
-        <div className="flex items-center">
-          <a href="">
-            <div className="bg-black text-white px-3 py-2 rounded-xl">
-              เข้าสู่ระบบ
-            </div>
-          </a>
-        </div>
-      </div>
-
       <div className="h-screen flex-col content-center">
         <div className="flex items-center justify-center">
           {/* Image */}
