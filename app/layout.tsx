@@ -20,26 +20,19 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-
         <div className="flex justify-between px-28 py-4 absolute w-full">
-
           {/* Logo */}
           <div className="flex items-center space-x-3">
-            <Image
-              src='/favicon.ico'
-              width={40}
-              height={40}
-              alt="Ricardo"
-            />
+            <Image src="/favicon.ico" width={40} height={40} alt="Ricardo" />
             <div>Cozy Care</div>
           </div>
 
           {/* Register */}
           <div className="flex items-center">
             <a href="">
-              <div className="bg-black text-white px-3 py-2 rounded-xl">
+              <button className="bg-black hover:bg-gray-800 text-white font-bold py-2 px-4 rounded">
                 เข้าสู่ระบบ
-              </div>
+              </button>
             </a>
           </div>
         </div>

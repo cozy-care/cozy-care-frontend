@@ -5,7 +5,7 @@ export const metadata: Metadata = {
     title: "login - Cozy Care",
 };
 
-export default function Home() {
+export default function Login() {
     return (
         <main>
             Hello, login
