@@ -8,7 +8,7 @@ export const metadata: Metadata = {
 export default function Register() {
   return (
     <div className="flex w-screen h-screen">
-      <div className="w-5/12 h-full bg-slate-400 ">
+      <div className="w-5/12 h-full bg-red-400 ">
         <div className="bg-slate-200 p-4 rounded-l-xl w-3/4 ">
           <div className="flex flex-col place-items-center">เริ่มต้นใช้งาน</div>
           <div className="">ทำไมต้องเลือกเรา?</div>
