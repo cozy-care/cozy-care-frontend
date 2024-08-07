@@ -9,7 +9,7 @@ export default function Welcome() {
   return (
     <div>
       <div className="h-screen flex-col content-center">
-        <div className="flex items-center justify-center mt-[40px]">
+        <div className="flex items-center justify-center mt-[40px] gap-x-12">
           {/* Image */}
           <div
             className="rounded-[50%] w-[800px] h-[650px] border-black border-2"
@@ -22,7 +22,7 @@ export default function Welcome() {
           ></div>
 
           {/* Text */}
-          <div className="bg-gray-500 w-[700px] h-[400px] flex-col justify-center content-center gap-4">
+          <div className="w-[700px] h-[400px] flex-col justify-center content-center gap-4">
             <div className="font-extrabold mx-auto w-max text-2xl ">
               ร่วมเป็นผู้ดูแลกับเรา
             </div>
