@@ -30,4 +30,26 @@ body {
   .text-balance {
     text-wrap: balance;
   }
-} */
+} 
+p {
+  font-size: 1rem; 
+  line-height: 1.5rem; 
+}
+  
+
+*/
+
+ul {
+  list-style-type: disc; /* ใช้จุดเป็นสัญลักษณ์ของรายการ */
+  margin-left: 20px; /* ระยะห่างจากขอบซ้าย */
+}
+
+li {
+  margin-bottom: 20px; /* ระยะห่างระหว่างรายการ */
+}
+
+h1 {
+  font-size: 1.875rem; /* 30px */
+  line-height: 2.25rem; /* 36px */
+  font-weight: 700;
+}
