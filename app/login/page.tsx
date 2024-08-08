@@ -1,10 +1,12 @@
-import { Metadata } from "next";
+'use client'
 
-export const metadata: Metadata = {
-    title: "Login - Cozy Care",
-};
+import { useEffect } from "react";
 
 export default function Login() {
+
+    useEffect(() => {
+        document.title = "Login - Cozy Care";
+    }, []);
     return (
         <main>
             Hello, login

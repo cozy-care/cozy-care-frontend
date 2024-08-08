@@ -2,17 +2,23 @@
 
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
+import {ArrowBackIos, ArrowForwardIos} from '@mui/icons-material';
 
 export default function Welcome() {
   const router = useRouter()
-  
+
   useEffect(() => {
     document.title = "Welcome - Cozy Care";
   }, []);
 
   return (
-    <div className="h-screen flex-col content-center">
-      <div className="flex items-center justify-center gap-x-10 mt-[40px]">
+    <div className="h-screen flex content-center">
+      <button className="w-[80px] h-full from-slate-300 bg-gradient-to-r">
+        <ArrowBackIos />
+      </button>
+
+      <div className="flex items-center justify-center gap-x-10 mt-[40px] mx-auto">
+
         {/* Image */}
         <div
           className="rounded-[50%] w-[600px] h-[450px] border-slate-800 border-2"
@@ -25,7 +31,7 @@ export default function Welcome() {
         ></div>
 
         {/* Text */}
-        <div className="w-[700px] h-[400px] flex-col content-center gap-9">
+        <div className="w-[700px] h-[400px] flex-col content-center gap-9 mt-[48px]">
           <h1 className="mx-auto w-max text-2xl">
             ร่วมเป็นผู้ดูแลกับเรา
           </h1>
@@ -44,13 +50,19 @@ export default function Welcome() {
               เริ่มต้นใช้งาน
             </button>
           </div>
+
+          <div className="flex justify-center gap-5 mx-auto mt-12">
+            <button className="w-[15px] h-[15px] bg-slate-800 rounded-[50%] my-auto" />
+            <button className="w-[12px] h-[12px] bg-slate-500 rounded-[50%] my-auto" />
+          </div>
         </div>
       </div>
 
-      <div className="flex gap-5 py-4 w-max h-max mx-auto">
-        <button className="w-[15px] h-[15px] bg-slate-800 rounded-[50%] my-auto"/>
-        <button className="w-[12px] h-[12px] bg-slate-500 rounded-[50%] my-auto"/>
-      </div>
+      <button className="w-[80px] h-full from-slate-300 bg-gradient-to-l">
+        <ArrowForwardIos />
+      </button>
+
     </div>
+
   );
 }
