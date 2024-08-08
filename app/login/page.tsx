@@ -1,8 +1,7 @@
 import { Metadata } from "next";
-import Image from "next/image";
 
 export const metadata: Metadata = {
-    title: "login - Cozy Care",
+    title: "Login - Cozy Care",
 };
 
 export default function Login() {
