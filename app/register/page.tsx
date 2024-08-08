@@ -11,7 +11,7 @@ export default function Register() {
   return (
     <div className="flex w-screen h-screen static">
       <div className="w-5/12 h-full bg-slate-400 static ">
-        <div className="bg-slate-200 p-4 rounded-l-xl w-3/4 h-4/5 relative top-24 left-40 ">
+        <div className="flex flex-col justify-center  bg-slate-200 p-4 rounded-l-xl w-3/4 h-4/5 relative top-24 left-40 ">
           <h1 className="flex justify-center  text-indigo-700 ">
             เริ่มต้นใช้งาน
           </h1>
@@ -44,11 +44,11 @@ export default function Register() {
         </div>
       </div>
       <div className="w-7/12 h-auto bg-slate-300 static">
-        <div className="bg-slate-100 p-4 rounded-r-xl relative top-24 w-4/5 h-4/5 flex justify-center items-center">
+        <div className="flex flex-col justify-center items-center bg-slate-100 p-4 rounded-r-xl relative top-24 w-4/5 h-4/5 ">
           <form>
-            <fieldset className="flex-row ">
+            <fieldset>
               <legend className="text-center my-7 ">
-                <h2 className="flex-col justify-center text-3xl font-bold text-indigo-700">
+                <h2 className="flex flex-col justify-center items-center text-3xl font-bold text-indigo-700">
                   ลงทะเบียน
                 </h2>
               </legend>
@@ -108,7 +108,7 @@ export default function Register() {
                   type="password"
                   id="confirm_password"
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  "
-                  placeholder="ชื่อผู้ใช้"
+                  placeholder="ยืนยันรหัสผ่าน"
                   required
                 />
               </div>
