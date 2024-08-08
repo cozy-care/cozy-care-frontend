@@ -1,11 +1,13 @@
-import { Metadata } from "next";
-import Image from "next/image";
+'use client'
 
-export const metadata: Metadata = {
-  title: "Register - Cozy Care",
-};
+import { useEffect } from "react";
 
 export default function Register() {
+  
+  useEffect(() => {
+    document.title = "Register - Cozy Care";
+  }, []);
+  
   return (
     <div className="flex w-screen h-screen static">
       <div className="w-5/12 h-full bg-slate-400 static ">
@@ -50,10 +52,10 @@ export default function Register() {
                   ลงทะเบียน
                 </h2>
               </legend>
-              <div className="m-auto">
+              <div className="m-auto mb-2">
                 <label
                   htmlFor="user_name"
-                  className=" block mb-2 text-sm font-medium text-gray-900 "
+                  className=" block text-sm font-medium text-gray-900 "
                 >
                   ชื่อผู้ใช้
                 </label>
@@ -65,10 +67,10 @@ export default function Register() {
                   required
                 />
               </div>
-              <div>
+              <div className="mb-2">
                 <label
                   htmlFor="e_mail"
-                  className="block mb-2 text-sm font-medium text-gray-900"
+                  className="block text-sm font-medium text-gray-900"
                 >
                   อีเมล
                 </label>
@@ -80,10 +82,10 @@ export default function Register() {
                   required
                 />
               </div>
-              <div>
+              <div className="mb-2">
                 <label
                   htmlFor="password"
-                  className="block mb-2 text-sm font-medium text-gray-900"
+                  className="block text-sm font-medium text-gray-900"
                 >
                   รหัสผ่าน
                 </label>
@@ -95,10 +97,10 @@ export default function Register() {
                   required
                 />
               </div>
-              <div>
+              <div className="mb-2">
                 <label
                   htmlFor="confirm_password"
-                  className="block mb-2 text-sm font-medium text-gray-900  "
+                  className="block text-sm font-medium text-gray-900  "
                 >
                   ยืนยันรหัสผ่าน
                 </label>

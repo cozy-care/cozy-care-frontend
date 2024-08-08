@@ -1,11 +1,12 @@
-import { Metadata } from "next";
-import Image from "next/image";
+'use client'
 
-export const metadata: Metadata = {
-    title: "Home - Cozy Care",
-};
+import { useEffect } from "react";
 
 export default function Home() {
+
+    useEffect(() => {
+        document.title = "Home - Cozy Care";
+    }, []);
     return (
         <main>
             Hello, home
