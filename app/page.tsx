@@ -12,7 +12,7 @@ export default function Welcome() {
   }, []);
 
   return (
-    <div className="h-screen flex content-center">
+    <main className="h-screen flex content-center mt-[-56px]">
       <button className="w-[80px] h-full from-slate-300 bg-gradient-to-r invisible">
         <ArrowBackIos />
       </button>
@@ -21,7 +21,7 @@ export default function Welcome() {
 
         {/* Image */}
         <div
-          className="rounded-[50%] w-[600px] h-[450px] border-slate-900 border-2"
+          className="rounded-[50%] w-[700px] h-[550px] border-slate-900 border-2"
           style={{
             backgroundImage:
               "url('https://www.westerncape.gov.za/sites/www.westerncape.gov.za/files/taking_care_of_older_people.jpg')",
@@ -62,7 +62,7 @@ export default function Welcome() {
         <ArrowForwardIos />
       </button>
 
-    </div>
+    </main>
 
   );
 }
