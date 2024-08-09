@@ -1,5 +1,9 @@
-import React from "react";
+'use client'
 
 export default function Footer() {
-  return <div>Footer</div>;
+  return (
+    <footer className="w-full h-[150px] bg-slate-300 sticky bottom-0">
+      โย่ และนี่คือเสียงจากเด็กวัด
+    </footer>
+  );
 }

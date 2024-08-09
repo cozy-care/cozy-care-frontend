@@ -3,16 +3,16 @@
 import Footer from "@/components/Footer";
 import { useEffect } from "react";
 
-export default function Home() {
+export default function Patient() {
 
     useEffect(() => {
-        document.title = "Home - Cozy Care";
+        document.title = "Patient - Cozy Care";
     }, []);
 
     return (
         <main className="flex flex-col min-h-svh">
             <div className="grow">
-                Home page
+                Patient page
             </div>
 
             <Footer />

@@ -12,16 +12,16 @@ export default function Welcome() {
   }, []);
 
   return (
-    <div className="h-screen flex content-center">
-      <button className="w-[80px] h-full from-slate-300 bg-gradient-to-r">
+    <main className="h-screen flex content-center mt-[-56px]">
+      <button className="w-[80px] h-full from-slate-300 bg-gradient-to-r invisible">
         <ArrowBackIos />
       </button>
 
-      <div className="flex items-center justify-center gap-x-10 mt-[40px] mx-auto">
+      <div className="flex flex-wrap items-center justify-center gap-x-10 mx-auto">
 
         {/* Image */}
         <div
-          className="rounded-[50%] w-[600px] h-[450px] border-slate-800 border-2"
+          className="rounded-[50%] w-[700px] h-[550px] border-slate-900 border-2"
           style={{
             backgroundImage:
               "url('https://www.westerncape.gov.za/sites/www.westerncape.gov.za/files/taking_care_of_older_people.jpg')",
@@ -46,7 +46,7 @@ export default function Welcome() {
             มาร่วมสร้างสังคมการดูแลที่อบอุ่นและปลอดภัยไปด้วยกัน
           </p>
           <div className="flex justify-center">
-            <button onClick={() => router.push('/login')} className="bg-slate-800 hover:bg-slate-700 text-white font-bold py-2 px-4 rounded-2xl">
+            <button onClick={() => router.push('/login')} className="bg-slate-900 hover:bg-slate-800 text-white font-bold py-2 px-4 rounded-2xl">
               เริ่มต้นใช้งาน
             </button>
           </div>
@@ -62,7 +62,7 @@ export default function Welcome() {
         <ArrowForwardIos />
       </button>
 
-    </div>
+    </main>
 
   );
 }
