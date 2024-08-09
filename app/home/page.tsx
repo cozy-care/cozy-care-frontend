@@ -10,7 +10,7 @@ export default function Home() {
     }, []);
 
     return (
-        <main className="flex flex-col min-h-svh">
+        <main className="flex flex-col min-h-[calc(100svh-3.5rem)]">
             <div className="grow">
                 Home page
             </div>
