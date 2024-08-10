@@ -9,8 +9,8 @@ export default function Login() {
   }, []);
   return (
     <div className="flex w-screen h-screen static">
-      <div className="w-5/12 h-full bg-slate-400 static ">
-        <div className="bg-slate-200 p-4 rounded-l-xl w-3/4 h-4/5 relative top-24 left-40 flex flex-col justify-center items-center">
+      <div className="w-5/12 h-full bg-slate-400 flex justify-end items-center">
+        <div className="bg-slate-200 p-4 rounded-l-xl w-3/4 h-4/5   flex flex-col justify-center items-center">
           <h1 className="flex justify-center text-indigo-700 ">
             ยินดีต้อนรับกลับ
           </h1>
@@ -24,15 +24,15 @@ export default function Login() {
           />
         </div>
       </div>
-      <div className="w-7/12 h-auto bg-slate-300 static">
-        <div className="bg-slate-100 p-4 rounded-r-xl relative top-24 w-4/5 h-4/5 flex justify-center items-center">
+
+      <div className="w-7/12 h-auto bg-slate-300  flex justify-start items-center">
+        <div className="bg-slate-100 p-4 rounded-r-xl w-4/5 h-4/5 flex justify-center  ">
           <form>
-            <fieldset className="flex-row ">
-              <legend className="text-center my-7 ">
-                <h2 className="flex-col justify-center text-3xl font-bold text-indigo-700">
-                  เข้าสู่ระบบ
-                </h2>
-              </legend>
+            <fieldset className="flex-row mt-11">
+              <h2 className="flex justify-center text-3xl font-bold text-indigo-700 mb-3">
+                เข้าสู่ระบบ
+              </h2>
+              <legend className="text-center my-auto"></legend>
               <div className="m-auto">
                 <label
                   htmlFor="user_name"
