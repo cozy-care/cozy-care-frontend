@@ -10,17 +10,17 @@ interface LoginCredentials {
 }
 
 async function loginUser(credentials: LoginCredentials): Promise<boolean> {
-  try {
-      const response: AxiosResponse = await axios.post('http://localhost:3333/api/auth/login', credentials, { withCredentials: true });
-      return response.status === 200;
-  } catch (error) {
-      console.error("There was an error logging in!", error);
-      return false;
-  }
+    try {
+        const response: AxiosResponse = await axios.post('http://localhost:3333/api/auth/login', credentials, { withCredentials: true });
+        return response.status === 200;
+    } catch (error) {
+        console.error("There was an error logging in!", error);
+        return false;
+    }
 }
 
 export default function Login() {
-  const router = useRouter(); 
+    const router = useRouter();
 
     const handleLogin = async (event: React.FormEvent<HTMLFormElement>): Promise<void> => {
         event.preventDefault();
@@ -119,9 +119,9 @@ export default function Login() {
                                 <hr className="w-64 h-px my-8 bg-gray-200 border-0 dark:bg-gray-700 ml-5" />
                             </div>
                             <div className="flex justify-center mt-1">
-                                <button 
+                                <button
                                     type="button"
-                                    onClick={handleGoogleLogin} 
+                                    onClick={handleGoogleLogin}
                                     className="flex items-center bg-white border-gray-300 rounded-lg shadow-md px-6 py-2 text-sm font-medium text-gray-800 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">
                                     <svg
                                         className="h-6 w-6 mr-2"
