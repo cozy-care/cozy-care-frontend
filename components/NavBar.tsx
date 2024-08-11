@@ -24,20 +24,20 @@ export default function NavBar() {
 
             {/* Right side */}
             {pageTitle == "Welcome - Cozy Care" ? (
-                <div className="flex items-center">
+                <div className="flex items-center pr-4">
                     <button onClick={() => router.push('/login')} className="bg-slate-900 hover:bg-slate-800 text-white font-bold py-2 px-4 rounded-2xl">
                         เข้าสู่ระบบ
                     </button>
                 </div>
             ) : (
                 <div className="flex items-center">
-                    <button type="button" onClick={() => router.push('/home')}         className="h-full px-4 hover:text-blue-500">หน้าหลัก</button>
-                    <button type="button" onClick={() => router.push('/caregiver')}    className="h-full px-4 hover:text-blue-500">ค้นหาผู้ดูแล</button>
-                    <button type="button" onClick={() => router.push('/patient')}      className="h-full px-4 hover:text-blue-500">ค้นหาผู้รับการดูแล</button>
-                    <button type="button" onClick={() => router.push('/announcement')} className="h-full px-4 hover:text-blue-500">ประชาสัมพันธ์</button>
-                    <button type="button" onClick={() => router.push('/message')}      className="h-full px-4 hover:text-blue-500"><Chat sx={{ fontSize: 30}} /></button>
-                    <button type="button" onClick={() => router.push('/notification')} className="h-full px-4 hover:text-blue-500"><Notifications sx={{ fontSize: 30}}/></button>
-                    <button type="button" onClick={() => router.push('/profile')}      className="h-full px-4 hover:text-blue-500"><Person sx={{ fontSize: 35}}/></button>
+                    <button type="button" onClick={() => router.push('/home')}         className="h-full px-5 hover:text-blue-500">หน้าหลัก</button>
+                    <button type="button" onClick={() => router.push('/caregiver')}    className="h-full px-5 hover:text-blue-500">ค้นหาผู้ดูแล</button>
+                    <button type="button" onClick={() => router.push('/patient')}      className="h-full px-5 hover:text-blue-500">ค้นหาผู้รับการดูแล</button>
+                    <button type="button" onClick={() => router.push('/announcement')} className="h-full px-5 hover:text-blue-500">ประชาสัมพันธ์</button>
+                    <button type="button" onClick={() => router.push('/message')}      className="h-full px-5 hover:text-blue-500"><Chat sx={{ fontSize: 30}} /></button>
+                    <button type="button" onClick={() => router.push('/notification')} className="h-full px-5 hover:text-blue-500"><Notifications sx={{ fontSize: 30}}/></button>
+                    <button type="button" onClick={() => router.push('/profile')}      className="h-full px-5 hover:text-blue-500"><Person sx={{ fontSize: 35}}/></button>
                 </div>
             )}
         </nav>
