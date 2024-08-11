@@ -43,7 +43,7 @@ export default function Home() {
         <img
           src="https://baanlalisa.com/wp-content/uploads/2020/09/%E0%B8%81%E0%B8%B2%E0%B8%A3%E0%B8%94%E0%B8%B9%E0%B9%81%E0%B8%A5-%E0%B8%9C%E0%B8%B9%E0%B9%89%E0%B8%AA%E0%B8%B9%E0%B8%87%E0%B8%AD%E0%B8%B2%E0%B8%A2%E0%B8%B8-%E0%B8%9A%E0%B9%89%E0%B8%B2%E0%B8%99%E0%B8%A5%E0%B8%A5%E0%B8%B4%E0%B8%AA%E0%B8%B2.jpg"
           alt="การบริการผู้สูงอายุ"
-          className="w-[900px] h-[500px] rounded-2xl mt-20 shadow-xl"
+          className="w-[900px] h-[500px] rounded-2xl mt-20 border-4 border-blue-300"
         />
         <article className="flex-col ">
           <h2 className="text-black font-bold text-5xl mb-7 ">
