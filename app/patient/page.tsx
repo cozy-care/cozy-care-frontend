@@ -46,16 +46,16 @@ export default function Patient() {
                         <AddCircleOutline sx={{ marginTop: '2px' }} />
                     </button>
 
-                    <Input type="text" placeholder="ค้นหาผู้ดูแล" onChange={(e) => setSearchTerm(e.target.value)} className="w-1/2"/>
+                    <Input type="text" placeholder="ค้นหาผู้รับการดูแล" onChange={(e) => setSearchTerm(e.target.value)} className="w-1/2"/>
 
                     <button className="flex justify-start w-1/4 hover:text-blue-500">
                         <FilterList />
                     </button>
                 </div>
 
-                <PatientCard />
-                <PatientCard />
-                <PatientCard />
+                <PatientCard name="คนป่วย 1" profileURL="https://cdn-icons-png.flaticon.com/512/1430/1430453.png"/>
+                <PatientCard name="คนป่วย 2" profileURL="https://cdn-icons-png.flaticon.com/512/2621/2621786.png"/>
+                <PatientCard name="คนป่วย 3" profileURL="https://cdn-icons-png.freepik.com/512/7031/7031048.png"/>
             </div>
 
             <Footer />
