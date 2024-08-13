@@ -1,12 +1,17 @@
 'use client'
 
+import { Chat } from "@mui/icons-material";
 import { Button, Card, CardBody, Image, Link } from "@nextui-org/react";
-import { Star, StarBorder } from '@mui/icons-material';
 
-export default function PatientCard() {
+interface Props {
+    name: string;
+    profileURL: string;
+}
+
+export default function PatientCard(props: Props) {
     return (
         <Card
-            className="p-2 mb-6 w-1/2 bg-slate-100"
+            className="p-2 mb-6 w-1/2 bg-slate-300"
             shadow="sm"
         >
             <CardBody>
@@ -14,20 +19,19 @@ export default function PatientCard() {
                     <div className="relative">
                         <Image
                             alt="Patient profile"
-                            className="object-cover"
-                            width="100%"
+                            className="object-cover bg-white"
+                            width={200}
                             height={200}
                             shadow="sm"
-                            src="https://cdn-icons-png.flaticon.com/512/2621/2621786.png"
+                            src={props.profileURL}
                         />
                     </div>
 
                     <div className="grow flex flex-col gap-4">
                         <div className="flex gap-4 h-3/4">
                             <div className="flex flex-col gap-2 w-1/2">
-                                <p>ชื่อ : .................................</p>
-                                <p>บริการที่เสนอ: ..........................</p>
-                                <p className="flex">คะแนนที่รีวิว: <Star /><Star /><Star /><StarBorder /><StarBorder /></p>
+                                <p>ชื่อ : {props.name}</p>
+                                <p>บริการที่ต้องการ: ..........................</p>
                             </div>
 
                             <div className="flex flex-col gap-4 w-1/2">
@@ -38,7 +42,7 @@ export default function PatientCard() {
 
                         <div className="flex justify-center items-center h-1/4">
                             <Link href="">
-                                <Button className="px-10 text-large">
+                                <Button className="px-10 text-large" color="success" endContent={<Chat/>}>
                                     เริ่มการสนทนา
                                 </Button>
                             </Link>

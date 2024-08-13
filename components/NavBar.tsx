@@ -15,7 +15,7 @@ export default function NavBar() {
     }, []);
 
     return (
-        <nav className="flex justify-between h-14 pl-4 w-full sticky top-0 bg-white border-b-[1px] border-b-slate-400">
+        <nav className="flex justify-between h-14 pl-4 w-full sticky top-0 bg-white border-b-[1px] border-b-slate-400 z-[99]">
 
             {/* Left side */}
             <Link href="/home" className="flex items-center space-x-3">

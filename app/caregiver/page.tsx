@@ -45,16 +45,16 @@ export default function Caregiver() {
                         <AddCircleOutline sx={{ marginTop: '2px' }} />
                     </button>
 
-                    <Input type="text" placeholder="ค้นหาผู้รับการดูแล" onChange={(e) => setSearchTerm(e.target.value)} className="w-1/2"/>
+                    <Input type="text" placeholder="ค้นหาผู้ดูแล" onChange={(e) => setSearchTerm(e.target.value)} className="w-1/2"/>
 
                     <button className="flex justify-start w-1/4 hover:text-blue-500">
                         <FilterList />
                     </button>
                 </div>
 
-                <CaregiverCard />
-                <CaregiverCard />
-                <CaregiverCard />
+                <CaregiverCard name="หมอ 1" profileURL="https://cdn-icons-png.flaticon.com/512/8496/8496122.png"/>
+                <CaregiverCard name="หมอ 2" profileURL="https://cdn-icons-png.flaticon.com/512/2785/2785554.png"/>
+                <CaregiverCard name="หมอ 3" profileURL="https://cdn-icons-png.flaticon.com/512/822/822111.png"/>
             </div>
 
             <Footer />
