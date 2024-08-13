@@ -4,6 +4,7 @@ import Footer from "@/components/Footer";
 import { FormEvent, useEffect, useState } from "react";
 import { AddCircleOutline, FilterList } from '@mui/icons-material';
 import { Input } from "@nextui-org/react";
+import PatientCard from "./PatientCard";
 
 
 export default function Patient() {
@@ -39,9 +40,9 @@ export default function Patient() {
     return (
         <main className="flex flex-col min-h-[calc(100svh-3.5rem)]">
             <div className="grow flex flex-col items-center">
-                <div className="flex gap-4 py-4 w-full h-max items-center">
+                <div className="flex gap-4 py-6 w-full h-max items-center">
                     <button className="flex justify-end w-1/4 gap-1 hover:text-blue-500">
-                        เพิ่มข้อมูลผู้ดูแล
+                        เพิ่มข้อมูลผู้รับการดูแล
                         <AddCircleOutline sx={{ marginTop: '2px' }} />
                     </button>
 
@@ -52,7 +53,9 @@ export default function Patient() {
                     </button>
                 </div>
 
-                {searchTerm}
+                <PatientCard />
+                <PatientCard />
+                <PatientCard />
             </div>
 
             <Footer />

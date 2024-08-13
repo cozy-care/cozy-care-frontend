@@ -4,6 +4,7 @@ import Footer from "@/components/Footer";
 import { AddCircleOutline, FilterList } from "@mui/icons-material";
 import { Input } from "@nextui-org/react";
 import { FormEvent, useEffect, useState } from "react";
+import CaregiverCard from "./CaregiverCard";
 
 export default function Caregiver() {
     const [searchTerm, setSearchTerm] = useState('')
@@ -38,20 +39,22 @@ export default function Caregiver() {
     return (
         <main className="flex flex-col min-h-[calc(100svh-3.5rem)]">
             <div className="grow flex flex-col items-center">
-                <div className="flex gap-4 py-4 w-full h-max items-center">
+                <div className="flex gap-4 py-6 w-full h-max items-center">
                     <button className="flex justify-end w-1/4 gap-1 hover:text-blue-500">
-                        เพิ่มข้อมูลผู้รับการดูแล
+                        เพิ่มข้อมูลผู้ดูแล
                         <AddCircleOutline sx={{ marginTop: '2px' }} />
                     </button>
 
-                    <Input type="text" placeholder="ค้นหาผู้รับการดูแล" variant="bordered" onChange={(e) => setSearchTerm(e.target.value)} className="w-1/2"/>
+                    <Input type="text" placeholder="ค้นหาผู้รับการดูแล" onChange={(e) => setSearchTerm(e.target.value)} className="w-1/2"/>
 
                     <button className="flex justify-start w-1/4 hover:text-blue-500">
                         <FilterList />
                     </button>
                 </div>
 
-                {searchTerm}
+                <CaregiverCard />
+                <CaregiverCard />
+                <CaregiverCard />
             </div>
 
             <Footer />
