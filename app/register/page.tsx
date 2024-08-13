@@ -1,17 +1,16 @@
-'use client'
+"use client";
 
 import { useEffect } from "react";
 
 export default function Register() {
-  
   useEffect(() => {
     document.title = "Register - Cozy Care";
   }, []);
-  
+
   return (
     <div className="flex w-screen h-screen static">
-      <div className="w-5/12 h-full bg-slate-400 static ">
-        <div className="flex flex-col justify-center  bg-slate-200 p-4 rounded-l-xl w-3/4 h-4/5 relative top-24 left-40 ">
+      <div className="w-5/12 h-full bg-slate-400 flex justify-end items-center">
+        <div className="bg-slate-200 p-4 rounded-l-xl w-3/4 h-4/5 flex flex-col justify-center items-center">
           <h1 className="flex justify-center  text-indigo-700 ">
             เริ่มต้นใช้งาน
           </h1>
@@ -43,8 +42,8 @@ export default function Register() {
           </ul>
         </div>
       </div>
-      <div className="w-7/12 h-auto bg-slate-300 static">
-        <div className="flex flex-col justify-center items-center bg-slate-100 p-4 rounded-r-xl relative top-24 w-4/5 h-4/5 ">
+      <div className="w-7/12 h-auto bg-slate-300 flex justify-start items-center">
+        <div className="bg-slate-100 p-4 rounded-r-xl w-4/5 h-4/5 flex justify-center ">
           <form>
             <fieldset>
               <legend className="text-center my-7 ">
