@@ -12,8 +12,8 @@ export default function Welcome() {
   }, []);
 
   return (
-    <main className="h-screen flex content-center mt-[-56px]">
-      <button className="w-[80px] h-full from-slate-300 bg-gradient-to-r invisible">
+    <main className="h-max flex content-center mt-[-56px]">
+      <button className="w-[80px] h-100% from-slate-300 bg-gradient-to-r invisible">
         <ArrowBackIos />
       </button>
 
@@ -58,7 +58,7 @@ export default function Welcome() {
         </div>
       </div>
 
-      <button className="w-[80px] h-full from-slate-300 bg-gradient-to-l">
+      <button className="w-[80px] h-100% from-slate-300 bg-gradient-to-l">
         <ArrowForwardIos />
       </button>
 
