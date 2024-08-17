@@ -25,25 +25,25 @@ export default function Home() {
           </header>
         </section>
 
-        <nav className="flex gap-12 mt-10  ">
+        <nav className="flex  justify-center items-center gap-12 mt-10  ">
           <button className="bg-gray-400 text-center p-5 rounded-2xl shadow-xl transform hover:scale-105 hover:bg-gray-500  transition-transform duration-500">
             <a href="#" className="text-black font-bold mx-44 text-5xl ">
               ค้นหาผู้ดูแลสุขภาพ
             </a>
           </button>
-          <button className="bg-gray-400 text-center p-4 rounded-2xl shadow-xl transform hover:scale-105 hover:bg-gray-500   transition-transform duration-500">
-            <a href="#" className="text-black font-bold mx-60 text-5xl">
+          <button className="bg-gray-400 text-center p-5 rounded-2xl shadow-xl transform hover:scale-105 hover:bg-gray-500   transition-transform duration-500">
+            <a href="#" className="text-black font-bold mx-64 text-5xl">
               สมัครผู้ดูแล
             </a>
           </button>
         </nav>
 
         <section>
-          <article className="flex-col text-center mt-32">
+          <article className="flex flex-col justify-center items-center text-center mt-32">
             <h2 className="text-black font-bold text-5xl mb-7  ">
               บริการดูแลเพื่อผู้ดูแลและคนที่คุณรัก
             </h2>
-            <p className="w-[700px] h-auto text-2xl">
+            <p className=" w-[700px] h-auto text-2xl  ">
               "เราตอบสนองความต้องการของทั้งผู้ดูแลและผู้รับบริการด้วยการจัดลำดับความสำคัญของแผนสุขภาพที่เป็นเอกลักษณ์
               การดูแลของเรามุ่งเน้นไปที่การปรับปรุงผลลัพธ์ด้านสุขภาพ
               ลดต้นทุนการดูแล และเพิ่มความพึงพอใจของสมาชิกผ่านการดูแลที่บ้าน”
@@ -51,7 +51,7 @@ export default function Home() {
           </article>
         </section>
 
-        <section>
+        <section className="flex flex-col justify-center items-center">
           <button className="flex w-[1000px] h-[300px]  mt-10 transform hover:scale-105 transition-transform duration-500">
             <article className="w-1/2 h-full bg-blue-900 rounded-l-2xl flex flex-col justify-center items-center text-left ">
               <h3 className="text-white font-bold text-3xl mb-7 ">
@@ -74,7 +74,6 @@ export default function Home() {
               </ul>
             </article>
           </button>
-          {/* <img src="" alt="" /> */}
           <h3 className="text-black font-bold text-xl mt-7 text-center ">
             แพ็คเกจฟรี
           </h3>
