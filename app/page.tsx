@@ -12,7 +12,7 @@ export default function Welcome() {
   }, []);
 
   return (
-    <main className="h-max flex content-center mt-[-56px]">
+    <main className="w-screen h-screen flex content-center mt-[-56px]">
       <button className="w-[80px] h-100% from-slate-300 bg-gradient-to-r invisible">
         <ArrowBackIos />
       </button>
