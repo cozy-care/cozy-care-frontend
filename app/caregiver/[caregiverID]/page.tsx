@@ -1,7 +1,16 @@
 "use client";
-
+import React from "react";
 import { Edit } from "@mui/icons-material";
-import { Avatar, Button, Card, Input, ButtonGroup } from "@nextui-org/react";
+import {
+  Avatar,
+  Button,
+  Card,
+  Input,
+  ButtonGroup,
+  DatePicker,
+  Select,
+  SelectItem,
+} from "@nextui-org/react";
 
 import { useEffect } from "react";
 
@@ -9,6 +18,10 @@ export default function CaregiverID() {
   useEffect(() => {
     document.title = "*Caregiver Name* - Cozy Care";
   }, []);
+
+  const placements = ["outside"];
+
+  const gender = ["ชาย", "หญิง"];
 
   return (
     <main className="flex flex-col min-h-[calc(100svh-3.5rem)]">
@@ -92,84 +105,90 @@ export default function CaregiverID() {
                   />
                   <fieldset>
                     <div id="row-1" className="flex">
-                      <div>
-                        <label
-                          htmlFor="first_name"
-                          className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                        >
-                          ชื่อจริง
-                        </label>
-                        <input
-                          type="text"
-                          id="first_name"
-                          className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                          placeholder="ชื่อจริง"
-                          required
-                        />
+                      <div className="flex w-full flex-wrap items-end md:flex-nowrap mb-6 md:mb-0 gap-4">
+                        {placements.map((placement) => (
+                          <Input
+                            key={placement}
+                            type="ชื่อจริง"
+                            label="ชื่อจริง"
+                            labelPlacement="outside"
+                            placeholder="ชื่อจริง"
+                          />
+                        ))}
                       </div>
-                      <div>
-                        <label
-                          htmlFor="first_name"
-                          className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                        >
-                          ชื่อกลาง
-                        </label>
-                        <input
-                          type="text"
-                          id="first_name"
-                          className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                          placeholder="ชื่อจริง"
-                          required
-                        />
+                      <div className="flex w-full flex-wrap items-end md:flex-nowrap mb-6 md:mb-0 gap-4">
+                        {placements.map((placement) => (
+                          <Input
+                            key={placement}
+                            type="ชื่อกลาง"
+                            label="ชื่อกลาง"
+                            labelPlacement="outside"
+                            placeholder="ชื่อกลาง(ถ้ามี)"
+                          />
+                        ))}
                       </div>
-                      <div>
-                        <label
-                          htmlFor="first_name"
-                          className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                        >
-                          นามสกุล
-                        </label>
-                        <input
-                          type="text"
-                          id="first_name"
-                          className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                          placeholder="ชื่อจริง"
-                          required
-                        />
+                      <div className="flex w-full flex-wrap items-end md:flex-nowrap mb-6 md:mb-0 gap-4">
+                        {placements.map((placement) => (
+                          <Input
+                            key={placement}
+                            type="นามสกุล"
+                            label="นามสกุล"
+                            labelPlacement="outside"
+                            placeholder="นามสกุล"
+                          />
+                        ))}
                       </div>
                     </div>
                     <div id="row-2" className="flex">
-                      <div>
-                        <label
-                          htmlFor="first_name"
-                          className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                        >
-                          เพศสภาพ
-                        </label>
-                        <input
-                          type="text"
-                          id="first_name"
-                          className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                          placeholder="ชื่อจริง"
-                          required
-                        />
+                      <div className="flex w-full flex-wrap items-end md:flex-nowrap mb-6 md:mb-0 gap-4">
+                        {placements.map((placement) => (
+                          <Select
+                            label="เพศสภาพ"
+                            placeholder="เพศสภาพ"
+                            labelPlacement="outside"
+                            className="max-w-xs"
+                          >
+                            {gender.map((gender) => (
+                              <SelectItem key={gender}>{gender}</SelectItem>
+                            ))}
+                          </Select>
+                        ))}
                       </div>
-                      <div>
-                        <label
-                          htmlFor="first_name"
-                          className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                        >
-                          วัน/เดือน/ปีเกิด
-                        </label>
-                        <input
-                          type="text"
-                          id="first_name"
-                          className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                          placeholder="ชื่อจริง"
-                          required
-                        />
+                      <div className="flex flex-col gap-4">
+                        <div className="flex flex-col gap-2">
+                          <div className="flex w-full flex-wrap items-end md:flex-nowrap mb-6 md:mb-0 gap-4">
+                            {placements.map((placement) => (
+                              <DatePicker
+                                label={"Birth date"}
+                                className="max-w-[284px]"
+                                labelPlacement="outside"
+                              />
+                            ))}
+                          </div>
+                        </div>
                       </div>
-                      <div>
+                      {/* <div className="relative max-w-sm">
+                        <div className="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
+                          <svg
+                            className="w-4 h-4 text-gray-500 dark:text-gray-400"
+                            aria-hidden="true"
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="currentColor"
+                            viewBox="0 0 20 20"
+                          >
+                            <path d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z" />
+                          </svg>
+                          <input
+                            id="datepicker-autohide"
+                            datepicker
+                            datepicker-autohide
+                            type="text"
+                            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                            placeholder="วัน/เดือน/ปี"
+                          />
+                        </div>
+                      </div> */}
+                      {/* <div>
                         <label
                           htmlFor="first_name"
                           className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
@@ -198,7 +217,7 @@ export default function CaregiverID() {
                           placeholder="ชื่อจริง"
                           required
                         />
-                      </div>
+                      </div> */}
                     </div>
                   </fieldset>
                 </form>
