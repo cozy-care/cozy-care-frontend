@@ -10,6 +10,7 @@ import {
   DatePicker,
   Select,
   SelectItem,
+  Checkbox,
 } from "@nextui-org/react";
 
 import { useEffect } from "react";
@@ -22,6 +23,12 @@ export default function CaregiverID() {
   const placements = ["outside"];
 
   const gender = ["ชาย", "หญิง"];
+
+  const province = ["กรุงเทพมหานคร", "นนทบุรี", "สงขลา"];
+
+  const district = ["1", "2", "3"];
+
+  const subdistrict = ["4", "5", "6"];
 
   return (
     <main className="flex flex-col min-h-[calc(100svh-3.5rem)]">
@@ -101,7 +108,7 @@ export default function CaregiverID() {
                   <img
                     src="https://cdn.pixabay.com/photo/2016/12/18/13/45/download-1915753_640.png"
                     alt="dowload"
-                    className="h-[200px] w-auto"
+                    className="h-[150px] w-auto"
                   />
                   <fieldset>
                     <div id="row-1" className="flex">
@@ -167,57 +174,32 @@ export default function CaregiverID() {
                           </div>
                         </div>
                       </div>
-                      {/* <div className="relative max-w-sm">
-                        <div className="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
-                          <svg
-                            className="w-4 h-4 text-gray-500 dark:text-gray-400"
-                            aria-hidden="true"
-                            xmlns="http://www.w3.org/2000/svg"
-                            fill="currentColor"
-                            viewBox="0 0 20 20"
-                          >
-                            <path d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z" />
-                          </svg>
-                          <input
-                            id="datepicker-autohide"
-                            datepicker
-                            datepicker-autohide
-                            type="text"
-                            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                            placeholder="วัน/เดือน/ปี"
-                          />
-                        </div>
-                      </div> */}
-                      {/* <div>
-                        <label
-                          htmlFor="first_name"
-                          className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                        >
-                          น้ำหนัก
-                        </label>
-                        <input
-                          type="text"
-                          id="first_name"
-                          className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                          placeholder="ชื่อจริง"
-                          required
-                        />
-                      </div>
-                      <div>
-                        <label
-                          htmlFor="first_name"
-                          className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                        >
-                          ส่วนสูง
-                        </label>
-                        <input
-                          type="text"
-                          id="first_name"
-                          className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                          placeholder="ชื่อจริง"
-                          required
-                        />
-                      </div> */}
+                      <Input
+                        type="number"
+                        label="น้ำหนัก"
+                        placeholder="0.00"
+                        labelPlacement="outside"
+                        endContent={
+                          <div className="pointer-events-none flex items-center">
+                            <span className="text-default-400 text-small">
+                              กิโลกรัม
+                            </span>
+                          </div>
+                        }
+                      />
+                      <Input
+                        type="number"
+                        label="ส่วนสูง"
+                        placeholder="0.00"
+                        labelPlacement="outside"
+                        endContent={
+                          <div className="pointer-events-none flex items-center">
+                            <span className="text-default-400 text-small">
+                              เซนติเมตร
+                            </span>
+                          </div>
+                        }
+                      />
                     </div>
                   </fieldset>
                 </form>
@@ -225,116 +207,139 @@ export default function CaregiverID() {
                   <h3 className="flex flex-col justify-start items-strat text-xl font-bold	">
                     สถานที่ที่ต้องการดูแล *
                   </h3>
-                  <div id="row-3" className="flex">
-                    <div>
-                      <input
-                        type="text"
-                        id="first_name"
-                        className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                        placeholder="จังหวัด"
-                        required
-                      />
+
+                  <div className="w-full h-[80px] bg-sky-300 flex  justify-center items-center">
+                    <div className=" w-full flex-wrap items-end md:flex-nowrap mb-6 md:mb-0 ">
+                      {placements.map((placement) => (
+                        <Select
+                          label="จังหวัด"
+                          placeholder="จังหวัด"
+                          labelPlacement="outside"
+                          className="max-w-xs"
+                        >
+                          {province.map((province) => (
+                            <SelectItem key={province}>{province}</SelectItem>
+                          ))}
+                        </Select>
+                      ))}
                     </div>
-                    <div>
-                      <input
-                        type="text"
-                        id="first_name"
-                        className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                        placeholder="เขต/อำเภอ"
-                        required
-                      />
+                    <div className=" w-full flex-wrap items-end md:flex-nowrap mb-6 md:mb-0 ">
+                      {placements.map((placement) => (
+                        <Select
+                          label="เขต/อำเภอ"
+                          placeholder="เขต/อำเภอ"
+                          labelPlacement="outside"
+                          className="max-w-xs"
+                        >
+                          {district.map((district) => (
+                            <SelectItem key={district}>{district}</SelectItem>
+                          ))}
+                        </Select>
+                      ))}
                     </div>
-                    <div>
-                      <input
-                        type="text"
-                        id="first_name"
-                        className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                        placeholder="แขวง/ตำบล"
-                        required
-                      />
+                    <div className="w-full flex-wrap items-end md:flex-nowrap mb-6 md:mb-0 ">
+                      {placements.map((placement) => (
+                        <Select
+                          label="แขวง/ตำบล"
+                          placeholder="แขวง/ตำบล"
+                          labelPlacement="outside"
+                          className="max-w-xs"
+                        >
+                          {subdistrict.map((subdistrict) => (
+                            <SelectItem key={subdistrict}>
+                              {subdistrict}
+                            </SelectItem>
+                          ))}
+                        </Select>
+                      ))}
                     </div>
                   </div>
+
                   <h3 className="flex flex-col justify-start items-strat text-xl font-bold	">
                     รายละเอียดเพิ่มเติมของผู้ดูแล
                   </h3>
-                  <div id="row-4" className="flex gap-10">
-                    <div>
-                      <label
-                        htmlFor="first_name"
-                        className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                      >
-                        ประสบการณ์
-                      </label>
-                      <input
-                        type="text"
-                        id="first_name"
-                        className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                        placeholder="ชื่อจริง"
-                        required
-                      />
-                    </div>
-                    <div>
-                      <label
-                        htmlFor="first_name"
-                        className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                      >
-                        ความเชี่ยวชาญ
-                      </label>
-                      <input
-                        type="text"
-                        id="first_name"
-                        className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                        placeholder="ชื่อจริง"
-                        required
-                      />
+                  <div>
+                    <div className="bg-sky-300 w-full h-[150px]">
+                      <div id="row-4" className="flex gap-10">
+                        <div>
+                          <label
+                            htmlFor="first_name"
+                            className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                          >
+                            ประสบการณ์
+                          </label>
+                          <input
+                            type="text"
+                            id="first_name"
+                            className="h-auto w-[500px] bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                            placeholder="เขียนประสบการณ์ของคุณ (ถ้ามี)"
+                            required
+                          />
+                        </div>
+                        <div>
+                          <label
+                            htmlFor="first_name"
+                            className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                          >
+                            ความเชี่ยวชาญ
+                          </label>
+                          <input
+                            type="text"
+                            id="first_name"
+                            className="h-auto w-[500px] bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block  p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                            placeholder="เขียนความเชี่ยวชาญของคุณ (ถ้ามี)"
+                            required
+                          />
+                        </div>
+                      </div>
+                      <div id="row-5" className="flex gap-10">
+                        <div>
+                          <label
+                            htmlFor="first_name"
+                            className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                          >
+                            ใบรับรองการประกอบวิชาชีพพยาบาล พร้อมลงนาม *
+                          </label>
+                          <input
+                            type="text"
+                            id="first_name"
+                            className="h-auto w-[500px] bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                            placeholder="อัพโหลดไฟล์ของคุณ (pdf)"
+                            required
+                          />
+                        </div>
+                        <div>
+                          <label
+                            htmlFor="first_name"
+                            className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                          >
+                            ภาษาที่สื่อสารได้ *
+                          </label>
+                          <input
+                            type="text"
+                            id="first_name"
+                            className="h-auto w-[500px] bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block  p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                            placeholder="เขียนความเชี่ยวชาญของคุณ (ถ้ามี)"
+                            required
+                          />
+                        </div>
+                      </div>
                     </div>
                   </div>
-                  <div id="row-5" className="flex gap-10">
-                    <div>
-                      <label
-                        htmlFor="first_name"
-                        className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                      >
-                        ใบรังรองการประกอบวิชาชีพพยาบาล พร้อมลงนาม *
-                      </label>
-                      <input
-                        type="text"
-                        id="first_name"
-                        className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                        placeholder="ชื่อจริง"
-                        required
-                      />
-                    </div>
-                    <div>
-                      <label
-                        htmlFor="first_name"
-                        className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                      >
-                        ภาษาที่สื่อสารได้ *
-                      </label>
-                      <input
-                        type="text"
-                        id="first_name"
-                        className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                        placeholder="ชื่อจริง"
-                        required
-                      />
-                    </div>
-                  </div>
-                  <div className="flex items-center">
-                    <input
-                      id="default-checkbox"
-                      type="checkbox"
-                      value=""
-                      className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
-                    />
-                    <label
-                      htmlFor="checked-checkbox"
-                      className="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-                    >
+
+                  <div className="flex items-center mt-5">
+                    <Checkbox defaultSelected>
                       ยอมรับเงื่อนไข
                       และนโยบายส่วนตัว.........................................
-                    </label>
+                    </Checkbox>
+                  </div>
+                  <div className="flex justify-center items-center gap-10 mt-5">
+                    <Button color="default" className="w-[130px]">
+                      ยกเลิก
+                    </Button>
+                    <Button color="primary" className="w-[130px]">
+                      บันทึก
+                    </Button>
                   </div>
                 </form>
               </section>
