@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { ChangeEvent, useState } from "react";
 import { Edit } from "@mui/icons-material";
 import {
   Avatar,
@@ -30,6 +30,18 @@ export default function CaregiverID() {
 
   const subdistrict = ["4", "5", "6"];
 
+  const [imageSrc, setImageSrc] = useState<string | null>(null);
+  const handleImageUpload = (event: ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setImageSrc(reader.result as string);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
   return (
     <main className="flex flex-col min-h-[calc(100svh-3.5rem)]">
       <div className="grow flex justify-center items-center mt-[-40px]">
@@ -39,10 +51,10 @@ export default function CaregiverID() {
           <div className="flex gap-8 w-full h-[80vh]">
             <Card className="flex flex-col gap-4 w-1/4 h-full p-4 bg-blue-100 rounded-2xl shadow-lg">
               <div className="flex w-full h-1/6">
-                <div className="flex w-1/4 h-full justify-center items-center">
+                <div className="flex w-[150px] h-auto justify-center items-center">
                   <Avatar
                     src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQvFD5-UI3RkGwYxCx_0qHbtqSzjwr3PrLEuw&s"
-                    className="w-full h-auto border-2 border-blue-400"
+                    className="w-full h-full border-2 border-blue-400 rounded-full"
                   />
                 </div>
 
@@ -59,44 +71,48 @@ export default function CaregiverID() {
                   </Button>
                 </div>
               </div>
-              <section className="flex flex-col m-10 rounded-none">
-                <button className="bg-slate-500 hover:bg-slate-700 text-white font-bold py-2 px-4 rounded">
-                  ผู้ดูแล
-                </button>
-                <button className="bg-slate-500 hover:bg-slate-700 text-white font-bold py-2 px-4 rounded">
-                  สถานะ : แพคเกจฟรี
-                </button>
-                <button className="bg-slate-500 hover:bg-slate-700 text-white font-bold py-2 px-4 rounded">
-                  ตารางนัดหมาย
-                </button>
-                <button className="bg-slate-500 hover:bg-slate-700 text-white font-bold py-2 px-4 rounded">
-                  คะแนนรีวิว
-                </button>
-              </section>
+              <div className="flex flex-col w-full h-5/6 justify-between">
+                <section className="flex flex-col gap-2">
+                  <button className="bg-slate-500 hover:bg-slate-700 text-start text-white font-medium py-3 px-4 rounded-full">
+                    ผู้ดูแล
+                  </button>
+                  <button className="bg-slate-400 hover:bg-slate-700 text-start text-white font-medium py-3 px-4 rounded-full">
+                    สถานะ : แพ็กเกจฟรี
+                  </button>
+                  <button className="bg-slate-400 hover:bg-slate-700 text-start text-white font-medium py-3 px-4 rounded-full">
+                    ตารางนัดหมาย
+                  </button>
+                  <button className="bg-slate-400 hover:bg-slate-700 text-start text-white font-medium py-3 px-4 rounded-full">
+                    คะแนนรีวิว
+                  </button>
+                </section>
 
-              {/* <ButtonGroup size="lg" className="flex flex-col ">
+                {/* <ButtonGroup size="lg" className="flex flex-col ">
                 <Button className="rounded-none">One</Button>
                 <Button>Two</Button>
                 <Button>Three</Button>
                 <Button>Four</Button>
               </ButtonGroup> */}
-              <section className="flex flex-col m-10 rounded-none">
-                <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-                  การตั้งค่าและความเป็นส่วนตัว
-                </button>
-                <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-                  ประวัติการใช้งาน
-                </button>
-                <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-                  ประวัติการซื้อ
-                </button>
-                <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-                  ความช่วยเหลือและการสนับสนุน
-                </button>
-                <button className="bg-red-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-                  ออกจากระบบ
-                </button>
-              </section>
+                <div className="flex flex-col gap-4">
+                  <div className="flex flex-col w-full">
+                    <button className="bg-blue-500 hover:bg-blue-700 text-start text-white font-medium py-3 px-4 rounded-t-2xl">
+                      การตั้งค่าและความเป็นส่วนตัว
+                    </button>
+                    <button className="bg-blue-500 hover:bg-blue-700 text-start text-white font-medium py-3 px-4">
+                      ประวัติการใช้งาน
+                    </button>
+                    <button className="bg-blue-500 hover:bg-blue-700 text-start text-white font-medium py-3 px-4">
+                      ประวัติการซื้อ
+                    </button>
+                    <button className="bg-blue-500 hover:bg-blue-700 text-start text-white font-medium py-3 px-4 rounded-b-2xl">
+                      ความช่วยเหลือและการสนับสนุน
+                    </button>
+                  </div>
+                  <button className="bg-red-500 hover:bg-red-700 text-white font-medium py-3 px-4 rounded-full">
+                    ออกจากระบบ
+                  </button>
+                </div>
+              </div>
             </Card>
 
             <Card className="w-3/4 h-full p-4 bg-blue-100 rounded-2xl shadow-lg">
@@ -105,11 +121,26 @@ export default function CaregiverID() {
                   กรอกข้อมูลผู้ดูแล
                 </h2>
                 <form className="flex">
-                  <img
-                    src="https://cdn.pixabay.com/photo/2016/12/18/13/45/download-1915753_640.png"
-                    alt="dowload"
-                    className="h-[150px] w-auto"
-                  />
+                  <div>
+                    <label htmlFor="imageUpload">
+                      {imageSrc ? (
+                        <img src={imageSrc} alt="Uploaded" style={{ height: '100px', width: 'auto', cursor: 'pointer' }} />
+                      ) : (
+                        <img
+                          src="https://cdn.pixabay.com/photo/2016/12/18/13/45/download-1915753_640.png"
+                          alt="dowload"
+                          className="h-[150px] w-auto cursor-pointer"
+                        />
+                      )}
+                    </label>
+                    <input
+                      id="imageUpload"
+                      type="file"
+                      accept="image/*"
+                      onChange={handleImageUpload}
+                      style={{ display: 'none' }}
+                    />
+                  </div>
                   <fieldset>
                     <div id="row-1" className="flex">
                       <div className="flex w-full flex-wrap items-end md:flex-nowrap mb-6 md:mb-0 gap-4">
@@ -328,7 +359,7 @@ export default function CaregiverID() {
                   </div>
 
                   <div className="flex items-center mt-5">
-                    <Checkbox defaultSelected>
+                    <Checkbox>
                       ยอมรับเงื่อนไข
                       และนโยบายส่วนตัว.........................................
                     </Checkbox>

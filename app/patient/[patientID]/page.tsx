@@ -1,13 +1,25 @@
 "use client";
 
 import { Avatar, Button, Card } from "@nextui-org/react";
-import { useEffect } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import { Edit } from "@mui/icons-material";
 
 export default function PatientID() {
   useEffect(() => {
     document.title = "*Patient Name* - Cozy Care";
   }, []);
+
+  const [imageSrc, setImageSrc] = useState<string | null>(null);
+  const handleImageUpload = (event: ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setImageSrc(reader.result as string);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
 
   return (
     <main className="flex flex-col min-h-[calc(100svh-3.5rem)]">
@@ -41,7 +53,24 @@ export default function PatientID() {
             </Card>
 
             <Card className="w-3/4 h-full p-4 bg-blue-100 rounded-2xl shadow-lg">
-              asd
+              <div>
+                <label htmlFor="imageUpload">
+                  {imageSrc ? (
+                    <img src={imageSrc} alt="Uploaded" style={{ width: '100px', cursor: 'pointer' }} />
+                  ) : (
+                    <div style={{ width: '100px', height: '100px', border: '1px solid #ccc', cursor: 'pointer' }}>
+                      Click to upload
+                    </div>
+                  )}
+                </label>
+                <input
+                  id="imageUpload"
+                  type="file"
+                  accept="image/*"
+                  onChange={handleImageUpload}
+                  style={{ display: 'none' }}
+                />
+              </div>
             </Card>
           </div>
         </div>
