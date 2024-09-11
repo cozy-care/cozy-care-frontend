@@ -176,39 +176,6 @@ export default function CaregiverID() {
                             />
                           ))}
                         </div>
-                        {/* <div className="flex w-full flex-wrap items-end md:flex-nowrap mb-6 md:mb-0 gap-4">
-                        {placements.map((placement) => (
-                          <Input
-                            key={placement}
-                            type="ชื่อจริง"
-                            label="ชื่อจริง"
-                            labelPlacement="outside"
-                            placeholder="ชื่อจริง"
-                          />
-                        ))}
-                      </div>
-                      <div className="flex w-full flex-wrap items-end md:flex-nowrap mb-6 md:mb-0 gap-4">
-                        {placements.map((placement) => (
-                          <Input
-                            key={placement}
-                            type="ชื่อกลาง"
-                            label="ชื่อกลาง"
-                            labelPlacement="outside"
-                            placeholder="ชื่อกลาง(ถ้ามี)"
-                          />
-                        ))}
-                      </div>
-                      <div className="flex w-full flex-wrap items-end md:flex-nowrap mb-6 md:mb-0 gap-4">
-                        {placements.map((placement) => (
-                          <Input
-                            key={placement}
-                            type="นามสกุล"
-                            label="นามสกุล"
-                            labelPlacement="outside"
-                            placeholder="นามสกุล"
-                          />
-                        ))}
-                      </div> */}
                       </div>
 
                       <div id="row-2" className="flex justify-around">
@@ -268,59 +235,6 @@ export default function CaregiverID() {
                             />
                           </div>
                         </div>
-                        {/* <div className="flex w-full flex-wrap items-end md:flex-nowrap mb-6 md:mb-0 gap-4">
-                          {placements.map((placement) => (
-                            <Select
-                              label="เพศสภาพ"
-                              placeholder="เพศสภาพ"
-                              labelPlacement="outside"
-                              className="max-w-xs"
-                            >
-                              {gender.map((gender) => (
-                                <SelectItem key={gender}>{gender}</SelectItem>
-                              ))}
-                            </Select>
-                          ))}
-                        </div>
-                        <div className="flex flex-col gap-4">
-                          <div className="flex flex-col gap-2">
-                            <div className="flex w-full flex-wrap items-end md:flex-nowrap mb-6 md:mb-0 gap-4">
-                              {placements.map((placement) => (
-                                <DatePicker
-                                  label={"Birth date"}
-                                  className="max-w-[284px]"
-                                  labelPlacement="outside"
-                                />
-                              ))}
-                            </div>
-                          </div>
-                        </div>
-                        <Input
-                          type="number"
-                          label="น้ำหนัก"
-                          placeholder="0.00"
-                          labelPlacement="outside"
-                          endContent={
-                            <div className="pointer-events-none flex items-center">
-                              <span className="text-default-400 text-small">
-                                กิโลกรัม
-                              </span>
-                            </div>
-                          }
-                        />
-                        <Input
-                          type="number"
-                          label="ส่วนสูง"
-                          placeholder="0.00"
-                          labelPlacement="outside"
-                          endContent={
-                            <div className="pointer-events-none flex items-center">
-                              <span className="text-default-400 text-small">
-                                เซนติเมตร
-                              </span>
-                            </div>
-                          }
-                        /> */}
                       </div>
                     </div>
                   </fieldset>
