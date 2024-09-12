@@ -12,7 +12,7 @@ interface LoginCredentials {
 async function loginUser(credentials: LoginCredentials): Promise<boolean> {
   try {
     const response: AxiosResponse = await axios.post(
-      "http://localhost:3333/api/auth/login",
+      "http://161.246.70.39/api/auth/login",
       credentials,
       { withCredentials: true }
     );
@@ -51,7 +51,7 @@ export default function Login() {
   }, []);
 
   const handleGoogleLogin = () => {
-    window.location.href = "http://localhost:3333/api/auth/google";
+    window.location.href = "http://161.246.70.39/api/auth/google";
   };
 
   return (
