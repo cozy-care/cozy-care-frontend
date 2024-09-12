@@ -46,7 +46,7 @@ export default function Register() {
 
     try {
       const response: AxiosResponse = await axios.post(
-        "https://gold39.kmitl.ac.th/api/auth/register",
+        "https://gold39.ce.kmitl.ac.th/api/auth/register",
         {
           username,
           email,
@@ -69,7 +69,7 @@ export default function Register() {
   };
 
   const handleGoogleLogin = () => {
-    window.location.href = "https://gold39.kmitl.ac.th/api/auth/google";
+    window.location.href = "https://gold39.ce.kmitl.ac.th/api/auth/google";
   };
 
   return (

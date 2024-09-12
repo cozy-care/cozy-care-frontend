@@ -12,7 +12,7 @@ interface LoginCredentials {
 async function loginUser(credentials: LoginCredentials): Promise<boolean> {
   try {
     const response: AxiosResponse = await axios.post(
-      "https://gold39.kmitl.ac.th/api/auth/login",
+      "https://gold39.ce.kmitl.ac.th/api/auth/login",
       credentials,
       { withCredentials: true }
     );
@@ -51,7 +51,7 @@ export default function Login() {
   }, []);
 
   const handleGoogleLogin = () => {
-    window.location.href = "https://gold39.kmitl.ac.th/api/auth/google";
+    window.location.href = "https://gold39.ce.kmitl.ac.th/api/auth/google";
   };
 
   return (
