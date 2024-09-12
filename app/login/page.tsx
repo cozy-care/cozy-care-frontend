@@ -12,7 +12,7 @@ interface LoginCredentials {
 async function loginUser(credentials: LoginCredentials): Promise<boolean> {
   try {
     const response: AxiosResponse = await axios.post(
-      "http://161.246.70.39/api/auth/login",
+      "https://gold39.kmitl.ac.th/api/auth/login",
       credentials,
       { withCredentials: true }
     );
@@ -51,7 +51,7 @@ export default function Login() {
   }, []);
 
   const handleGoogleLogin = () => {
-    window.location.href = "http://161.246.70.39/api/auth/google";
+    window.location.href = "https://gold39.kmitl.ac.th/api/auth/google";
   };
 
   return (
@@ -128,7 +128,6 @@ export default function Login() {
               </div>
               <div className="flex justify-center mt-1">
                 <button
-                  type="button"
                   onClick={handleGoogleLogin}
                   className="flex items-center bg-white border-gray-300 rounded-lg shadow-md px-6 py-2 text-sm font-medium text-gray-800 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
                 >

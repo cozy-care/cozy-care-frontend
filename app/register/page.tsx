@@ -46,7 +46,7 @@ export default function Register() {
 
     try {
       const response: AxiosResponse = await axios.post(
-        "http://161.246.70.39/api/auth/register",
+        "https://gold39.kmitl.ac.th/api/auth/register",
         {
           username,
           email,
@@ -66,6 +66,10 @@ export default function Register() {
         err.response?.data?.message || "An error occurred during registration"
       );
     }
+  };
+
+  const handleGoogleLogin = () => {
+    window.location.href = "https://gold39.kmitl.ac.th/api/auth/google";
   };
 
   return (
@@ -195,7 +199,10 @@ export default function Register() {
                 <hr className="w-64 h-px my-8 bg-gray-200 border-0 dark:bg-gray-700 ml-5" />
               </div>
               <div className="flex justify-center mt-1">
-                <button className="flex items-center bg-white border-gray-300 rounded-lg shadow-md px-6 py-2 text-sm font-medium text-gray-800 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">
+                <button
+                  className="flex items-center bg-white border-gray-300 rounded-lg shadow-md px-6 py-2 text-sm font-medium text-gray-800 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
+                  onClick={handleGoogleLogin}
+                >
                   <svg
                     className="h-6 w-6 mr-2"
                     width="800px"
