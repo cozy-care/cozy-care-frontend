@@ -3,6 +3,7 @@
 import { useEffect } from "react";
 import axios, { AxiosResponse } from "axios";
 import { useRouter } from "next/navigation";
+import { Button } from "@nextui-org/react";
 
 interface LoginCredentials {
   username: string;
@@ -12,7 +13,7 @@ interface LoginCredentials {
 async function loginUser(credentials: LoginCredentials): Promise<boolean> {
   try {
     const response: AxiosResponse = await axios.post(
-      "https://gold39.ce.kmitl.ac.th/api/auth/login",
+      "http://localhost:3333/api/auth/login",
       credentials,
       { withCredentials: true }
     );
@@ -51,21 +52,21 @@ export default function Login() {
   }, []);
 
   const handleGoogleLogin = () => {
-    window.location.href = "https://gold39.ce.kmitl.ac.th/api/auth/google";
+    window.location.href = "http://localhost:3333/api/auth/google";
   };
 
   return (
-    <div className="flex w-screen h-screen static">
-      <div className="w-5/12 h-full bg-slate-400 flex justify-end items-center">
-        <div className="bg-slate-200 p-4 rounded-l-xl w-3/4 h-4/5 flex flex-col justify-center items-center">
-          <h1 className="flex justify-center text-indigo-700 ">
+    <div className="flex h-screen  ">
+      <div className="w-5/12 h-full bg-slate-400 flex justify-end items-center ">
+        <div className="bg-slate-200 p-4 rounded-l-xl w-3/4 h-4/5 flex flex-col justify-center items-center ">
+          <h1 className="flex justify-center text-indigo-700 font-bold">
             ยินดีต้อนรับกลับ
           </h1>
-          <h2 className="my-7 ">
+          <h2 className="my-7 text-lg ">
             กรุณาเข้าสู่ระบบเพื่อเริ่มต้นการดูแลสุขภาพที่ดีที่สุดสำหรับคุณและคนที่คุณรัก
           </h2>
           <img
-            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQJK8rMb-7B6KD_im3sQCJlQ7wH4P0Ogzc8XQ&s"
+            src="https://walfinch.com/wp-content/uploads/2023/04/nurse-comforting-elder-lady-2021-08-26-15-43-10-utc-1-768x512.jpg"
             alt="family"
             className="rounded-full w-[300px] h-[300px] flex justify-center"
           />
@@ -79,11 +80,14 @@ export default function Login() {
               <h2 className="flex justify-center text-3xl font-bold text-indigo-700 mb-3">
                 เข้าสู่ระบบ
               </h2>
-              <legend className="text-center my-auto"></legend>
-              <div className="m-auto">
+
+              <div
+                id="userName-password"
+                className="flex flex-col justify-center gap-1"
+              >
                 <label
                   htmlFor="user_name"
-                  className="block mb-2 text-sm font-medium text-gray-900"
+                  className="block mb-2 text-xl font-medium text-gray-900"
                 >
                   ชื่อผู้ใช้
                 </label>
@@ -95,11 +99,10 @@ export default function Login() {
                   placeholder="ชื่อผู้ใช้"
                   required
                 />
-              </div>
-              <div>
+
                 <label
                   htmlFor="password"
-                  className="block mb-2 text-sm font-medium text-gray-900"
+                  className="block mb-2 text-xl font-medium text-gray-900"
                 >
                   รหัสผ่าน
                 </label>
@@ -113,13 +116,22 @@ export default function Login() {
                 />
               </div>
 
-              <div className="flex justify-center mt-4">
-                <button
-                  type="submit"
-                  className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 border border-blue-700 rounded"
+              <div className="flex text-sm justify-between mt-3">
+                <p>
+                  <a href="#">ยังไม่มีบัญชีผู้ใช้? [สมัครสมาชิก]</a>
+                </p>
+                <p>
+                  <a href="#">ลืมรหัสผ่าน? [กู้คืนรหัสผ่าน]</a>
+                </p>
+              </div>
+
+              <div className="flex justify-center items-center mt-4">
+                <Button
+                  color="primary"
+                  className="text-xl mt-6 w-[150px] font-bold"
                 >
                   ยืนยัน
-                </button>
+                </Button>
               </div>
               <div className="inline-flex items-center justify-center w-full">
                 <hr className="w-64 h-px my-8 bg-gray-200 border-0 dark:bg-gray-700 mr-5" />
@@ -127,7 +139,9 @@ export default function Login() {
                 <hr className="w-64 h-px my-8 bg-gray-200 border-0 dark:bg-gray-700 ml-5" />
               </div>
               <div className="flex justify-center mt-1">
+                {/* google button*/}
                 <button
+                  type="button"
                   onClick={handleGoogleLogin}
                   className="flex items-center bg-white border-gray-300 rounded-lg shadow-md px-6 py-2 text-sm font-medium text-gray-800 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
                 >

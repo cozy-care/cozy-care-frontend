@@ -28,6 +28,26 @@ export default function PatientID() {
 
   const subdistrict = ["4", "5", "6"];
 
+  const [selectedOption1, setSelectedOption1] = useState("");
+
+  const [selectedOption2, setSelectedOption2] = useState("");
+
+  const handleYesChange1 = () => {
+    setSelectedOption1("yes");
+  };
+
+  const handleNoChange1 = () => {
+    setSelectedOption1("no");
+  };
+
+  const handleYesChange2 = () => {
+    setSelectedOption2("yes");
+  };
+
+  const handleNoChange2 = () => {
+    setSelectedOption2("no");
+  };
+
   const [imageSrc, setImageSrc] = useState<string | null>(null);
   const handleImageUpload = (event: ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
@@ -292,7 +312,7 @@ export default function PatientID() {
 
                     <fieldset>
                       <h3 className="flex flex-col justify-start items-strat text-xl font-bold	">
-                        รายละเอียดเพิ่มเติมของผู้ดูแล
+                        รายละเอียดเพิ่มเติมของของผู้รับการดูแล
                       </h3>
                       <div>
                         <div className="bg-sky-300 w-full h-[150px]">
@@ -302,13 +322,13 @@ export default function PatientID() {
                                 htmlFor="first_name"
                                 className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                               >
-                                ประสบการณ์
+                                ประเภทผู้ได้รับการดูแล
                               </label>
                               <input
                                 type="text"
                                 id="first_name"
                                 className="h-auto w-[500px] bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                placeholder="เขียนประสบการณ์ของคุณ (ถ้ามี)"
+                                placeholder="เด็ก|ผู้สูงอายุ|ผู้ป่วย"
                                 required
                               />
                             </div>
@@ -317,13 +337,13 @@ export default function PatientID() {
                                 htmlFor="first_name"
                                 className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                               >
-                                ความเชี่ยวชาญ
+                                โรคประจำตัว
                               </label>
                               <input
                                 type="text"
                                 id="first_name"
                                 className="h-auto w-[500px] bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block  p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                placeholder="เขียนความเชี่ยวชาญของคุณ (ถ้ามี)"
+                                placeholder="โรคประจำตัว(ถ้ามี)"
                                 required
                               />
                             </div>
@@ -334,13 +354,13 @@ export default function PatientID() {
                                 htmlFor="first_name"
                                 className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                               >
-                                ใบรับรองการประกอบวิชาชีพพยาบาล พร้อมลงนาม *
+                                ประวัติการแพ้ยา
                               </label>
                               <input
                                 type="text"
                                 id="first_name"
                                 className="h-auto w-[500px] bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                placeholder="อัพโหลดไฟล์ของคุณ (pdf)"
+                                placeholder="ประวัติการแพ้ยา(ถ้ามี)"
                                 required
                               />
                             </div>
@@ -349,13 +369,13 @@ export default function PatientID() {
                                 htmlFor="first_name"
                                 className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                               >
-                                ภาษาที่สื่อสารได้ *
+                                รายการยาที่ต้องใช้ประจำ
                               </label>
                               <input
                                 type="text"
                                 id="first_name"
                                 className="h-auto w-[500px] bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block  p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                placeholder="เขียนความเชี่ยวชาญของคุณ (ถ้ามี)"
+                                placeholder="รายการยาที่ใช้(ถ้ามี)"
                                 required
                               />
                             </div>
@@ -364,12 +384,51 @@ export default function PatientID() {
                       </div>
                     </fieldset>
 
+                    <div className="flex items-start justify-start mt-5">
+                      <p>ผู้รับการดูแลมีภาวะติดเตียง * :</p>
+                      <div className="flex  ml-8 gap-4">
+                        <Checkbox
+                          isSelected={selectedOption1 === "yes"}
+                          onChange={handleYesChange1}
+                          disabled={selectedOption1 === "no"}
+                        >
+                          ใช่
+                        </Checkbox>
+                        <Checkbox
+                          isSelected={selectedOption1 === "no"}
+                          onChange={handleNoChange1}
+                          disabled={selectedOption1 === "yes"}
+                        >
+                          ไม่
+                        </Checkbox>
+                      </div>
+                    </div>
+                    <div className="flex items-start justify-start mt-5">
+                      <p>ผู้รับการดูแลต้องได้รับการฟีดอาหาร หรือดูเสมหะ :</p>
+                      <div className="flex  ml-8 gap-4">
+                        <Checkbox
+                          isSelected={selectedOption2 === "yes"}
+                          onChange={handleYesChange2}
+                          disabled={selectedOption2 === "no"}
+                        >
+                          ใช่
+                        </Checkbox>
+                        <Checkbox
+                          isSelected={selectedOption2 === "no"}
+                          onChange={handleNoChange2}
+                          disabled={selectedOption2 === "yes"}
+                        >
+                          ไม่
+                        </Checkbox>
+                      </div>
+                    </div>
                     <div className="flex items-center mt-5">
                       <Checkbox>
                         ยอมรับเงื่อนไข
                         และนโยบายส่วนตัว.........................................
                       </Checkbox>
                     </div>
+
                     <div className="flex justify-center items-center gap-10 mt-5">
                       <Button color="default" className="w-[130px]">
                         ยกเลิก
