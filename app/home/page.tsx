@@ -1,6 +1,7 @@
 "use client";
 
 import Footer from "@/components/Footer";
+import { Button } from "@nextui-org/react";
 import { useEffect } from "react";
 
 export default function Home() {
@@ -25,17 +26,22 @@ export default function Home() {
           </header>
         </section>
 
-        <nav className="flex  justify-center items-center gap-12 mt-10  ">
-          <button className="bg-gray-400 text-center p-5 rounded-2xl shadow-xl transform hover:scale-105 hover:bg-gray-500  transition-transform duration-500">
-            <a href="#" className="text-black font-bold mx-44 text-5xl ">
-              ค้นหาผู้ดูแลสุขภาพ
+        <nav className="flex justify-between items-center  mt-10  ">
+          <Button className="h-[100px] w-[500px] bg-gray-400 text-center  rounded-2xl shadow-xl transform hover:scale-105 hover:bg-gray-500 transition-transform duration-500">
+            <a href="#" className="text-black font-bold  text-3xl ">
+              เริ่มต้นเป็นผู้ดูแลสุขภาพ
             </a>
-          </button>
-          <button className="bg-gray-400 text-center p-5 rounded-2xl shadow-xl transform hover:scale-105 hover:bg-gray-500   transition-transform duration-500">
-            <a href="#" className="text-black font-bold mx-64 text-5xl">
-              สมัครผู้ดูแล
+          </Button>
+          <Button className="h-[100px] w-[500px] bg-gray-400 text-center  rounded-2xl shadow-xl transform hover:scale-105 hover:bg-gray-500 transition-transform duration-500">
+            <a href="#" className="text-black font-bold text-3xl">
+              เริ่มต้นเป็นผู้รับการดูแล
             </a>
-          </button>
+          </Button>
+          <Button className="h-[100px] w-[500px] bg-gray-400 text-center  rounded-2xl shadow-xl transform hover:scale-105 hover:bg-gray-500 transition-transform duration-500">
+            <a href="#" className="text-black font-bold  text-3xl">
+              เริ่มต้นเป็นนักโภชนาการ
+            </a>
+          </Button>
         </nav>
 
         <section>
