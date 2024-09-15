@@ -1,13 +1,36 @@
 "use client";
-
+import * as React from "react";
 import Footer from "@/components/Footer";
-import { Button } from "@nextui-org/react";
-import { useEffect } from "react";
+import { Button, Card } from "@nextui-org/react";
+import { useEffect, useState } from "react";
+
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel";
 
 export default function Home() {
+  const [currentSlide, setCurrentSlide] = useState(0); // State for current slide
+  const totalSlides = 3; // Total number of slides
+
   useEffect(() => {
     document.title = "Home - Cozy Care";
   }, []);
+
+  const handleNextSlide = () => {
+    setCurrentSlide((prev) => (prev + 1) % totalSlides);
+  };
+
+  const handlePreviousSlide = () => {
+    setCurrentSlide((prev) => (prev - 1 + totalSlides) % totalSlides);
+  };
+
+  const goToSlide = (index: React.SetStateAction<number>) => {
+    setCurrentSlide(index);
+  };
 
   return (
     <main className="flex flex-col min-h-[calc(100svh-3.5rem)] items-center justify-center  ">
@@ -57,7 +80,133 @@ export default function Home() {
           </article>
         </section>
 
-        <section className="flex flex-col justify-center items-center">
+        <div className="flex justify-center mt-10">
+          <Carousel className="w-full max-w-6xl flex flex-col justify-center items-center">
+            <CarouselContent>
+              <CarouselItem>
+                <section className="flex flex-col justify-center items-center">
+                  <button className="flex w-[1000px] h-[400px] mt-10 transform hover:scale-105 transition-transform duration-500">
+                    <article className="w-1/2 h-full bg-blue-900 rounded-l-2xl flex flex-col justify-center items-center text-left">
+                      <h3 className="text-white font-bold text-3xl mb-7">
+                        ผู้รับการดูแล
+                      </h3>
+                      <ul className="text-white w-[400px] h-auto text-xl">
+                        <li>ค้นหาผู้ดูแลและโปรไฟล์</li>
+                        <li>ดูรีวิวและคะแนนของผู้ดูแล</li>
+                        <li>การติดต่อผู้ดูแลผ่านระบบแชทในแอป</li>
+                        <li>การจองบริการเบื้องต้น (จำกัดจำนวนครั้งต่อเดือน)</li>
+                      </ul>
+                    </article>
+                    <article className="w-1/2 h-full bg-blue-300 rounded-r-2xl flex flex-col justify-center items-center text-left">
+                      <h3 className="text-black font-bold text-3xl mb-7">
+                        ผู้ดูแล
+                      </h3>
+                      <ul className="text-black w-[400px] h-auto text-xl text-left">
+                        <li>สร้างและแก้ไขโปรไฟล์</li>
+                        <li>รับการติดต่อจากผู้ป่วย</li>
+                        <li>การแสดงรีวิวและคะแนนจากผู้ป่วย</li>
+                        <li>การรับงานเบื้องต้น (จำกัดจำนวนครั้งต่อเดือน)</li>
+                      </ul>
+                    </article>
+                  </button>
+                  <h3 className="text-black font-bold text-xl mt-7 text-center">
+                    แพ็คเกจฟรี
+                  </h3>
+                </section>
+              </CarouselItem>
+              <CarouselItem>
+                <section className="flex flex-col justify-center items-center">
+                  <button className="flex w-[1000px] h-[400px] mt-10 transform hover:scale-105 transition-transform duration-500">
+                    <article className="w-1/2 h-full bg-blue-900 rounded-l-2xl flex flex-col justify-center items-center text-left">
+                      <h3 className="text-white font-bold text-3xl mb-7">
+                        ผู้รับการดูแล
+                      </h3>
+                      <ul className="text-white w-[400px] h-auto text-xl">
+                        <li>รวมทุกอย่างในแพ็คเกจฟรี</li>
+                        <li>การจองบริการไม่จำกัดจำนวนครั้ง</li>
+                        <li>การสนับสนุนจากทีมงานตลอด 24 ชั่วโมง</li>
+                        <li>การแจ้งเตือนและติดตามดูแลแบบเรียลไทม์</li>
+                      </ul>
+                    </article>
+                    <article className="w-1/2 h-full bg-blue-300 rounded-r-2xl flex flex-col justify-center items-center text-left">
+                      <h3 className="text-black font-bold text-3xl mb-7">
+                        ผู้ดูแล
+                      </h3>
+                      <ul className="text-black w-[400px] h-auto text-xl text-left">
+                        <li>รวมทุกอย่างในแพ็คเกจฟรี</li>
+                        <li>การรับงานไม่จำกัดจำนวนครั้ง</li>
+                        <li>การแสดงรีวิวและคะแนนจากผู้ป่วย</li>
+                        <li>การจัดการปฏิทินและการแจ้งเตือนงาน</li>
+                      </ul>
+                    </article>
+                  </button>
+                  <h3 className="text-black font-bold text-xl mt-7 text-center">
+                    แพ็คเกจพื้นฐาน
+                  </h3>
+                </section>
+              </CarouselItem>
+              <CarouselItem>
+                <section className="flex flex-col justify-center items-center">
+                  <button className="flex w-[1000px] h-[400px] mt-10 transform hover:scale-105 transition-transform duration-500">
+                    <article className="w-1/2 h-full bg-blue-900 rounded-l-2xl flex flex-col justify-center items-center text-left">
+                      <h3 className="text-white font-bold text-3xl mb-7">
+                        ผู้รับการดูแล
+                      </h3>
+                      <ul className="text-white w-[400px] h-auto text-xl">
+                        <li>รวมทุกอย่างในแพ็คเกจพื้นฐาน</li>
+                        <li>
+                          บริการการดูแลส่วนตัวเฉพาะทาง (เช่น
+                          การดูแลผู้ป่วยติดเตียงหรือผู้ป่วยหลังการผ่าตัด)
+                        </li>
+                        <li>การให้คำปรึกษาทางการแพทย์จากผู้เชี่ยวชาญ</li>
+                        <li>การจัดการและวางแผนการดูแลสุขภาพเฉพาะบุคคล</li>
+                        <li>ส่วนลดพิเศษสำหรับการบริการเพิ่มเติม</li>
+                      </ul>
+                    </article>
+                    <article className="w-1/2 h-full bg-blue-300 rounded-r-2xl flex flex-col justify-center items-center text-left">
+                      <h3 className="text-black font-bold text-3xl mb-7">
+                        ผู้ดูแล
+                      </h3>
+                      <ul className="text-black w-[400px] h-auto text-xl text-left">
+                        <li>รวมทุกอย่างในแพ็คเกจพื้นฐาน</li>
+                        <li>
+                          บริการการดูแลส่วนตัวเฉพาะทาง (เช่น
+                          การดูแลผู้ป่วยติดเตียงหรือผู้ป่วยหลังการผ่าตัด)
+                        </li>
+                        <li>การให้คำปรึกษาทางการแพทย์จากผู้เชี่ยวชาญ</li>
+                        <li>การจัดการและวางแผนการดูแลสุขภาพเฉพาะบุคคล</li>
+                        <li>ส่วนลดพิเศษสำหรับการบริการเพิ่มเติม</li>
+                      </ul>
+                    </article>
+                  </button>
+                  <h3 className="text-black font-bold text-xl mt-7 text-center">
+                    แพ็คเกจพรีเมียม
+                  </h3>
+                </section>
+              </CarouselItem>
+            </CarouselContent>
+
+            <CarouselNext className="absolute right-4 top-1/2 transform -translate-y-1/2">
+              <button onClick={handleNextSlide}>Next</button>
+            </CarouselNext>
+            <CarouselPrevious className="absolute left-4 top-1/2 transform -translate-y-1/2">
+              <button onClick={handlePreviousSlide}>Previous</button>
+            </CarouselPrevious>
+            <div className="flex mt-4 space-x-2">
+              {[...Array(totalSlides)].map((_, index) => (
+                <button
+                  key={index}
+                  onClick={() => goToSlide(index)} // Set slide to the clicked dot
+                  className={`w-3 h-3 rounded-full transition-colors duration-300 ${
+                    index === currentSlide ? "bg-gray-900" : "bg-gray-400"
+                  }`}
+                  aria-label={`Go to slide ${index + 1}`} // Add aria-label for accessibility
+                />
+              ))}
+            </div>
+          </Carousel>
+        </div>
+        {/* <section className="flex flex-col justify-center items-center">
           <button className="flex w-[1000px] h-[300px]  mt-10 transform hover:scale-105 transition-transform duration-500">
             <article className="w-1/2 h-full bg-blue-900 rounded-l-2xl flex flex-col justify-center items-center text-left ">
               <h3 className="text-white font-bold text-3xl mb-7 ">
@@ -83,7 +232,7 @@ export default function Home() {
           <h3 className="text-black font-bold text-xl mt-7 text-center ">
             แพ็คเกจฟรี
           </h3>
-        </section>
+        </section> */}
 
         <section className="flex justify-center items-center p-10 text-center  gap-10">
           <img
