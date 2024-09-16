@@ -43,11 +43,13 @@ pipeline {
             }
         }
 
-        stage("Docker Backend Up"){
+        stage("Docker Frontend Up"){
             steps {
-                echo 'Node/Express UP'
-                sh 'docker run -d -p 3333:3333 cozycare-backend-image'
+                echo 'NextJs UP'
+                sh 'docker build -t cozycare-frontend-image .'
+                sh 'docker run -d -p 3000:3000 cozycare-frontend-image'
             }
         }
+
     }
 }
