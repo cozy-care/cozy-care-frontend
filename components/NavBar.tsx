@@ -59,7 +59,7 @@ export default function NavBar() {
                         <DropdownTrigger>
                             <button type="button" className="px-5 py-2 hover:text-blue-500"><Notifications sx={{ fontSize: 30 }} /></button>
                         </DropdownTrigger>
-                        <DropdownMenu aria-label="Static Actions" disableAnimation={true} closeOnSelect={false} c>
+                        <DropdownMenu aria-label="Static Actions" disableAnimation={true} closeOnSelect={false}>
                             <DropdownItem isReadOnly key="header" className="opacity-100 cursor-default">
                                 <div className="flex justify-between w-[400px]">
                                     <h2 className="text-black text-2xl font-semibold">การแจ้งเตือน</h2>
