@@ -36,41 +36,41 @@ export default function NavBar() {
                     <Link type="button" href="/patient" className="px-5 py-2 hover:text-blue-500">ค้นหาผู้รับการดูแล</Link>
                     <Link type="button" href="/announcement" className="px-5 py-2 hover:text-blue-500">ประชาสัมพันธ์</Link>
 
-                    <Dropdown>
+                    {/* CHAT */}
+                    <Dropdown disableAnimation={true}>
                         <DropdownTrigger>
                             <button type="button" className="px-5 py-2 hover:text-blue-500"><Chat sx={{ fontSize: 30 }} /></button>
                         </DropdownTrigger>
-                        <DropdownMenu aria-label="Static Actions" disableAnimation={true} closeOnSelect={false}>
+                        <DropdownMenu aria-label="Static Actions" disableAnimation={true} closeOnSelect={false} className="h-[90svh]">
                             <DropdownItem isReadOnly key="header" className="opacity-100 cursor-default">
                                 <div className="flex justify-between w-[400px]">
                                     <h2 className="text-black text-2xl font-semibold">แชท</h2>
                                     <button type="button" className="hover:text-blue-500"><MoreHoriz sx={{ fontSize: 30 }} /></button>
                                 </div>
                             </DropdownItem>
-                            <DropdownItem key="copy">Copy link</DropdownItem>
-                            <DropdownItem key="edit">Edit file</DropdownItem>
-                            <DropdownItem key="delete" className="text-danger" color="danger">
-                                Delete file
+                            <DropdownItem isReadOnly key="sub" className="opacity-100 cursor-default">
+                                asd 
                             </DropdownItem>
+                            <DropdownItem key="edit">Chat</DropdownItem>
                         </DropdownMenu>
                     </Dropdown>
 
-                    <Dropdown>
+                    {/* NOTIFICATION */}
+                    <Dropdown disableAnimation={true}>
                         <DropdownTrigger>
                             <button type="button" className="px-5 py-2 hover:text-blue-500"><Notifications sx={{ fontSize: 30 }} /></button>
                         </DropdownTrigger>
-                        <DropdownMenu aria-label="Static Actions" disableAnimation={true} closeOnSelect={false}>
+                        <DropdownMenu aria-label="Static Actions" closeOnSelect={false} className="h-[90svh]">
                             <DropdownItem isReadOnly key="header" className="opacity-100 cursor-default">
                                 <div className="flex justify-between w-[400px]">
                                     <h2 className="text-black text-2xl font-semibold">การแจ้งเตือน</h2>
                                     <button type="button" className="hover:text-blue-500"><MoreHoriz sx={{ fontSize: 30 }} /></button>
                                 </div>
                             </DropdownItem>
-                            <DropdownItem key="copy">Copy link</DropdownItem>
-                            <DropdownItem key="edit">Edit file</DropdownItem>
-                            <DropdownItem key="delete" className="text-danger" color="danger">
-                                Delete file
+                            <DropdownItem isReadOnly key="sub" className="opacity-100 cursor-default">
+
                             </DropdownItem>
+                            <DropdownItem key="edit">Edit file</DropdownItem>
                         </DropdownMenu>
                     </Dropdown>
 
