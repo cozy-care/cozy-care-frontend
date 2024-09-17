@@ -74,8 +74,8 @@ export default function Register() {
   };
 
   return (
-    <div className="flex min-w-screen h-screen">
-      <div className="w-5/12 h-full bg-slate-400 flex justify-end items-center">
+    <div className="flex min-h-[calc(100svh-3.5rem)]">
+      <div className="grow w-5/12 bg-slate-400 flex justify-end items-center">
         <div className="w-max h-[600px] bg-slate-200 p-4 rounded-l-xl  flex flex-col justify-start items-center ">
           <h1 className="flex justify-center text-indigo-700">
             เริ่มต้นใช้งาน
@@ -109,7 +109,7 @@ export default function Register() {
         </div>
       </div>
 
-      <div className="w-7/12 h-full bg-slate-300 flex justify-start  items-center ">
+      <div className="grow w-7/12 bg-slate-300 flex justify-start  items-center ">
         <form
           onSubmit={handleSubmit}
           className="w-[1000px] h-[600px] bg-slate-100  rounded-r-xl justify-start "
