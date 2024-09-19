@@ -7,12 +7,33 @@ import { FormEvent, useEffect, useState } from "react";
 
 import { Input } from "@nextui-org/react";
 import InformationCard from "./InformationCard";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel";
 export default function Caregiver() {
   const [searchTerm, setSearchTerm] = useState("");
+  const [currentSlide, setCurrentSlide] = useState(0); // State for current slide
+  const totalSlides = 3; // Total number of slides
 
   useEffect(() => {
     document.title = "Information - Cozy Care";
   }, []);
+
+  const handleNextSlide = () => {
+    setCurrentSlide((prev) => (prev + 1) % totalSlides);
+  };
+
+  const handlePreviousSlide = () => {
+    setCurrentSlide((prev) => (prev - 1 + totalSlides) % totalSlides);
+  };
+
+  const goToSlide = (index: React.SetStateAction<number>) => {
+    setCurrentSlide(index);
+  };
 
   useEffect(() => {
     const delayDebounceFn = setTimeout(() => {
@@ -39,12 +60,53 @@ export default function Caregiver() {
     <main className="flex flex-col min-h-[calc(100svh-3.5rem)]">
       <div className="grow flex flex-col items-center h-full w-full">
         <h1 className="text-5xl font-bold p-10">ประชาสัมพันธ์</h1>
-        <img
-          src="https://www.azay.co.th/th_TH/life/senior/Soongwai/_jcr_content/root/parsys/stage_copy_copy/stageimage.img.82.3360.jpeg/1688548061915/soongwai-1520x510-26012021.jpeg"
-          alt="news"
-          className="w-full h-full"
-        />
+        <Carousel className="max-w-8xl h-[600px] ">
+          <CarouselContent className="w-full h-full">
+            <CarouselItem>
+              <img
+                src="https://www.azay.co.th/th_TH/life/senior/Soongwai/_jcr_content/root/parsys/stage_copy_copy/stageimage.img.82.3360.jpeg/1688548061915/soongwai-1520x510-26012021.jpeg"
+                alt="news"
+                className=""
+              />
+            </CarouselItem>
+            <CarouselItem className="w-full h-full">
+              <img
+                src="https://www.nakornthon.com/Upload/Images/Content/637545036588642046/Image_AW_Website_7%20%E0%B9%82%E0%B8%A3%E0%B8%84%E0%B8%9E%E0%B8%9A%E0%B8%9A%E0%B9%88%E0%B8%AD%E0%B8%A2%E0%B9%83%E0%B8%99%E0%B8%9C%E0%B8%B9%E0%B9%89%E0%B8%AA%E0%B8%B9%E0%B8%87%E0%B8%AD%E0%B8%B2%E0%B8%A2%E0%B8%B8%20%E0%B8%97%E0%B8%B5%E0%B9%88%E0%B8%95%E0%B9%89%E0%B8%AD%E0%B8%87%E0%B9%80%E0%B8%9D%E0%B9%89%E0%B8%B2%E0%B8%A3%E0%B8%B0%E0%B8%A7%E0%B8%B1%E0%B8%87-01.jpg"
+                alt="news"
+                className="object-cover object-center w-full h-full "
+              />
+            </CarouselItem>
+            <CarouselItem>
+              <img
+                src="https://www.bfcdental.com/wp-content/uploads/2021/08/article-bfc-aug-3.png"
+                alt="news"
+                className="object-cover object-center w-full h-full"
+              />
+            </CarouselItem>
+          </CarouselContent>
 
+          <CarouselNext className="absolute right-0 top-1/2 transform -translate-y-1/2 w-[100px] h-full rounded-none hover:bg-slate-200">
+            <button onClick={handleNextSlide} className="">
+              Next
+            </button>
+          </CarouselNext>
+          <CarouselPrevious className="absolute left-0 top-1/2 transform -translate-y-1/2 w-[100px] h-full rounded-none hover:bg-slate-200">
+            <button onClick={handlePreviousSlide}>Previous</button>
+          </CarouselPrevious>
+
+          {/* <div className="flex mt-4 space-x-2">
+            {[...Array(totalSlides)].map((_, index) => (
+              <button
+                key={index}
+                onClick={() => goToSlide(index)} // Set slide to the clicked dot
+                className={`w-3 h-3 rounded-full transition-colors duration-300 ${
+                  index === currentSlide ? "bg-gray-900" : "bg-gray-400"
+                }`}
+                aria-label={`Go to slide ${index + 1}`} // Add aria-label for accessibility
+              />
+            ))}
+          </div> */}
+        </Carousel>
         <div className="flex gap-4 py-6 w-full h-full items-center justify-center ">
           <Input
             type="text"
@@ -52,11 +114,10 @@ export default function Caregiver() {
             onChange={(e) => setSearchTerm(e.target.value)}
             className=" flex flex-col justify-center p-2 mb-6 w-[1500px] h-full"
           />
-          <button className="flex  hover:text-blue-500">
+          <button className="flex hover:text-blue-500 mb-6">
             <FilterList />
           </button>
         </div>
-
         <section className="flex flex-col justify-center items-center">
           <InformationCard
             title={"โรคอัลไซเมอร์ รู้ให้เร็ว ก่อนเสี่ยงภาวะเสื่อมรุนเเรง"}
