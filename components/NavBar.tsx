@@ -1,10 +1,10 @@
 'use client'
 
-import Image from "next/image";
 import { useEffect, useState } from "react";
 import { Chat, Notifications, Person, MoreHoriz } from '@mui/icons-material';
 import Link from "next/link";
-import { Dropdown, DropdownTrigger, DropdownMenu, DropdownItem, Button } from "@nextui-org/react";
+import { Dropdown, DropdownTrigger, DropdownMenu, DropdownItem, Button, Card, CardBody, Image } from "@nextui-org/react";
+import NotiCard from "./NotiCard";
 
 export default function NavBar() {
     const [pageTitle, setPageTitle] = useState('');
@@ -18,7 +18,7 @@ export default function NavBar() {
 
             {/* Left side */}
             <Link href="/home" className="flex items-center space-x-3">
-                <Image src="/favicon.ico" width={40} height={40} alt="Ricardo" />
+                <Image src="/favicon.ico" width={40} height={40} alt="Logo  " />
                 <div className="font-bold text-lg">Cozy Care</div>
             </Link>
 
@@ -49,7 +49,7 @@ export default function NavBar() {
                                 </div>
                             </DropdownItem>
                             <DropdownItem isReadOnly key="sub" className="opacity-100 cursor-default">
-                                asd 
+                                asd
                             </DropdownItem>
                             <DropdownItem key="edit">Chat</DropdownItem>
                         </DropdownMenu>
@@ -68,9 +68,20 @@ export default function NavBar() {
                                 </div>
                             </DropdownItem>
                             <DropdownItem isReadOnly key="sub" className="opacity-100 cursor-default">
-
+                                <div className="h-[82vh] overflow-y-auto">
+                                    <NotiCard imageUrl="https://uploads.dailydot.com/2018/10/olli-the-polite-cat.jpg?auto=compress&fm=pjpg"/>
+                                    <NotiCard imageUrl="https://uploads.dailydot.com/2018/10/olli-the-polite-cat.jpg?auto=compress&fm=pjpg"/>
+                                    <NotiCard imageUrl="https://uploads.dailydot.com/2018/10/olli-the-polite-cat.jpg?auto=compress&fm=pjpg"/>
+                                    <NotiCard imageUrl="https://uploads.dailydot.com/2018/10/olli-the-polite-cat.jpg?auto=compress&fm=pjpg"/>
+                                    <NotiCard imageUrl="https://uploads.dailydot.com/2018/10/olli-the-polite-cat.jpg?auto=compress&fm=pjpg"/>
+                                    <NotiCard imageUrl="https://uploads.dailydot.com/2018/10/olli-the-polite-cat.jpg?auto=compress&fm=pjpg"/>
+                                    <NotiCard imageUrl="https://uploads.dailydot.com/2018/10/olli-the-polite-cat.jpg?auto=compress&fm=pjpg"/>
+                                    <NotiCard imageUrl="https://uploads.dailydot.com/2018/10/olli-the-polite-cat.jpg?auto=compress&fm=pjpg"/>
+                                    <NotiCard imageUrl="https://uploads.dailydot.com/2018/10/olli-the-polite-cat.jpg?auto=compress&fm=pjpg"/>
+                                    <NotiCard imageUrl="https://uploads.dailydot.com/2018/10/olli-the-polite-cat.jpg?auto=compress&fm=pjpg"/>
+                                    <NotiCard imageUrl="https://uploads.dailydot.com/2018/10/olli-the-polite-cat.jpg?auto=compress&fm=pjpg"/>
+                                </div>
                             </DropdownItem>
-                            <DropdownItem key="edit">Edit file</DropdownItem>
                         </DropdownMenu>
                     </Dropdown>
 
