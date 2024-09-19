@@ -1,0 +1,21 @@
+numbers = input("  Median Mean \nEnter numbers : ")
+list0 = numbers.split()
+list1 = [int(num) for num in list0]
+mean = sum(list1) / len(list1)
+sorted_list = sorted(list1)
+n = len(sorted_list)
+if n % 2 == 0:
+    median = (sorted_list[n//2 - 1] + sorted_list[n//2]) / 2
+else:
+    median = sorted_list[n//2]
+if mean.is_integer():
+    mean_formatted = f"{int(mean)}" 
+else:
+    mean_formatted = f"{mean:.2f}"
+median_formatted = f"{int(median)}" 
+print(f"list0 =  {list0}")
+print(f"list1 =  {list1}")
+print(f"Mean = {mean_formatted:^}") 
+print(f"sort = {sorted_list}")
+print(f"Median = {median_formatted}")
+print(f"list2 =  []")
