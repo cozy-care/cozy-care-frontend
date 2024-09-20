@@ -13,24 +13,34 @@ import {
 } from "@/components/ui/carousel";
 
 export default function Home() {
-  const [currentSlide, setCurrentSlide] = useState(0); // State for current slide
-  const totalSlides = 3; // Total number of slides
+  // const [currentSlide, setCurrentSlide] = useState(0); // State for current slide
+  // const totalSlides = 3; // Total number of slides
 
-  useEffect(() => {
-    document.title = "Home - Cozy Care";
-  }, []);
+  // useEffect(() => {
+  //   document.title = "Home - Cozy Care";
+  // }, []);
 
-  const handleNextSlide = () => {
-    setCurrentSlide((prev) => (prev + 1) % totalSlides);
+  // const handleNextSlide = () => {
+  //   setCurrentSlide((prev) => (prev + 1) % totalSlides);
+  // };
+
+  // const handlePreviousSlide = () => {
+  //   setCurrentSlide((prev) => (prev - 1 + totalSlides) % totalSlides);
+  // };
+
+  const [currentPage, setCurrentPage] = useState(1);
+
+  const handlePointingnNextPage = () => {
+    setCurrentPage((prevPage) => (prevPage === 3 ? 1 : prevPage + 1));
   };
 
-  const handlePreviousSlide = () => {
-    setCurrentSlide((prev) => (prev - 1 + totalSlides) % totalSlides);
+  const handlePointingnPreviousPage = () => {
+    setCurrentPage((prevPage) => (prevPage === 1 ? 3 : prevPage - 1));
   };
 
-  const goToSlide = (index: React.SetStateAction<number>) => {
-    setCurrentSlide(index);
-  };
+  // const goToSlide = (index: React.SetStateAction<number>) => {
+  //   setCurrentSlide(index);
+  // };
 
   return (
     <main className="flex flex-col min-h-[calc(100svh-3.5rem)] items-center justify-center  ">
@@ -80,7 +90,7 @@ export default function Home() {
           </article>
         </section>
 
-        <div className="flex justify-center mt-10">
+        <div className="flex justify-center mt-10 overflow-hidden">
           <Carousel className="w-full max-w-6xl flex flex-col justify-center items-center">
             <CarouselContent>
               <CarouselItem>
@@ -186,13 +196,34 @@ export default function Home() {
               </CarouselItem>
             </CarouselContent>
 
-            <CarouselNext className="absolute right-4 top-1/2 transform -translate-y-1/2">
-              <button onClick={handleNextSlide}>Next</button>
-            </CarouselNext>
             <CarouselPrevious className="absolute left-4 top-1/2 transform -translate-y-1/2">
-              <button onClick={handlePreviousSlide}>Previous</button>
+              <button onClick={handlePointingnPreviousPage}>Previous</button>
             </CarouselPrevious>
-            <div className="flex mt-4 space-x-2">
+
+            <CarouselNext
+              className="absolute right-4 top-1/2 transform -translate-y-1/2"
+              onClick={handlePointingnNextPage}
+            >
+              <button onClick={handlePointingnNextPage} className="">
+                Next
+              </button>
+            </CarouselNext>
+            {/* <div className="flex gap-3 mt-10">
+              {Array(3)
+                .fill(null)
+                .map((_, index) => (
+                  <div
+                    key={index}
+                    className={`w-6 h-6 bg-slate-500 rounded-[50%] my-auto gap-5 mx-auto transition-colors duration-500 ${
+                      currentPage === index + 1
+                        ? "bg-slate-800"
+                        : "bg-slate-500"
+                    }`}
+                  />
+                ))}
+            </div> */}
+
+            {/* <div className="flex mt-4 space-x-2">
               {[...Array(totalSlides)].map((_, index) => (
                 <button
                   key={index}
@@ -203,36 +234,28 @@ export default function Home() {
                   aria-label={`Go to slide ${index + 1}`} // Add aria-label for accessibility
                 />
               ))}
-            </div>
+            </div> */}
+
+            {/* <div className="flex mt-4 space-x-2">
+              <button onClick={handlePointingnPreviousPage}>ย้อนกลับ</button>
+              {Array(3)
+                .fill(null)
+                .map((_, index) => (
+                  <div
+                    key={index}
+                    style={{
+                      width: "50px",
+                      height: "50px",
+                      borderRadius: "50%",
+                      backgroundColor:
+                        currentPage === index + 1 ? "red" : "black", // เปลี่ยนเงื่อนไขตรงนี้
+                    }}
+                  />
+                ))}
+              <button onClick={handlePointingnNextPage}>ไปหน้าถัดไป</button>
+            </div> */}
           </Carousel>
         </div>
-        {/* <section className="flex flex-col justify-center items-center">
-          <button className="flex w-[1000px] h-[300px]  mt-10 transform hover:scale-105 transition-transform duration-500">
-            <article className="w-1/2 h-full bg-blue-900 rounded-l-2xl flex flex-col justify-center items-center text-left ">
-              <h3 className="text-white font-bold text-3xl mb-7 ">
-                ผู้รับการดูแล
-              </h3>
-              <ul className="text-white w-[400px] h-auto text-xl ">
-                <li>ค้นหาผู้ดูแลและโปรไฟล์</li>
-                <li>ดูรีวิวและคะแนนของผู้ดูแล</li>
-                <li>การติดต่อผู้ดูแลผ่านระบบแชทในแอป</li>
-                <li>การจองบริการเบื้องต้น (จำกัดจำนวนครั้งต่อเดือน)</li>
-              </ul>
-            </article>
-            <article className="w-1/2 h-full bg-blue-300 rounded-r-2xl flex flex-col justify-center items-center text-left">
-              <h3 className="text-black font-bold text-3xl mb-7 ">ผู้ดูแล</h3>
-              <ul className="text-black w-[400px] h-auto text-xl text-left">
-                <li>สร้างและแก้ไขโปรไฟล์</li>
-                <li>รับการติดต่อจากผู้ป่วย</li>
-                <li>การแสดงรีวิวและคะแนนจากผู้ป่วย</li>
-                <li>การรับงานเบื้องต้น (จำกัดจำนวนครั้งต่อเดือน)</li>
-              </ul>
-            </article>
-          </button>
-          <h3 className="text-black font-bold text-xl mt-7 text-center ">
-            แพ็คเกจฟรี
-          </h3>
-        </section> */}
 
         <section className="flex justify-center items-center p-10 text-center  gap-10">
           <img
@@ -314,20 +337,6 @@ export default function Home() {
             </p>
           </article>
         </section>
-        {/* <section>
-        <h2 className="text-black font-bold text-5xl">ทำไมต้องเลือกเรา?</h2>
-      </section>
-
-      <section>
-        <h2 className="text-black font-bold text-5xl">
-          ร่วมเป็นส่วนหนึ่งของเรา
-        </h2>
-        <ul>
-          <li>
-            ผู้ดูแลที่เชื่อถือได้: ทีมผู้ดูแลที่มีประสบการณ์และได้รับการรับรอง
-          </li>
-        </ul>
-      </section> */}
       </div>
 
       <Footer />
