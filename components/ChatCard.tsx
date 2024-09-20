@@ -8,9 +8,9 @@ interface Props {
     imageUrl: string;
 }
 
-export default function NotiCard(props: Props) {
+export default function ChatCard(props: Props) {
     return (
-        <Card shadow="none" radius="sm" isPressable className="w-full hover:bg-gray-200 py-1">
+        <Card shadow="none" radius="sm" isPressable className="w-full hover:bg-gray-200 py-[2px]">
             <CardBody>
                 <div className="flex gap-2">
                     <Image
@@ -21,8 +21,10 @@ export default function NotiCard(props: Props) {
                         src={props.imageUrl}
                     />
                     <div className="flex flex-col justify-center gap-1">
-                        <p className="text-xl font-semibold">ใครสักคนกำลังจ้องจะเล่นคุณ</p>
-                        <p className="text-blue-400">10 นาทีที่ผ่านมา</p>
+                        <p className="text-xl font-semibold">นายโรคภัย ไข้เจ็บ</p>
+                        <div className="flex">
+                            <p className="">คืองี้เว้ยแชท</p><p className="px-2 font-extrabold">·</p><p>10 นาที</p>
+                        </div>
                     </div>
                 </div>
             </CardBody>
