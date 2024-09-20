@@ -16,9 +16,9 @@ export default function Home() {
   // const [currentSlide, setCurrentSlide] = useState(0); // State for current slide
   // const totalSlides = 3; // Total number of slides
 
-  // useEffect(() => {
-  //   document.title = "Home - Cozy Care";
-  // }, []);
+  useEffect(() => {
+    document.title = "Home - Cozy Care";
+  }, []);
 
   // const handleNextSlide = () => {
   //   setCurrentSlide((prev) => (prev + 1) % totalSlides);
