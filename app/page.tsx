@@ -34,7 +34,7 @@ export default function Welcome() {
 
   return (
     <main className="w-screen h-screen  flex content-center mt-[-56px]  ">
-      <Carousel className="flex  flex-wrap items-center justify-center   gap-x-10 mx-auto overflow-auto ">
+      <Carousel className="flex  flex-wrap items-center justify-center  gap-x-10 mx-auto overflow-auto ">
         <CarouselContent>
           <CarouselItem className="flex flex-wrap items-center justify-center gap-x-10 mx-auto">
             {/* Image */}
@@ -51,7 +51,7 @@ export default function Welcome() {
             {/* Text */}
             <div className="w-[700px] h-[400px] flex-col content-center  gap-9 mt-[48px] ">
               <h1 className="mx-auto w-max text-2xl ">ร่วมเป็นผู้ดูแลกับเรา</h1>
-              <p className="w-[600px]  mx-auto text-xl  ">
+              <p className="w-[600px]  mx-auto text-xl  my-5 ">
                 &emsp;ร่วมเป็นผู้ดูแลกับเรา
                 เพื่อมอบการดูแลสุขภาพที่ดีให้กับผู้ที่ต้องการ
                 คุณจะพบกับการจองงานที่ง่ายและรวดเร็ว
@@ -90,11 +90,11 @@ export default function Welcome() {
             ></div>
 
             {/* Text */}
-            <div className="w-[700px] h-[400px] flex-col content-center gap-9 mt-[48px] ">
-              <h1 className="mx-auto w-max text-2xl s">
+            <div className="w-[700px] h-[400px] flex-col content-center  gap-9 mt-[48px] ">
+              <h1 className="mx-auto w-max text-2xl ">
                 เริ่มต้นการดูแลครอบครัวของคุณ
               </h1>
-              <p className="w-[600px]  mx-auto text-xl -sm my-5 ">
+              <p className="w-[600px]  mx-auto text-xl  my-5">
                 &emsp; เริ่มต้นการดูแลครอบครัวของคุณกับเรา
                 ค้นหาและจองผู้ดูแลสุขภาพ
                 ที่มีประสบการณ์และได้รับการรับรองได้ง่ายๆ
@@ -152,7 +152,7 @@ export default function Welcome() {
                 </button>
               </div>
 
-              <div className="flex justify-center gap-5 mx-auto mt-12 ">
+              <div className="flex justify-center gap-5 mx-auto mt-12 sm:mt-7">
                 <button className="w-[12px] h-[12px] bg-slate-500 rounded-[50%] my-auto" />
                 <button className="w-[12px] h-[12px] bg-slate-500 rounded-[50%] my-auto" />
                 <button className="w-[15px] h-[15px] bg-slate-800 rounded-[50%] my-auto" />
@@ -166,7 +166,7 @@ export default function Welcome() {
             Next
           </button>
         </CarouselNext>
-        <CarouselPrevious className="absolute left-0 top-1/2 transform -translate-y-1/2 w-[100px] h-full rounded-none hover:bg-slate-200">
+        <CarouselPrevious className="absolute left-0 top-1/2 transform -translate-y-1/2 w-[100px] sm:w-[50px] h-full rounded-none hover:bg-slate-200">
           <button onClick={handlePreviousSlide}>Previous</button>
         </CarouselPrevious>
       </Carousel>
