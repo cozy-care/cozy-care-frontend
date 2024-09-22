@@ -33,16 +33,13 @@ export default function Welcome() {
   };
 
   return (
-    <main className="w-screen h-screen flex content-center mt-[-56px]">
-      {/* <button className="w-[80px] h-100% from-slate-300 bg-gradient-to-r invisible">
-        <ArrowBackIos />
-      </button> */}
-      <Carousel className="flex flex-wrap items-center justify-center gap-x-10 mx-auto overflow-auto">
+    <main className="w-screen h-screen sm:min-h-full flex content-center mt-[-56px] sm:mt-[0px] sm:overflow-hidden">
+      <Carousel className="flex sm:flex flex-wrap items-center sm:items-start justify-center  sm:justify-start gap-x-10 mx-auto overflow-auto ">
         <CarouselContent>
           <CarouselItem className="flex flex-wrap items-center justify-center gap-x-10 mx-auto">
             {/* Image */}
             <div
-              className="rounded-[50%] w-[700px] h-[550px] border-slate-900 border-2"
+              className="rounded-[50%] w-[700px] h-[550px] border-slate-900 border-2 sm:w-[250px] sm:h-[180px] sm:mt-7"
               style={{
                 backgroundImage:
                   "url('https://www.westerncape.gov.za/sites/www.westerncape.gov.za/files/taking_care_of_older_people.jpg')",
@@ -52,9 +49,11 @@ export default function Welcome() {
             ></div>
 
             {/* Text */}
-            <div className="w-[700px] h-[400px] flex-col content-center gap-9 mt-[48px]">
-              <h1 className="mx-auto w-max text-2xl">ร่วมเป็นผู้ดูแลกับเรา</h1>
-              <p className="w-[600px] mx-auto text-xl my-5">
+            <div className="w-[700px] h-[400px] flex-col content-center sm:content-start gap-9 mt-[48px] sm:mt-[20px]">
+              <h1 className="mx-auto w-max text-2xl sm:text-lg sm:mt-2">
+                ร่วมเป็นผู้ดูแลกับเรา
+              </h1>
+              <p className="w-[600px] sm:w-[250px] mx-auto text-xl sm:text-sm my-5  sm:mt-5 ">
                 &emsp;ร่วมเป็นผู้ดูแลกับเรา
                 เพื่อมอบการดูแลสุขภาพที่ดีให้กับผู้ที่ต้องการ
                 คุณจะพบกับการจองงานที่ง่ายและรวดเร็ว
@@ -73,7 +72,7 @@ export default function Welcome() {
                 </button>
               </div>
 
-              <div className="flex justify-center gap-5 mx-auto mt-12">
+              <div className="flex justify-center gap-5 mx-auto mt-12 sm:mt-7">
                 <button className="w-[15px] h-[15px] bg-slate-800 rounded-[50%] my-auto" />
                 <button className="w-[12px] h-[12px] bg-slate-500 rounded-[50%] my-auto" />
                 <button className="w-[12px] h-[12px] bg-slate-500 rounded-[50%] my-auto" />
@@ -83,7 +82,7 @@ export default function Welcome() {
           <CarouselItem className="flex flex-wrap items-center justify-center gap-x-10 mx-auto">
             {/* Image */}
             <div
-              className="rounded-[50%] w-[700px] h-[550px] border-slate-900 border-2"
+              className="rounded-[50%] w-[700px] h-[550px] border-slate-900 border-2 sm:w-[250px] sm:h-[180px] sm:mt-7"
               style={{
                 backgroundImage:
                   "url('https://www.synphaet.co.th/wp-content/uploads/2021/01/20196963_xxl-scaled.jpg')",
@@ -93,12 +92,54 @@ export default function Welcome() {
             ></div>
 
             {/* Text */}
-            <div className="w-[700px] h-[400px] flex-col content-center gap-9 mt-[48px]">
-              <h1 className="mx-auto w-max text-2xl">
+            <div className="w-[700px] h-[400px] flex-col content-center sm:content-start gap-9 mt-[48px] sm:mt-[20px]">
+              <h1 className="mx-auto w-max text-2xl sm:text-lg sm:mt-2">
                 เริ่มต้นการดูแลครอบครัวของคุณ
               </h1>
-              <p className="w-[600px] mx-auto text-xl my-5">
-                &emsp;เริ่มต้นการดูแลครอบครัวของคุณกับเรา
+              <p className="w-[600px] sm:w-[250px] mx-auto text-xl sm:text-sm my-5 sm:mt-5">
+                &emsp; เริ่มต้นการดูแลครอบครัวของคุณกับเรา
+                ค้นหาและจองผู้ดูแลสุขภาพ
+                ที่มีประสบการณ์และได้รับการรับรองได้ง่ายๆ
+                ใช้ระบบแชทเพื่อติดต่อกับผู้ดูแล
+                และมั่นใจได้ในความปลอดภัยด้วยการตรวจสอบประวัติ ผู้ใช้สามารถ
+                ดูรีวิวและ คะแนนเพื่อเลือกผู้ดูแลที่เหมาะสมที่สุด
+                มอบการดูแลที่ดีที่สุดให้กับครอบครัว ของคุณวันนี้!
+              </p>
+              <div className="flex justify-center">
+                <button
+                  onClick={() => router.push("/login")}
+                  className="bg-slate-900 hover:bg-slate-800 text-white font-bold py-2 px-4 rounded-2xl "
+                >
+                  เริ่มต้นใช้งาน
+                </button>
+              </div>
+
+              <div className="flex justify-center gap-5 mx-auto mt-12  sm:mt-7">
+                <button className="w-[12px] h-[12px] bg-slate-500 rounded-[50%] my-auto" />
+                <button className="w-[15px] h-[15px] bg-slate-800 rounded-[50%] my-auto" />
+                <button className="w-[12px] h-[12px] bg-slate-500 rounded-[50%] my-auto" />
+              </div>
+            </div>
+          </CarouselItem>
+          <CarouselItem className="flex flex-wrap items-center justify-center gap-x-10 mx-auto">
+            {/* Image */}
+            <div
+              className="rounded-[50%] w-[700px] h-[550px] border-slate-900 border-2 sm:w-[250px] sm:h-[180px] sm:mt-7"
+              style={{
+                backgroundImage:
+                  "url('https://s.isanook.com/he/0/ud/2/10817/nutritionist.jpg')",
+                backgroundSize: "cover",
+                backgroundPosition: "center",
+              }}
+            ></div>
+
+            {/* Text */}
+            <div className="w-[700px] h-[400px] flex-col content-center sm:content-start gap-9 mt-[48px] sm:mt-[20px]">
+              <h1 className="mx-auto w-max text-2xl sm:text-lg sm:mt-2">
+                ร่วมเป็นผู้ดูแลกับเรา
+              </h1>
+              <p className="w-[600px] sm:w-[250px] mx-auto text-xl sm:text-sm my-5 sm:mt-5">
+                &emsp; เริ่มต้นการดูแลครอบครัวของคุณกับเรา
                 ค้นหาและจองผู้ดูแลสุขภาพ
                 ที่มีประสบการณ์และได้รับการรับรองได้ง่ายๆ
                 ใช้ระบบแชทเพื่อติดต่อกับผู้ดูแล
@@ -115,48 +156,7 @@ export default function Welcome() {
                 </button>
               </div>
 
-              <div className="flex justify-center gap-5 mx-auto mt-12">
-                <button className="w-[12px] h-[12px] bg-slate-500 rounded-[50%] my-auto" />
-                <button className="w-[15px] h-[15px] bg-slate-800 rounded-[50%] my-auto" />
-                <button className="w-[12px] h-[12px] bg-slate-500 rounded-[50%] my-auto" />
-              </div>
-            </div>
-          </CarouselItem>
-          <CarouselItem className="flex flex-wrap items-center justify-center gap-x-10 mx-auto">
-            {/* Image */}
-            <div
-              className="rounded-[50%] w-[700px] h-[550px] border-slate-900 border-2"
-              style={{
-                backgroundImage:
-                  "url('https://s.isanook.com/he/0/ud/2/10817/nutritionist.jpg')",
-                backgroundSize: "cover",
-                backgroundPosition: "center",
-              }}
-            ></div>
-
-            {/* Text */}
-            <div className="w-[700px] h-[400px] flex-col content-center gap-9 mt-[48px]">
-              <h1 className="mx-auto w-max text-2xl">ร่วมเป็นผู้ดูแลกับเรา</h1>
-              <p className="w-[600px] mx-auto text-xl my-5">
-                &emsp;ร่วมเป็นผู้ดูแลกับเรา
-                เพื่อมอบการดูแลสุขภาพที่ดีให้กับผู้ที่ต้องการ
-                คุณจะพบกับการจองงานที่ง่ายและรวดเร็ว
-                พร้อมระบบการชำระเงินที่ปลอดภัย
-                และการสนับสนุนจากทีมงานที่พร้อมช่วยเหลือทุกขั้นตอน
-                ระบบของเราช่วยให้
-                คุณสามารถติดต่อกับครอบครัวผู้ป่วยได้อย่างสะดวกและมั่นใจในความปลอดภัย
-                มาร่วมสร้างสังคมการดูแลที่อบอุ่นและปลอดภัยไปด้วยกัน
-              </p>
-              <div className="flex justify-center">
-                <button
-                  onClick={() => router.push("/login")}
-                  className="bg-slate-900 hover:bg-slate-800 text-white font-bold py-2 px-4 rounded-2xl"
-                >
-                  เริ่มต้นใช้งาน
-                </button>
-              </div>
-
-              <div className="flex justify-center gap-5 mx-auto mt-12">
+              <div className="flex justify-center gap-5 mx-auto mt-12 sm:mt-7">
                 <button className="w-[12px] h-[12px] bg-slate-500 rounded-[50%] my-auto" />
                 <button className="w-[12px] h-[12px] bg-slate-500 rounded-[50%] my-auto" />
                 <button className="w-[15px] h-[15px] bg-slate-800 rounded-[50%] my-auto" />
@@ -165,12 +165,12 @@ export default function Welcome() {
           </CarouselItem>
         </CarouselContent>
 
-        <CarouselNext className="absolute right-0 top-1/2 transform -translate-y-1/2 w-[100px] h-full rounded-none hover:bg-slate-200">
+        <CarouselNext className="absolute right-0 top-1/2 transform -translate-y-1/2 w-[100px] sm:w-[50px] h-full rounded-none hover:bg-slate-200">
           <button onClick={handleNextSlide} className="">
             Next
           </button>
         </CarouselNext>
-        <CarouselPrevious className="absolute left-0 top-1/2 transform -translate-y-1/2 w-[100px] h-full rounded-none hover:bg-slate-200">
+        <CarouselPrevious className="absolute left-0 top-1/2 transform -translate-y-1/2 w-[100px] sm:w-[50px] h-full rounded-none hover:bg-slate-200">
           <button onClick={handlePreviousSlide}>Previous</button>
         </CarouselPrevious>
       </Carousel>
