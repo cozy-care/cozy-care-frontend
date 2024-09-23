@@ -11,12 +11,22 @@ const config: Config = {
   theme: {
     extend: {
       screens: {
-        xs: "320px",
-        sm: "360px",
-        md: "414px",
-        lg: "768px",
-        xl: "1024px",
-        "2xl": "1440px",
+        xs: "375px", //for small mobile
+
+        //default from tailwind
+        // sm: "640px", horizontal mobile
+        // md: "768px", tablet
+        // lg: "1024px", computer
+        // xl: "1280px",
+        // "2xl": "1536px"
+
+        //customize
+        // xs: "320px",
+        // sm: "360px",
+        // md: "414px",
+        // lg: "768px",
+        // xl: "1024px",
+        // "2xl": "1440px",
       },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
