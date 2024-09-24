@@ -74,33 +74,48 @@ export default function Register() {
   };
 
   return (
-    <div className="flex min-h-[calc(100svh-3.5rem)]">
-      <div className="grow w-5/12 bg-slate-400 flex justify-end items-center">
-        <div className="w-max h-[600px] bg-slate-200 p-4 rounded-l-xl  flex flex-col justify-start items-center ">
+    <div className="h-full flex min-h-[calc(100svh-3.5rem)]">
+      <div className=" grow w-1/3 lg:w-5/12 bg-slate-400 flex justify-end items-center">
+        <div className="w-full lg:w-10/12 h-[600px] bg-slate-200 p-4 rounded-l-xl  flex flex-col justify-start items-center ">
           <h1 className="flex justify-center text-indigo-700">
             เริ่มต้นใช้งาน
           </h1>
           <h2 className="my-7">ทำไมต้องเลือกเรา?</h2>
-          <ul>
+
+          <ul className="sm:ml-5 flex flex-col gap-y-4 ">
             <li>
-              <strong>ผู้ดูแลที่เชื่อถือได้ :</strong>
-              <p>ค้นหาและจองผู้ดูแลสุขภาพที่มีประสบการณ์และได้รับการรับรอง</p>
+              <strong className="font-bold lg:text-lg">
+                ผู้ดูแลที่เชื่อถือได้ :
+              </strong>
+              <p className="text-sm lg:text-medium">
+                ค้นหาและจองผู้ดูแลสุขภาพที่มีประสบการณ์และได้รับการรับรอง
+              </p>
             </li>
             <li>
-              <strong>ใช้งานง่าย :</strong>
-              <p>จองผู้ดูแลในไม่กี่ขั้นตอนผ่านแอปพลิเคชันของเรา</p>
+              <strong className="font-bold lg:text-lg">ใช้งานง่าย :</strong>
+              <p className="text-sm lg:text-medium">
+                จองผู้ดูแลในไม่กี่ขั้นตอนผ่านแอปพลิเคชันของเรา
+              </p>
             </li>
             <li>
-              <strong>การติดต่อที่สะดวก :</strong>
-              <p>ระบบแชทภายในแอปช่วยให้คุณติดต่อกับผู้ดูแลได้ตลอดเวลา</p>
+              <strong className="font-bold lg:text-lg">
+                การติดต่อที่สะดวก :
+              </strong>
+              <p className="text-sm lg:text-medium">
+                ระบบแชทภายในแอปช่วยให้คุณติดต่อกับผู้ดูแลได้ตลอดเวลา
+              </p>
             </li>
             <li>
-              <strong>รีวิวและคะแนน :</strong>
-              <p>ดูรีวิวจากผู้ใช้อื่นเพื่อเลือกผู้ดูแลที่เหมาะสม</p>
+              <strong className="font-bold lg:text-lg">รีวิวและคะแนน :</strong>
+              <p className="text-sm lg:text-medium">
+                ดูรีวิวจากผู้ใช้อื่นเพื่อเลือกผู้ดูแลที่เหมาะสม
+              </p>
             </li>
             <li>
-              <strong>การสนับสนุนจากทีมงาน :</strong>
-              <p>
+              <strong className="font-bold lg:text-lg">
+                การสนับสนุนจากทีมงาน :
+              </strong>
+              <p className="text-sm lg:text-medium">
                 พร้อมให้ความช่วยเหลือและคำปรึกษาตลอดการใช้งาน
                 เพื่อให้คุณได้รับประสบการณ์ที่ดีที่สุด
               </p>
@@ -109,10 +124,10 @@ export default function Register() {
         </div>
       </div>
 
-      <div className="grow w-7/12 bg-slate-300 flex justify-start  items-center ">
+      <div className=" grow w-7/12 bg-slate-300 flex justify-start  items-center ">
         <form
           onSubmit={handleSubmit}
-          className="w-[1000px] h-[600px] bg-slate-100  rounded-r-xl justify-start "
+          className="lg:w-11/12 h-[600px] bg-slate-100  rounded-r-xl justify-start "
         >
           <fieldset className="flex-row justify-center items-center ">
             <h2 className="flex justify-center text-3xl font-bold text-indigo-700 mt-4">
