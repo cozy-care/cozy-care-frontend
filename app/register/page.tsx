@@ -74,7 +74,7 @@ export default function Register() {
   };
 
   return (
-    <div className="h-full flex min-h-[calc(100svh-3.5rem)]">
+    <div className="W-full flex min-h-[calc(100svh-3.5rem)]">
       <div className=" grow w-full lg:w-5/12 bg-slate-400 flex justify-end items-center">
         <div className="w-full lg:w-10/12 h-[600px] bg-slate-200 p-4 rounded-l-xl  flex flex-col justify-start items-center ">
           <h1 className="flex justify-center text-indigo-700">
@@ -134,12 +134,12 @@ export default function Register() {
               ลงทะเบียน
             </h2>
 
-            <div className="flex flex-col justify-center items-center">
+            <div className=" flex flex-col justify-center items-center">
               {error && <p className="text-red-500">{error}</p>}
               <div className=" mb-2">
                 <label
                   htmlFor="username"
-                  className="block  text-medium lg:text-lg font-bold text-gray-900"
+                  className="block text-medium lg:text-lg font-bold text-gray-900"
                 >
                   ชื่อผู้ใช้
                 </label>
