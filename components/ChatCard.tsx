@@ -23,7 +23,7 @@ export default function ChatCard(props: Props) {
                     <div className="flex flex-col justify-center gap-1">
                         <p className="text-xl font-semibold">นายโรคภัย ไข้เจ็บ</p>
                         <div className="flex">
-                            <p className="">คืองี้เว้ยแชท</p><p className="px-2 font-extrabold">·</p><p>10 นาที</p>
+                            <p className="">ฮัลโหลๆ 1234</p><p className="px-2 font-extrabold">·</p><p>10 นาที</p>
                         </div>
                     </div>
                 </div>
