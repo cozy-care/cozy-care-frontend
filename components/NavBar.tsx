@@ -56,15 +56,16 @@ export default function NavBar() {
                             </DropdownItem>
                             <DropdownItem isReadOnly key="sub" className="opacity-100 cursor-default">
                                 <div className="h-[82vh] overflow-y-auto">
-                                    <ChatCard imageUrl="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS0sk1gZUWYPUZm5tPW_BNf0QdBWq_XQqAO5Q&s" />
-                                    <ChatCard imageUrl="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS0sk1gZUWYPUZm5tPW_BNf0QdBWq_XQqAO5Q&s" />
-                                    <ChatCard imageUrl="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS0sk1gZUWYPUZm5tPW_BNf0QdBWq_XQqAO5Q&s" />
-                                    <ChatCard imageUrl="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS0sk1gZUWYPUZm5tPW_BNf0QdBWq_XQqAO5Q&s" />
-                                    <ChatCard imageUrl="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS0sk1gZUWYPUZm5tPW_BNf0QdBWq_XQqAO5Q&s" />
-                                    <ChatCard imageUrl="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS0sk1gZUWYPUZm5tPW_BNf0QdBWq_XQqAO5Q&s" />
-                                    <ChatCard imageUrl="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS0sk1gZUWYPUZm5tPW_BNf0QdBWq_XQqAO5Q&s" />
-                                    <ChatCard imageUrl="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS0sk1gZUWYPUZm5tPW_BNf0QdBWq_XQqAO5Q&s" />
-                                    <ChatCard imageUrl="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS0sk1gZUWYPUZm5tPW_BNf0QdBWq_XQqAO5Q&s" />
+                                    <ChatCard imageUrl="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" />
+                                    <ChatCard imageUrl="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" />
+                                    <ChatCard imageUrl="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" />
+                                    <ChatCard imageUrl="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" />
+                                    <ChatCard imageUrl="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" />
+                                    <ChatCard imageUrl="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" />
+                                    <ChatCard imageUrl="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" />
+                                    <ChatCard imageUrl="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" />
+                                    <ChatCard imageUrl="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" />
+                                    <ChatCard imageUrl="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" />
                                 </div>
                             </DropdownItem>
                         </DropdownMenu>
