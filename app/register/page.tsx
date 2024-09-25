@@ -75,7 +75,7 @@ export default function Register() {
 
   return (
     <div className="h-full flex min-h-[calc(100svh-3.5rem)]">
-      <div className=" grow w-1/3 lg:w-5/12 bg-slate-400 flex justify-end items-center">
+      <div className=" grow w-full lg:w-5/12 bg-slate-400 flex justify-end items-center">
         <div className="w-full lg:w-10/12 h-[600px] bg-slate-200 p-4 rounded-l-xl  flex flex-col justify-start items-center ">
           <h1 className="flex justify-center text-indigo-700">
             เริ่มต้นใช้งาน
@@ -124,13 +124,13 @@ export default function Register() {
         </div>
       </div>
 
-      <div className=" grow w-7/12 bg-slate-300 flex justify-start  items-center ">
+      <div className="w-2/3 grow lg:w-7/12 bg-slate-300 flex justify-start  items-center ">
         <form
           onSubmit={handleSubmit}
-          className="lg:w-11/12 h-[600px] bg-slate-100  rounded-r-xl justify-start "
+          className="w-max lg:w-11/12 h-[600px] bg-slate-100  rounded-r-xl justify-start "
         >
-          <fieldset className="flex-row justify-center items-center ">
-            <h2 className="flex justify-center text-3xl font-bold text-indigo-700 mt-4">
+          <fieldset className=" flex-row justify-center items-center ">
+            <h2 className=" flex justify-center text-3xl font-bold text-indigo-700 mt-4">
               ลงทะเบียน
             </h2>
 
@@ -139,7 +139,7 @@ export default function Register() {
               <div className=" mb-2">
                 <label
                   htmlFor="username"
-                  className="block text-lg font-medium text-gray-900"
+                  className="block  text-medium lg:text-lg font-bold text-gray-900"
                 >
                   ชื่อผู้ใช้
                 </label>
@@ -156,7 +156,7 @@ export default function Register() {
               <div className="mb-2">
                 <label
                   htmlFor="email"
-                  className="block text-lg  font-medium text-gray-900"
+                  className="block  text-medium lg:text-lg font-bold text-gray-900"
                 >
                   อีเมล
                 </label>
@@ -173,7 +173,7 @@ export default function Register() {
               <div className="mb-2">
                 <label
                   htmlFor="password"
-                  className="block text-lg  font-medium text-gray-900"
+                  className="block  text-medium lg:text-lg font-bold text-gray-900"
                 >
                   รหัสผ่าน
                 </label>
@@ -190,7 +190,7 @@ export default function Register() {
               <div className="mb-2">
                 <label
                   htmlFor="confirmPassword"
-                  className="block text-lg  font-medium text-gray-900"
+                  className="block  text-medium lg:text-lg font-bold text-gray-900"
                 >
                   ยืนยันรหัสผ่าน
                 </label>
