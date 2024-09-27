@@ -7,6 +7,7 @@ import {
   Person,
   MoreHoriz,
   ZoomOutMap,
+  Menu,
 } from "@mui/icons-material";
 import Link from "next/link";
 import {
@@ -26,6 +27,7 @@ import { useRouter } from "next/navigation";
 export default function NavBar() {
   const router = useRouter();
   const [pageTitle, setPageTitle] = useState("");
+  const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
     setPageTitle(document.title);
@@ -51,36 +53,42 @@ export default function NavBar() {
         </div>
       ) : (
         <div className="flex justify-center items-center">
-          <Link
-            type="button"
-            href="/home"
-            className="px-5 py-2 hover:text-blue-500"
-          >
-            หน้าหลัก
-          </Link>
-          <Link
-            type="button"
-            href="/caregiver"
-            className="px-5 py-2 hover:text-blue-500"
-          >
-            ค้นหาผู้ดูแล
-          </Link>
-          <Link
-            type="button"
-            href="/patient"
-            className="px-5 py-2 hover:text-blue-500"
-          >
-            ค้นหาผู้รับการดูแล
-          </Link>
-          <Link
-            type="button"
-            href="/announcement"
-            className="px-5 py-2 hover:text-blue-500"
-          >
-            ประชาสัมพันธ์
-          </Link>
+          {/* Hamburger menu items (hidden on large screens) */}
+          {menuOpen && (
+            <div className="absolute top-14 left-0 w-full bg-white shadow-md md:hidden">
+              <Link
+                type="button"
+                href="/home"
+                className="px-5 py-2 hover:text-blue-500"
+              >
+                หน้าหลัก
+              </Link>
+              <Link
+                type="button"
+                href="/caregiver"
+                className="px-5 py-2 hover:text-blue-500"
+              >
+                ค้นหาผู้ดูแล
+              </Link>
+              <Link
+                type="button"
+                href="/patient"
+                className="px-5 py-2 hover:text-blue-500"
+              >
+                ค้นหาผู้รับการดูแล
+              </Link>
+              <Link
+                type="button"
+                href="/announcement"
+                className="px-5 py-2 hover:text-blue-500"
+              >
+                ประชาสัมพันธ์
+              </Link>
+            </div>
+          )}
 
           {/* CHAT */}
+
           <Dropdown disableAnimation={true}>
             <DropdownTrigger>
               <button type="button" className="px-5 py-2 hover:text-blue-500">
@@ -186,6 +194,14 @@ export default function NavBar() {
           >
             <Person sx={{ fontSize: 35 }} />
           </Link>
+
+          {/* Hamburger menu icon for mobile */}
+          <button
+            onClick={() => setMenuOpen(!menuOpen)}
+            className="md:hidden px-5 py-2"
+          >
+            <Menu className="text-3xl" />
+          </button>
         </div>
       )}
     </nav>
