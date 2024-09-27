@@ -75,14 +75,14 @@ export default function Register() {
 
   return (
     <div className="W-full flex min-h-[calc(100svh-3.5rem)]">
-      <div className=" grow w-full lg:w-5/12 bg-slate-400 flex justify-end items-center">
-        <div className="w-full lg:w-10/12 h-[600px] bg-slate-200 p-4 rounded-l-xl  flex flex-col justify-start items-center ">
-          <h1 className="flex justify-center text-indigo-700">
+      <div className="grow lg:w-5/12 bg-slate-400 flex justify-end items-center">
+        <div className="w-full h-full lg:w-10/12 lg:h-[600px] bg-slate-200 p-4 rounded-l-xl  flex flex-col justify-start items-center ">
+          <h1 className="text-2xl sm:text-3xl flex justify-center text-indigo-700">
             เริ่มต้นใช้งาน
           </h1>
           <h2 className="my-7">ทำไมต้องเลือกเรา?</h2>
 
-          <ul className="sm:ml-5 flex flex-col gap-y-4 ">
+          <ul className="ml-5 flex flex-col gap-y-4 ">
             <li>
               <strong className="font-bold lg:text-lg">
                 ผู้ดูแลที่เชื่อถือได้ :
@@ -124,17 +124,17 @@ export default function Register() {
         </div>
       </div>
 
-      <div className="w-2/3 grow lg:w-7/12 bg-slate-300 flex justify-start  items-center ">
+      <div className="grow lg:w-7/12 bg-slate-300 flex justify-start  items-center ">
         <form
           onSubmit={handleSubmit}
-          className="w-max lg:w-11/12 h-[600px] bg-slate-100  rounded-r-xl justify-start "
+          className="w-full h-full lg:w-11/12 lg:h-[600px] bg-slate-100  rounded-r-xl justify-start "
         >
           <fieldset className=" flex-row justify-center items-center ">
-            <h2 className=" flex justify-center text-3xl font-bold text-indigo-700 mt-4">
+            <h2 className=" flex justify-center text-2xl sm:text-3xl font-bold text-indigo-700 mt-4">
               ลงทะเบียน
             </h2>
 
-            <div className=" flex flex-col justify-center items-center">
+            <div className=" flex flex-col justify-start items-start lg:justify-center lg:items-center">
               {error && <p className="text-red-500">{error}</p>}
               <div className=" mb-2">
                 <label
@@ -148,7 +148,7 @@ export default function Register() {
                   id="username"
                   value={formState.username}
                   onChange={handleInputChange}
-                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-[600px] p-2.5"
+                  className="w-[400px] bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block lg:w-[600px] p-2.5"
                   placeholder="ชื่อผู้ใช้"
                   required
                 />
@@ -165,7 +165,7 @@ export default function Register() {
                   id="email"
                   value={formState.email}
                   onChange={handleInputChange}
-                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-[600px] p-2.5"
+                  className="w-[400px] bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block lg:w-[600px] p-2.5"
                   placeholder="อีเมล"
                   required
                 />
@@ -182,7 +182,7 @@ export default function Register() {
                   id="password"
                   value={formState.password}
                   onChange={handleInputChange}
-                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-[600px] p-2.5"
+                  className="w-[400px] bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block lg:w-[600px] p-2.5"
                   placeholder="รหัสผ่าน"
                   required
                 />
@@ -199,7 +199,7 @@ export default function Register() {
                   id="confirmPassword"
                   value={formState.confirmPassword}
                   onChange={handleInputChange}
-                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-[600px] p-2.5"
+                  className="w-[400px] bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block lg:w-[600px] p-2.5"
                   placeholder="ยืนยันรหัสผ่าน"
                   required
                 />
