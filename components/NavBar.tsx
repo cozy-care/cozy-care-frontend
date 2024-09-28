@@ -33,6 +33,22 @@ export default function NavBar() {
     setPageTitle(document.title);
   }, []);
 
+  // Close menu when clicking outside
+  useEffect(() => {
+    const handleOutsideClick = (event: MouseEvent) => {
+      const target = event.target as HTMLElement;
+
+      if (target && !target.closest(".menu-button") && menuOpen) {
+        setMenuOpen(false);
+      }
+    };
+
+    document.addEventListener("click", handleOutsideClick);
+    return () => {
+      document.removeEventListener("click", handleOutsideClick);
+    };
+  }, [menuOpen]);
+
   return (
     <nav className="flex justify-between h-14 pl-4 w-full sticky top-0 bg-white border-b-[1px] border-b-slate-400 z-[99]">
       {/* Left side */}
@@ -53,42 +69,76 @@ export default function NavBar() {
         </div>
       ) : (
         <div className="flex justify-center items-center">
-          {/* Hamburger menu items (hidden on large screens) */}
+          {/* Hamburger menu items for mobile */}
           {menuOpen && (
             <div className="absolute top-14 left-0 w-full bg-white shadow-md md:hidden">
               <Link
                 type="button"
                 href="/home"
-                className="px-5 py-2 hover:text-blue-500"
+                className="block px-5 py-2 hover:text-blue-500"
+                onClick={() => setMenuOpen(false)}
               >
                 หน้าหลัก
               </Link>
               <Link
                 type="button"
                 href="/caregiver"
-                className="px-5 py-2 hover:text-blue-500"
+                className="block px-5 py-2 hover:text-blue-500"
+                onClick={() => setMenuOpen(false)}
               >
                 ค้นหาผู้ดูแล
               </Link>
               <Link
                 type="button"
                 href="/patient"
-                className="px-5 py-2 hover:text-blue-500"
+                className="block px-5 py-2 hover:text-blue-500"
+                onClick={() => setMenuOpen(false)}
               >
                 ค้นหาผู้รับการดูแล
               </Link>
               <Link
                 type="button"
                 href="/announcement"
-                className="px-5 py-2 hover:text-blue-500"
+                className="block px-5 py-2 hover:text-blue-500"
+                onClick={() => setMenuOpen(false)}
               >
                 ประชาสัมพันธ์
               </Link>
             </div>
           )}
 
+          {/* Menu items for larger screens (md and above) */}
+          <div className="hidden md:flex justify-center items-center">
+            <Link
+              type="button"
+              href="/home"
+              className="px-5 py-2 hover:text-blue-500"
+            >
+              หน้าหลัก
+            </Link>
+            <Link
+              type="button"
+              href="/caregiver"
+              className="px-5 py-2 hover:text-blue-500"
+            >
+              ค้นหาผู้ดูแล
+            </Link>
+            <Link
+              type="button"
+              href="/patient"
+              className="px-5 py-2 hover:text-blue-500"
+            >
+              ค้นหาผู้รับการดูแล
+            </Link>
+            <Link
+              type="button"
+              href="/announcement"
+              className="px-5 py-2 hover:text-blue-500"
+            >
+              ประชาสัมพันธ์
+            </Link>
+          </div>
           {/* CHAT */}
-
           <Dropdown disableAnimation={true}>
             <DropdownTrigger>
               <button type="button" className="px-5 py-2 hover:text-blue-500">
