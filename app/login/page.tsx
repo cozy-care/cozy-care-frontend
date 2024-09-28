@@ -127,6 +127,7 @@ export default function Login() {
 
               <div className="flex justify-center items-center mt-4">
                 <Button
+                  type="submit"
                   color="primary"
                   className="text-xl mt-6 w-[150px] font-bold"
                 >
