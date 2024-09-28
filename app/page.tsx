@@ -49,16 +49,22 @@ export default function Welcome() {
             ></div>
 
             {/* Text 1*/}
-            <div className="lg:w-[700px] lg:h-[400px] flex-col content-center  gap-9 mt-[48px]">
+            <div className="lg:w-[700px] lg:h-[400px] flex-col content-center  gap-9  mt-[30px] lg:mt-[48px]">
               <h1 className="mx-auto w-max text-xl lg:text-2xl ">
                 ร่วมเป็นผู้ดูแลกับเรา
               </h1>
               <p className="w-[250px] lg:w-[600px] mx-auto text-medium lg:text-xl  my-5">
-                &emsp;ร่วมเป็นผู้ดูแลกับเรา
+                &emsp; ร่วมเป็นผู้ดูแลกับเราเพื่อมอบการดูแลที่อบอุ่นและปลอดภัย
+                จองงานที่ง่ายและรวดเร็ว พร้อมระบบชำระเงินที่ปลอดภัย
+                และการสนับสนุนจากทีมงานที่พร้อมช่วยเหลือทุกขั้นตอน ระบบของเรา
+                ช่วยให้คุณติดต่อกับครอบครัวผู้ป่วยได้อย่างสะดวก
+                มั่นใจในความปลอดภัย
+                มาร่วมสร้างสังคมการดูแลที่อบอุ่นและปลอดภัยไปด้วยกัน
+                {/* &emsp;ร่วมเป็นผู้ดูแลกับเรา
                 เพื่อมอบการดูแลสุขภาพที่ดีให้กับผู้ที่ต้องการ
                 คุณจะพบกับการจองงานที่ง่ายและรวดเร็ว
                 พร้อมระบบการชำระเงินที่ปลอดภัย
-                และการสนับสนุนจากทีมงานที่พร้อมช่วยเหลือทุกขั้นตอน...
+                และการสนับสนุนจากทีมงานที่พร้อมช่วยเหลือทุกขั้นตอน... */}
               </p>
               <div className="flex justify-center">
                 <button
@@ -68,11 +74,11 @@ export default function Welcome() {
                   เริ่มต้นใช้งาน
                 </button>
               </div>
+              <div className="flex justify-center gap-5 mx-auto mt-12">
+                <button className="w-[15px] h-[15px] bg-slate-800 rounded-[50%] my-auto" />
 
-              <div className="flex justify-center gap-2 sm:gap-5 mx-auto mt-6 sm:mt-12">
-                <button className="w-[10px] sm:w-[12px] h-[10px] sm:h-[12px] bg-slate-800 rounded-full my-auto" />
-                <button className="w-[8px] sm:w-[10px] h-[8px] sm:h-[10px] bg-slate-500 rounded-full my-auto" />
-                <button className="w-[8px] sm:w-[10px] h-[8px] sm:h-[10px] bg-slate-500 rounded-full my-auto" />
+                <button className="w-[12px] h-[12px] bg-slate-500 rounded-[50%] my-auto" />
+                <button className="w-[12px] h-[12px] bg-slate-500 rounded-[50%] my-auto" />
               </div>
             </div>
           </CarouselItem>
@@ -89,7 +95,7 @@ export default function Welcome() {
             ></div>
 
             {/* Text 2*/}
-            <div className="lg:w-[700px] lg:h-[400px] flex-col content-center  gap-9 mt-[48px] ">
+            <div className="lg:w-[700px] lg:h-[400px] flex-col content-center  gap-9 mt-[20px] lg:mt-[48px] ">
               <h1 className="mx-auto w-max text-xl lg:text-2xl ">
                 เริ่มต้นการดูแลครอบครัวของคุณ
               </h1>
@@ -111,7 +117,7 @@ export default function Welcome() {
                 </button>
               </div>
 
-              <div className="flex justify-center gap-5 mx-auto mt-12 ">
+              <div className="flex justify-center gap-5 mx-auto mt-12">
                 <button className="w-[12px] h-[12px] bg-slate-500 rounded-[50%] my-auto" />
                 <button className="w-[15px] h-[15px] bg-slate-800 rounded-[50%] my-auto" />
                 <button className="w-[12px] h-[12px] bg-slate-500 rounded-[50%] my-auto" />
@@ -131,7 +137,7 @@ export default function Welcome() {
             ></div>
 
             {/* Text 3*/}
-            <div className="lg:w-[700px] lg:h-[400px] flex-col content-center  gap-9 mt-[48px] ">
+            <div className="lg:w-[700px] lg:h-[400px] flex-col content-center  gap-9 mt-[20px] lg:mt-[48px]">
               <h1 className="mx-auto w-max text-xl lg:text-2xl ">
                 เริ่มต้นการดูแลครอบครัวของคุณ
               </h1>
@@ -153,7 +159,7 @@ export default function Welcome() {
                 </button>
               </div>
 
-              <div className="flex justify-center gap-5 mx-auto mt-12 sm:mt-12">
+              <div className="flex justify-center gap-5 mx-auto mt-12">
                 <button className="w-[12px] h-[12px] bg-slate-500 rounded-[50%] my-auto" />
                 <button className="w-[12px] h-[12px] bg-slate-500 rounded-[50%] my-auto" />
                 <button className="w-[15px] h-[15px] bg-slate-800 rounded-[50%] my-auto" />

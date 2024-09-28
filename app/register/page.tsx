@@ -74,48 +74,48 @@ export default function Register() {
   };
 
   return (
-    <div className="h-full flex min-h-[calc(100svh-3.5rem)]">
-      <div className=" grow w-1/3 lg:w-5/12 bg-slate-400 flex justify-end items-center">
-        <div className="w-full lg:w-10/12 h-[600px] bg-slate-200 p-4 rounded-l-xl  flex flex-col justify-start items-center ">
-          <h1 className="flex justify-center text-indigo-700">
+    <div className="W-full  lg:flex  min-h-[calc(100svh-3.5rem)]">
+      <div className=" w-full  h-full justify-center items-center lg:w-5/12 lg:h-auto bg-slate-400  lg:flex lg:justify-end lg:items-center">
+        <div className="w-full h-full lg:w-[85%] lg:h-[80%] bg-slate-200 p-4 rounded-l-xl  flex flex-col justify-start items-center">
+          <h1 className="text-2xl sm:text-3xl lg:text-5xl flex justify-center text-indigo-700">
             เริ่มต้นใช้งาน
           </h1>
-          <h2 className="my-7">ทำไมต้องเลือกเรา?</h2>
+          <h2 className="my-7 text-sm lg:text-2xl">ทำไมต้องเลือกเรา?</h2>
 
-          <ul className="sm:ml-5 flex flex-col gap-y-4 ">
+          <ul className="ml-5 flex flex-col gap-y-4 ">
             <li>
-              <strong className="font-bold lg:text-lg">
+              <strong className="font-bold lg:text-2xl">
                 ผู้ดูแลที่เชื่อถือได้ :
               </strong>
-              <p className="text-sm lg:text-medium">
+              <p className="text-sm lg:text-xl">
                 ค้นหาและจองผู้ดูแลสุขภาพที่มีประสบการณ์และได้รับการรับรอง
               </p>
             </li>
             <li>
-              <strong className="font-bold lg:text-lg">ใช้งานง่าย :</strong>
-              <p className="text-sm lg:text-medium">
+              <strong className="font-bold lg:text-2xl">ใช้งานง่าย :</strong>
+              <p className="text-sm lg:text-xl">
                 จองผู้ดูแลในไม่กี่ขั้นตอนผ่านแอปพลิเคชันของเรา
               </p>
             </li>
             <li>
-              <strong className="font-bold lg:text-lg">
+              <strong className="font-bold lg:text-2xl">
                 การติดต่อที่สะดวก :
               </strong>
-              <p className="text-sm lg:text-medium">
+              <p className="text-sm lg:text-xl">
                 ระบบแชทภายในแอปช่วยให้คุณติดต่อกับผู้ดูแลได้ตลอดเวลา
               </p>
             </li>
             <li>
-              <strong className="font-bold lg:text-lg">รีวิวและคะแนน :</strong>
-              <p className="text-sm lg:text-medium">
+              <strong className="font-bold lg:text-2xl">รีวิวและคะแนน :</strong>
+              <p className="text-sm lg:text-xl">
                 ดูรีวิวจากผู้ใช้อื่นเพื่อเลือกผู้ดูแลที่เหมาะสม
               </p>
             </li>
             <li>
-              <strong className="font-bold lg:text-lg">
+              <strong className="font-bold lg:text-2xl">
                 การสนับสนุนจากทีมงาน :
               </strong>
-              <p className="text-sm lg:text-medium">
+              <p className="text-sm lg:text-xl">
                 พร้อมให้ความช่วยเหลือและคำปรึกษาตลอดการใช้งาน
                 เพื่อให้คุณได้รับประสบการณ์ที่ดีที่สุด
               </p>
@@ -124,22 +124,22 @@ export default function Register() {
         </div>
       </div>
 
-      <div className=" grow w-7/12 bg-slate-300 flex justify-start  items-center ">
+      <div className="grow lg:w-7/12 justify-center items-center bg-slate-300 flex lg:justify-start  lg:items-center ">
         <form
           onSubmit={handleSubmit}
-          className="lg:w-11/12 h-[600px] bg-slate-100  rounded-r-xl justify-start "
+          className="w-full  h-full lg:w-[89%] lg:h-[80%] bg-slate-100  rounded-r-xl justify-start "
         >
-          <fieldset className="flex-row justify-center items-center ">
-            <h2 className="flex justify-center text-3xl font-bold text-indigo-700 mt-4">
+          <fieldset className=" flex-row justify-center items-center ">
+            <h2 className=" flex justify-center text-2xl sm:text-3xl lg:text-5xl font-bold text-indigo-700 mt-4">
               ลงทะเบียน
             </h2>
 
-            <div className="flex flex-col justify-center items-center">
+            <div className=" flex flex-col justify-start items-start lg:justify-center lg:items-center">
               {error && <p className="text-red-500">{error}</p>}
               <div className=" mb-2">
                 <label
                   htmlFor="username"
-                  className="block text-lg font-medium text-gray-900"
+                  className="block text-medium lg:text-2xl font-bold text-gray-900"
                 >
                   ชื่อผู้ใช้
                 </label>
@@ -148,7 +148,7 @@ export default function Register() {
                   id="username"
                   value={formState.username}
                   onChange={handleInputChange}
-                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-[600px] p-2.5"
+                  className="lg:text-lg w-[400px]  bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block lg:w-[600px] p-2.5"
                   placeholder="ชื่อผู้ใช้"
                   required
                 />
@@ -156,7 +156,7 @@ export default function Register() {
               <div className="mb-2">
                 <label
                   htmlFor="email"
-                  className="block text-lg  font-medium text-gray-900"
+                  className="block text-medium lg:text-2xl font-bold text-gray-900"
                 >
                   อีเมล
                 </label>
@@ -165,7 +165,7 @@ export default function Register() {
                   id="email"
                   value={formState.email}
                   onChange={handleInputChange}
-                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-[600px] p-2.5"
+                  className="lg:text-lg w-[400px] bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block lg:w-[600px] p-2.5"
                   placeholder="อีเมล"
                   required
                 />
@@ -173,7 +173,7 @@ export default function Register() {
               <div className="mb-2">
                 <label
                   htmlFor="password"
-                  className="block text-lg  font-medium text-gray-900"
+                  className="block  text-medium lg:text-2xl font-bold text-gray-900"
                 >
                   รหัสผ่าน
                 </label>
@@ -182,7 +182,7 @@ export default function Register() {
                   id="password"
                   value={formState.password}
                   onChange={handleInputChange}
-                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-[600px] p-2.5"
+                  className="lg:text-lg w-[400px] bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block lg:w-[600px] p-2.5"
                   placeholder="รหัสผ่าน"
                   required
                 />
@@ -190,7 +190,7 @@ export default function Register() {
               <div className="mb-2">
                 <label
                   htmlFor="confirmPassword"
-                  className="block text-lg  font-medium text-gray-900"
+                  className="block  text-medium lg:text-2xl font-bold text-gray-900"
                 >
                   ยืนยันรหัสผ่าน
                 </label>
@@ -199,32 +199,41 @@ export default function Register() {
                   id="confirmPassword"
                   value={formState.confirmPassword}
                   onChange={handleInputChange}
-                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-[600px] p-2.5"
+                  className="lg:text-lg w-[400px] bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block lg:w-[600px] p-2.5"
                   placeholder="ยืนยันรหัสผ่าน"
                   required
                 />
               </div>
-              <div className="flex text-sm gap-x-[485px] items-center  mt-3 ">
+              <div className="flex text-sm gap-x-[440px] items-center  mt-3 ">
                 <p>
-                  <a href="#">มีบัญชีแล้ว [LogIn]</a>
+                  <a
+                    className="text-sm lg:text-xl hover:text-blue-600"
+                    href="#"
+                  >
+                    มีบัญชีแล้ว [LogIn]
+                  </a>
                 </p>
                 <p></p>
               </div>
             </div>
 
             <div className="flex justify-center mt-2">
-              <Button color="primary" className="text-lg w-[100px] h-[50px]">
+              <Button
+                color="primary"
+                className="text-lg w-[100px] h-[50px] lg:w-[20%] lg:mt-"
+              >
                 สมัคร
               </Button>
             </div>
             <div className="inline-flex items-center justify-center w-full">
               <hr className="w-64 h-px my-8 bg-gray-200 border-0 dark:bg-gray-700 mr-5" />
-              <span className="">หรือ</span>
+              <span className="lg:text-lg">หรือ</span>
               <hr className="w-64 h-px my-8 bg-gray-200 border-0 dark:bg-gray-700 ml-5" />
             </div>
+
             <div className="flex justify-center mt-1">
               <button
-                className="flex items-center bg-white border-gray-300 rounded-lg shadow-md px-6 py-2 text-sm font-medium text-gray-800 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
+                className="h-full  flex items-center bg-white border-gray-300 rounded-lg shadow-md px-6 py-2 text-sm font-medium text-gray-800 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
                 onClick={handleGoogleLogin}
               >
                 <svg
@@ -276,7 +285,7 @@ export default function Register() {
                     </g>
                   </g>
                 </svg>
-                <span>ลงทะเบียน ด้วย Google</span>
+                <span className="lg:text-lg">ลงทะเบียน ด้วย Google</span>
               </button>
             </div>
           </fieldset>
