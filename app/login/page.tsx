@@ -115,12 +115,16 @@ export default function Login() {
               />
             </div>
 
-            <div className="flex text-sm lg:gap-x-[440px] gap-x-[270px] mt-4 lg:mt-6 ">
+            <div className="flex text-sm lg:gap-x-[120px] gap-x-[40px] mt-4 lg:mt-6 ">
               <p>
-                <a href="#">ยังไม่มีบัญชีผู้ใช้? [สมัครสมาชิก]</a>
+                <a className="text-sm lg:text-xl hover:text-blue-600" href="#">
+                  ยังไม่มีบัญชีผู้ใช้? [สมัครสมาชิก]
+                </a>
               </p>
               <p>
-                <a href="#">ลืมรหัสผ่าน? [กู้คืนรหัสผ่าน]</a>
+                <a className="text-sm lg:text-xl hover:text-blue-600" href="#">
+                  ลืมรหัสผ่าน? [กู้คืนรหัสผ่าน]
+                </a>
               </p>
             </div>
 
@@ -130,7 +134,7 @@ export default function Login() {
                 type="submit"
                 className="text-lg w-[200px] h-[50px] lg:w-[20%] px-6 py-2 mt-4 lg:mt-6"
               >
-                สมัคร
+                ยืนยัน
               </Button>
             </div>
             <div className="inline-flex items-center justify-center w-full">
