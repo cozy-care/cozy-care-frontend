@@ -5,7 +5,6 @@ import { MoreHoriz, Info, AddCircle, Image as ImageIcon, Send } from "@mui/icons
 import { Input, Image } from "@nextui-org/react";
 import { useEffect, useState } from "react";
 
-// อย่าลืมเปลี่ยนชื่อ Function
 export default function Messages() {
     const [searchTerm, setSearchTerm] = useState('')
     const [isVisible, setIsVisible] = useState(true);
@@ -14,7 +13,6 @@ export default function Messages() {
         setIsVisible(!isVisible);
     };
 
-    // อย่าลืมเปลี่ยน Title
     useEffect(() => {
         document.title = "Messages - Cozy Care";
     }, []);
@@ -43,7 +41,7 @@ export default function Messages() {
 
             </div>
 
-            <div className="flex flex-col grow  border-r-1 border-gray-300">
+            <div className="flex flex-col grow max-h-[calc(100svh-3.5rem)] border-r-1 border-gray-300">
                 <div className="flex h-[64px] px-4 items-center justify-between  border-b-1 border-gray-300">
                     <div className="flex gap-4 items-center">
                         <Image
@@ -57,8 +55,52 @@ export default function Messages() {
                     </div>
                     <button type="button" className="hover:!text-blue-500" onClick={toggleInfo} ><Info sx={{ fontSize: 30 }} /></button>
                 </div>
-                <div className="grow overflow-y-scroll">
-                    Chat section
+                <div className="w-full h-full flex flex-col-reverse overflow-y-scroll">
+                    <p>TESTstart</p>
+                    <p>TEST</p>
+                    <p>TEST</p>
+                    <p>TEST</p>
+                    <p>TEST</p>
+                    <p>TEST</p>
+                    <p>TEST</p>
+                    <p>TEST</p>
+                    <p>TEST</p>
+                    <p>TEST</p>
+                    <p>TEST</p>
+                    <p>TEST</p>
+                    <p>TEST</p>
+                    <p>TEST</p>
+                    <p>TEST</p>
+                    <p>TEST</p>
+                    <p>TEST</p>
+                    <p>TEST</p>
+                    <p>TEST</p>
+                    <p>TEST</p>
+                    <p>TEST</p>
+                    <p>TEST</p>
+                    <p>TEST</p>
+                    <p>TEST</p>
+                    <p>TEST</p>
+                    <p>TEST</p>
+                    <p>TEST</p>
+                    <p>TEST</p>
+                    <p>TEST</p>
+                    <p>TEST</p>
+                    <p>TEST</p>
+                    <p>TEST</p>
+                    <p>TEST</p>
+                    <p>TEST</p>
+                    <p>TEST</p>
+                    <p>TEST</p>
+                    <p>TEST</p>
+                    <p>TEST</p>
+                    <p>TEST</p>
+                    <p>TEST</p>
+                    <p>TEST</p>
+                    <p>TEST</p>
+                    <p>TEST</p>
+                    <p>TEST</p>
+                    <p>TESTend</p>
                 </div>
                 <div className="flex h-[64px] items-center justify-between px-4 gap-4  border-t-1 border-gray-300">
                     <button type="button" className="hover:!text-blue-500"><AddCircle sx={{ fontSize: 30 }} /></button>
@@ -81,12 +123,12 @@ export default function Messages() {
                         />
                         <p className="text-2xl font-semibold mb-2">นายโรคภัย ไข้เจ็บ</p>
                     </div>
-                        <p className="text-lg font-medium">ชื่อ-สกุล : dd</p>
-                        <p className="text-lg font-medium">สถานะ : dd</p>
-                        <p className="text-lg font-medium">อายุ : 10</p>
-                        <p className="text-lg font-medium">โรคภัยประจำตัว : </p>
-                        <p className="text-lg font-medium">ประวัติการแย้พา : </p>
-                        <p className="text-lg font-medium">ความเชี่ยวชาญ : </p>
+                    <p className="text-lg font-medium">ชื่อ-สกุล : ...</p>
+                    <p className="text-lg font-medium">สถานะ : ...</p>
+                    <p className="text-lg font-medium">อายุ : ...</p>
+                    <p className="text-lg font-medium">โรคภัยประจำตัว : ...</p>
+                    <p className="text-lg font-medium">ประวัติการแย้พา : ...</p>
+                    <p className="text-lg font-medium">ความเชี่ยวชาญ : ...</p>
                 </div>
             )}
         </main>
