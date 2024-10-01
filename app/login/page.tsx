@@ -13,7 +13,7 @@ interface LoginCredentials {
 async function loginUser(credentials: LoginCredentials): Promise<boolean> {
   try {
     const response: AxiosResponse = await axios.post(
-      "https://gold39.ce.kmitl.ac.th/api/auth/login",
+      "http://localhost:3333/api/auth/login",
       credentials,
       { withCredentials: true }
     );
@@ -127,6 +127,7 @@ export default function Login() {
             <div className="flex justify-center mt-2">
               <Button
                 color="primary"
+                type="submit"
                 className="text-lg w-[200px] h-[50px] lg:w-[20%] px-6 py-2 mt-4 lg:mt-6"
               >
                 สมัคร
