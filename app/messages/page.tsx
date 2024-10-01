@@ -4,6 +4,8 @@ import ChatCard from "@/components/ChatCard";
 import { MoreHoriz, Info, AddCircle, Image as ImageIcon, Send } from "@mui/icons-material";
 import { Input, Image } from "@nextui-org/react";
 import { useEffect, useState } from "react";
+import MyChatBox from "./MyChatBox";
+import TheirChatBox from "./TheirChatBox";
 
 export default function Messages() {
     const [searchTerm, setSearchTerm] = useState('')
@@ -55,52 +57,15 @@ export default function Messages() {
                     </div>
                     <button type="button" className="hover:!text-blue-500" onClick={toggleInfo} ><Info sx={{ fontSize: 30 }} /></button>
                 </div>
-                <div className="w-full h-full flex flex-col-reverse overflow-y-scroll">
-                    <p>TESTstart</p>
-                    <p>TEST</p>
-                    <p>TEST</p>
-                    <p>TEST</p>
-                    <p>TEST</p>
-                    <p>TEST</p>
-                    <p>TEST</p>
-                    <p>TEST</p>
-                    <p>TEST</p>
-                    <p>TEST</p>
-                    <p>TEST</p>
-                    <p>TEST</p>
-                    <p>TEST</p>
-                    <p>TEST</p>
-                    <p>TEST</p>
-                    <p>TEST</p>
-                    <p>TEST</p>
-                    <p>TEST</p>
-                    <p>TEST</p>
-                    <p>TEST</p>
-                    <p>TEST</p>
-                    <p>TEST</p>
-                    <p>TEST</p>
-                    <p>TEST</p>
-                    <p>TEST</p>
-                    <p>TEST</p>
-                    <p>TEST</p>
-                    <p>TEST</p>
-                    <p>TEST</p>
-                    <p>TEST</p>
-                    <p>TEST</p>
-                    <p>TEST</p>
-                    <p>TEST</p>
-                    <p>TEST</p>
-                    <p>TEST</p>
-                    <p>TEST</p>
-                    <p>TEST</p>
-                    <p>TEST</p>
-                    <p>TEST</p>
-                    <p>TEST</p>
-                    <p>TEST</p>
-                    <p>TEST</p>
-                    <p>TEST</p>
-                    <p>TEST</p>
-                    <p>TESTend</p>
+                <div className="w-full h-full flex flex-col-reverse gap-1 px-3 pb-2 overflow-y-scroll">
+                    <MyChatBox text="อันนี้อันแรก" date="12:09"/>
+                    <TheirChatBox text="อันนี้อันสอง แต่ทดสอบถ้าข้อความยาววววววววววววววววววววววววววววววววววววววววววววววววววววววววววววววววววววว" date="12:05"/>
+                    <TheirChatBox text="อันนี้อันสาม" date="12:05"/>
+                    <TheirChatBox text="อันนี้อันสี่" date="12:05"/>
+                    <TheirChatBox text="อันนี้อันห้า" date="12:05"/>
+                    <MyChatBox text="อันนี้อันหก แต่ทดสอบถ้าข้อความยาววววววววววววววววววววววววววววววววววววววววววววววว" date="12:09"/>
+                    <MyChatBox text="อันนี้อันเจ็ด" date="12:09"/>
+                    <MyChatBox text="อันนี้อันแปด" date="12:09"/>
                 </div>
                 <div className="flex h-[64px] items-center justify-between px-4 gap-4  border-t-1 border-gray-300">
                     <button type="button" className="hover:!text-blue-500"><AddCircle sx={{ fontSize: 30 }} /></button>
