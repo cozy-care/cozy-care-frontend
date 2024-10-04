@@ -77,7 +77,7 @@ export default function Register() {
     <div className="W-full  lg:flex  min-h-[calc(100svh-3.5rem)] overflow-hidden">
       <div className=" w-full  h-full justify-center items-center lg:w-5/12 lg:h-auto bg-slate-400  lg:flex lg:justify-end lg:items-center">
         <div className="w-full h-full lg:w-[85%] lg:h-[80%] bg-slate-200 p-4 lg:rounded-l-xl  flex flex-col justify-start items-center">
-          <h1 className="  text-3xl font-bold lg:text-5xl flex justify-center text-indigo-700">
+          <h1 className="  text-3xl font-bold lg:text-4xl flex justify-center text-indigo-700">
             เริ่มต้นใช้งาน
           </h1>
           <h2 className="my-7 text-sm lg:text-2xl">ทำไมต้องเลือกเรา?</h2>
@@ -129,7 +129,7 @@ export default function Register() {
           onSubmit={handleSubmit}
           className="w-full h-full lg:w-[89%] lg:h-[80%] bg-slate-100  lg:rounded-r-xl justify-start "
         >
-          <h2 className="flex items-center justify-center text-3xl lg:text-5xl font-bold text-indigo-700 mt-4">
+          <h2 className="flex items-center justify-center text-3xl lg:text-4xl font-bold text-indigo-700 mt-4">
             ลงทะเบียน
           </h2>
 
@@ -204,7 +204,7 @@ export default function Register() {
               />
             </div>
 
-            <div className="flex text-sm lg:gap-x-[455px] gap-x-[270px] mt-4 lg:mt-2 ">
+            <div className="flex text-sm lg:gap-x-[455px] gap-x-[265px] mt-4 lg:mt-2 ">
               <p>
                 <a className="text-sm lg:text-lg hover:text-blue-600" href="#">
                   มีบัญชีแล้ว [LogIn]
