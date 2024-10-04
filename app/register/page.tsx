@@ -133,12 +133,12 @@ export default function Register() {
             ลงทะเบียน
           </h2>
 
-          <div className="w-full h-auto flex flex-col justify-center items-center lg:justify-center lg:items-center mt-6 lg:mt-8">
+          <div className="w-full h-auto flex flex-col justify-center items-center lg:justify-center lg:items-center mt-6 lg:mt-2">
             {error && <p className="text-red-500">{error}</p>}
-            <div className="mb-2 lg:mb-4">
+            <div className="mb-2 lg:mb-1">
               <label
                 htmlFor="username"
-                className="block text-medium lg:text-2xl font-bold text-gray-900"
+                className="block text-medium lg:text-xl font-bold text-gray-900"
               >
                 ชื่อผู้ใช้
               </label>
@@ -152,10 +152,10 @@ export default function Register() {
                 required
               />
             </div>
-            <div className="mb-2 lg:mb-4">
+            <div className="mb-2 lg:mb-1">
               <label
                 htmlFor="email"
-                className="block text-medium lg:text-2xl font-bold text-gray-900"
+                className="block text-medium lg:text-xl font-bold text-gray-900"
               >
                 อีเมล
               </label>
@@ -169,10 +169,10 @@ export default function Register() {
                 required
               />
             </div>
-            <div className="mb-2 lg:mb-4">
+            <div className="mb-2 lg:mb-1">
               <label
                 htmlFor="password"
-                className="block  text-medium lg:text-2xl font-bold text-gray-900"
+                className="block  text-medium lg:text-xl font-bold text-gray-900"
               >
                 รหัสผ่าน
               </label>
@@ -189,7 +189,7 @@ export default function Register() {
             <div className="lg:mb-0">
               <label
                 htmlFor="confirmPassword"
-                className="block  text-medium lg:text-2xl font-bold text-gray-900"
+                className="block  text-medium lg:text-xl font-bold text-gray-900"
               >
                 ยืนยันรหัสผ่าน
               </label>
@@ -204,9 +204,9 @@ export default function Register() {
               />
             </div>
 
-            <div className="flex text-sm lg:gap-x-[440px] gap-x-[270px] mt-4 lg:mt-6 ">
+            <div className="flex text-sm lg:gap-x-[455px] gap-x-[270px] mt-4 lg:mt-2 ">
               <p>
-                <a className="text-sm lg:text-xl hover:text-blue-600" href="#">
+                <a className="text-sm lg:text-lg hover:text-blue-600" href="#">
                   มีบัญชีแล้ว [LogIn]
                 </a>
               </p>
