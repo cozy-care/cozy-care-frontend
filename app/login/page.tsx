@@ -59,10 +59,10 @@ export default function Login() {
     <div className="W-full  lg:flex  min-h-[calc(100svh-3.5rem)] overflow-hidden">
       <div className=" w-full  h-full justify-center items-center lg:w-5/12 lg:h-auto bg-slate-400  lg:flex lg:justify-end lg:items-center">
         <div className="w-full h-full lg:w-[85%] lg:h-[80%] bg-slate-200 p-4 lg:rounded-l-xl  flex flex-col justify-start items-center">
-          <h1 className="  text-3xl font-bold lg:text-5xl flex justify-center text-indigo-700">
+          <h1 className="mt-2 lg:mt-16 text-3xl font-bold lg:text-4xl flex justify-center text-indigo-700">
             ยินดีต้อนรับกลับ
           </h1>
-          <h2 className="my-7 text-sm lg:text-2xl">
+          <h2 className=" w-[75%] h-auto flex flex-col  text-center justify-center items-center my-7 text-lg lg:text-2xl">
             กรุณาเข้าสู่ระบบเพื่อเริ่มต้นการดูแลสุขภาพที่ดีที่สุดสำหรับคุณและคนที่คุณรัก
           </h2>
           <img
@@ -78,15 +78,15 @@ export default function Login() {
           onSubmit={handleLogin}
           className="w-full h-full lg:w-[89%] lg:h-[80%] bg-slate-100  lg:rounded-r-xl justify-start "
         >
-          <h2 className="flex items-center justify-center text-3xl lg:text-5xl font-bold text-indigo-700 mt-4">
+          <h2 className="mt-5 lg:mt-20 flex items-center justify-center text-3xl lg:text-4xl font-bold text-indigo-700 ">
             เข้าสู่ระบบ
           </h2>
 
-          <div className="w-full h-auto flex flex-col justify-center items-center lg:justify-center lg:items-center mt-6 lg:mt-8">
-            <div id="userName-password" className="mb-2 lg:mb-4">
+          <div className="grow w-full h-auto flex flex-col justify-center items-center lg:justify-center lg:items-center mt-6 lg:mt-8">
+            <div id="userName-password" className="mb-2 lg:mb-1">
               <label
                 htmlFor="user_name"
-                className="block text-medium lg:text-2xl font-bold text-gray-900"
+                className="block text-medium lg:text-xl font-bold text-gray-900"
               >
                 ชื่อผู้ใช้
               </label>
@@ -101,7 +101,7 @@ export default function Login() {
 
               <label
                 htmlFor="password"
-                className="block text-medium lg:text-2xl font-bold text-gray-900"
+                className=" mt-4 block text-medium lg:text-xl font-bold text-gray-900"
               >
                 รหัสผ่าน
               </label>
@@ -115,12 +115,16 @@ export default function Login() {
               />
             </div>
 
-            <div className="flex text-sm lg:gap-x-[440px] gap-x-[270px] mt-4 lg:mt-6 ">
+            <div className="flex text-sm lg:gap-x-[160px] gap-x-[40px] mt-3 lg:mt-2 ">
               <p>
-                <a href="#">ยังไม่มีบัญชีผู้ใช้? [สมัครสมาชิก]</a>
+                <a className="text-sm lg:text-lg hover:text-blue-600" href="#">
+                  ยังไม่มีบัญชีผู้ใช้? [สมัครสมาชิก]
+                </a>
               </p>
               <p>
-                <a href="#">ลืมรหัสผ่าน? [กู้คืนรหัสผ่าน]</a>
+                <a className="text-sm lg:text-lg hover:text-blue-600" href="#">
+                  ลืมรหัสผ่าน? [กู้คืนรหัสผ่าน]
+                </a>
               </p>
             </div>
 
@@ -128,11 +132,12 @@ export default function Login() {
               <Button
                 color="primary"
                 type="submit"
-                className="text-lg w-[200px] h-[50px] lg:w-[20%] px-6 py-2 mt-4 lg:mt-6"
+                className="text-lg w-[200px] h-[50px]  px-6 py-2 mt-4 lg:mt-6"
               >
-                สมัคร
+                ยืนยัน
               </Button>
             </div>
+
             <div className="inline-flex items-center justify-center w-full">
               <hr className="w-64 h-px my-8 bg-gray-200 border-0 dark:bg-gray-700 mr-5" />
               <span className="">หรือ</span>
@@ -143,7 +148,7 @@ export default function Login() {
               <button
                 type="button"
                 onClick={handleGoogleLogin}
-                className="flex items-center bg-white border-gray-300 rounded-lg shadow-md px-6 py-2 text-sm font-medium text-gray-800 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
+                className="mb-20 lg:mb-0  flex items-center bg-white border-gray-300 rounded-lg shadow-md px-6 py-2 text-sm font-medium text-gray-800 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
               >
                 <svg
                   className="h-6 w-6 mr-2"
