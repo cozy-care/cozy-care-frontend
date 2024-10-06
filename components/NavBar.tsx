@@ -24,10 +24,26 @@ import NotiCard from "./NotiCard";
 import ChatCard from "./ChatCard";
 import { useRouter } from "next/navigation";
 
+// import SelectRole from "@/app/home/edit/role/page";
+// import PatientIDProfile from "@/app/patient/[patientID]/edit/page";
+// import CaregiverIDProfile from "@/app/caregiver/[caregiverID]/edit/page";
+
 export default function NavBar() {
   const router = useRouter();
   const [pageTitle, setPageTitle] = useState("");
   const [menuOpen, setMenuOpen] = useState(false);
+
+  // const SelectRole = () => {
+  //   router.push("/home/edit/role/page"); // ไปที่หน้า SelectRole.tsx
+  // };
+
+  // const PatientIDProfile = () => {
+  //   router.push("/patient/[patientID]/edit/page");
+  // };
+
+  // const CaregiverIDProfile = () => {
+  //   router.push("/caregiver/[caregiverID]/edit/page");
+  // };
 
   useEffect(() => {
     setPageTitle(document.title);
@@ -237,9 +253,10 @@ export default function NavBar() {
             </DropdownMenu>
           </Dropdown>
 
+          {/* PROFILE */}
           <Link
             type="button"
-            href="/profile"
+            href="/home/edit/role"
             className="px-4 py-2 hover:text-blue-500"
           >
             <Person sx={{ fontSize: 35 }} />

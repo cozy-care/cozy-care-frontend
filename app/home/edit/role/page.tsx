@@ -12,6 +12,7 @@ import {
   SelectItem,
   Checkbox,
   Image,
+  Link,
 } from "@nextui-org/react";
 
 import { useEffect } from "react";
@@ -104,26 +105,33 @@ export default function page({}) {
                   กรุณาเลือกสถานะผู้ใช้งาน
                 </h2>
                 <div className="flex justify-around items-center mt-20">
-                  <div className="flex flex-col justify-center items-center gap-5">
-                    <Image
-                      isZoomed
-                      width={300}
-                      height={400}
-                      alt="caregiver role"
-                      src="https://coahc.org/wp-content/uploads/hands.png"
-                    />
-                    <p className="text-2xl font-bold">ผู้ดูแล</p>
-                  </div>
-                  <div className="flex flex-col justify-center items-center  gap-5">
-                    <Image
-                      isZoomed
-                      width={300}
-                      height={400}
-                      alt="patient role"
-                      src="https://freerangestock.com/sample/149048/hands-woman-patient-in-hospital-bed.jpg"
-                    />
-                    <p className="text-2xl font-bold">ผู้รับการดูแล</p>
-                  </div>
+                  {/* caregiver*/}
+                  <Link href="/caregiver/[caregiverID]/edit">
+                    <div className="flex flex-col justify-center items-center gap-5">
+                      <Image
+                        isZoomed
+                        width={300}
+                        height={400}
+                        alt="caregiver role"
+                        src="https://coahc.org/wp-content/uploads/hands.png"
+                      />
+                      <p className="text-2xl font-bold">ผู้ดูแล</p>
+                    </div>
+                  </Link>
+                  
+                  {/* patient */}
+                  <Link href="/patient/[patientID]/edit">
+                    <div className="flex flex-col justify-center items-center  gap-5">
+                      <Image
+                        isZoomed
+                        width={300}
+                        height={400}
+                        alt="patient role"
+                        src="https://freerangestock.com/sample/149048/hands-woman-patient-in-hospital-bed.jpg"
+                      />
+                      <p className="text-2xl font-bold">ผู้รับการดูแล</p>
+                    </div>
+                  </Link>
                   <div className="flex flex-col justify-center items-center  gap-5">
                     <Image
                       isZoomed

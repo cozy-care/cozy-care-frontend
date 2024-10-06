@@ -46,15 +46,19 @@ export default function Home() {
     <main className="flex flex-col min-h-[calc(100svh-3.5rem)] items-center justify-center overflow-hidden">
       <div className="grow">
         <section>
-          <header className="flex items-center bg-gray-300 rounded-2xl shadow-xl w-full ">
-            <div className="lg:ml-6 p-20 flex flex-col justify-center items-center w-full ">
-              <h1 className="text-black font-bold text-5xl mb-4">COZY CARE</h1>
-              <p className="text-2xl">เพื่อการดูแลที่อบอุ่นและปลอดภัย</p>
+          <header className="flex flex-col lg:flex-row items-center bg-gray-300 lg:rounded-2xl shadow-xl w-full  ">
+            <div className="lg:ml-6 lg:p-20 flex flex-col justify-center items-center w-full p-6 ">
+              <h1 className=" text-black font-bold text-3xl lg:text-5xl mb-2 lg:mb-4 ">
+                COZY CARE
+              </h1>
+              <p className="text-xl lg:text-2xl">
+                เพื่อการดูแลที่อบอุ่นและปลอดภัย
+              </p>
             </div>
             <img
               src="https://www.muangthai.co.th/assets/070a9ff0-521d-4cfb-b015-02c44a02ec1a/Content-Desktop-1440X390_5-.webp?format=webp"
               alt="การดูแลผู้สูงอายุ"
-              className="rounded-lg p-3 w-full  lg:h-[300px] flex justify-center "
+              className="rounded-lg lg:p-3 w-full h-auto lg:h-[300px] flex justify-center mb-5 "
             />
           </header>
         </section>
@@ -154,7 +158,7 @@ export default function Home() {
                       </ul>
                     </article>
                   </button>
-                  <h3 className="text-black font-bold text-xl mt-7 text-center">
+                  <h3 className="text-black font-bold text-lg lg:text-xl mt-3 lg:mt-7 text-center">
                     แพ็คเกจพื้นฐาน
                   </h3>
                 </section>
@@ -195,18 +199,18 @@ export default function Home() {
                       </ul>
                     </article>
                   </button>
-                  <h3 className="text-black font-bold text-xl mt-7 text-center">
+                  <h3 className="text-black font-bold text-lg lg:text-xl mt-3 lg:mt-7 text-center">
                     แพ็คเกจพรีเมียม
                   </h3>
                 </section>
               </CarouselItem>
             </CarouselContent>
 
-            <CarouselPrevious className="absolute left-[-10px] lg:left-4 lg:top-1/2 top-3/5 transform -translate-y-1/2">
+            <CarouselPrevious className="absolute left-[-10px] lg:left-4 lg:top-1/2 top-[170px] transform -translate-y-1/2">
               <button onClick={handlePointingnPreviousPage}>Previous</button>
             </CarouselPrevious>
 
-            <CarouselNext className="absoluter right-[-10px] lg:right-4  lg:top-1/2 top-3/5  transform -translate-y-1/2">
+            <CarouselNext className="absoluter right-[-10px] lg:right-4 lg:top-1/2 top-[170px] transform -translate-y-1/2">
               <button onClick={handlePointingnNextPage}>Next</button>
             </CarouselNext>
             {/* <div className="flex gap-3 mt-10">
@@ -258,17 +262,17 @@ export default function Home() {
           </Carousel>
         </div>
 
-        <section className="flex lg:flex-row flex-col justify-center items-center p-10 text-center  gap-10">
+        <section className="flex lg:flex-row flex-col justify-center items-center lg:p-10 text-center  gap-6">
           <img
             src="https://baanlalisa.com/wp-content/uploads/2020/09/%E0%B8%81%E0%B8%B2%E0%B8%A3%E0%B8%94%E0%B8%B9%E0%B9%81%E0%B8%A5-%E0%B8%9C%E0%B8%B9%E0%B9%89%E0%B8%AA%E0%B8%B9%E0%B8%87%E0%B8%AD%E0%B8%B2%E0%B8%A2%E0%B8%B8-%E0%B8%9A%E0%B9%89%E0%B8%B2%E0%B8%99%E0%B8%A5%E0%B8%A5%E0%B8%B4%E0%B8%AA%E0%B8%B2.jpg"
             alt="การบริการผู้สูงอายุ"
-            className="lg:w-[900px] lg:h-[500px] w-[380px] h-auto rounded-2xl lg:mt-20 border-4 border-blue-300"
+            className="lg:w-[900px] lg:h-[500px] w-[380px] h-auto rounded-2xl lg:mt-20  border-4 border-blue-300"
           />
           <article className="flex-col ">
             <h2 className="text-black font-bold text-2xl lg:text-5xl mb-4 lg:mb-7 ">
               บริการที่ครอบคลุมทุกขั้นตอน
             </h2>
-            <p className="lg:w-[590px] w-[380px] h-auto text-sm lg:text-2xl">
+            <p className="lg:w-[590px] w-[380px] h-auto text-sm lg:text-2xl mb-5">
               บริการที่บ้านที่สนับสนุนการดูแลทั้งหมดในทุกขั้นตอน
               ตั้งแต่การดูแลเบื้องต้น การฟื้นฟู จนถึงการดูแลในระยะยาว
               ทีมงานของเราพร้อมให้การดูแลที่บ้านที่ครอบคลุม
@@ -278,7 +282,7 @@ export default function Home() {
           </article>
         </section>
 
-        <section className="flex flex-col lg:flex-row justify-center items-center lg:p-10 gap-8 lg:gap-10">
+        <section className="flex flex-col lg:flex-row justify-center items-center lg:p-10 mt- gap-8 lg:gap-10 ">
           <article className="flex-col ">
             <h2 className="text-black font-bold text-2xl lg:text-5xl mb-4 lg:mb-7 ">
               ทำไมต้องเลือกเรา?
@@ -321,17 +325,17 @@ export default function Home() {
           />
         </section>
 
-        <section className="flex flex-col lg:flex-row justify-center items-center p-10 text-center  gap-8 lg:gap-10 lg:mb-20">
+        <section className="flex flex-col lg:flex-row justify-center items-center lg:p-10  text-center  gap-8 lg:gap-10 lg:mb-20">
           <img
             src="https://www.isavta.co.il/content/migrated-a779904c62a810bcaef859555e16fdc2-592.jpg"
             alt="ขั้นตอนการดูแลผู้สูงอายุ"
-            className="w-[500px] h-auto lg:w-[900px] lg:h-[500px] rounded-2xl mt-5 lg:mt-20 shadow-xl"
+            className="w-[380px] h-auto lg:w-[900px] lg:h-[500px] rounded-2xl mt-5 lg:mt-20 shadow-xl"
           />
           <article className="flex-col ">
             <h2 className="text-black font-bold text-2xl lg:text-5xl mb-4  lg:mb-7 ">
               ร่วมเป็นส่วนหนึ่งของเรา
             </h2>
-            <p className="w-[380px] lg:w-[500px] h-auto text-sm lg:text-2xl">
+            <p className="w-[380px] lg:w-[500px] h-auto text-sm lg:text-2xl mb-7">
               "มาร่วมเป็นส่วนหนึ่งของชุมชนการดูแลสุขภาพที่บ้านที่มุ่งมั่นให้บริการที่มีคุณภาพและเชื่อถือได้
               ไม่ว่าคุณจะเป็นผู้ดูแลหรือครอบครัวที่ต้องการการดูแล
               เราพร้อมให้การสนับสนุนและบริการที่ดีที่สุดเพื่อให้คุณมั่นใจได้ว่าคนที่คุณรักจะได้รับการดูแลที่ดีที่สุด"
