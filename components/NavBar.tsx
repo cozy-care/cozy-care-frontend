@@ -33,17 +33,17 @@ export default function NavBar() {
   const [pageTitle, setPageTitle] = useState("");
   const [menuOpen, setMenuOpen] = useState(false);
 
-  const SelectRole = () => {
-    router.push("/home/edit/role/page"); // ไปที่หน้า SelectRole.tsx
-  };
+  // const SelectRole = () => {
+  //   router.push("/home/edit/role/page"); // ไปที่หน้า SelectRole.tsx
+  // };
 
-  const PatientIDProfile = () => {
-    router.push("/patient/[patientID]/edit/page");
-  };
+  // const PatientIDProfile = () => {
+  //   router.push("/patient/[patientID]/edit/page");
+  // };
 
-  const CaregiverIDProfile = () => {
-    router.push("/caregiver/[caregiverID]/edit/page");
-  };
+  // const CaregiverIDProfile = () => {
+  //   router.push("/caregiver/[caregiverID]/edit/page");
+  // };
 
   useEffect(() => {
     setPageTitle(document.title);
