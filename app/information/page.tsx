@@ -66,12 +66,12 @@ export default function Caregiver() {
   }
 
   return (
-    <main className="flex flex-col min-h-[calc(100svh-3.5rem)]">
+    <main className="flex flex-col min-h-[calc(100svh-3.5rem)] overflow-hidden">
       <div className="grow flex flex-col items-center h-full w-full">
-        <h1 className="text-5xl font-bold p-10">ประชาสัมพันธ์</h1>
-        <Carousel className="max-w-8xl h-[600px] bg-slate-400">
+        <h1 className="text-3xl lg:text-5xl font-bold p-10">ประชาสัมพันธ์</h1>
+        <Carousel className=" lg:max-w-8xl h-[300px] lg:h-[600px] bg-slate-400">
           <CarouselContent
-            className="w-full h-full flex transition-transform duration-1000 ease-in-out"
+            className="w-full h-full flex  ease-in-out"
             style={{
               transform: `translateX(-${currentSlide * 100}%)`,
             }}
@@ -80,45 +80,45 @@ export default function Caregiver() {
               <img
                 src="https://blog.cheewid.com/wp-content/uploads/2024/04/Cheewid-MAR-3-02.jpg"
                 alt="news"
-                className="object-contain  w-full h-[600px]"
+                className="object-contain  w-full h-[300px] lg:h-[600px]"
               />
             </CarouselItem>
             <CarouselItem className="w-full h-full">
               <img
                 src="https://www.nakornthon.com/Upload/Images/Content/637545036588642046/Image_AW_Website_7%20%E0%B9%82%E0%B8%A3%E0%B8%84%E0%B8%9E%E0%B8%9A%E0%B8%9A%E0%B9%88%E0%B8%AD%E0%B8%A2%E0%B9%83%E0%B8%99%E0%B8%9C%E0%B8%B9%E0%B9%89%E0%B8%AA%E0%B8%B9%E0%B8%87%E0%B8%AD%E0%B8%B2%E0%B8%A2%E0%B8%B8%20%E0%B8%97%E0%B8%B5%E0%B9%88%E0%B8%95%E0%B9%89%E0%B8%AD%E0%B8%87%E0%B9%80%E0%B8%9D%E0%B9%89%E0%B8%B2%E0%B8%A3%E0%B8%B0%E0%B8%A7%E0%B8%B1%E0%B8%87-01.jpg"
                 alt="news"
-                className="object-contain w-full h-[600px] "
+                className="object-contain  w-full h-[300px] lg:h-[600px] "
               />
             </CarouselItem>
             <CarouselItem>
               <img
                 src="https://www.bfcdental.com/wp-content/uploads/2021/08/article-bfc-aug-3.png"
                 alt="news"
-                className="object-contain w-full h-[600px]"
+                className="object-contain  w-full h-[300px] lg:h-[600px]"
               />
             </CarouselItem>
             <CarouselItem>
               <img
                 src="https://www.nakornthon.com/Upload/Images/Content/637595277210943124/Image_AW_Website_%E0%B8%AA%E0%B8%B8%E0%B8%82%E0%B8%A0%E0%B8%B2%E0%B8%9E%E0%B8%88%E0%B8%B4%E0%B8%95%E0%B8%9C%E0%B8%B9%E0%B9%89%E0%B8%AA%E0%B8%B9%E0%B8%87%E0%B8%AD%E0%B8%B2%E0%B8%A2%E0%B8%B8%20%E0%B9%80%E0%B8%A3%E0%B8%B7%E0%B9%88%E0%B8%AD%E0%B8%87%E0%B8%AA%E0%B8%B3%E0%B8%84%E0%B8%B1%E0%B8%8D%E0%B8%97%E0%B8%B5%E0%B9%88%E0%B9%84%E0%B8%A1%E0%B9%88%E0%B8%84%E0%B8%A7%E0%B8%A3%E0%B8%A1%E0%B8%AD%E0%B8%87%E0%B8%82%E0%B9%89%E0%B8%B2%E0%B8%A1-01.jpg"
                 alt="news"
-                className="object-contain w-full h-[600px]"
+                className="object-contain  w-full h-[300px] lg:h-[600px]"
               />
             </CarouselItem>
             <CarouselItem>
               <img
                 src="https://siph-space.sgp1.digitaloceanspaces.com/uploads/postHealths/2021/12/1639550019_151264_Take_care_elderly_in_cold_season.jpg"
                 alt="news"
-                className="object-contain w-full h-[600px]"
+                className="object-contain  w-full h-[300px] lg:h-[600px]"
               />
             </CarouselItem>
           </CarouselContent>
 
-          <CarouselNext className="absolute right-0 top-1/2 transform -translate-y-1/2 w-[100px] h-full rounded-none hover:bg-slate-200">
+          <CarouselNext className="absolute right-0 top-1/2 transform -translate-y-1/2 w-[40px] lg:w-[100px] h-full rounded-none hover:bg-slate-200">
             <button onClick={handleNextSlide} className="">
               Next
             </button>
           </CarouselNext>
-          <CarouselPrevious className="absolute left-0 top-1/2 transform -translate-y-1/2 w-[100px] h-full rounded-none hover:bg-slate-200">
+          <CarouselPrevious className="absolute left-0 top-1/2 transform -translate-y-1/2 w-[40px] lg:w-[100px] h-full rounded-none hover:bg-slate-200">
             <button onClick={handlePreviousSlide}>Previous</button>
           </CarouselPrevious>
 
