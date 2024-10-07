@@ -37,8 +37,8 @@ export default function Caregiver() {
   return (
     <main className="flex flex-col min-h-[calc(100svh-3.5rem)]">
       <div className="grow flex flex-col items-center">
-        <div className="flex gap-1 lg:gap-4 py-6 w-full h-max  items-center">
-          <button className="text-sm lg:text-medium flex  lg:justify-end  w-2/5 lg:w-1/4 gap-1 hover:text-blue-500">
+        <div className="ml-10 lg:ml-0 flex gap-1 lg:gap-4 py-6 w-full h-max  items-center">
+          <button className="text-sm lg:text-medium flex  lg:justify-end  w-2/6 lg:w-1/4 gap-1 hover:text-blue-500">
             เพิ่มข้อมูลผู้ดูแล
             <AddCircleOutline className="mt-[8px] lg:mt-[2px] " />
             {/* <AddCircleOutline sx={{ marginTop: "2px" }} /> */}
