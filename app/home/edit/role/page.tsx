@@ -44,7 +44,7 @@ export default function page({}) {
                 <div className="flex w-[150px] h-auto justify-center items-center">
                   <Avatar
                     src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtp7SBv7iqt9a63k7ghTSJBMPKZF03MpmhDg&s"
-                    className="w-full h-full border-2 border-blue-400 rounded-full"
+                    className="w-[130px] h-[130px] object-cover object-center border-2 border-blue-400 rounded-full mt-4"
                   />
                 </div>
 
@@ -61,7 +61,7 @@ export default function page({}) {
                   </Button>
                 </div>
               </div>
-              <div className="flex flex-col w-full h-5/6 justify-between">
+              <div className="flex flex-col w-full h-5/6 justify-between mt-4">
                 <section className="flex flex-col gap-2">
                   <button className="bg-slate-500 hover:bg-slate-700 text-start text-white font-medium py-3 px-4 rounded-full">
                     ยังไม่ได้เลือกสถานะผู้ใช้งาน
@@ -118,7 +118,7 @@ export default function page({}) {
                       <p className="text-2xl font-bold">ผู้ดูแล</p>
                     </div>
                   </Link>
-                  
+
                   {/* patient */}
                   <Link href="/patient/[patientID]/edit">
                     <div className="flex flex-col justify-center items-center  gap-5">

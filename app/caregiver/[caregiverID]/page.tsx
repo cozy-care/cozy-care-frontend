@@ -54,7 +54,7 @@ export default function CaregiverID() {
                 <div className="flex w-[150px] h-auto justify-center items-center">
                   <Avatar
                     src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQvFD5-UI3RkGwYxCx_0qHbtqSzjwr3PrLEuw&s"
-                    className="w-full h-full border-2 border-blue-400 rounded-full"
+                    className="w-[130px] h-[130px] object-cover object-center border-2 border-blue-400 rounded-full mt-4"
                   />
                 </div>
 
@@ -71,7 +71,7 @@ export default function CaregiverID() {
                   </Button>
                 </div>
               </div>
-              <div className="flex flex-col w-full h-5/6 justify-between">
+              <div className="flex flex-col w-full h-5/6 justify-between mt-4">
                 <section className="flex flex-col gap-2">
                   <button className="bg-slate-500 hover:bg-slate-700 text-start text-white font-medium py-3 px-4 rounded-full">
                     ผู้ดูแล
@@ -116,7 +116,7 @@ export default function CaregiverID() {
                 </h2>
                 <form>
                   <fieldset className="flex gap-4  mb-2">
-                    <div className="w-[150px] h-[150px] rounded-full border-red-200 border-2">
+                    <div className="w-[150px] h-[150px] object-cover object-center rounded-full border-red-200 border-2">
                       <label htmlFor="imageUpload">
                         {imageSrc ? (
                           <img

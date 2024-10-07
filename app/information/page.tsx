@@ -135,17 +135,19 @@ export default function Caregiver() {
             ))}
           </div> */}
         </Carousel>
-        <div className="flex gap-4 py-6 w-full h-full items-center justify-center ">
+
+        <div className="flex gap-2 lg:gap-4 py-6 w-full h-full items-center justify-center ">
           <Input
             type="text"
             placeholder="ค้นหาคำสำคัญ"
             onChange={(e) => setSearchTerm(e.target.value)}
-            className=" flex flex-col justify-center p-2 mb-6 w-[1500px] h-full"
+            className=" flex flex-col justify-center p-2 mb-6 w-[360px] lg:w-[1500px] h-full"
           />
           <button className="flex hover:text-blue-500 mb-6">
             <FilterList />
           </button>
         </div>
+
         <section className="flex flex-col justify-center items-center">
           <InformationCard
             title={"โรคอัลไซเมอร์ รู้ให้เร็ว ก่อนเสี่ยงภาวะเสื่อมรุนเเรง"}
