@@ -1,9 +1,9 @@
 "use client";
 
 import { useEffect } from "react";
+import axios, { AxiosResponse } from "axios";
 import { useRouter } from "next/navigation";
 import { Button } from "@nextui-org/react";
-import axios, { AxiosResponse } from "axios";
 
 interface LoginCredentials {
   username: string;
@@ -13,7 +13,7 @@ interface LoginCredentials {
 async function loginUser(credentials: LoginCredentials): Promise<boolean> {
   try {
     const response: AxiosResponse = await axios.post(
-      `${process.env.NEXT_PUBLIC_API_LOGIN_URL}/api/auth/login`,
+      `${process.env.NEXT_PUBLIC_API_URL}/api/auth/login`,
       credentials,
       { withCredentials: true }
     );
@@ -40,11 +40,15 @@ async function checkAuth(router: any): Promise<void> {
 export default function Login() {
   const router = useRouter();
 
-  const handleLogin = async (event: React.FormEvent<HTMLFormElement>): Promise<void> => {
+  const handleLogin = async (
+    event: React.FormEvent<HTMLFormElement>
+  ): Promise<void> => {
     event.preventDefault();
     const form = event.target as HTMLFormElement;
-    const username = (form.elements.namedItem("user_name") as HTMLInputElement).value;
-    const password = (form.elements.namedItem("password") as HTMLInputElement).value;
+    const username = (form.elements.namedItem("user_name") as HTMLInputElement)
+      .value;
+    const password = (form.elements.namedItem("password") as HTMLInputElement)
+      .value;
 
     const success = await loginUser({ username, password });
 
@@ -58,13 +62,13 @@ export default function Login() {
 
   useEffect(() => {
     document.title = "Login - Cozy Care";
-    checkAuth(router);  // Check if user is already logged in
-  }, [router]);
+  }, []);
 
   const handleGoogleLogin = () => {
-    window.location.href = `${process.env.NEXT_PUBLIC_API_GOOGLE_LOGIN_URL}`;
+    window.location.href = `${process.env.NEXT_PUBLIC_API_URL}/api/auth/google`;
   };
 
+  checkAuth(router);
   return (
     <div className="W-full  lg:flex  min-h-[calc(100svh-3.5rem)] overflow-hidden">
       <div className=" w-full  h-full justify-center items-center lg:w-5/12 lg:h-auto bg-slate-400  lg:flex lg:justify-end lg:items-center">
@@ -154,6 +158,7 @@ export default function Login() {
               <hr className="w-64 h-px my-8 bg-gray-200 border-0 dark:bg-gray-700 ml-5" />
             </div>
             <div className="flex justify-center mt-1">
+              {/* google button*/}
               <button
                 type="button"
                 onClick={handleGoogleLogin}
