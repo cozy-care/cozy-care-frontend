@@ -13,7 +13,7 @@ interface LoginCredentials {
 async function loginUser(credentials: LoginCredentials): Promise<boolean> {
   try {
     const response: AxiosResponse = await axios.post(
-      `${process.env.NEXT_PUBLIC_API_LOGIN_URL}`,
+      `${process.env.NEXT_PUBLIC_API_LOGIN_URL}/api/auth/login`,
       credentials,
       { withCredentials: true }
     );
