@@ -43,6 +43,18 @@ pipeline {
             }
         }
 
+        stage("Prepare Frontend Environment"){
+            steps {
+                echo 'Create .env file'
+                script {
+                    sh 'touch .env'
+                    sh '''
+                    echo "NEXT_PUBLIC_API_URL=https://gold39.ce.kmitl.ac.th" >> .env
+                    '''
+                }
+            }
+        }
+
         stage("Docker Frontend Up"){
             steps {
                 echo 'NextJs UP'

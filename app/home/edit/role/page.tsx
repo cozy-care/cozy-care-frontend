@@ -1,36 +1,64 @@
 "use client";
-import React, { ChangeEvent, useState } from "react";
+import React, { ChangeEvent, useEffect, useState } from "react";
 import { Edit } from "@mui/icons-material";
-import {
-  Avatar,
-  Button,
-  Card,
-  Input,
-  ButtonGroup,
-  DatePicker,
-  Select,
-  SelectItem,
-  Checkbox,
-  Image,
-  Link,
-} from "@nextui-org/react";
+import { Avatar, Button, Card, Image, Link } from "@nextui-org/react";
+import axios, { AxiosResponse } from "axios";
+import { useRouter } from "next/navigation";
 
-import { useEffect } from "react";
+export default function Page() {
+  const router = useRouter();
 
-export default function page({}) {
+  // State to store user data
+  const [alias, setAlias] = useState<string | null>(null);
+  const [email, setEmail] = useState<string | null>(null);
+  const [role, setRole] = useState<string | null>(null);
+
+  // Fetch user data and check authentication
+  useEffect(() => {
+    const checkAuthentication = async () => {
+      try {
+        const response: AxiosResponse<{ alias: string; email: string; role: string }> = await axios.get(
+          `${process.env.NEXT_PUBLIC_API_URL}/api/user/me`, // Use environment variable
+          {
+            withCredentials: true, // Send cookies for authentication
+          }
+        );
+        setAlias(response.data.alias);
+        setEmail(response.data.email);
+        setRole(response.data.role);
+
+        // Redirect to /home/edit if the role is not "user"
+        if (response.data.role !== "user") {
+          router.push("/home/edit");
+        }
+      } catch (error) {
+        console.error("User not authenticated or failed to fetch data:", error);
+        router.push("/login"); // Redirect to login if not authenticated
+      }
+    };
+
+    checkAuthentication();
+  }, [router]);
+
+  // Set document title on mount
   useEffect(() => {
     document.title = "Edit Profile New User - Cozy Care";
   }, []);
 
-  const [imageSrc, setImageSrc] = useState<string | null>(null);
-  const handleImageUpload = (event: ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files?.[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setImageSrc(reader.result as string);
-      };
-      reader.readAsDataURL(file);
+  // Handle role update
+  const handleRoleUpdate = async (newRole: string) => {
+    try {
+      await axios.put(
+        `${process.env.NEXT_PUBLIC_API_URL}/api/user/me`,
+        { role: newRole },
+        {
+          withCredentials: true,
+        }
+      );
+      setRole(newRole);
+      router.push("/home/edit"); // Redirect to /home/edit after successful update
+    } catch (error) {
+      console.error("Error updating role:", error);
     }
   };
 
@@ -43,16 +71,16 @@ export default function page({}) {
               <div className="flex w-full h-1/6">
                 <div className="flex w-[150px] h-auto justify-center items-center">
                   <Avatar
-                    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtp7SBv7iqt9a63k7ghTSJBMPKZF03MpmhDg&s"
-                    className="w-[130px] h-[130px] object-cover object-center border-2 border-blue-400 rounded-full mt-4"
+                    src={"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtp7SBv7iqt9a63k7ghTSJBMPKZF03MpmhDg&s"}
+                    className="w-full h-full border-2 border-blue-400 rounded-full"
                   />
                 </div>
 
                 <div className="flex flex-col justify-center items-end gap-2 w-2/4 h-full">
                   <div className="content-center font-extrabold text-2xl">
-                    ผู้ใช้งานใหม่
+                    {alias}
                   </div>
-                  <p className="content-center">xxxxxx@gmail.com</p>
+                  <p className="content-center">{email}</p>
                 </div>
 
                 <div className="flex justify-end w-1/4 h-full">
@@ -61,7 +89,8 @@ export default function page({}) {
                   </Button>
                 </div>
               </div>
-              <div className="flex flex-col w-full h-5/6 justify-between mt-4">
+
+              <div className="flex flex-col w-full h-5/6 justify-between">
                 <section className="flex flex-col gap-2">
                   <button className="bg-slate-500 hover:bg-slate-700 text-start text-white font-medium py-3 px-4 rounded-full">
                     ยังไม่ได้เลือกสถานะผู้ใช้งาน
@@ -101,38 +130,42 @@ export default function page({}) {
 
             <Card className="flex flex-col w-3/4 h-full p-4 bg-blue-100 rounded-2xl shadow-lg">
               <section>
-                <h2 className="flex flex-col justify-center items-center text-3xl font-bold	mt-10">
+                <h2 className="flex flex-col justify-center items-center text-3xl font-bold mt-10">
                   กรุณาเลือกสถานะผู้ใช้งาน
                 </h2>
                 <div className="flex justify-around items-center mt-20">
-                  {/* caregiver*/}
-                  <Link href="/caregiver/[caregiverID]/edit">
-                    <div className="flex flex-col justify-center items-center gap-5">
-                      <Image
-                        isZoomed
-                        width={300}
-                        height={400}
-                        alt="caregiver role"
-                        src="https://coahc.org/wp-content/uploads/hands.png"
-                      />
-                      <p className="text-2xl font-bold">ผู้ดูแล</p>
-                    </div>
-                  </Link>
+                  {/* caregiver */}
+                  <div
+                    onClick={() => handleRoleUpdate("caregiver")}
+                    className="flex flex-col justify-center items-center gap-5 cursor-pointer"
+                  >
+                    <Image
+                      isZoomed
+                      width={300}
+                      height={400}
+                      alt="caregiver role"
+                      src="https://coahc.org/wp-content/uploads/hands.png"
+                    />
+                    <p className="text-2xl font-bold">ผู้ดูแล</p>
+                  </div>
 
                   {/* patient */}
-                  <Link href="/patient/[patientID]/edit">
-                    <div className="flex flex-col justify-center items-center  gap-5">
-                      <Image
-                        isZoomed
-                        width={300}
-                        height={400}
-                        alt="patient role"
-                        src="https://freerangestock.com/sample/149048/hands-woman-patient-in-hospital-bed.jpg"
-                      />
-                      <p className="text-2xl font-bold">ผู้รับการดูแล</p>
-                    </div>
-                  </Link>
-                  <div className="flex flex-col justify-center items-center  gap-5">
+                  <div
+                    onClick={() => handleRoleUpdate("patient")}
+                    className="flex flex-col justify-center items-center gap-5 cursor-pointer"
+                  >
+                    <Image
+                      isZoomed
+                      width={300}
+                      height={400}
+                      alt="patient role"
+                      src="https://freerangestock.com/sample/149048/hands-woman-patient-in-hospital-bed.jpg"
+                    />
+                    <p className="text-2xl font-bold">ผู้รับการดูแล</p>
+                  </div>
+
+                  {/* nutritionist (no role change) */}
+                  <div className="flex flex-col justify-center items-center gap-5">
                     <Image
                       isZoomed
                       width={300}

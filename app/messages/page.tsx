@@ -18,7 +18,7 @@ interface Message {
 }
 
 // WebSocket connection
-const socket: Socket = io('http://localhost:3333');
+const socket: Socket = io(`${process.env.NEXT_PUBLIC_API_URL}`);
 
 export default function Messages() {
     const router = useRouter();
@@ -46,7 +46,7 @@ export default function Messages() {
     useEffect(() => {
         const checkAuthentication = async () => {
             try {
-                const response: AxiosResponse<{ userId: string }> = await axios.get('http://localhost:3333/api/auth/me', {
+                const response: AxiosResponse<{ userId: string }> = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/user/me`, {
                     withCredentials: true, // Include HttpOnly cookie in the request
                 });
                 setUserId(response.data.userId); // Store the userId
@@ -64,7 +64,7 @@ export default function Messages() {
     useEffect(() => {
         const fetchMessages = async () => {
             try {
-                const response: AxiosResponse<Message[]> = await axios.get(`http://localhost:3333/api/chat/${chat_id}`, {
+                const response: AxiosResponse<Message[]> = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/chat/${chat_id}`, {
                     withCredentials: true,
                 });
                 setMessages(response.data);
@@ -105,7 +105,7 @@ export default function Messages() {
 
         try {
             await axios.post(
-                'http://localhost:3333/api/chat/send',
+                `${process.env.NEXT_PUBLIC_API_URL}/api/chat/send`,
                 {
                     chat_id,
                     sender_id: userId,

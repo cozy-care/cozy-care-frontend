@@ -1,9 +1,9 @@
 "use client";
 
 import { useEffect } from "react";
-import axios, { AxiosResponse } from "axios";
 import { useRouter } from "next/navigation";
 import { Button } from "@nextui-org/react";
+import axios, { AxiosResponse } from "axios";
 
 interface LoginCredentials {
   username: string;
@@ -13,7 +13,7 @@ interface LoginCredentials {
 async function loginUser(credentials: LoginCredentials): Promise<boolean> {
   try {
     const response: AxiosResponse = await axios.post(
-      "http://localhost:3333/api/auth/login",
+      `${process.env.NEXT_PUBLIC_API_LOGIN_URL}`,
       credentials,
       { withCredentials: true }
     );
@@ -24,18 +24,27 @@ async function loginUser(credentials: LoginCredentials): Promise<boolean> {
   }
 }
 
+async function checkAuth(router: any): Promise<void> {
+  try {
+    const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/user/me`, {
+      withCredentials: true,
+    });
+    if (response.status === 200) {
+      router.push("/home");
+    }
+  } catch (error) {
+    console.log("User not logged in or authentication failed.");
+  }
+}
+
 export default function Login() {
   const router = useRouter();
 
-  const handleLogin = async (
-    event: React.FormEvent<HTMLFormElement>
-  ): Promise<void> => {
+  const handleLogin = async (event: React.FormEvent<HTMLFormElement>): Promise<void> => {
     event.preventDefault();
     const form = event.target as HTMLFormElement;
-    const username = (form.elements.namedItem("user_name") as HTMLInputElement)
-      .value;
-    const password = (form.elements.namedItem("password") as HTMLInputElement)
-      .value;
+    const username = (form.elements.namedItem("user_name") as HTMLInputElement).value;
+    const password = (form.elements.namedItem("password") as HTMLInputElement).value;
 
     const success = await loginUser({ username, password });
 
@@ -49,10 +58,11 @@ export default function Login() {
 
   useEffect(() => {
     document.title = "Login - Cozy Care";
-  }, []);
+    checkAuth(router);  // Check if user is already logged in
+  }, [router]);
 
   const handleGoogleLogin = () => {
-    window.location.href = "https://gold39.ce.kmitl.ac.th/api/auth/google";
+    window.location.href = `${process.env.NEXT_PUBLIC_API_GOOGLE_LOGIN_URL}`;
   };
 
   return (
@@ -144,7 +154,6 @@ export default function Login() {
               <hr className="w-64 h-px my-8 bg-gray-200 border-0 dark:bg-gray-700 ml-5" />
             </div>
             <div className="flex justify-center mt-1">
-              {/* google button*/}
               <button
                 type="button"
                 onClick={handleGoogleLogin}
