@@ -48,9 +48,7 @@ pipeline {
                 echo 'Create .env file'
                 script {
                     sh 'touch .env'
-                    sh '''
-                    echo "NEXT_PUBLIC_API_URL=https://gold39.ce.kmitl.ac.th" >> .env
-                    '''
+                    sh 'echo "NEXT_PUBLIC_API_URL=https://gold39.ce.kmitl.ac.th" >> .env'
                 }
             }
         }
