@@ -42,7 +42,7 @@ export default function page() {
                 <div className="flex w-[150px] h-auto justify-center items-center">
                   <Avatar
                     src="https://i.pravatar.cc/150?u=a04258114e29026708c"
-                    className="w-full h-full border-2 border-blue-400 rounded-full"
+                    className="w-[130px] h-[130px]  object-cover object-center border-2 border-blue-400 rounded-full mt-4"
                   />
                 </div>
 
@@ -59,7 +59,7 @@ export default function page() {
                   </Button>
                 </div>
               </div>
-              <div className="flex flex-col w-full h-5/6 justify-between">
+              <div className="flex flex-col w-full h-5/6 justify-between mt-4">
                 <section className="flex flex-col gap-2">
                   <button className="bg-slate-500 hover:bg-slate-700 text-start text-white font-medium py-3 px-4 rounded-full">
                     ผู้รับการดูแล

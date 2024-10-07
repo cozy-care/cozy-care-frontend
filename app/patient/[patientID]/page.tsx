@@ -69,10 +69,10 @@ export default function PatientID() {
           <div className="flex gap-8 w-full h-[80vh]">
             <Card className="flex flex-col gap-4 w-1/4 h-full p-4 bg-blue-100 rounded-2xl shadow-lg">
               <div className="flex w-full h-1/6">
-                <div className="flex w-1/4 h-full justify-center items-center">
+                <div className="flex w-[150px] h-auto justify-center items-center">
                   <Avatar
                     src="https://i.pravatar.cc/150?u=a04258114e29026708c"
-                    className="w-full h-auto border-2 border-blue-400"
+                    className="w-[130px] h-[130px] object-cover object-center border-2 border-blue-400  rounded-full mt-4"
                   />
                 </div>
 
@@ -90,7 +90,7 @@ export default function PatientID() {
                 </div>
               </div>
 
-              <div className="flex flex-col w-full h-5/6 justify-between">
+              <div className="flex flex-col w-full h-5/6 justify-between mt-4">
                 <section className="flex flex-col gap-2">
                   <button className="bg-slate-500 hover:bg-slate-700 text-start text-white font-medium py-3 px-4 rounded-full">
                     ผู้รับการดูแล
