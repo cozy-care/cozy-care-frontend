@@ -50,7 +50,7 @@ export default function Page() {
           }
         );
 
-        const imageURL = `${process.env.NEXT_PUBLIC_API_URL}/${response.data.profile_image}`;
+        const imageURL = `http://localhost:3333${response.data.profile_image}`;
 
         // Populate the state with user data from the response
         setAlias(response.data.alias);
