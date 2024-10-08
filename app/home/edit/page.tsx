@@ -50,13 +50,15 @@ export default function Page() {
           }
         );
 
+        const imageURL = `${process.env.NEXT_PUBLIC_API_URL}/${response.data.profile_image}`;
+
         // Populate the state with user data from the response
         setAlias(response.data.alias);
         setEmail(response.data.email);
         setUsername(response.data.username);
         setPhoneNumber(response.data.phone);
         setRole(response.data.role);
-        setProfileImageUrl(response.data.profile_image || ""); // Profile image URL
+        setProfileImageUrl(imageURL || ""); // Profile image URL
       } catch (error) {
         console.error("User not authenticated or failed to fetch data:", error);
         router.push("/login"); // Redirect to login if not authenticated
