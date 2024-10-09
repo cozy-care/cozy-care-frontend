@@ -17,6 +17,26 @@ export default function Page() {
   const [profileImageUrl, setProfileImageUrl] = useState<string | null>(null); // Store profile image URL
   const [imageFile, setImageFile] = useState<File | null>(null); // Store image file
 
+  //Handle Check Phone Number
+  const [errorMessage, setErrorMessage] = useState<string>("");
+  const handlePhoneNumberChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    // only 10 number
+    const phoneNumberPattern = /^[0-9]{0,10}$/;
+
+    if (phoneNumberPattern.test(value)) {
+      setPhoneNumber(value);
+      if (value.length === 10) {
+        setErrorMessage(""); // ล้างข้อความเมื่อถูกต้อง
+        console.log("เบอร์โทรศัพท์ถูกต้อง");
+      } else {
+        setErrorMessage("เบอร์โทรศัพท์ต้องมี 10 ตัวเลข");
+      }
+    } else {
+      setErrorMessage("เบอร์โทรศัพท์ต้องเป็นตัวเลขเท่านั้น");
+    }
+  };
+
   // Handle image selection
   const handleImageUpload = (event: ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
@@ -31,42 +51,42 @@ export default function Page() {
   };
 
   // Fetch user data and check authentication
-  useEffect(() => {
-    document.title = "Edit Profile - Cozy Care";
+  // useEffect(() => {
+  //   document.title = "Edit Profile - Cozy Care";
 
-    const checkAuthentication = async () => {
-      try {
-        const response: AxiosResponse<{
-          alias: string;
-          email: string;
-          username: string;
-          phone: string;
-          role: string;
-          profile_image: string;
-        }> = await axios.get(
-          `${process.env.NEXT_PUBLIC_API_URL}/api/user/me`, // Use environment variable
-          {
-            withCredentials: true, // Send cookies for authentication
-          }
-        );
+  //   const checkAuthentication = async () => {
+  //     try {
+  //       const response: AxiosResponse<{
+  //         alias: string;
+  //         email: string;
+  //         username: string;
+  //         phone: string;
+  //         role: string;
+  //         profile_image: string;
+  //       }> = await axios.get(
+  //         `${process.env.NEXT_PUBLIC_API_URL}/api/user/me`, // Use environment variable
+  //         {
+  //           withCredentials: true, // Send cookies for authentication
+  //         }
+  //       );
 
-        const imageURL = `${process.env.NEXT_PUBLIC_API_URL}${response.data.profile_image}`;
+  //       const imageURL = `${process.env.NEXT_PUBLIC_API_URL}${response.data.profile_image}`;
 
-        // Populate the state with user data from the response
-        setAlias(response.data.alias);
-        setEmail(response.data.email);
-        setUsername(response.data.username);
-        setPhoneNumber(response.data.phone);
-        setRole(response.data.role);
-        setProfileImageUrl(imageURL || ""); // Profile image URL
-      } catch (error) {
-        console.error("User not authenticated or failed to fetch data:", error);
-        router.push("/login"); // Redirect to login if not authenticated
-      }
-    };
+  //       // Populate the state with user data from the response
+  //       setAlias(response.data.alias);
+  //       setEmail(response.data.email);
+  //       setUsername(response.data.username);
+  //       setPhoneNumber(response.data.phone);
+  //       setRole(response.data.role);
+  //       setProfileImageUrl(imageURL || ""); // Profile image URL
+  //     } catch (error) {
+  //       console.error("User not authenticated or failed to fetch data:", error);
+  //       router.push("/login"); // Redirect to login if not authenticated
+  //     }
+  //   };
 
-    checkAuthentication();
-  }, [router]);
+  //   checkAuthentication();
+  // }, [router]);
 
   // Handle form submission to upload image and update profile
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
@@ -111,7 +131,6 @@ export default function Page() {
           withCredentials: true, // Send cookies for authentication
         }
       );
-
     } catch (error) {
       console.error("Error updating profile:", error);
     }
@@ -230,11 +249,14 @@ export default function Page() {
                         onChange={handleImageUpload}
                         style={{ display: "none" }}
                       />
-                      </div>
+                    </div>
 
                     <div className="flex flex-col gap-2 mt-4">
                       <div>
-                        <label htmlFor="alias" className="block mb-2 text-sm font-medium text-gray-900">
+                        <label
+                          htmlFor="alias"
+                          className="block mb-2 text-sm font-medium text-gray-900"
+                        >
                           นามแฝง
                         </label>
                         <input
@@ -248,20 +270,26 @@ export default function Page() {
                       </div>
 
                       <div>
-                      <label htmlFor="username" className="block mb-2 text-sm font-medium text-gray-900">
-                        ชื่อผู้ใช้
-                      </label>
-                      <input
-                        type="text"
-                        id="username"
-                        value={username ?? ""}
-                        disabled
-                        className="h-auto w-[500px] bg-gray-100 border border-gray-300 text-gray-500 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 cursor-not-allowed"
-                      />
+                        <label
+                          htmlFor="username"
+                          className="block mb-2 text-sm font-medium text-gray-900"
+                        >
+                          ชื่อผู้ใช้
+                        </label>
+                        <input
+                          type="text"
+                          id="username"
+                          value={username ?? ""}
+                          disabled
+                          className="h-auto w-[500px] bg-gray-100 border border-gray-300 text-gray-500 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 cursor-not-allowed"
+                        />
                       </div>
 
                       <div>
-                        <label htmlFor="email" className="block mb-2 text-sm font-medium text-gray-900">
+                        <label
+                          htmlFor="email"
+                          className="block mb-2 text-sm font-medium text-gray-900"
+                        >
                           อีเมล
                         </label>
                         <input
@@ -275,25 +303,41 @@ export default function Page() {
                       </div>
 
                       <div>
-                        <label htmlFor="phoneNumber" className="block mb-2 text-sm font-medium text-gray-900">
+                        <label
+                          htmlFor="phoneNumber"
+                          className="block mb-2 text-sm font-medium text-gray-900"
+                        >
                           เบอร์โทรศัพท์
                         </label>
                         <input
                           type="text"
                           id="phoneNumber"
                           value={phoneNumber ?? ""}
-                          onChange={(e) => setPhoneNumber(e.target.value)}
+                          onChange={handlePhoneNumberChange}
                           className="h-auto w-[500px] bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5"
                           placeholder="เบอร์โทรศัพท์"
                         />
+                        {errorMessage && (
+                          <p className="text-red-500 text-sm mt-1">
+                            {errorMessage}
+                          </p>
+                        )}
                       </div>
                     </div>
 
                     <div className="flex justify-center items-center gap-10 mt-6">
-                      <Button color="default" className="w-[130px]" type="reset">
+                      <Button
+                        color="default"
+                        className="w-[130px]"
+                        type="reset"
+                      >
                         ยกเลิก
                       </Button>
-                      <Button color="primary" className="w-[130px]" type="submit">
+                      <Button
+                        color="primary"
+                        className="w-[130px]"
+                        type="submit"
+                      >
                         บันทึก
                       </Button>
                     </div>
