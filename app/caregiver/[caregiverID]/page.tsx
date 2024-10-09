@@ -115,6 +115,7 @@ export default function CaregiverID() {
                   กรอกข้อมูลผู้ดูแล
                 </h2>
                 <form>
+                  <p className="text-lg font-bold  ml-3 mb-2">ภาพการทำงาน</p>
                   <fieldset className="flex gap-4  mb-2">
                     <div className="w-[150px] h-[150px] object-cover object-center rounded-full border-red-200 border-2">
                       <label htmlFor="imageUpload">
