@@ -10,58 +10,58 @@ interface LoginCredentials {
   password: string;
 }
 
-// async function loginUser(credentials: LoginCredentials): Promise<boolean> {
-//   try {
-//     const response: AxiosResponse = await axios.post(
-//       `${process.env.NEXT_PUBLIC_API_URL}/api/auth/login`,
-//       credentials,
-//       { withCredentials: true }
-//     );
-//     return response.status === 200;
-//   } catch (error) {
-//     console.error("There was an error logging in!", error);
-//     return false;
-//   }
-// }
+async function loginUser(credentials: LoginCredentials): Promise<boolean> {
+  try {
+    const response: AxiosResponse = await axios.post(
+      `${process.env.NEXT_PUBLIC_API_URL}/api/auth/login`,
+      credentials,
+      { withCredentials: true }
+    );
+    return response.status === 200;
+  } catch (error) {
+    console.error("There was an error logging in!", error);
+    return false;
+  }
+}
 
-// async function checkAuth(router: any): Promise<void> {
-//   try {
-//     const response = await axios.get(
-//       `${process.env.NEXT_PUBLIC_API_URL}/api/user/me`,
-//       {
-//         withCredentials: true,
-//       }
-//     );
-//     if (response.status === 200) {
-//       router.push("/home");
-//     }
-//   } catch (error) {
-//     console.log("User not logged in or authentication failed.");
-//   }
-// }
+async function checkAuth(router: any): Promise<void> {
+  try {
+    const response = await axios.get(
+      `${process.env.NEXT_PUBLIC_API_URL}/api/user/me`,
+      {
+        withCredentials: true,
+      }
+    );
+    if (response.status === 200) {
+      router.push("/home");
+    }
+  } catch (error) {
+    console.log("User not logged in or authentication failed.");
+  }
+}
 
 export default function Login() {
   const router = useRouter();
 
-  // const handleLogin = async (
-  //   event: React.FormEvent<HTMLFormElement>
-  // ): Promise<void> => {
-  //   event.preventDefault();
-  //   const form = event.target as HTMLFormElement;
-  //   const username = (form.elements.namedItem("user_name") as HTMLInputElement)
-  //     .value;
-  //   const password = (form.elements.namedItem("password") as HTMLInputElement)
-  //     .value;
+  const handleLogin = async (
+    event: React.FormEvent<HTMLFormElement>
+  ): Promise<void> => {
+    event.preventDefault();
+    const form = event.target as HTMLFormElement;
+    const username = (form.elements.namedItem("user_name") as HTMLInputElement)
+      .value;
+    const password = (form.elements.namedItem("password") as HTMLInputElement)
+      .value;
 
-  //   const success = await loginUser({ username, password });
+    const success = await loginUser({ username, password });
 
-  //   if (success) {
-  //     console.log("Login successful!");
-  //     router.push("/home");
-  //   } else {
-  //     console.log("Login failed");
-  //   }
-  // };
+    if (success) {
+      console.log("Login successful!");
+      router.push("/home");
+    } else {
+      console.log("Login failed");
+    }
+  };
 
   useEffect(() => {
     document.title = "Login - Cozy Care";
@@ -71,7 +71,7 @@ export default function Login() {
     window.location.href = `${process.env.NEXT_PUBLIC_API_URL}/api/auth/google`;
   };
 
-  // checkAuth(router);
+  checkAuth(router);
   return (
     <div className="W-full  lg:flex  min-h-[calc(100svh-3.5rem)] overflow-hidden">
       <div className=" w-full  h-full justify-center items-center lg:w-5/12 lg:h-auto bg-slate-400  lg:flex lg:justify-end lg:items-center">
@@ -92,7 +92,7 @@ export default function Login() {
 
       <div className="grow lg:w-7/12 justify-center items-center bg-slate-300 flex lg:justify-start  lg:items-center ">
         <form
-          // onSubmit={handleLogin}
+          onSubmit={handleLogin}
           className="w-full h-full lg:w-[89%] lg:h-[80%] bg-slate-100  lg:rounded-r-xl justify-start "
         >
           <h2 className="mt-5 lg:mt-20 flex items-center justify-center text-3xl lg:text-4xl font-bold text-indigo-700 ">
