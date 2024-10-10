@@ -46,10 +46,10 @@ export default function Messages() {
     useEffect(() => {
         const checkAuthentication = async () => {
             try {
-                const response: AxiosResponse<{ userId: string }> = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/user/me`, {
+                const response: AxiosResponse<{ user_id: string }> = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/user/me`, {
                     withCredentials: true, // Include HttpOnly cookie in the request
                 });
-                setUserId(response.data.userId); // Store the userId
+                setUserId(response.data.user_id); // Store the userId
                 setIsAuthenticated(true); // Set authenticated to true
             } catch (error) {
                 console.error('User is not authenticated:', error);
@@ -59,7 +59,6 @@ export default function Messages() {
 
         checkAuthentication();
     }, [router]);
-
     // Fetch messages from the API
     useEffect(() => {
         const fetchMessages = async () => {
