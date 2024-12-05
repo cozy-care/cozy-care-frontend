@@ -92,14 +92,14 @@ export default function NavBar() {
             const now = moment();
             const lastMessageMoment = moment(messagesResponse.data.lastMessageTime);
 
-            const minutesDifference = now.diff(lastMessageMoment, 'minutes');
+            const timeDifference = now.diff(lastMessageMoment, 'seconds');
             
             return {
               chat_id: chatId.chat_id,
               profile_image: userResponse.data.profile_image,
               name: userResponse.data.alias,
               lastMessage: messagesResponse.data.lastMessageContent,
-              lastMessageTime: minutesDifference,
+              lastMessageTime: timeDifference,
             };
           })
         );
