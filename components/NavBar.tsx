@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import axios from 'axios';
 import {
   Chat,
   Notifications,
@@ -23,15 +24,29 @@ import {
 import NotiCard from "./NotiCard";
 import ChatCard from "./ChatCard";
 import { useRouter } from "next/navigation";
+import moment from 'moment';
 
 // import SelectRole from "@/app/home/edit/role/page";
 // import PatientIDProfile from "@/app/patient/[patientID]/edit/page";
 // import CaregiverIDProfile from "@/app/caregiver/[caregiverID]/edit/page";
 
+interface ChatCards {
+  chat_id: string;
+  profile_image: string; // URL for the other user's profile image
+  name: string; // Other user's name
+  lastMessage: string;
+  lastMessageTime: number;
+}
+
 export default function NavBar() {
   const router = useRouter();
   const [pageTitle, setPageTitle] = useState("");
   const [menuOpen, setMenuOpen] = useState(false);
+  const [chatCards, setChatCards] = useState<ChatCards[]>([]);
+
+  const handleChatCardClick = (chatId: string) => {
+    router.push(`/messages/${chatId}`);
+  };
 
   // const SelectRole = () => {
   //   router.push("/home/edit/role/page"); // ไปที่หน้า SelectRole.tsx
@@ -51,6 +66,50 @@ export default function NavBar() {
 
   // Close menu when clicking outside
   useEffect(() => {
+    const fetchChatData = async () => {
+
+      try {
+        // Fetch chat IDs
+        const chatIdResponse = await axios.get(
+          `${process.env.NEXT_PUBLIC_API_URL}/api/chat/me`, 
+          { withCredentials: true }
+        );
+        const chatIds: any[] = chatIdResponse.data;
+
+        // Fetch chat details for each chat ID
+        const chatDetails = await Promise.all(
+          chatIds.map(async (chatId) => {
+            const userResponse = await axios.get(
+              `${process.env.NEXT_PUBLIC_API_URL}/api/user/getOtherBychatId/${chatId.chat_id}`,
+              { withCredentials: true }
+            );
+
+            const messagesResponse = await axios.get(
+              `${process.env.NEXT_PUBLIC_API_URL}/api/chat/${chatId.chat_id}/lastMessage/${userResponse.data.user_id}`,
+              { withCredentials: true }
+            );
+
+            const now = moment();
+            const lastMessageMoment = moment(messagesResponse.data.lastMessageTime);
+
+            const minutesDifference = now.diff(lastMessageMoment, 'minutes');
+            
+            return {
+              chat_id: chatId.chat_id,
+              profile_image: userResponse.data.profile_image,
+              name: userResponse.data.alias,
+              lastMessage: messagesResponse.data.lastMessageContent,
+              lastMessageTime: minutesDifference,
+            };
+          })
+        );
+
+        setChatCards(chatDetails);
+      } catch (error) {
+        console.error("Error fetching chat data:", error);
+      }
+    };
+
     const handleOutsideClick = (event: MouseEvent) => {
       const target = event.target as HTMLElement;
 
@@ -60,9 +119,13 @@ export default function NavBar() {
     };
 
     document.addEventListener("click", handleOutsideClick);
+
+    fetchChatData();
+
     return () => {
       document.removeEventListener("click", handleOutsideClick);
     };
+
   }, [menuOpen]);
 
   return (
@@ -193,16 +256,16 @@ export default function NavBar() {
                 className="opacity-100 cursor-default"
               >
                 <div className="h-[82vh] overflow-y-auto">
-                  <ChatCard imageUrl="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" />
-                  <ChatCard imageUrl="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" />
-                  <ChatCard imageUrl="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" />
-                  <ChatCard imageUrl="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" />
-                  <ChatCard imageUrl="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" />
-                  <ChatCard imageUrl="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" />
-                  <ChatCard imageUrl="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" />
-                  <ChatCard imageUrl="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" />
-                  <ChatCard imageUrl="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" />
-                  <ChatCard imageUrl="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" />
+                  {chatCards.map((chat) => (
+                    <ChatCard
+                      key={chat.chat_id}
+                      imageUrl={chat.profile_image}
+                      name={chat.name}
+                      lastMessage={chat.lastMessage}
+                      lastMessageTime={chat.lastMessageTime}
+                      onClick={() => handleChatCardClick(chat.chat_id)}
+                    />
+                  ))}
                 </div>
               </DropdownItem>
             </DropdownMenu>
