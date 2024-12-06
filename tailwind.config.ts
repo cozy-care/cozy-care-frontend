@@ -39,6 +39,8 @@ const config: Config = {
         sm: "calc(var(--radius) - 4px)",
       },
       colors: {
+        dark: "#232A3C",
+        medium: "#5d6d7e  ",
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
         card: {
@@ -82,7 +84,7 @@ const config: Config = {
       },
     },
   },
-  darkMode: ["class", "class"],
+  darkMode: "class",
   plugins: [nextui(), require("tailwindcss-animate")],
 };
 export default config;
