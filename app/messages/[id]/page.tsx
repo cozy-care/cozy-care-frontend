@@ -205,6 +205,7 @@ export default function Messages() {
 
         {/* Messages */}
         <div className="w-full h-full flex flex-col-reverse gap-1 px-3 pb-2 overflow-y-scroll">
+          <div ref={messagesEndRef} />{" "}
           {sortedMessages.map((message) =>
             message.sender_id === userId ? (
               <MyChatBox
@@ -220,8 +221,6 @@ export default function Messages() {
               />
             )
           )}
-          <div ref={messagesEndRef} />{" "}
-          {/* Scroll to this element when a new message is added */}
         </div>
 
         {/* Message Input */}

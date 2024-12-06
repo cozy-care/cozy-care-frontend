@@ -42,7 +42,7 @@ export default function ChatCard(props: Props) {
             className="object-center object-cover rounded-full"
             width={60}
             height={60}
-            src={props.imageUrl}
+            src={props.imageUrl || "https://cdn-icons-png.flaticon.com/512/3135/3135715.png" } 
           />
           <div className="flex flex-col justify-center gap-1">
             <p className="text-xl font-semibold">{props.name}</p>

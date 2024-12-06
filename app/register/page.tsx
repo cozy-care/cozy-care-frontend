@@ -10,6 +10,7 @@ interface RegisterFormState {
   email: string;
   password: string;
   confirmPassword: string;
+  alias: string;
 }
 
 export default function Register() {
@@ -18,6 +19,7 @@ export default function Register() {
     email: "",
     password: "",
     confirmPassword: "",
+    alias: ""
   });
 
   const [error, setError] = useState<string>("");
@@ -47,14 +49,17 @@ export default function Register() {
 
     try {
       const response: AxiosResponse = await axios.post(
-        "https://gold39.ce.kmitl.ac.th/api/auth/register",
+        `${process.env.NEXT_PUBLIC_API_URL}/api/auth/register`,
         {
           username,
           email,
           password,
           role: "user", // Setting role as "user"
+          alias: "unknow"
         }
       );
+
+      console.log('test')
 
       if (response.status === 201) {
         // Redirect to login page
@@ -70,7 +75,7 @@ export default function Register() {
   };
 
   const handleGoogleLogin = () => {
-    window.location.href = "https://gold39.ce.kmitl.ac.th/api/auth/google";
+    window.location.href = `${process.env.NEXT_PUBLIC_API_URL}/api/auth/google`;
   };
 
   return (
@@ -218,6 +223,7 @@ export default function Register() {
             <Button
               color="primary"
               className="text-lg w-[200px] h-[50px] lg:w-[20%] px-6 py-2 mt-4 lg:mt-6"
+              onClick={handleSubmit}
             >
               สมัคร
             </Button>
