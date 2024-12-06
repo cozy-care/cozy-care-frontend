@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import axios from 'axios';
+import axios from "axios";
 import {
   Chat,
   Notifications,
@@ -24,7 +24,8 @@ import {
 import NotiCard from "./NotiCard";
 import ChatCard from "./ChatCard";
 import { useRouter } from "next/navigation";
-import moment from 'moment';
+import moment from "moment";
+import ThemeToggle from "./ThemeToggle";
 
 // import SelectRole from "@/app/home/edit/role/page";
 // import PatientIDProfile from "@/app/patient/[patientID]/edit/page";
@@ -67,11 +68,10 @@ export default function NavBar() {
   // Close menu when clicking outside
   useEffect(() => {
     const fetchChatData = async () => {
-
       try {
         // Fetch chat IDs
         const chatIdResponse = await axios.get(
-          `${process.env.NEXT_PUBLIC_API_URL}/api/chat/me`, 
+          `${process.env.NEXT_PUBLIC_API_URL}/api/chat/me`,
           { withCredentials: true }
         );
         const chatIds: any[] = chatIdResponse.data;
@@ -90,10 +90,12 @@ export default function NavBar() {
             );
 
             const now = moment();
-            const lastMessageMoment = moment(messagesResponse.data.lastMessageTime);
+            const lastMessageMoment = moment(
+              messagesResponse.data.lastMessageTime
+            );
 
-            const timeDifference = now.diff(lastMessageMoment, 'seconds');
-            
+            const timeDifference = now.diff(lastMessageMoment, "seconds");
+
             return {
               chat_id: chatId.chat_id,
               profile_image: userResponse.data.profile_image,
@@ -125,15 +127,14 @@ export default function NavBar() {
     return () => {
       document.removeEventListener("click", handleOutsideClick);
     };
-
   }, [menuOpen]);
 
   return (
-    <nav className="flex justify-between h-14 pl-4 w-full sticky top-0 bg-white border-b-[1px] border-b-slate-400 z-[99]">
+    <nav className="dark:bg-dark flex justify-between h-14 pl-4 w-full sticky top-0 bg-white border-b-[1px] border-b-slate-400 z-[99]">
       {/* Left side */}
       <Link href="/home" className="flex items-center space-x-3">
         <Image src="/favicon.ico" width={40} height={40} alt="Logo  " />
-        <div className="font-bold text-lg">Cozy Care</div>
+        <div className="font-bold text-lg dark:text-white">Cozy Care</div>
       </Link>
 
       {/* Right side */}
@@ -150,11 +151,11 @@ export default function NavBar() {
         <div className="flex justify-center items-center">
           {/* Hamburger menu items for mobile */}
           {menuOpen && (
-            <div className="absolute top-14 left-0 w-full bg-white shadow-md md:hidden">
+            <div className="dark:text-white absolute top-14 left-0 w-full bg-white shadow-md md:hidden">
               <Link
                 type="button"
                 href="/home"
-                className="block px-5 py-2 hover:text-blue-500"
+                className=" block px-5 py-2 hover:text-blue-500 "
                 onClick={() => setMenuOpen(false)}
               >
                 หน้าหลัก
@@ -187,7 +188,7 @@ export default function NavBar() {
           )}
 
           {/* Menu items for larger screens (md and above) */}
-          <div className="hidden md:flex justify-center items-center">
+          <div className="dark:text-white hidden md:flex justify-center items-center">
             <Link
               type="button"
               href="/home"
@@ -216,11 +217,15 @@ export default function NavBar() {
             >
               ประชาสัมพันธ์
             </Link>
+            <ThemeToggle></ThemeToggle>
           </div>
           {/* CHAT */}
           <Dropdown disableAnimation={true}>
             <DropdownTrigger>
-              <button type="button" className="px-5 py-2 hover:text-blue-500">
+              <button
+                type="button"
+                className="dark:text-white px-5 py-2 hover:text-blue-500"
+              >
                 <Chat sx={{ fontSize: 30 }} />
               </button>
             </DropdownTrigger>
@@ -274,7 +279,10 @@ export default function NavBar() {
           {/* NOTIFICATION */}
           <Dropdown disableAnimation={true}>
             <DropdownTrigger>
-              <button type="button" className="px-5 py-2 hover:text-blue-500">
+              <button
+                type="button"
+                className="dark:text-white px-5 py-2 hover:text-blue-500"
+              >
                 <Notifications sx={{ fontSize: 30 }} />
               </button>
             </DropdownTrigger>
@@ -320,7 +328,7 @@ export default function NavBar() {
           <Link
             type="button"
             href="/home/edit/role"
-            className="px-4 py-2 hover:text-blue-500"
+            className="px-4 py-2 dark:text-white hover:text-blue-500"
           >
             <Person sx={{ fontSize: 35 }} />
           </Link>
