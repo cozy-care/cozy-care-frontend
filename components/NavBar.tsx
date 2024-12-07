@@ -151,7 +151,7 @@ export default function NavBar() {
         <div className="flex justify-center items-center">
           {/* Hamburger menu items for mobile */}
           {menuOpen && (
-            <div className="dark:text-white absolute top-14 left-0 w-full bg-white shadow-md md:hidden">
+            <div className="dark:text-white absolute top-14 left-0 w-full bg-white dark:bg-dark shadow-md md:hidden">
               <Link
                 type="button"
                 href="/home"
@@ -184,6 +184,9 @@ export default function NavBar() {
               >
                 ประชาสัมพันธ์
               </Link>
+              <div className="block px-4 py-2">
+                <ThemeToggle></ThemeToggle>
+              </div>
             </div>
           )}
 
@@ -336,9 +339,9 @@ export default function NavBar() {
           {/* Hamburger menu icon for mobile */}
           <button
             onClick={() => setMenuOpen(!menuOpen)}
-            className="md:hidden px-5 py-2"
+            className="md:hidden px-5 py-2 "
           >
-            <Menu className="text-3xl" />
+            <Menu className="text-3xl dark:text-white" />
           </button>
         </div>
       )}
