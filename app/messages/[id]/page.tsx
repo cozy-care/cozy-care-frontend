@@ -183,7 +183,7 @@ export default function Messages() {
   return (
     <main className="flex min-h-[calc(100svh-3.5rem)]">
       {/* Sidebar with Chat List */}
-      <div className="flex flex-col w-[100px] md:w-[360px] max-h-[calc(100svh-3.5rem)] border-r-1 border-gray-300">
+      <div className="flex flex-col w-[100px] sm:w-[120px] md:w-[360px] max-h-[calc(100svh-3.5rem)] border-r-1 border-gray-300">
         <div className="flex justify-between px-4 py-2 border-b-1 border-gray-300">
           <h2 className="text-2xl font-semibold">แชท</h2>
           <button type="button" className="hover:!text-blue-500">
