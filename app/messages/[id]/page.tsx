@@ -24,21 +24,21 @@ interface Message {
 }
 
 interface UserData {
-    user_id: string;
-    alias: string;
-    profile_image: string | null;
+  user_id: string;
+  alias: string;
+  profile_image: string | null;
 }
 
 // WebSocket connection
 const socket: Socket = io(`${process.env.NEXT_PUBLIC_API_URL}`);
 
 export default function Messages() {
-    const { id: chatId } = useParams();
+  const { id: chatId } = useParams();
   const router = useRouter();
   const [messages, setMessages] = useState<Message[]>([]);
   const [messageText, setMessageText] = useState<string>("");
   const [userId, setUserId] = useState<string | null>(null);
-  const [isVisible, setIsVisible] = useState<boolean>(true);
+  const [isVisible, setIsVisible] = useState<boolean>(false);
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
   const [otherUserData, setOtherUserData] = useState<UserData | null>(null);
   const chat_id = chatId; // Fixed chat ID
@@ -48,6 +48,25 @@ export default function Messages() {
   const toggleInfo = () => {
     setIsVisible(!isVisible);
   };
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth > 768) {
+        setIsVisible(true); // เปิด Sidebar เมื่อหน้าจอใหญ่กว่า 768px = lg
+      } else {
+        setIsVisible(false); // ปิด Sidebar เมื่อหน้าจอเล็กกว่า 768px
+      }
+    };
+
+    // เช็คขนาดจอครั้งแรก
+    handleResize();
+
+    // เพิ่ม event listener เพื่อตรวจสอบการเปลี่ยนแปลงขนาดจอ
+    window.addEventListener("resize", handleResize);
+
+    // ลบ event listener เมื่อ component ถูกทำลาย
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   // Scroll to the bottom of the chat when a new message is added
   const scrollToBottom = () => {
@@ -192,7 +211,9 @@ export default function Messages() {
                 "https://cdn-icons-png.flaticon.com/512/3135/3135715.png"
               }
             />
-            <p className="text-2xl font-semibold">{otherUserData?.alias || "Loading..."}</p>
+            <p className="text-2xl font-semibold">
+              {otherUserData?.alias || "Loading..."}
+            </p>
           </div>
           <button
             type="button"
@@ -263,7 +284,9 @@ export default function Messages() {
                 "https://cdn-icons-png.flaticon.com/512/3135/3135715.png"
               }
             />
-            <p className="text-2xl font-semibold mb-2">{otherUserData?.alias || "Loading..."}</p>
+            <p className="text-2xl font-semibold mb-2">
+              {otherUserData?.alias || "Loading..."}
+            </p>
           </div>
           <p className="text-lg font-medium">ชื่อ-สกุล : ...</p>
           <p className="text-lg font-medium">สถานะ : ...</p>
