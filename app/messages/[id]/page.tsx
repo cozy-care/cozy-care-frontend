@@ -52,7 +52,7 @@ export default function Messages() {
   useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth > 768) {
-        setIsVisible(true); // เปิด Sidebar เมื่อหน้าจอใหญ่กว่า 768px = lg
+        setIsVisible(true); // เปิด Sidebar เมื่อหน้าจอใหญ่กว่า 768px
       } else {
         setIsVisible(false); // ปิด Sidebar เมื่อหน้าจอเล็กกว่า 768px
       }
@@ -183,7 +183,7 @@ export default function Messages() {
   return (
     <main className="flex min-h-[calc(100svh-3.5rem)]">
       {/* Sidebar with Chat List */}
-      <div className="flex flex-col w-[360px] max-h-[calc(100svh-3.5rem)] border-r-1 border-gray-300">
+      <div className="flex flex-col w-[100px] md:w-[360px] max-h-[calc(100svh-3.5rem)] border-r-1 border-gray-300">
         <div className="flex justify-between px-4 py-2 border-b-1 border-gray-300">
           <h2 className="text-2xl font-semibold">แชท</h2>
           <button type="button" className="hover:!text-blue-500">
@@ -203,8 +203,7 @@ export default function Messages() {
           <div className="flex gap-4 items-center">
             <Image
               alt="Chat profile"
-              className="object-center object-cover rounded-full"
-              width={45}
+              className="object-center object-cover rounded-full w-10 md:w-12"
               height={"auto"}
               src={
                 otherUserData?.profile_image ||
@@ -276,8 +275,7 @@ export default function Messages() {
           <div className="flex flex-col items-center gap-3">
             <Image
               alt="Chat profile"
-              className="object-center object-cover rounded-full"
-              width={130}
+              className="object-center object-cover rounded-full w-20 md:w-40"
               height={"auto"}
               src={
                 otherUserData?.profile_image ||
