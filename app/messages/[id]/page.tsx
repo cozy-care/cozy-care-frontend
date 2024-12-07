@@ -24,21 +24,21 @@ interface Message {
 }
 
 interface UserData {
-    user_id: string;
-    alias: string;
-    profile_image: string | null;
+  user_id: string;
+  alias: string;
+  profile_image: string | null;
 }
 
 // WebSocket connection
 const socket: Socket = io(`${process.env.NEXT_PUBLIC_API_URL}`);
 
 export default function Messages() {
-    const { id: chatId } = useParams();
+  const { id: chatId } = useParams();
   const router = useRouter();
   const [messages, setMessages] = useState<Message[]>([]);
   const [messageText, setMessageText] = useState<string>("");
   const [userId, setUserId] = useState<string | null>(null);
-  const [isVisible, setIsVisible] = useState<boolean>(true);
+  const [isVisible, setIsVisible] = useState<boolean>(false);
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
   const [otherUserData, setOtherUserData] = useState<UserData | null>(null);
   const chat_id = chatId; // Fixed chat ID
@@ -49,6 +49,25 @@ export default function Messages() {
     setIsVisible(!isVisible);
   };
 
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth > 768) {
+        setIsVisible(true); // เปิด Sidebar เมื่อหน้าจอใหญ่กว่า 768px
+      } else {
+        setIsVisible(false); // ปิด Sidebar เมื่อหน้าจอเล็กกว่า 768px
+      }
+    };
+
+    // เช็คขนาดจอครั้งแรก
+    handleResize();
+
+    // เพิ่ม event listener เพื่อตรวจสอบการเปลี่ยนแปลงขนาดจอ
+    window.addEventListener("resize", handleResize);
+
+    // ลบ event listener เมื่อ component ถูกทำลาย
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
   // Scroll to the bottom of the chat when a new message is added
   const scrollToBottom = () => {
     if (messagesEndRef.current) {
@@ -57,25 +76,25 @@ export default function Messages() {
   };
 
   // Check for token and user authentication
-  useEffect(() => {
-    const checkAuthentication = async () => {
-      try {
-        const response: AxiosResponse<{ user_id: string }> = await axios.get(
-          `${process.env.NEXT_PUBLIC_API_URL}/api/user/me`,
-          {
-            withCredentials: true, // Include HttpOnly cookie in the request
-          }
-        );
-        setUserId(response.data.user_id); // Store the userId
-        setIsAuthenticated(true); // Set authenticated to true
-      } catch (error) {
-        console.error("User is not authenticated:", error);
-        router.push("/login"); // Redirect to login if not authenticated
-      }
-    };
+  // useEffect(() => {
+  //   const checkAuthentication = async () => {
+  //     try {
+  //       const response: AxiosResponse<{ user_id: string }> = await axios.get(
+  //         `${process.env.NEXT_PUBLIC_API_URL}/api/user/me`,
+  //         {
+  //           withCredentials: true, // Include HttpOnly cookie in the request
+  //         }
+  //       );
+  //       setUserId(response.data.user_id); // Store the userId
+  //       setIsAuthenticated(true); // Set authenticated to true
+  //     } catch (error) {
+  //       console.error("User is not authenticated:", error);
+  //       router.push("/login"); // Redirect to login if not authenticated
+  //     }
+  //   };
 
-    checkAuthentication();
-  }, [router]);
+  //   checkAuthentication();
+  // }, [router]);
   // Fetch messages from the API
   useEffect(() => {
     const fetchMessages = async () => {
@@ -164,7 +183,7 @@ export default function Messages() {
   return (
     <main className="flex min-h-[calc(100svh-3.5rem)]">
       {/* Sidebar with Chat List */}
-      <div className="flex flex-col w-[360px] max-h-[calc(100svh-3.5rem)] border-r-1 border-gray-300">
+      <div className="flex flex-col w-[100px] sm:w-[120px] md:w-[360px] max-h-[calc(100svh-3.5rem)] border-r-1 border-gray-300">
         <div className="flex justify-between px-4 py-2 border-b-1 border-gray-300">
           <h2 className="text-2xl font-semibold">แชท</h2>
           <button type="button" className="hover:!text-blue-500">
@@ -184,15 +203,16 @@ export default function Messages() {
           <div className="flex gap-4 items-center">
             <Image
               alt="Chat profile"
-              className="object-center object-cover rounded-full"
-              width={45}
+              className="object-center object-cover rounded-full w-10 md:w-12"
               height={"auto"}
               src={
                 otherUserData?.profile_image ||
                 "https://cdn-icons-png.flaticon.com/512/3135/3135715.png"
               }
             />
-            <p className="text-2xl font-semibold">{otherUserData?.alias || "Loading..."}</p>
+            <p className="text-2xl font-semibold">
+              {otherUserData?.alias || "Loading..."}
+            </p>
           </div>
           <button
             type="button"
@@ -255,15 +275,16 @@ export default function Messages() {
           <div className="flex flex-col items-center gap-3">
             <Image
               alt="Chat profile"
-              className="object-center object-cover rounded-full"
-              width={130}
+              className="object-center object-cover rounded-full w-20 md:w-40"
               height={"auto"}
               src={
                 otherUserData?.profile_image ||
                 "https://cdn-icons-png.flaticon.com/512/3135/3135715.png"
               }
             />
-            <p className="text-2xl font-semibold mb-2">{otherUserData?.alias || "Loading..."}</p>
+            <p className="text-2xl font-semibold mb-2">
+              {otherUserData?.alias || "Loading..."}
+            </p>
           </div>
           <p className="text-lg font-medium">ชื่อ-สกุล : ...</p>
           <p className="text-lg font-medium">สถานะ : ...</p>
