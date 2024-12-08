@@ -203,19 +203,22 @@ export default function NavBar() {
   }, [menuOpen]);
 
   return (
-    <nav className="dark:bg-dark flex justify-between h-14 pl-4 w-full sticky top-0 bg-white border-b-[1px] border-b-slate-400 z-[99]">
+    <nav className="dark:bg-background-dark bg-background-light flex justify-between h-14 pl-4 w-full sticky top-0  border-b-[1px] border-b-slate-400 z-[99]">
       {/* Left side */}
       <Link href="/home" className="flex items-center space-x-3">
         <Image src="/favicon.ico" width={40} height={40} alt="Logo  " />
-        <div className="font-bold text-lg dark:text-white">Cozy Care</div>
+        <div className="font-bold text-lg dark:text-text-dark text-text-light">Cozy Care</div>
       </Link>
 
       {/* Right side */}
       {pageTitle == "Welcome - Cozy Care" ? (
         <div className="flex items-center pr-4">
+          <div className="block px-4 py-2">
+            <ThemeToggle></ThemeToggle>
+          </div>
           <Link
             href="/login"
-            className="bg-slate-900 hover:bg-slate-800 text-white font-bold py-2 px-4 rounded-2xl"
+            className="dark:bg-primary-dark bg-primary-light dark:text-text-dark text-text-light font-bold py-2 px-4 rounded-2xl"
           >
             เข้าสู่ระบบ
           </Link>
