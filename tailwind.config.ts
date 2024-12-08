@@ -39,8 +39,16 @@ const config: Config = {
         sm: "calc(var(--radius) - 4px)",
       },
       colors: {
-        dark: "#232A3C",
-        medium: "#5d6d7e  ",
+        'text-dark': '#ecf8f8',
+        'background-dark': '#1c1d1d',
+        'primary-dark': '#117ca6',
+        'secondary-dark': '#1f8b8b',
+        'accent-dark': '#40dddd',
+        'text-light': '#071313',
+        'background-light': '#e2e4e4',
+        'primary-light': '#59c3ee',
+        'secondary-light': '#75e1e1',
+        'accent-light': '#22bfbf',
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
         card: {

@@ -24,7 +24,7 @@ export default function RootLayout({
   return (
     //เอาไว้เปลี่ยนพี้นหลังทั้งหน้าจอ <body>
     <html lang="en" className="light">
-      <body className={`${inter.className} dark:bg-medium`}>
+      <body className={`${inter.className} transform transition dark:bg-background-dark bg-background-light dark:text-text-dark text-text-light`}>
         <Providers>
           <NavBar />
           {children}
