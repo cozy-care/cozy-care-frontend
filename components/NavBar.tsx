@@ -39,6 +39,79 @@ interface ChatCards {
   lastMessageTime: number;
 }
 
+export const chatMock: ChatCards[] = [
+  {
+    chat_id: '1',
+    profile_image: "https://via.placeholder.com/150",
+    name: 'John ชาวไร่',
+    lastMessage: 'yo',
+    lastMessageTime: 200,
+  },
+  {
+    chat_id: '2',
+    profile_image: "https://via.placeholder.com/150",
+    name: 'Sarah เมืองกรุง',
+    lastMessage: 'Hello!',
+    lastMessageTime: 400,
+  },
+  {
+    chat_id: '3',
+    profile_image: "https://via.placeholder.com/150",
+    name: 'Mike เขาค้อ',
+    lastMessage: 'How are you?',
+    lastMessageTime: 300,
+  },
+  {
+    chat_id: '4',
+    profile_image: "https://via.placeholder.com/150",
+    name: 'Sophia ใกล้คลอง',
+    lastMessage: 'See you soon!',
+    lastMessageTime: 150,
+  },
+  {
+    chat_id: '5',
+    profile_image: "https://via.placeholder.com/150",
+    name: 'Tommy ทอมซ่า',
+    lastMessage: 'Haha, that was funny!',
+    lastMessageTime: 600,
+  },
+  {
+    chat_id: '6',
+    profile_image: "https://via.placeholder.com/150",
+    name: 'Emily อารมณ์ดี',
+    lastMessage: 'Goodnight!',
+    lastMessageTime: 50,
+  },
+  {
+    chat_id: '7',
+    profile_image: "https://via.placeholder.com/150",
+    name: 'Liam นักเลง',
+    lastMessage: 'Let’s grab coffee',
+    lastMessageTime: 800,
+  },
+  {
+    chat_id: '8',
+    profile_image: "https://via.placeholder.com/150",
+    name: 'Olivia เด็กดี',
+    lastMessage: 'I’ll call you later',
+    lastMessageTime: 120,
+  },
+  {
+    chat_id: '9',
+    profile_image: "https://via.placeholder.com/150",
+    name: 'Jake ขาลุย',
+    lastMessage: 'What’s the plan?',
+    lastMessageTime: 550,
+  },
+  {
+    chat_id: '10',
+    profile_image: "https://via.placeholder.com/150",
+    name: 'Emma แม่บ้าน',
+    lastMessage: 'Thanks!',
+    lastMessageTime: 90,
+  },
+];
+
 export default function NavBar() {
   const router = useRouter();
   const [pageTitle, setPageTitle] = useState("");
