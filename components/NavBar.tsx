@@ -23,9 +23,10 @@ import {
 } from "@nextui-org/react";
 import NotiCard from "./NotiCard";
 import ChatCard from "./ChatCard";
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 import moment from "moment";
 import ThemeToggle from "./ThemeToggle";
+import { Heading1 } from "lucide-react";
 
 // import SelectRole from "@/app/home/edit/role/page";
 // import PatientIDProfile from "@/app/patient/[patientID]/edit/page";
@@ -114,6 +115,7 @@ export const chatMock: ChatCards[] = [
 
 export default function NavBar() {
   const router = useRouter();
+  const currentPath = usePathname();
   const [pageTitle, setPageTitle] = useState("");
   const [menuOpen, setMenuOpen] = useState(false);
   const [chatCards, setChatCards] = useState<ChatCards[]>([]);
@@ -202,28 +204,16 @@ export default function NavBar() {
     };
   }, [menuOpen]);
 
-  return (
-    <nav className="dark:bg-background-dark bg-background-light flex justify-between h-14 pl-4 w-full sticky top-0  border-b-[1px] border-b-slate-400 z-[99]">
-      {/* Left side */}
-      <Link href="/home" className="flex items-center space-x-3">
-        <Image src="/favicon.ico" width={40} height={40} alt="Logo  " />
-        <div className="font-bold text-lg dark:text-text-dark text-text-light">Cozy Care</div>
-      </Link>
+  if (currentPath !== '/') {
+    return (
+      <nav className="transform transition dark:bg-background-dark bg-background-light flex justify-between h-14 pl-4 w-full sticky top-0  border-b-[1px] border-b-slate-400 z-[99]">
+        {/* Left side */}
+        <Link href="/home" className="flex items-center space-x-3">
+          <Image src="/favicon.ico" width={40} height={40} alt="Logo  " />
+          <div className="font-bold text-lg dark:text-text-dark text-text-light">Cozy Care</div>
+        </Link>
 
-      {/* Right side */}
-      {pageTitle == "Welcome - Cozy Care" ? (
-        <div className="flex items-center pr-4">
-          <div className="block px-4 py-2">
-            <ThemeToggle></ThemeToggle>
-          </div>
-          <Link
-            href="/login"
-            className="dark:bg-primary-dark bg-primary-light dark:text-text-dark text-text-light font-bold py-2 px-4 rounded-2xl"
-          >
-            เข้าสู่ระบบ
-          </Link>
-        </div>
-      ) : (
+        {/* Right side */}
         <div className="flex justify-center items-center">
           {/* Hamburger menu items for mobile */}
           {menuOpen && (
@@ -422,7 +412,8 @@ export default function NavBar() {
             <Menu className="text-3xl dark:text-white" />
           </button>
         </div>
-      )}
-    </nav>
-  );
+      </nav>
+    );
+  }
+
 }

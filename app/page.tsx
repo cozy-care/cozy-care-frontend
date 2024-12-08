@@ -9,6 +9,7 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
+import ThemeToggle from "@/components/ThemeToggle";
 
 interface CarouselInterface {
   title: string;
@@ -56,51 +57,54 @@ export default function Welcome() {
   };
 
   return (
-    <main className="w-screen h-screen flex content-center mt-[-56px] ">
+    <main className="w-screen h-screen flex content-center">
       <Carousel className="flex flex-wrap items-center justify-center gap-x-10 mx-auto overflow-auto  ">
         <CarouselContent className="lg:w-full lg:h-full ">
           {carouselDetails.map((car) => (
             <CarouselItem className="flex flex-wrap items-center justify-center gap-x-10 mx-auto">
-            <div
-              className="rounded-[50%] w-[270px] h-[250px] lg:w-[700px] lg:h-[550px] md:mt-16 "
-              style={{
-                backgroundImage: `url(${car.image_link})`,
-                backgroundSize: "cover",
-                backgroundPosition: "center",
-              }}
-            ></div>
+              <div
+                className="rounded-[50%] w-[270px] h-[250px] lg:w-[700px] lg:h-[550px] md:mt-16 "
+                style={{
+                  backgroundImage: `url(${car.image_link})`,
+                  backgroundSize: "cover",
+                  backgroundPosition: "center",
+                }}
+              ></div>
 
-            <div className="lg:w-[700px] lg:h-[400px] flex-col content-center  gap-9  mt-[30px] lg:mt-[48px]">
-              <h1 className="mx-auto w-max py-2 text-xl lg:text-4xl bg-gradient-to-r from-primary-dark to-accent-dark text-transparent bg-clip-text">
-                {car.title}
-              </h1>
-              <p className="w-[250px] lg:w-[600px] mx-auto lg:text-xl  my-5">
-                &emsp; {car.text}
-              </p>
-              <div className="flex justify-center">
-                <button
-                  onClick={() => router.push("/login")}
-                  className="transform transition hover:-translate-y-1 dark:bg-primary-dark bg-primary-light dark:text-text-dark text-text-light font-bold py-4 px-8 rounded-xl">
-                  เริ่มต้นใช้งาน
-                </button>
-              </div>
-              {/* <div className="flex justify-center gap-5 mx-auto mt-12">
+              <div className="lg:w-[700px] lg:h-[400px] flex-col content-center  gap-9  mt-[30px] lg:mt-[48px]">
+                <h1 className="mx-auto w-max py-2 text-xl lg:text-4xl bg-gradient-to-r from-primary-dark to-accent-dark text-transparent bg-clip-text">
+                  {car.title}
+                </h1>
+                <p className="w-[250px] lg:w-[600px] mx-auto lg:text-xl  my-5">
+                  &emsp; {car.text}
+                </p>
+                <div className="flex justify-center">
+                  <button
+                    onClick={() => router.push("/login")}
+                    className="transform transition hover:scale-110 dark:bg-primary-dark bg-primary-light dark:text-text-dark text-text-light font-bold py-4 px-8 rounded-xl">
+                    เริ่มต้นใช้งาน
+                  </button>
+                </div>
+                {/* <div className="flex justify-center gap-5 mx-auto mt-12">
                 <button className="w-[15px] h-[15px] bg-slate-800 rounded-[50%] my-auto" />
                 <button className="w-[12px] h-[12px] bg-slate-500 rounded-[50%] my-auto" />
                 <button className="w-[12px] h-[12px] bg-slate-500 rounded-[50%] my-auto" />
               </div> */}
-            </div>
-          </CarouselItem>
+              </div>
+            </CarouselItem>
           ))}
         </CarouselContent>
 
-        <CarouselNext className="absolute right-0 top-1/2 transform -translate-y-1/2 w-[40px] h-full sm:w-[60px] lg:w-[80px]  rounded-none opacity-50 dark:bg-background-dark dark:hover:bg-neutral-700 bg-background-light">
+        <CarouselNext className="transform transition absolute right-0 top-1/2 -translate-y-1/2 w-[40px] h-full sm:w-[60px] lg:w-[80px] rounded-none opacity-50 dark:bg-background-dark dark:hover:bg-neutral-700 bg-background-light">
           <button onClick={handleNextSlide}></button>
         </CarouselNext>
-        <CarouselPrevious className="absolute left-0 top-1/2 transform -translate-y-1/2 w-[40px] h-full sm:w-[60px] lg:w-[80px] rounded-none opacity-50 dark:bg-background-dark dark:hover:bg-neutral-700 bg-background-light">
+        <CarouselPrevious className="transform transition absolute left-0 top-1/2 -translate-y-1/2 w-[40px] h-full sm:w-[60px] lg:w-[80px] rounded-none opacity-50 dark:bg-background-dark dark:hover:bg-neutral-700 bg-background-light">
           <button onClick={handlePreviousSlide}></button>
         </CarouselPrevious>
       </Carousel>
+      <div className="block px-4 py-2 absolute left-20">
+        <ThemeToggle/>
+      </div>
     </main>
   );
 }
