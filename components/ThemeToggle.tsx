@@ -21,15 +21,15 @@ const ThemeToggle = () => {
   }, [darkMode]);
   return (
     <div
-      className="relative w-16 h-8 flex item-center dark:bg-gray-700 bg-teal-500 cursor-pointer rounded-full p-1"
+      className="relative w-16 h-8 flex item-center dark:bg-gray-700 bg-medium cursor-pointer rounded-full p-1"
       onClick={() => setDarkMode(!darkMode)}
     >
-      <IoMoon className="text-white w-5 h-6"></IoMoon>
+      <IoSunny className="text-yellow-400  w-6 h-6"></IoSunny>
       <div
-        className="absolute bg-white dark:bg-medium w-6 h-6 rounded-full shadow-md transform transition-transform duration-300"
+        className="absolute bg-white dark:bg-medium w-7 h-6 rounded-full shadow-md transform transition-transform duration-300"
         style={darkMode ? { left: "2px" } : { right: "2px" }}
       ></div>
-      <IoSunny className="ml-auto text-yellow-400 w-6 h-6"></IoSunny>
+      <IoMoon className="ml-auto text-white w-5 h-6"></IoMoon>
     </div>
   );
 };

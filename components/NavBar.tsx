@@ -220,7 +220,9 @@ export default function NavBar() {
             >
               ประชาสัมพันธ์
             </Link>
-            <ThemeToggle></ThemeToggle>
+            <div className="px-3 py-2">
+              <ThemeToggle></ThemeToggle>
+            </div>
           </div>
           {/* CHAT */}
           <Dropdown disableAnimation={true}>
