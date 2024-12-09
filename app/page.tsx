@@ -9,6 +9,7 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
+import ThemeToggle from "@/components/ThemeToggle";
 
 interface CarouselInterface {
   title: string;
@@ -57,7 +58,7 @@ export default function Welcome() {
 
   return (
     <main className="w-screen h-screen flex content-center">
-      <Carousel opts={{watchDrag:false}} className="flex flex-wrap items-center justify-center gap-x-10 mx-auto overflow-auto">
+      <Carousel opts={{ watchDrag: false }} className="flex flex-wrap items-center justify-center gap-x-10 mx-auto overflow-auto">
         <CarouselContent className="lg:w-full lg:h-full ">
           {carouselDetails.map((car) => (
             <CarouselItem className="flex flex-wrap items-center justify-center gap-x-10 mx-auto">
@@ -101,6 +102,9 @@ export default function Welcome() {
           <button onClick={handlePreviousSlide}></button>
         </CarouselPrevious>
       </Carousel>
+      <div className="block px-4 py-2 absolute left-20 z-20">
+        <ThemeToggle />
+      </div>
     </main>
   );
 }
