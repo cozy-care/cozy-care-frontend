@@ -204,7 +204,7 @@ export default function NavBar() {
     };
   }, [menuOpen]);
 
-  if (currentPath !== "/") {
+  if (currentPath !== "/" && currentPath !== "/login" && currentPath !== "/register") {
     return (
       <nav className="transform transition dark:bg-background-dark bg-background-light flex justify-between h-14 pl-4 w-full sticky top-0  border-b-[1px] border-b-slate-400 z-[99]">
         {/* Left side */}
@@ -291,9 +291,7 @@ export default function NavBar() {
             >
               ประชาสัมพันธ์
             </Link>
-            <div className="px-5 py-2">
-              <ModalDonation></ModalDonation>
-            </div>
+            <ModalDonation/>
             <div className="px-3 py-2">
               <ThemeToggle></ThemeToggle>
             </div>

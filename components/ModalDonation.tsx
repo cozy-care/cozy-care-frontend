@@ -15,7 +15,7 @@ export default function ModalDonation() {
 
   return (
     <>
-      <Button onPress={onOpen}>Donation</Button>
+      <Button onPress={onOpen} className="hover:text-blue-500">สนับสนุนเรา</Button>
       <Modal isOpen={isOpen} onOpenChange={onOpenChange}>
         <ModalContent>
           {(onClose) => (
@@ -25,7 +25,7 @@ export default function ModalDonation() {
               </ModalHeader>
               <ModalBody>
                 <p className="text-lg font-bold text-center">
-                  "ร่วมสนับสนุนเพื่อสร้างการเปลี่ยนแปลง!"
+                  ร่วมสนับสนุนเพื่อสร้างการเปลี่ยนแปลง!
                 </p>
                 <div className="flex justify-center items-center">
                   <img
