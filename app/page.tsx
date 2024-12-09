@@ -58,7 +58,7 @@ export default function Welcome() {
 
   return (
     <main className="w-screen h-screen flex content-center">
-      <Carousel className="flex flex-wrap items-center justify-center gap-x-10 mx-auto overflow-auto  ">
+      <Carousel opts={{watchDrag:false}} className="flex flex-wrap items-center justify-center gap-x-10 mx-auto overflow-auto">
         <CarouselContent className="lg:w-full lg:h-full ">
           {carouselDetails.map((car) => (
             <CarouselItem className="flex flex-wrap items-center justify-center gap-x-10 mx-auto">
