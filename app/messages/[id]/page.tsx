@@ -33,7 +33,7 @@ interface UserData {
 const socket: Socket = io(`${process.env.NEXT_PUBLIC_API_URL}`);
 
 export default function Messages() {
-  const { id: chatId } = useParams();
+  const chatId = useParams();
   const router = useRouter();
   const [messages, setMessages] = useState<Message[]>([]);
   const [messageText, setMessageText] = useState<string>("");
