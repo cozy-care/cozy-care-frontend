@@ -22,6 +22,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
 
+  // For fix flash light mode
   const setInitialTheme =
     `
       (function() {
@@ -34,7 +35,7 @@ export default function RootLayout({
   return (
     //เอาไว้เปลี่ยนพี้นหลังทั้งหน้าจอ <body>
     <html lang="en" className="">
-      <body className={`${inter.className} transform transition dark:bg-background-dark bg-background-light dark:text-text-dark text-text-light`}>
+      <body className={`${inter.className} transform transition dark:bg-cozy-background-dark bg-white dark:text-white text-black`}>
         <script dangerouslySetInnerHTML={{ __html: setInitialTheme }} />
         <Providers>
           <NavBar />
