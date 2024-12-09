@@ -54,12 +54,12 @@ h1 {
   font-weight: 700;
 }
 
-body {
+/* body {
   color: #313131;
   margin: 0px;
-}
+} */
 
-@layer base {
+/* @layer base {
   :root {
     --background: 0 0% 100%;
     --foreground: 0 0% 3.9%;
@@ -122,4 +122,4 @@ body {
   body {
     @apply bg-background text-foreground;
   }
-}
+} */
