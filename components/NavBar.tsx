@@ -42,73 +42,73 @@ interface ChatCards {
 
 export const chatMock: ChatCards[] = [
   {
-    chat_id: '1',
+    chat_id: "1",
     profile_image: "https://via.placeholder.com/150",
-    name: 'John ชาวไร่',
-    lastMessage: 'yo',
+    name: "John ชาวไร่",
+    lastMessage: "yo",
     lastMessageTime: 200,
   },
   {
-    chat_id: '2',
+    chat_id: "2",
     profile_image: "https://via.placeholder.com/150",
-    name: 'Sarah เมืองกรุง',
-    lastMessage: 'Hello!',
+    name: "Sarah เมืองกรุง",
+    lastMessage: "Hello!",
     lastMessageTime: 400,
   },
   {
-    chat_id: '3',
+    chat_id: "3",
     profile_image: "https://via.placeholder.com/150",
-    name: 'Mike เขาค้อ',
-    lastMessage: 'How are you?',
+    name: "Mike เขาค้อ",
+    lastMessage: "How are you?",
     lastMessageTime: 300,
   },
   {
-    chat_id: '4',
+    chat_id: "4",
     profile_image: "https://via.placeholder.com/150",
-    name: 'Sophia ใกล้คลอง',
-    lastMessage: 'See you soon!',
+    name: "Sophia ใกล้คลอง",
+    lastMessage: "See you soon!",
     lastMessageTime: 150,
   },
   {
-    chat_id: '5',
+    chat_id: "5",
     profile_image: "https://via.placeholder.com/150",
-    name: 'Tommy ทอมซ่า',
-    lastMessage: 'Haha, that was funny!',
+    name: "Tommy ทอมซ่า",
+    lastMessage: "Haha, that was funny!",
     lastMessageTime: 600,
   },
   {
-    chat_id: '6',
+    chat_id: "6",
     profile_image: "https://via.placeholder.com/150",
-    name: 'Emily อารมณ์ดี',
-    lastMessage: 'Goodnight!',
+    name: "Emily อารมณ์ดี",
+    lastMessage: "Goodnight!",
     lastMessageTime: 50,
   },
   {
-    chat_id: '7',
+    chat_id: "7",
     profile_image: "https://via.placeholder.com/150",
-    name: 'Liam นักเลง',
-    lastMessage: 'Let’s grab coffee',
+    name: "Liam นักเลง",
+    lastMessage: "Let’s grab coffee",
     lastMessageTime: 800,
   },
   {
-    chat_id: '8',
+    chat_id: "8",
     profile_image: "https://via.placeholder.com/150",
-    name: 'Olivia เด็กดี',
-    lastMessage: 'I’ll call you later',
+    name: "Olivia เด็กดี",
+    lastMessage: "I’ll call you later",
     lastMessageTime: 120,
   },
   {
-    chat_id: '9',
+    chat_id: "9",
     profile_image: "https://via.placeholder.com/150",
-    name: 'Jake ขาลุย',
-    lastMessage: 'What’s the plan?',
+    name: "Jake ขาลุย",
+    lastMessage: "What’s the plan?",
     lastMessageTime: 550,
   },
   {
-    chat_id: '10',
+    chat_id: "10",
     profile_image: "https://via.placeholder.com/150",
-    name: 'Emma แม่บ้าน',
-    lastMessage: 'Thanks!',
+    name: "Emma แม่บ้าน",
+    lastMessage: "Thanks!",
     lastMessageTime: 90,
   },
 ];
@@ -204,20 +204,22 @@ export default function NavBar() {
     };
   }, [menuOpen]);
 
-  if (currentPath !== '/') {
+  if (currentPath !== "/") {
     return (
       <nav className="transform transition dark:bg-background-dark bg-background-light flex justify-between h-14 pl-4 w-full sticky top-0  border-b-[1px] border-b-slate-400 z-[99]">
         {/* Left side */}
         <Link href="/home" className="flex items-center space-x-3">
           <Image src="/favicon.ico" width={40} height={40} alt="Logo  " />
-          <div className="font-bold text-lg dark:text-text-dark text-text-light">Cozy Care</div>
+          <div className="font-bold text-lg dark:text-text-dark text-text-light">
+            Cozy Care
+          </div>
         </Link>
 
         {/* Right side */}
         <div className="flex justify-center items-center">
           {/* Hamburger menu items for mobile */}
           {menuOpen && (
-            <div className="dark:text-white absolute top-14 left-0 w-full bg-white dark:bg-dark shadow-md md:hidden">
+            <div className="dark:text-text-dark absolute top-14 left-0 w-full bg-white dark:bg-background-dark shadow-md md:hidden">
               <Link
                 type="button"
                 href="/home"
@@ -415,5 +417,4 @@ export default function NavBar() {
       </nav>
     );
   }
-
 }
