@@ -14,31 +14,31 @@ export default function Page() {
   const [role, setRole] = useState<string | null>(null);
 
   // Fetch user data and check authentication
-  useEffect(() => {
-    const checkAuthentication = async () => {
-      try {
-        const response: AxiosResponse<{ alias: string; email: string; role: string }> = await axios.get(
-          `${process.env.NEXT_PUBLIC_API_URL}/api/user/me`, // Use environment variable
-          {
-            withCredentials: true, // Send cookies for authentication
-          }
-        );
-        setAlias(response.data.alias);
-        setEmail(response.data.email);
-        setRole(response.data.role);
+  // useEffect(() => {
+  //   const checkAuthentication = async () => {
+  //     try {
+  //       const response: AxiosResponse<{ alias: string; email: string; role: string }> = await axios.get(
+  //         `${process.env.NEXT_PUBLIC_API_URL}/api/user/me`, // Use environment variable
+  //         {
+  //           withCredentials: true, // Send cookies for authentication
+  //         }
+  //       );
+  //       setAlias(response.data.alias);
+  //       setEmail(response.data.email);
+  //       setRole(response.data.role);
 
-        // Redirect to /home/edit if the role is not "user"
-        if (response.data.role !== "user") {
-          router.push("/home/edit");
-        }
-      } catch (error) {
-        console.error("User not authenticated or failed to fetch data:", error);
-        router.push("/login"); // Redirect to login if not authenticated
-      }
-    };
+  //       // Redirect to /home/edit if the role is not "user"
+  //       if (response.data.role !== "user") {
+  //         router.push("/home/edit");
+  //       }
+  //     } catch (error) {
+  //       console.error("User not authenticated or failed to fetch data:", error);
+  //       router.push("/login"); // Redirect to login if not authenticated
+  //     }
+  //   };
 
-    checkAuthentication();
-  }, [router]);
+  //   checkAuthentication();
+  // }, [router]);
 
   // Set document title on mount
   useEffect(() => {
@@ -71,7 +71,9 @@ export default function Page() {
               <div className="flex w-full h-1/6">
                 <div className="flex w-[150px] h-auto justify-center items-center">
                   <Avatar
-                    src={"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtp7SBv7iqt9a63k7ghTSJBMPKZF03MpmhDg&s"}
+                    src={
+                      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtp7SBv7iqt9a63k7ghTSJBMPKZF03MpmhDg&s"
+                    }
                     className="w-full h-full border-2 border-blue-400 rounded-full"
                   />
                 </div>
@@ -133,7 +135,7 @@ export default function Page() {
                 <h2 className="flex flex-col justify-center items-center text-3xl font-bold mt-10">
                   กรุณาเลือกสถานะผู้ใช้งาน
                 </h2>
-                <div className="flex justify-around items-center mt-20">
+                <div className="flex justify-around items-center mt-10">
                   {/* caregiver */}
                   <div
                     onClick={() => handleRoleUpdate("caregiver")}
