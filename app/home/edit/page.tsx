@@ -51,42 +51,42 @@ export default function Page() {
   };
 
   // Fetch user data and check authentication
-  useEffect(() => {
-    document.title = "Edit Profile - Cozy Care";
+  // useEffect(() => {
+  //   document.title = "Edit Profile - Cozy Care";
 
-    const checkAuthentication = async () => {
-      try {
-        const response: AxiosResponse<{
-          alias: string;
-          email: string;
-          username: string;
-          phone: string;
-          role: string;
-          profile_image: string;
-        }> = await axios.get(
-          `${process.env.NEXT_PUBLIC_API_URL}/api/user/me`, // Use environment variable
-          {
-            withCredentials: true, // Send cookies for authentication
-          }
-        );
+  //   const checkAuthentication = async () => {
+  //     try {
+  //       const response: AxiosResponse<{
+  //         alias: string;
+  //         email: string;
+  //         username: string;
+  //         phone: string;
+  //         role: string;
+  //         profile_image: string;
+  //       }> = await axios.get(
+  //         `${process.env.NEXT_PUBLIC_API_URL}/api/user/me`, // Use environment variable
+  //         {
+  //           withCredentials: true, // Send cookies for authentication
+  //         }
+  //       );
 
-        const imageURL = `${process.env.NEXT_PUBLIC_API_URL}${response.data.profile_image}`;
+  //       const imageURL = `${process.env.NEXT_PUBLIC_API_URL}${response.data.profile_image}`;
 
-        // Populate the state with user data from the response
-        setAlias(response.data.alias);
-        setEmail(response.data.email);
-        setUsername(response.data.username);
-        setPhoneNumber(response.data.phone);
-        setRole(response.data.role);
-        setProfileImageUrl(imageURL || ""); // Profile image URL
-      } catch (error) {
-        console.error("User not authenticated or failed to fetch data:", error);
-        router.push("/login"); // Redirect to login if not authenticated
-      }
-    };
+  //       // Populate the state with user data from the response
+  //       setAlias(response.data.alias);
+  //       setEmail(response.data.email);
+  //       setUsername(response.data.username);
+  //       setPhoneNumber(response.data.phone);
+  //       setRole(response.data.role);
+  //       setProfileImageUrl(imageURL || ""); // Profile image URL
+  //     } catch (error) {
+  //       console.error("User not authenticated or failed to fetch data:", error);
+  //       router.push("/login"); // Redirect to login if not authenticated
+  //     }
+  //   };
 
-    checkAuthentication();
-  }, [router]);
+  //   checkAuthentication();
+  // }, [router]);
 
   // Handle form submission to upload image and update profile
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
