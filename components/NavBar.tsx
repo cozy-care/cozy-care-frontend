@@ -27,7 +27,7 @@ import { useRouter, usePathname } from "next/navigation";
 import moment from "moment";
 import ThemeToggle from "./ThemeToggle";
 import { Heading1 } from "lucide-react";
-
+import ModalDonation from "./ModalDonation";
 // import SelectRole from "@/app/home/edit/role/page";
 // import PatientIDProfile from "@/app/patient/[patientID]/edit/page";
 // import CaregiverIDProfile from "@/app/caregiver/[caregiverID]/edit/page";
@@ -252,6 +252,9 @@ export default function NavBar() {
               >
                 ประชาสัมพันธ์
               </Link>
+              <div className="px-5 py-2">
+                <ModalDonation></ModalDonation>
+              </div>
               <div className="block px-4 py-2">
                 <ThemeToggle></ThemeToggle>
               </div>
@@ -288,6 +291,9 @@ export default function NavBar() {
             >
               ประชาสัมพันธ์
             </Link>
+            <div className="px-5 py-2">
+              <ModalDonation></ModalDonation>
+            </div>
             <div className="px-3 py-2">
               <ThemeToggle></ThemeToggle>
             </div>
