@@ -4,26 +4,20 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { Button } from "@nextui-org/react";
 import Image from "next/image";
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-} from "@/components/ui/carousel";
 import { NavigateNext } from "@mui/icons-material";
 
 export default function Welcome() {
-  const [isFading, setIsFading] = useState(false); // Fading state
-  const [fadeOut, setFadeOut] = useState(false); // Fading state
+  const [isFading, setIsFading] = useState(false);
+  const [fadeOut, setFadeOut] = useState(false);
 
   const handleNextImage = () => {
+    console.log(isFading)
     if (isFading) return; // Prevent overlapping clicks during transition
-
     setFadeOut(!fadeOut);
-    setIsFading(true); // Start the fade-out effect
+    setIsFading(true);
     setTimeout(() => {
-      // setStep(nextStep); // Update to the next image
-      setIsFading(false); // Reset fading state
-    }, 1000); // Match the duration of the fade-out transition
+      setIsFading(false);
+    }, 1000);
   };
 
   useEffect(() => {
@@ -47,7 +41,7 @@ export default function Welcome() {
     },
   ];
   return (
-    <main className="min-h-screen max-h-screen overflow-hidden">
+    <main className=" min-h-[100dvh] max-h-[100dvh] overflow-hidden">
       <div className="flex flex-col items-center gap-y-4 pt-4">
         <div className="self-start flex items-center space-x-3 pl-4">
           <Image src="/favicon.ico" width={40} height={40} alt="Logo" />
@@ -83,6 +77,7 @@ export default function Welcome() {
             radius="full"
             color="primary"
             variant="bordered"
+            className="font-bold"
             endContent={<NavigateNext />}
             onClick={handleNextImage}
           >
@@ -90,12 +85,11 @@ export default function Welcome() {
           </Button>
         ) : (
           <Link href={`/login`}>
-            <Button radius="full" color="primary">
+            <Button className="font-bold" radius="full" color="primary">
               เริ่มต้นการใช้งาน
             </Button>
           </Link>
         )}
-
       </div>
     </main >
   );
