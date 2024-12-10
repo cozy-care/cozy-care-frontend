@@ -56,26 +56,51 @@ export default function Welcome() {
           </div>
         </div>
 
-        <div className="relative w-[130vw] h-[40vh] rounded-t-full overflow-hidden">
+        <div className="relative w-[130vw] h-[40vh] md:w-7/12 lg:w-8/12 rounded-t-full overflow-hidden">
           <img
             className="absolute w-full h-full object-cover object-center"
             src={content[1].image}
           />
           <img
-            className={`absolute w-full h-full object-cover object-center transition-opacity duration-1000 ${fadeOut ? "opacity-0" : "opacity-100"
-              }`}
+            className={`absolute w-full h-full object-cover object-center transition-opacity duration-1000 ${
+              fadeOut ? "opacity-0" : "opacity-100"
+            }`}
             src={content[0].image}
           />
         </div>
 
         <div className="relative flex w-screen h-[3vh]">
-          <h1 className={`absolute left-1/2 -translate-x-1/2 w-max font-bold text-2xl transition-opacity duration-1000 drop-shadow-xl ${fadeOut ? "opacity-100" : "opacity-0"}`}>{content[1].title}</h1>
-          <h1 className={`absolute left-1/2 -translate-x-1/2 w-max font-bold text-2xl transition-opacity duration-1000 drop-shadow-xl ${fadeOut ? "opacity-0" : "opacity-100"}`}>{content[0].title}</h1>
+          <h1
+            className={`absolute left-1/2 -translate-x-1/2 w-max font-bold text-2xl transition-opacity duration-1000 drop-shadow-xl ${
+              fadeOut ? "opacity-100" : "opacity-0"
+            }`}
+          >
+            {content[1].title}
+          </h1>
+          <h1
+            className={`absolute left-1/2 -translate-x-1/2 w-max font-bold text-2xl transition-opacity duration-1000 drop-shadow-xl ${
+              fadeOut ? "opacity-0" : "opacity-100"
+            }`}
+          >
+            {content[0].title}
+          </h1>
         </div>
 
-        <div className="relative w-screen h-[180px]">
-          <p className={`absolute w-full h-full px-4 transition-opacity duration-1000 ${fadeOut ? "opacity-100" : "opacity-0"}`}>&emsp; {content[1].description}</p>
-          <p className={`absolute w-full h-full px-4 transition-opacity duration-1000 ${fadeOut ? "opacity-0" : "opacity-100"}`}>&emsp; {content[0].description}</p>
+        <div className="relative w-screen h-[180px] md:w-[500px] lg:w-[800px]">
+          <p
+            className={`absolute w-full h-full px-4 transition-opacity duration-1000 ${
+              fadeOut ? "opacity-100" : "opacity-0"
+            }`}
+          >
+            &emsp; {content[1].description}
+          </p>
+          <p
+            className={`absolute w-full h-full px-4 transition-opacity duration-1000 ${
+              fadeOut ? "opacity-0" : "opacity-100"
+            }`}
+          >
+            &emsp; {content[0].description}
+          </p>
         </div>
 
         {!fadeOut ? (
@@ -95,8 +120,7 @@ export default function Welcome() {
             </Button>
           </Link>
         )}
-
       </div>
-    </main >
+    </main>
   );
 }
