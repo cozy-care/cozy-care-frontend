@@ -23,22 +23,23 @@ export default function RootLayout({
 }>) {
 
   // For fix flash light mode
-  const setInitialTheme =
-    `
-      (function() {
-          const userTheme = localStorage.getItem('theme');
-          const systemTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-          const theme = userTheme || systemTheme;
-          document.documentElement.classList.add(theme);
-      })();
-    `
+  // const setInitialTheme =
+  //   `
+  //     (function() {
+  //         const userTheme = localStorage.getItem('theme');
+  //         const systemTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+  //         const theme = userTheme || systemTheme;
+  //         document.documentElement.classList.add(theme);
+  //     })();
+  //   `
+  
   return (
     //เอาไว้เปลี่ยนพี้นหลังทั้งหน้าจอ <body>
-    <html lang="en" className="">
+    <html lang="en">
       <body className={`${inter.className} transform transition dark:bg-cozy-background-dark bg-white dark:text-white text-black`}>
-        <script dangerouslySetInnerHTML={{ __html: setInitialTheme }} />
+        {/* <script dangerouslySetInnerHTML={{ __html: setInitialTheme }} /> */}
         <Providers>
-          <NavBar />
+          {/* <NavBar /> */}
           {children}
         </Providers>
       </body>

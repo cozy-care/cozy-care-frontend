@@ -11,7 +11,6 @@ export default function Welcome() {
   const [fadeOut, setFadeOut] = useState(false);
 
   const handleNextImage = () => {
-    console.log(isFading);
     if (isFading) return; // Prevent overlapping clicks during transition
     setFadeOut(!fadeOut);
     setIsFading(true);
@@ -40,41 +39,39 @@ export default function Welcome() {
         "ร่วมเป็นผู้ดูแลกับเรา เพื่อมอบการดูแลสุขภาพที่ดี ให้กับผู้ที่ต้องการ คุณจะพบกับการจองงานที่ง่ายและ รวดเร็ว พร้อมระบบการชำระเงินที่ปลอดภัยและการสนับ สนุนจากทีมงานที่พร้อมช่วยเหลือทุกขั้นตอน ระบบของ เราช่วยให้คุณสามารถติดต่อกับครอบครัวผู้ป่วยได้อย่างสะดวกและมั่นใจในความปลอดภัย มาร่วมสร้างสังคมการ ดูแลที่อบอุ่นและปลอดภัยไปด้วยกัน",
     },
   ];
+
   return (
     <main className=" min-h-[100dvh] max-h-[100dvh] overflow-hidden">
       <div className="flex flex-col items-center gap-y-4 pt-4">
         <div className="self-start flex items-center space-x-3 pl-4">
-          <Image src="/favicon.ico" width={40} height={40} alt="Logo" />
+          <Image src="/favicon.ico" width={40} height={40} alt="Logo" style={{ width: "auto", height: "auto" }} />
           <div className="font-bold text-lg text-cozy-blue-light dark:text-cozy-blue-dark">
             COZY CARE
           </div>
         </div>
 
-        <div className="relative w-[130vw] h-[40vh] md:w-[50vw] md:h-[50vh] lg:w-[20vw] lg:h-[20vw] rounded-t-full md:rounded-full overflow-hidden">
+        <div className="relative w-[130vw] h-[40vh] md:w-[50vw] md:h-[50vw] lg:w-[20vw] lg:h-[20vw] md:mb-4 rounded-t-full md:rounded-full overflow-hidden">
           <img
             className="absolute w-full h-full object-cover object-center"
             src={content[1].image}
           />
           <img
-            className={`absolute w-full h-full object-cover object-center transition-opacity duration-1000 ${
-              fadeOut ? "opacity-0" : "opacity-100"
-            }`}
+            className={`absolute w-full h-full object-cover object-center transition-opacity duration-1000 ${fadeOut ? "opacity-0" : "opacity-100"
+              }`}
             src={content[0].image}
           />
         </div>
 
         <div className="relative flex w-screen h-[3vh]">
           <h1
-            className={`absolute left-1/2 -translate-x-1/2 w-max font-bold text-2xl transition-opacity duration-1000 drop-shadow-xl ${
-              fadeOut ? "opacity-100" : "opacity-0"
-            }`}
+            className={`absolute left-1/2 -translate-x-1/2 w-max font-bold text-2xl transition-opacity duration-1000 drop-shadow-xl ${fadeOut ? "opacity-100" : "opacity-0"
+              }`}
           >
             {content[1].title}
           </h1>
           <h1
-            className={`absolute left-1/2 -translate-x-1/2 w-max font-bold text-2xl transition-opacity duration-1000 drop-shadow-xl ${
-              fadeOut ? "opacity-0" : "opacity-100"
-            }`}
+            className={`absolute left-1/2 -translate-x-1/2 w-max font-bold text-2xl transition-opacity duration-1000 drop-shadow-xl ${fadeOut ? "opacity-0" : "opacity-100"
+              }`}
           >
             {content[0].title}
           </h1>
@@ -82,16 +79,14 @@ export default function Welcome() {
 
         <div className="relative w-screen h-[180px] md:w-[500px] lg:w-[800px]">
           <p
-            className={`absolute w-full h-full px-4 transition-opacity duration-1000 ${
-              fadeOut ? "opacity-100" : "opacity-0"
-            }`}
+            className={`absolute w-full h-full px-4 transition-opacity duration-1000 ${fadeOut ? "opacity-100" : "opacity-0"
+              }`}
           >
             &emsp; {content[1].description}
           </p>
           <p
-            className={`absolute w-full h-full px-4 transition-opacity duration-1000 ${
-              fadeOut ? "opacity-0" : "opacity-100"
-            }`}
+            className={`absolute w-full h-full px-4 transition-opacity duration-1000 ${fadeOut ? "opacity-0" : "opacity-100"
+              }`}
           >
             &emsp; {content[0].description}
           </p>
@@ -104,16 +99,14 @@ export default function Welcome() {
             variant="bordered"
             className="font-bold"
             endContent={<NavigateNext />}
-            onClick={handleNextImage}
+            onPress={handleNextImage}
           >
             ถัดไป
           </Button>
         ) : (
-          <Link href={`/login`}>
-            <Button className="font-bold" radius="full" color="primary">
-              เริ่มต้นการใช้งาน
-            </Button>
-          </Link>
+          <Button as={Link} href="/login" className="font-bold" radius="full" color="primary">
+            เริ่มต้นการใช้งาน
+          </Button>
         )}
       </div>
     </main>
