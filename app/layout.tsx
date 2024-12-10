@@ -39,7 +39,7 @@ export default function RootLayout({
       <body className={`${inter.className} transform transition dark:bg-cozy-background-dark bg-white dark:text-white text-black`}>
         {/* <script dangerouslySetInnerHTML={{ __html: setInitialTheme }} /> */}
         <Providers>
-          <NavBar />
+          {/* <NavBar /> */}
           {children}
         </Providers>
       </body>
