@@ -13,8 +13,8 @@ const config: Config = {
       colors: {
         "cozy-green-light": "#3FADA8",
         "cozy-blue-light": "#28789E",
-        "cozy-lightblue-light": "#28789E",
-        "cozy-background-light": "#808080",
+        "cozy-lightblue-light": "#C1E2F2",
+        "cozy-gray-light": "#808080",
         "cozy-black-light": "#000000",
 
         "cozy-teal-dark": "#75F4EF",
@@ -35,7 +35,10 @@ const config: Config = {
               DEFAULT: "#3FADA8",
               foreground: "#FFFFFF",
             },
-            focus: "#3FADA8",
+            secondary: {
+              DEFAULT: "#28789E",
+              foreground: "#FFFFFF",
+            },
           },
         },
         dark: {
@@ -44,7 +47,10 @@ const config: Config = {
               DEFAULT: "#53B7E7",
               foreground: "#000000",
             },
-            focus: "#53B7E7",
+            secondary: {
+              DEFAULT: "#75F4EF",
+              foreground: "#000000",
+            },
           },
         },
       },
