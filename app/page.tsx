@@ -11,7 +11,7 @@ export default function Welcome() {
   const [fadeOut, setFadeOut] = useState(false);
 
   const handleNextImage = () => {
-    console.log(isFading)
+    console.log(isFading);
     if (isFading) return; // Prevent overlapping clicks during transition
     setFadeOut(!fadeOut);
     setIsFading(true);
@@ -50,7 +50,7 @@ export default function Welcome() {
           </div>
         </div>
 
-        <div className="relative w-[130vw] h-[40vh] md:w-7/12 lg:w-8/12 rounded-t-full overflow-hidden">
+        <div className="relative w-[130vw] h-[40vh] md:w-[50vw] md:h-[50vh] lg:w-[20vw] lg:h-[20vw] rounded-t-full md:rounded-full overflow-hidden">
           <img
             className="absolute w-full h-full object-cover object-center"
             src={content[1].image}
