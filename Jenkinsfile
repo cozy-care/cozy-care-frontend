@@ -10,6 +10,7 @@ pipeline {
         stage("Install Environment") {
             steps {
                 echo 'Installing Environment'
+                sh 'npm update'
                 sh 'npm install --force'
             }
         }
