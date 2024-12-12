@@ -10,6 +10,10 @@ const inter = Kanit({
 });
 
 export const metadata: Metadata = {
+  title: {
+    default: "Cozy care",
+    template: "%s - Cozy care"
+  },
   description: "Cozy Care by create next app",
   icons: {
     icon: "/favicon.ico",

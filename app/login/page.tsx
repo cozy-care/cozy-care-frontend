@@ -121,7 +121,7 @@ export default function Login() {
       </div>
 
       <div className="flex flex-col items-center justify-evenly bottom-0 w-screen h-[25vh] bg-cozy-lightblue-light dark:bg-cozy-green-light">
-        <Button onClick={handleGoogleLogin} className="font-bold" radius="full" color="secondary" startContent={<Google />}>เข้าสู่ระบบด้วย Google</Button>
+        <Button onPress={handleGoogleLogin} className="font-bold" radius="full" color="secondary" startContent={<Google />}>เข้าสู่ระบบด้วย Google</Button>
         <Link href={'/register'} underline="hover" className="text-cozy-gray-light dark:text-black">ยังไม่มีบัญชี ? [ลงทะเบียน]</Link>
       </div>
 

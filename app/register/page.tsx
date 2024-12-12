@@ -91,7 +91,7 @@ export default function Register() {
       </div>
 
       <div className="flex flex-col items-center justify-evenly bottom-0 w-screen h-[25vh] bg-cozy-lightblue-light dark:bg-cozy-green-light">
-        <Button onClick={handleGoogleLogin} className="font-bold" radius="full" color="secondary" startContent={<Google />}>ลงทะเบียนด้วย Google</Button>
+        <Button onPress={handleGoogleLogin} className="font-bold" radius="full" color="secondary" startContent={<Google />}>ลงทะเบียนด้วย Google</Button>
         <Link href={'/login'} className="text-cozy-gray-light dark:text-black hover:underline">มีบัญชีแล้ว ? [เข้าสู่ระบบ]</Link>
       </div>
 
