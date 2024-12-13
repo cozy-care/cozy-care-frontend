@@ -40,7 +40,7 @@ export default function RootLayout({
   return (
     //เอาไว้เปลี่ยนพี้นหลังทั้งหน้าจอ <body>
     <html lang="en">
-      <body className={`${inter.className} transform transition dark:bg-cozy-background-dark bg-white dark:text-white text-black`}>
+      <body className={`${inter.className} transition dark:bg-cozy-background-dark bg-white dark:text-white text-black`}>
         {/* <script dangerouslySetInnerHTML={{ __html: setInitialTheme }} /> */}
         <Providers>
           {/* <NavBar /> */}

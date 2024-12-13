@@ -13,7 +13,7 @@ export default function Home() {
     }, []);
 
     return (
-        <main className="flex flex-col min-h-[calc(100svh-3.5rem)]">
+        <main className="flex flex-col min-h-[100dvh]">
             <NavBar />
 
             <div className="grow flex flex-col items-center">

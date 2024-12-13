@@ -1,18 +1,33 @@
-"use client";
+import { Call, Facebook, Send } from "@mui/icons-material";
+import { Button } from "@nextui-org/react";
+import Link from "next/link";
+import { ThemeSwitcher } from "./ThemeSwitcher";
 
 export default function Footer() {
   return (
-    <footer className="flex w-full h-[150px] bg-slate-300 mt-auto pt-5">
-      <div className="flex justify-center w-2/5 lg:w-1/5 h-full font-black text-xl lg:text-3xl">
+    <footer className="flex w-full h-[180px] bg-cozy-lightblue-light transition dark:bg-cozy-darkblue-dark dark:text-white mt-auto pt-5">
+      <div className="flex flex-col items-center pr-6 w-1/2 lg:w-1/5 h-full font-black text-xl lg:text-3xl">
         COZY CARE
+        <ThemeSwitcher />
       </div>
-      <div className="flex flex-col pl-[10px] lg:pl-[200px] w-2/5 h-full">
-        <div className="font-extrabold text-md lg:text-xl">เกี่ยวกับ</div>
-        <div>ผู้ดูแล</div>
-        <div>ช่วยเหลือ/การติดต่อ</div>
-        <div>นโยบายความเป็นส่วนตัว</div>
+
+      <div className="flex flex-col gap-1 lg:pl-[200px] w-1/2 h-full text-sm">
+        <p className="font-extrabold lg:text-xl">เกี่ยวกับ</p>
+        <p>ผู้ดูแล</p>
+        <p>ช่วยเหลือ/การติดต่อ</p>
+        <p>นโยบายความเป็นส่วนตัว</p>
+        <div className="flex gap-4 mt-2">
+          <Button as={Link} href="" className="font-bold w-auto bg-cozy-blue-light text-white" radius="full" isIconOnly>
+            <Facebook />
+          </Button>
+          <Button as={Link} href="" className="font-bold w-auto bg-cozy-blue-light text-white" radius="full" isIconOnly>
+            <Send />
+          </Button>
+          <Button as={Link} href="" className="font-bold w-auto bg-cozy-blue-light text-white" radius="full" isIconOnly>
+            <Call />
+          </Button>
+        </div>
       </div>
-      <div className="flex justify-center w-2/5 h-full">logo here</div>
     </footer>
   );
 }

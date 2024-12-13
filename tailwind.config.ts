@@ -49,7 +49,7 @@ const config: Config = {
             },
             secondary: {
               DEFAULT: "#3FADA8",
-              foreground: "#000000",
+              foreground: "#75F4EF",
             },
           },
         },
