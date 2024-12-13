@@ -18,7 +18,7 @@ export default function NavBar() {
 
   return (
     <div className="sticky">
-      <Navbar height="4rem" classNames={{wrapper:'px-3'}}>
+      <Navbar height="4rem" classNames={{wrapper:'px-3'}} className='transition dark:bg-cozy-background-dark bg-white'>
         <NavbarBrand className='px-0'>
           <Image src="/favicon.ico" width={40} height={40} alt="Logo" style={{ width: "auto", height: "auto" }} />
           <p className="ml-2 font-bold text-lg text-cozy-blue-light dark:text-cozy-blue-dark">Cozy Care</p>
@@ -26,26 +26,26 @@ export default function NavBar() {
         <NavbarContent justify="end">
           <NavbarItem>
             <Button as={Link} href="#" className="font-bold" isIconOnly radius="full" color="primary" variant="light">
-              <Chat sx={{width:'75%', height:'75%'}} />
+              <Chat sx={{width:'65%', height:'65%'}} />
             </Button>
           </NavbarItem>
           <NavbarItem>
             <Button as={Link} href="#" className="font-bold" isIconOnly radius="full" color="primary" variant="light">
-              <Notifications sx={{width:'80%', height:'80%'}} />
+              <Notifications sx={{width:'70%', height:'70%'}} />
             </Button>
           </NavbarItem>
           <NavbarItem>
             <Button as={Link} href="#" className="font-bold" isIconOnly radius="full" color="primary" variant="light">
-              <Person sx={{width:'85%', height:'85%'}} />
+              <Person sx={{width:'75%', height:'75%'}} />
             </Button>
           </NavbarItem>
         </NavbarContent>
       </Navbar>
 
-      <Navbar isBordered shouldHideOnScroll classNames={{wrapper:'px-3 justify-center'}}>
+      <Navbar isBordered shouldHideOnScroll classNames={{wrapper:'px-3 justify-center'}} className='transition dark:bg-cozy-background-dark bg-white'>
         <NavbarContent justify="center" className='w-full gap-3'>
           <NavbarItem className='w-1/5'>
-            <Button as={Link} href="/home" className={`font-bold w-full ${pathname === "/home" && "bg-[#28789E] text-white pointer-events-none"}`} isIconOnly color="secondary">
+            <Button as={Link} href="/home" className={`font-bold w-full ${pathname === "/home" && "bg-[#28789E] dark:bg-cozy-teal-dark text-white dark:text-black pointer-events-none"}`} isIconOnly color="secondary">
               <Home />
             </Button>
           </NavbarItem>
