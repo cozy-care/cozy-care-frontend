@@ -12,17 +12,21 @@ interface LoginCredentials {
   password: string;
 }
 
-async function loginUser(credentials: LoginCredentials): Promise<boolean> {
+async function loginUser(credentials: LoginCredentials): Promise<{ success: boolean; isOTP?: boolean; userID?: string; email?: string }> {
   try {
     const response: AxiosResponse = await axios.post(
       `${process.env.NEXT_PUBLIC_API_URL}/api/auth/login`,
       credentials,
       { withCredentials: true }
     );
-    return response.status === 200;
+
+    // Extract isOTP, userID, and email from the response
+    const { isOTP, userID, email } = response.data;
+
+    return { success: true, isOTP, userID, email };
   } catch (error) {
     console.error("There was an error logging in!", error);
-    return false;
+    return { success: false };
   }
 }
 
@@ -30,9 +34,7 @@ async function checkAuth(router: any): Promise<void> {
   try {
     const response = await axios.get(
       `${process.env.NEXT_PUBLIC_API_URL}/api/user/me`,
-      {
-        withCredentials: true,
-      }
+      { withCredentials: true }
     );
     if (response.status === 200) {
       router.push("/home");
@@ -58,16 +60,34 @@ export default function Login() {
       .value;
     const password = (form.elements.namedItem("password") as HTMLInputElement)
       .value;
-
-    const success = await loginUser({ username, password });
+  
+    // Use the updated loginUser function that returns success, isOTP, email, and userID
+    const { success, isOTP, email, userID } = await loginUser({ username, password });
 
     if (success) {
-      console.log("Login successful!");
-      router.push("/home");
+      if (isOTP) {
+        router.push("/home");
+      } else {
+        // Call the additional POST request to send email and userID
+        try {
+          await axios.post(
+            `${process.env.NEXT_PUBLIC_API_URL}/api/auth/sendEmailOtp`,
+            { email, user_id: userID }, // Send email and userID in the body
+            { withCredentials: true }
+          );
+          console.log("POST request to /api/auth/sendEmailOtp successful!");
+        } catch (error) {
+          console.error("Error during POST request to /api/auth/sendEmailOtp:", error);
+          return; // Optionally prevent navigation if the POST fails
+        }
+        localStorage.setItem("email", email as string);
+        localStorage.setItem("userID", userID as string);
+        router.push("/otp"); // Navigate to /otp after the POST request
+      }
     } else {
       console.log("Login failed");
     }
-  };
+  };  
 
   const handleGoogleLogin = () => {
     window.location.href = `${process.env.NEXT_PUBLIC_API_URL}/api/auth/google`;
