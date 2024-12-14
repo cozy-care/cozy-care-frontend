@@ -1,76 +1,47 @@
-"use client";
+'use client'
 
+import { Image } from "@nextui-org/react";
 import Footer from "@/components/Footer";
-import { AddCircleOutline, FilterList } from "@mui/icons-material";
-import { Input } from "@nextui-org/react";
-import { FormEvent, useEffect, useState } from "react";
+import NavBar from "@/components/NavBar";
+import { useEffect } from "react";
 import CaregiverCard from "./CaregiverCard";
 
+// อย่าลืมเปลี่ยนชื่อ Function
 export default function Caregiver() {
-  const [searchTerm, setSearchTerm] = useState("");
 
+  // อย่าลืมเปลี่ยน Title
   useEffect(() => {
     document.title = "Caregiver - Cozy Care";
   }, []);
 
-  useEffect(() => {
-    const delayDebounceFn = setTimeout(() => {
-      console.log(searchTerm);
-      // Send Axios request here
-    }, 1000);
-
-    return () => clearTimeout(delayDebounceFn);
-  }, [searchTerm]);
-
-  async function searchHandle(event: FormEvent<HTMLFormElement>) {
-    // event.preventDefault()
-    // const formData = new FormData(event.currentTarget)
-    // const response = await fetch('/api/submit', {
-    //     method: 'POST',
-    //     body: formData,
-    // })
-    // // Handle response if necessary
-    // const data = await response.json()
-    // // ...
-  }
-
   return (
-    <main className="flex flex-col min-h-[calc(100svh-3.5rem)]">
+    <main className="flex flex-col min-h-[100dvh]">
+      <NavBar />
+
       <div className="grow flex flex-col items-center">
-        <div className="ml-10 lg:ml-0 flex gap-1 lg:gap-4 py-6 w-full h-max  items-center">
-          <button className="text-sm lg:text-medium flex  lg:justify-end  w-2/6 lg:w-1/4 gap-1 hover:text-blue-500">
-            เพิ่มข้อมูลผู้ดูแล
-            <AddCircleOutline className="mt-[8px] lg:mt-[2px] " />
-            {/* <AddCircleOutline sx={{ marginTop: "2px" }} /> */}
-          </button>
-
-          <Input
-            type="text"
-            placeholder="ค้นหาผู้ดูแล"
-            onChange={(e) => setSearchTerm(e.target.value)}
-            className=" w-full lg:w-1/2"
+        <div className="w-full h-max">
+          <Image
+            alt="Caregiver background image"
+            src="https://bloximages.chicago2.vip.townnews.com/goskagit.com/content/tncms/assets/v3/editorial/1/7c/17c723ea-60fd-11ef-b85b-7b4fc4959607/66c7fd703b8c5.image.jpg?resize=1035%2C691"
+            width="100%"
+            height={150}
+            radius="none"
+            className="object-cover object-center"
           />
-
-          <button className="flex justify-start   w-1/4 hover:text-blue-500">
-            <FilterList />
-          </button>
         </div>
 
-        <CaregiverCard
-          name="หมอ 1"
-          profileURL="https://cdn-icons-png.flaticon.com/512/8496/8496122.png"
-        />
-        <CaregiverCard
-          name="หมอ 2"
-          profileURL="https://cdn-icons-png.flaticon.com/512/2785/2785554.png"
-        />
-        <CaregiverCard
-          name="หมอ 3"
-          profileURL="https://cdn-icons-png.flaticon.com/512/822/822111.png"
-        />
+        <div className="flex justify-center sticky top-[111px] w-full z-[99] transition bg-white dark:bg-cozy-background-dark">
+          Test
+        </div>
+
+        <div className="flex flex-col w-full items-center">
+          <CaregiverCard name="John" profileURL="https://d1nhio0ox7pgb.cloudfront.net/_img/g_collection_png/standard/512x512/nurse.png" />
+          <CaregiverCard name="John" profileURL="https://d1nhio0ox7pgb.cloudfront.net/_img/g_collection_png/standard/512x512/nurse.png" />
+          <CaregiverCard name="John" profileURL="https://d1nhio0ox7pgb.cloudfront.net/_img/g_collection_png/standard/512x512/nurse.png" />
+        </div>
       </div>
 
       <Footer />
     </main>
-  );
+  )
 }
