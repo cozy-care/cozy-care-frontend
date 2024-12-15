@@ -50,22 +50,22 @@ export default function NavBar() {
             </Button>
           </NavbarItem>
           <NavbarItem className='w-1/5'>
-            <Button as={Link} href="/caregiver" className={`font-bold w-full ${pathname === "/caregiver" && "bg-[#28789E] text-white pointer-events-none"}`} isIconOnly color="secondary">
+            <Button as={Link} href="/caregiver" className={`font-bold w-full ${pathname === "/caregiver" && "bg-[#28789E] dark:bg-cozy-teal-dark text-white dark:text-black pointer-events-none"}`} isIconOnly color="secondary">
               <Add />
             </Button>
           </NavbarItem>
           <NavbarItem className='w-1/5'>
-            <Button as={Link} href="/patient" className={`font-bold w-full ${pathname === "/patient" && "bg-[#28789E] text-white pointer-events-none"}`} isIconOnly color="secondary">
+            <Button as={Link} href="/patient" className={`font-bold w-full ${pathname === "/patient" && "bg-[#28789E] dark:bg-cozy-teal-dark text-white dark:text-black pointer-events-none"}`} isIconOnly color="secondary">
               <Accessible />
             </Button>
           </NavbarItem>
           <NavbarItem className='w-1/5'>
-            <Button as={Link} href="/annoucement" className={`font-bold w-full ${pathname === "/annoucement" && "bg-[#28789E] text-white pointer-events-none"}`} isIconOnly color="secondary">
+            <Button as={Link} href="/annoucement" className={`font-bold w-full ${pathname === "/annoucement" && "bg-[#28789E] dark:bg-cozy-teal-dark text-white dark:text-black pointer-events-none"}`} isIconOnly color="secondary">
               <Announcement/>
             </Button>
           </NavbarItem>
           <NavbarItem className='w-1/5'>
-            <Button as={Link} href="/donation" className={`font-bold w-full ${pathname === "/donation" && "bg-[#28789E] text-white pointer-events-none"}`} isIconOnly color="secondary">
+            <Button as={Link} href="/donation" className={`font-bold w-full ${pathname === "/donation" && "bg-[#28789E] dark:bg-cozy-teal-dark text-white dark:text-black pointer-events-none"}`} isIconOnly color="secondary">
               <Handshake />
             </Button>
           </NavbarItem>

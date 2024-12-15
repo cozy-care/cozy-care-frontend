@@ -6,10 +6,60 @@ import NavBar from "@/components/NavBar";
 import { useEffect } from "react";
 import CaregiverCard from "./CaregiverCard";
 
-// อย่าลืมเปลี่ยนชื่อ Function
+interface CaregiverCard {
+  name?: string;
+  profileURL?: string;
+  service?: string;
+  skill?: string;
+  dateReady?: string;
+  distance?: number;
+}
+
+export const caregiverMock: CaregiverCard[] = [
+  {
+    name: "Alice Johnson",
+    profileURL: "/alice-johnson-profile.png",
+    service: "Elderly Care",
+    skill: "Companionship",
+    dateReady: "2024-12-20",
+    distance: 5,
+  },
+  {
+    name: "Bob Smith",
+    profileURL: "/bob-smith-profile.png",
+    service: "Child Care",
+    skill: "Teaching Assistance",
+    dateReady: "2024-12-18",
+    distance: 10,
+  },
+  {
+    name: "Charlie Brown",
+    profileURL: "/charlie-brown-profile.png",
+    service: "Disability Support",
+    skill: "Sign Language",
+    dateReady: "2024-12-15",
+    distance: 3,
+  },
+  {
+    name: "Daisy Green",
+    profileURL: "/daisy-green-profile.png",
+    service: "Nursing Care",
+    skill: "Medication Management",
+    dateReady: "2024-12-22",
+    distance: 7,
+  },
+  {
+    name: "Ethan Wright",
+    profileURL: "/ethan-wright-profile.png",
+    service: "Mental Health Support",
+    skill: "Counseling",
+    dateReady: "2024-12-17",
+    distance: 8,
+  },
+];
+
 export default function Caregiver() {
 
-  // อย่าลืมเปลี่ยน Title
   useEffect(() => {
     document.title = "Caregiver - Cozy Care";
   }, []);
@@ -30,14 +80,22 @@ export default function Caregiver() {
           />
         </div>
 
-        <div className="flex justify-center sticky top-[111px] w-full z-[99] transition bg-white dark:bg-cozy-background-dark">
-          Test
+        <div className="flex justify-center sticky top-[111px] w-full z-[99] bg-white dark:bg-cozy-background-dark">
+          Search bar here
         </div>
 
-        <div className="flex flex-col w-full items-center">
-          <CaregiverCard name="John" profileURL="https://d1nhio0ox7pgb.cloudfront.net/_img/g_collection_png/standard/512x512/nurse.png" />
-          <CaregiverCard name="John" profileURL="https://d1nhio0ox7pgb.cloudfront.net/_img/g_collection_png/standard/512x512/nurse.png" />
-          <CaregiverCard name="John" profileURL="https://d1nhio0ox7pgb.cloudfront.net/_img/g_collection_png/standard/512x512/nurse.png" />
+        <div className="flex flex-col w-full items-center gap-4 my-4">
+          {caregiverMock.map((data, index) => (
+            <CaregiverCard
+              key={index}
+              name={data.name}
+              profileURL = {data.profileURL}
+              service = {data.service}
+              skill = {data.skill}
+              dateReady = {data.dateReady}
+              distance = {data.distance}
+            />
+          ))}
         </div>
       </div>
 
