@@ -16,7 +16,7 @@ export default function Caregiver() {
     <main className="flex flex-col min-h-[100dvh]">
       <NavBar />
 
-      <div className="grow flex flex-col items-center">
+      <div className="grow flex flex-col items-center my-4">
         <div className="w-full h-max">
           <Image
             alt="Caregiver background image"
@@ -28,11 +28,11 @@ export default function Caregiver() {
           />
         </div>
 
-        <div className="flex justify-center sticky top-[111px] w-full z-[99] bg-white dark:bg-cozy-background-dark">
+        <div className="flex justify-center sticky top-[111px] w-full z-[99] transition bg-white dark:bg-cozy-background-dark">
           Search bar here
         </div>
 
-        <div className="flex flex-col w-full items-center gap-4 my-4">
+        <div className="flex flex-col w-full items-center gap-4">
           {caregiverMock.map((data, index) => (
             <CaregiverCard
               key={index}
