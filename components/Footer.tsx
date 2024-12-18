@@ -17,13 +17,13 @@ export default function Footer() {
         <p>ช่วยเหลือ/การติดต่อ</p>
         <p>นโยบายความเป็นส่วนตัว</p>
         <div className="flex gap-4 mt-2">
-          <Button as={Link} href="" className="font-bold w-auto bg-cozy-blue-light text-white" radius="full" isIconOnly>
+          <Button as={Link} href="" className="font-bold w-auto bg-[#1F5670] dark:bg-white text-white dark:text-[#1F5670]" radius="full" isIconOnly>
             <Facebook />
           </Button>
-          <Button as={Link} href="" className="font-bold w-auto bg-cozy-blue-light text-white" radius="full" isIconOnly>
+          <Button as={Link} href="" className="font-bold w-auto bg-[#1F5670] dark:bg-white text-white dark:text-[#1F5670]" radius="full" isIconOnly>
             <Send />
           </Button>
-          <Button as={Link} href="" className="font-bold w-auto bg-cozy-blue-light text-white" radius="full" isIconOnly>
+          <Button as={Link} href="" className="font-bold w-auto bg-[#1F5670] dark:bg-white text-white dark:text-[#1F5670]" radius="full" isIconOnly>
             <Call />
           </Button>
         </div>

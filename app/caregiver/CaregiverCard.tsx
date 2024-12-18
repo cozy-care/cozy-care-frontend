@@ -42,7 +42,7 @@ export default function CaregiverCard({
           <p className="text-xs">วันเวลาที่ว่าง: {dateReady}</p>
           <p className="text-xs">ระยะทาง: {distance} กิโลเมตร</p>
           <Button as={Link} href="" className="absolute font-bold justify-self-center self-center bottom-0 h-6 px-4" size="sm" radius="full" color="primary">
-            เริ่มต้นการใช้งาน
+            เริ่มการสนทนา
           </Button>
         </div>
       </CardBody>

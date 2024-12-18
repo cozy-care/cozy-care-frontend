@@ -82,13 +82,13 @@ export default function Welcome() {
             className={`absolute w-full h-full px-4 transition-opacity duration-1000 ${fadeOut ? "opacity-100" : "opacity-0"
               }`}
           >
-            &emsp; {content[1].description}
+            &emsp;{content[1].description}
           </p>
           <p
             className={`absolute w-full h-full px-4 transition-opacity duration-1000 ${fadeOut ? "opacity-0" : "opacity-100"
               }`}
           >
-            &emsp; {content[0].description}
+            &emsp;{content[0].description}
           </p>
         </div>
 

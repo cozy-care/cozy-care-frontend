@@ -10,10 +10,10 @@ const inter = Kanit({
 });
 
 export const metadata: Metadata = {
-  title: {
-    default: "Cozy care",
-    template: "%s - Cozy care"
-  },
+  // title: {
+  //   default: "Cozy care",
+  //   template: "%s - Cozy care"
+  // },
   description: "Cozy Care by create next app",
   icons: {
     icon: "/favicon.ico",
@@ -38,7 +38,6 @@ export default function RootLayout({
     `
   
   return (
-    //เอาไว้เปลี่ยนพี้นหลังทั้งหน้าจอ <body>
     <html lang="en" suppressHydrationWarning>
       <body className={`${inter.className} transition dark:bg-cozy-background-dark bg-white dark:text-white text-black`}>
         <script dangerouslySetInnerHTML={{ __html: setInitialTheme }} />

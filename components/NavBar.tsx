@@ -25,17 +25,17 @@ export default function NavBar() {
         </NavbarBrand>
         <NavbarContent justify="end">
           <NavbarItem>
-            <Button as={Link} href="#" className="font-bold" isIconOnly radius="full" color="primary" variant="light">
+            <Button as={Link} href="#" className="font-bold dark:text-white" isIconOnly radius="full" color="primary" variant="light">
               <Chat sx={{width:'65%', height:'65%'}} />
             </Button>
           </NavbarItem>
           <NavbarItem>
-            <Button as={Link} href="#" className="font-bold" isIconOnly radius="full" color="primary" variant="light">
+            <Button as={Link} href="#" className="font-bold dark:text-white" isIconOnly radius="full" color="primary" variant="light">
               <Notifications sx={{width:'70%', height:'70%'}} />
             </Button>
           </NavbarItem>
           <NavbarItem>
-            <Button as={Link} href="#" className="font-bold" isIconOnly radius="full" color="primary" variant="light">
+            <Button as={Link} href="#" className="font-bold dark:text-white" isIconOnly radius="full" color="primary" variant="light">
               <Person sx={{width:'75%', height:'75%'}} />
             </Button>
           </NavbarItem>
@@ -43,7 +43,7 @@ export default function NavBar() {
       </Navbar>
 
       <Navbar height='56px' classNames={{wrapper:'px-3 justify-center'}} className='transition dark:bg-cozy-background-dark bg-white'>
-        <NavbarContent justify="center" className='w-full gap-3'>
+        <NavbarContent justify="center" className='w-full gap-4'>
           <NavbarItem className='w-1/5'>
             <Button as={Link} href="/home" className={`font-bold w-full ${pathname === "/home" && "bg-[#28789E] dark:bg-cozy-teal-dark text-white dark:text-black pointer-events-none"}`} isIconOnly color="secondary">
               <Home />
