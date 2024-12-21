@@ -5,7 +5,7 @@ import Footer from "@/components/Footer";
 import NavBar from "@/components/NavBar";
 import { useEffect } from "react";
 import PatientCard from "./PatientCard";
-import { patientMock } from "./patientMock";
+import { patientMock } from "./PatientMock";
 
 export default function Patient() {
   useEffect(() => {
