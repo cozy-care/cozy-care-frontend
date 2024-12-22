@@ -16,7 +16,7 @@ export default function Patient() {
     <main className="flex flex-col min-h-[100dvh]">
       <NavBar />
 
-      <div className="grow flex flex-col items-center">
+      <div className="grow flex flex-col items-center mb-4">
         <div className="w-full h-max">
           <Image
             alt="Patient background image"
@@ -32,7 +32,7 @@ export default function Patient() {
           Search bar here
         </div>
 
-        <div className="flex flex-col w-full items-center gap-4 my-4">
+        <div className="flex flex-col w-full items-center gap-4">
           {patientMock.map((data, index) => (
             <PatientCard
               key={index}
