@@ -1,51 +1,51 @@
-"use client";
 
-import { Chat } from "@mui/icons-material";
-import { Button, Card, CardBody, Image, Link } from "@nextui-org/react";
+import { Card, CardBody, Image, Button } from "@nextui-org/react";
+import Link from "next/link";
 
 interface Props {
-  title: string;
-  detail: string;
-  picURL: string;
+  title?: string;
+  imgUrl?: string;
+  about?: string;
+  by?: string;
+  releaseDate?: string;
+  edittedDate?: string;
 }
 
-export default function InformationCard(props: Props) {
+
+export default function InformationCard({
+  title = "No title",
+  imgUrl = "",
+  about = "No about",
+  by = "No by",
+  releaseDate = "No date",
+  edittedDate = "No date",
+}: Props) {
   return (
-    <Card
-      className="flex flex-col justify-center p-2 mb-6 w-1/3 lg:w-full h-full bg-slate-300"
-      shadow="sm"
-    >
-      <CardBody>
-        <div className="flex lg:flex-row flex-col  w-full h-full gap-4 text-large">
-          <div className="flex items-center">
-            <Image
-              alt="Information picture"
-              className="object-cover  w-[500px] h-[200px] shadow-sm bg-white"
-              // width={500}
-              // height={200}
-              // shadow="sm"
-              src={props.picURL}
-            />
-          </div>
+    <Card shadow="sm" className="w-[calc(100dvw-24px)] h-max dark:bg-cozy-background-dark">
+      <CardBody className="flex flex-row gap-3">
+        <div className="">
+          <Image
+            shadow="sm"
+            alt="Caregiver image"
+            src={imgUrl}
+            width={130}
+            height={130}
+            radius="sm"
+            className="w-full h-full object-cover object-center"
+          />
+        </div>
 
-          <div className="grow flex flex-col gap-5">
-            <div className="flex gap-4 lg:h-3/4 ">
-              <div className="flex flex-col gap-3 w-[1000px] ">
-                <strong className=" text-lg lg:text-2xl font-bold">
-                  {props.title}
-                </strong>
-                <p className="text-medium lg:text-lg">{props.detail}</p>
-              </div>
-            </div>
-
-            <div className="flex justify-end items-center h-1/4">
-              <a href="#" className="hover:text-blue-800">
-                คลิกเพื่ออ่าน
-              </a>
-            </div>
-          </div>
+        <div className="relative flex flex-col grow gap-0.5">
+          <p className="font-bold text-base">{title}</p>
+          <p className="text-xs">เกี่ยวกับ: {about}</p>
+          <p className="text-xs">โดย: {by}</p>
+          <p className="text-xs">วันที่เผยแพร่: {releaseDate}</p>
+          <p className="text-xs">แก้ไขล่าสุด: {edittedDate}</p>
+          <Button as={Link} href="" className="absolute font-bold justify-self-center self-center bottom-0 h-6 px-4" size="sm" radius="full" color="primary">
+            กดเพื่ออ่าน
+          </Button>
         </div>
       </CardBody>
     </Card>
-  );
+  )
 }

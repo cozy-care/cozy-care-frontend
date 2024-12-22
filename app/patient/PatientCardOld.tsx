@@ -5,7 +5,7 @@ import { Button, Card, CardBody, Image, Link } from "@nextui-org/react";
 
 interface Props {
   name: string;
-  profileURL: string;
+  imgUrl: string;
 }
 
 export default function PatientCard(props: Props) {
@@ -20,7 +20,7 @@ export default function PatientCard(props: Props) {
               //   width={200}
               //   height={200}
               shadow="sm"
-              src={props.profileURL}
+              src={props.imgUrl}
             />
           </div>
 

@@ -31,13 +31,13 @@ export default function Patient() {
         <div className="flex justify-center sticky top-[111px] w-full z-[99] transition bg-white dark:bg-cozy-background-dark">
           Search bar here
         </div>
-    
+
         <div className="flex flex-col w-full items-center gap-4 my-4">
           {patientMock.map((data, index) => (
             <PatientCard
               key={index}
               name={data.name}
-              profileURL={data.profileURL}
+              imgUrl={data.imgUrl}
               serviceNeed={data.serviceNeed}
               skillNeed={data.skillNeed}
               dateReady={data.dateReady}

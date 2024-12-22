@@ -5,7 +5,7 @@ import { Chat, Star, StarBorder } from "@mui/icons-material";
 
 interface Props {
   name: string;
-  profileURL: string;
+  imgUrl: string;
 }
 
 export default function CaregiverCard(props: Props) {
@@ -20,7 +20,7 @@ export default function CaregiverCard(props: Props) {
               //   width={200}
               //   height={200}
               shadow="sm"
-              src={props.profileURL}
+              src={props.imgUrl}
             />
           </div>
 

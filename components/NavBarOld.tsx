@@ -113,7 +113,7 @@ export const chatMock: ChatCards[] = [
   },
 ];
 
-export default function NavBar() {
+export default function NavBarOld() {
   const router = useRouter();
   const currentPath = usePathname();
   const [pageTitle, setPageTitle] = useState("");
