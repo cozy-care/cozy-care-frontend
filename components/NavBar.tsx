@@ -60,7 +60,7 @@ export default function NavBar() {
             </Button>
           </NavbarItem>
           <NavbarItem className='w-1/5'>
-            <Button as={Link} href="/annoucement" className={`font-bold w-full ${pathname === "/annoucement" && "bg-[#28789E] dark:bg-cozy-teal-dark text-white dark:text-black pointer-events-none"}`} isIconOnly color="secondary">
+            <Button as={Link} href="/information" className={`font-bold w-full ${pathname === "/information" && "bg-[#28789E] dark:bg-cozy-teal-dark text-white dark:text-black pointer-events-none"}`} isIconOnly color="secondary">
               <Announcement/>
             </Button>
           </NavbarItem>

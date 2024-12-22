@@ -37,7 +37,7 @@ export default function Caregiver() {
             <CaregiverCard
               key={index}
               name={data.name}
-              profileURL={data.profileURL}
+              imgUrl={data.imgUrl}
               service={data.service}
               skill={data.skill}
               dateReady={data.dateReady}

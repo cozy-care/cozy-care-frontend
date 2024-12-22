@@ -1,7 +1,7 @@
 // patientMock.ts
 export interface PatientCardProps {
   name?: string;
-  profileURL?: string;
+  imgUrl?: string;
   serviceNeed?: string;
   skillNeed?: string;
   dateReady?: string;
@@ -11,7 +11,7 @@ export interface PatientCardProps {
 export const patientMock: PatientCardProps[] = [
   {
     name: "Alice Johnson",
-    profileURL: "/alice-johnson-profile.png",
+    imgUrl: "/alice-johnson-profile.png",
     serviceNeed: "Elderly Care",
     skillNeed: "Companionship",
     dateReady: "2024-12-20",
@@ -19,7 +19,7 @@ export const patientMock: PatientCardProps[] = [
   },
   {
     name: "Bob Smith",
-    profileURL: "/bob-smith-profile.png",
+    imgUrl: "/bob-smith-profile.png",
     serviceNeed: "Child Care",
     skillNeed: "Teaching Assistance",
     dateReady: "2024-12-18",
@@ -27,7 +27,7 @@ export const patientMock: PatientCardProps[] = [
   },
   {
     name: "Charlie Brown",
-    profileURL: "/charlie-brown-profile.png",
+    imgUrl: "/charlie-brown-profile.png",
     serviceNeed: "Disability Support",
     skillNeed: "Sign Language",
     dateReady: "2024-12-15",
@@ -35,7 +35,7 @@ export const patientMock: PatientCardProps[] = [
   },
   {
     name: "Daisy Green",
-    profileURL: "/daisy-green-profile.png",
+    imgUrl: "/daisy-green-profile.png",
     serviceNeed: "Nursing Care",
     skillNeed: "Medication Management",
     dateReady: "2024-12-22",
@@ -43,7 +43,7 @@ export const patientMock: PatientCardProps[] = [
   },
   {
     name: "Ethan Wright",
-    profileURL: "/ethan-wright-profile.png",
+    imgUrl: "/ethan-wright-profile.png",
     serviceNeed: "Mental Health Support",
     skillNeed: "Counseling",
     dateReady: "2024-12-17",

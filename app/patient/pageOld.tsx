@@ -58,15 +58,15 @@ export default function Patient() {
 
         <PatientCard
           name="คนป่วย 1"
-          profileURL="https://cdn-icons-png.flaticon.com/512/1430/1430453.png"
+          imgUrl="https://cdn-icons-png.flaticon.com/512/1430/1430453.png"
         />
         <PatientCard
           name="คนป่วย 2"
-          profileURL="https://cdn-icons-png.flaticon.com/512/2621/2621786.png"
+          imgUrl="https://cdn-icons-png.flaticon.com/512/2621/2621786.png"
         />
         <PatientCard
           name="คนป่วย 3"
-          profileURL="https://cdn-icons-png.freepik.com/512/7031/7031048.png"
+          imgUrl="https://cdn-icons-png.freepik.com/512/7031/7031048.png"
         />
       </div>
 

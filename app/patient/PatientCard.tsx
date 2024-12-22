@@ -4,7 +4,7 @@ import Link from "next/link";
 
 interface Props {
   name?: string;
-  profileURL?: string;
+  imgUrl?: string;
   serviceNeed?: string;
   skillNeed?: string;
   dateReady?: string;
@@ -14,7 +14,7 @@ interface Props {
 
 export default function PatientCard({
   name = "Default Name",
-  profileURL = "/default-profile.png",
+  imgUrl = "/default-profile.png",
   serviceNeed = "Default Service",
   skillNeed = "Default Skill",
   dateReady = "Not Ready",
@@ -27,7 +27,7 @@ export default function PatientCard({
           <Image
             shadow="sm"
             alt="Caregiver image"
-            src={profileURL}
+            src={imgUrl}
             width={130}
             height={130}
             radius="sm"

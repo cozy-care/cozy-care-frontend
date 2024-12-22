@@ -58,15 +58,15 @@ export default function Caregiver() {
 
         <CaregiverCard
           name="หมอ 1"
-          profileURL="https://cdn-icons-png.flaticon.com/512/8496/8496122.png"
+          imgUrl="https://cdn-icons-png.flaticon.com/512/8496/8496122.png"
         />
         <CaregiverCard
           name="หมอ 2"
-          profileURL="https://cdn-icons-png.flaticon.com/512/2785/2785554.png"
+          imgUrl="https://cdn-icons-png.flaticon.com/512/2785/2785554.png"
         />
         <CaregiverCard
           name="หมอ 3"
-          profileURL="https://cdn-icons-png.flaticon.com/512/822/822111.png"
+          imgUrl="https://cdn-icons-png.flaticon.com/512/822/822111.png"
         />
       </div>
 
