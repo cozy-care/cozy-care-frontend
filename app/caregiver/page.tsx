@@ -1,15 +1,40 @@
-'use client'
+'use client';
 
 import { Image } from "@nextui-org/react";
 import Footer from "@/components/Footer";
 import NavBar from "@/components/NavBar";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import CaregiverCard from "./CaregiverCard";
-import { caregiverMock } from "./caregiverMock";
+
+interface CaregiverData {
+  firstname: string;
+  lastname: string;
+  expert: string;
+  available_time: string;
+  certification_image: string;
+}
 
 export default function Caregiver() {
+  const [caregivers, setCaregivers] = useState<CaregiverData[]>([]);
+
   useEffect(() => {
     document.title = "Caregiver - Cozy Care";
+
+    // Fetch caregiver data
+    const fetchCaregivers = async () => {
+      try {
+        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/caregiver/all`);
+        if (!response.ok) {
+          throw new Error("Failed to fetch caregivers");
+        }
+        const data = await response.json();
+        setCaregivers(data);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    fetchCaregivers();
   }, []);
 
   return (
@@ -33,15 +58,15 @@ export default function Caregiver() {
         </div>
 
         <div className="flex flex-col w-full items-center gap-4">
-          {caregiverMock.map((data, index) => (
+          {caregivers.map((data, index) => (
             <CaregiverCard
               key={index}
-              name={data.name}
-              imgUrl={data.imgUrl}
-              service={data.service}
-              skill={data.skill}
-              dateReady={data.dateReady}
-              distance={data.distance}
+              name={`${data.firstname} ${data.lastname}`} // Full name
+              imgUrl={data.certification_image} // Certification image as the profile image
+              service={data.expert} // Service is the "expert" field
+              skill="ขับรถ" // Fixed skill
+              dateReady={data.available_time} // Available time
+              distance={10} // Fixed distance
             />
           ))}
         </div>

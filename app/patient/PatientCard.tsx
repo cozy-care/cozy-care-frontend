@@ -37,8 +37,8 @@ export default function PatientCard({
 
         <div className="relative flex flex-col grow gap-0.5">
           <p className="font-bold text-base">{name}</p>
-          <p className="text-xs">บริการ: {serviceNeed}</p>
-          <p className="text-xs">ความสามารถ: {skillNeed}</p>
+          <p className="text-xs">บริการที่ต้องการ: {serviceNeed}</p>
+          <p className="text-xs">ความสามารถที่ต้องการ: {skillNeed}</p>
           <p className="text-xs">วันเวลาที่ว่าง: {dateReady}</p>
           <p className="text-xs">ระยะทาง: {distance} กิโลเมตร</p>
           <Button as={Link} href="" className="absolute font-bold justify-self-center self-center bottom-0 h-6 px-4" size="sm" radius="full" color="primary">

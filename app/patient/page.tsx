@@ -1,15 +1,41 @@
-'use client'
+'use client';
 
 import { Image } from "@nextui-org/react";
 import Footer from "@/components/Footer";
 import NavBar from "@/components/NavBar";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import PatientCard from "./PatientCard";
-import { patientMock } from "./PatientMock";
+
+interface PatientData {
+  firstname: string;
+  lastname: string;
+  profile_image: string;
+  type: string;
+  con_disease: string;
+  available_time: string;
+}
 
 export default function Patient() {
+  const [patients, setPatients] = useState<PatientData[]>([]);
+
   useEffect(() => {
     document.title = "Patient - Cozy Care";
+
+    // Fetch patient data from API
+    const fetchPatients = async () => {
+      try {
+        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/patient/all`);
+        if (!response.ok) {
+          throw new Error("Failed to fetch patients");
+        }
+        const data = await response.json();
+        setPatients(data);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    fetchPatients();
   }, []);
 
   return (
@@ -33,15 +59,15 @@ export default function Patient() {
         </div>
 
         <div className="flex flex-col w-full items-center gap-4">
-          {patientMock.map((data, index) => (
+          {patients.map((data, index) => (
             <PatientCard
               key={index}
-              name={data.name}
-              imgUrl={data.imgUrl}
-              serviceNeed={data.serviceNeed}
-              skillNeed={data.skillNeed}
-              dateReady={data.dateReady}
-              distance={data.distance}
+              name={`${data.firstname} ${data.lastname}`} // Combine firstname and lastname
+              imgUrl={data.profile_image} // Patient profile image
+              serviceNeed={data.type} // Type of service needed
+              skillNeed="ทำอาหาร" // Condition or default message
+              dateReady={data.available_time} // Available time
+              distance={5} // Fixed distance
             />
           ))}
         </div>
