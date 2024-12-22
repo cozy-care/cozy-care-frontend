@@ -16,10 +16,10 @@ export default function Information() {
     return (
         <main className="flex flex-col min-h-[100dvh]">
             <NavBar />
-            <div className="grow flex flex-col items-center my-4">
+            <div className="grow flex flex-col items-center mb-4">
                 <div className="w-full h-max">
                     <Image
-                        alt="Caregiver background image"
+                        alt="Information background image"
                         src="https://www.flinn.org/wp-content/uploads/2023/04/GME-1024x326.webp"
                         width="100%"
                         height={150}
