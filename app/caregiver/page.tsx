@@ -5,6 +5,7 @@ import Footer from "@/components/Footer";
 import NavBar from "@/components/NavBar";
 import { useEffect, useState } from "react";
 import CaregiverCard from "./CaregiverCard";
+import { caregiverMock } from "./caregiverMock";
 
 interface CaregiverData {
   firstname: string;
