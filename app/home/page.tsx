@@ -22,18 +22,35 @@ export default function Home() {
       <NavBar />
 
       <div className="grow flex flex-col gap-6 px-3 mb-4 lg:w-[1025px] lg:mx-auto">
-        <div className=" relative w-full h-[150px] lg:h-[250px] border-2 rounded-2xl"></div>
-
+        <div className="w-full h-[150px] lg:h-[250px] rounded-2xl overflow-hidden">
+          <img
+            alt="Caregiver background image"
+            src="https://swancompanion.com/wp-content/uploads/2023/07/Depositphotos_91841702_DS.png"
+            className="w-full h-full object-cover object-[50%_20%]"
+          />
+        </div>
         <div className="flex justify-between w-full gap-3 -mt-3">
           <Link href="" className="flex flex-col items-center w-1/2 gap-2">
-            <div className="w-full h-[130px] lg:h-[150px] border-2 rounded-2xl"></div>
+            <div className="w-full h-[130px] lg:h-[150px] rounded-2xl overflow-hidden">
+              <img
+                alt="Caregiver background image"
+                src="https://landmarkresearchjournals.org/wp-content/uploads/2021/04/shutterstock_1052428820-360x292.jpg"
+                className="w-full h-full object-cover object-[50%_30%]"
+              />
+            </div>
             <p className="text-sm text-black dark:text-white font-semibold">
               เริ่มต้นเป็นผู้รับการดูแล
             </p>
           </Link>
 
           <Link href="" className="flex flex-col items-center w-1/2 gap-2">
-            <div className="w-full h-[130px] lg:h-[150px] border-2 rounded-2xl"></div>
+            <div className="w-full h-[130px] lg:h-[150px] rounded-2xl overflow-hidden">
+              <img
+                alt="Caregiver background image"
+                src="https://artistsinbuffalo.org/wp-content/uploads/2023/01/istockphoto-1374010907-612x612-1.jpg"
+                className="w-full h-full object-cover object-[50%_20%]"
+              />
+            </div>
             <p className="text-sm text-black dark:text-white font-semibold">
               เริ่มต้นเป็นผู้ดูแลสุขภาพ
             </p>
@@ -52,7 +69,13 @@ export default function Home() {
         </div>
 
         <div className="flex justify-between w-full h-max overflow-hidden">
-          <div className="w-3/5 aspect-square rounded-full border-2 -ml-16"></div>
+          <div className="w-3/5 aspect-square rounded-full -ml-16 overflow-hidden">
+            <img
+              alt="Caregiver background image"
+              src="https://scontent.fbkk5-6.fna.fbcdn.net/v/t39.30808-6/470170514_519880561010740_7163064939504643033_n.jpg?_nc_cat=102&ccb=1-7&_nc_sid=aa7b47&_nc_ohc=0ehQIr86bLoQ7kNvgFWp5az&_nc_oc=AdiRwDo1tnyDEHFWk0guRnI80AsfhvDuyc7fI8ifC2nHBCjqwWHEMgKuyqSuL2Vy8-o&_nc_zt=23&_nc_ht=scontent.fbkk5-6.fna&_nc_gid=AqggWaFDLQXxODFKE7sUALE&oh=00_AYDIiATiuNrCWrWIeAEP7WYDTUfWZeMKOCpHHF1MWyzn1A&oe=677CBEEE"
+              className="w-full h-full object-cover object-[10%_30%]"
+            />
+          </div>
           <div className="flex flex-col items-center justify-center w-4/5 rounded-full gap-2">
             <h2 className="text-lg font-semibold">
               บริการที่ครอบคลุมทุกขั้นตอน
