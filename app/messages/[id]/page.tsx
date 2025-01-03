@@ -35,7 +35,7 @@ export default function Messages() {
     const [isVisible, setIsVisible] = useState<boolean>(false);
     const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
     const [otherUserData, setOtherUserData] = useState<UserData | null>(null);
-    const chat_id = chatId; // Fixed chat ID
+    const chat_id = chatId.id;
 
     const messagesEndRef = useRef<HTMLDivElement | null>(null);
 
@@ -55,25 +55,25 @@ export default function Messages() {
     };
 
   // Check for token and user authentication
-  // useEffect(() => {
-  //   const checkAuthentication = async () => {
-  //     try {
-  //       const response: AxiosResponse<{ user_id: string }> = await axios.get(
-  //         `${process.env.NEXT_PUBLIC_API_URL}/api/user/me`,
-  //         {
-  //           withCredentials: true, // Include HttpOnly cookie in the request
-  //         }
-  //       );
-  //       setUserId(response.data.user_id); // Store the userId
-  //       setIsAuthenticated(true); // Set authenticated to true
-  //     } catch (error) {
-  //       console.error("User is not authenticated:", error);
-  //       router.push("/login"); // Redirect to login if not authenticated
-  //     }
-  //   };
+  useEffect(() => {
+    const checkAuthentication = async () => {
+      try {
+        const response: AxiosResponse<{ user_id: string }> = await axios.get(
+          `${process.env.NEXT_PUBLIC_API_URL}/api/user/me`,
+          {
+            withCredentials: true, // Include HttpOnly cookie in the request
+          }
+        );
+        setUserId(response.data.user_id); // Store the userId
+        setIsAuthenticated(true); // Set authenticated to true
+      } catch (error) {
+        console.error("User is not authenticated:", error);
+        router.push("/login"); // Redirect to login if not authenticated
+      }
+    };
 
-  //   checkAuthentication();
-  // }, [router]);
+    checkAuthentication();
+  }, [router]);
 
     // Fetch messages from the API
     useEffect(() => {
@@ -96,19 +96,34 @@ export default function Messages() {
 
     // Join the WebSocket room for the chat
     useEffect(() => {
-        if (userId) {
-            socket.emit("joinChat", chat_id);
+        // WebSocket connection setup
+        if (!userId) return;
 
-            // Listen for new messages via WebSocket
-            socket.on("message", (newMessage: Message) => {
-                setMessages((prevMessages) => [...prevMessages, newMessage]);
-                scrollToBottom(); // Scroll to bottom when a new message is received
-            });
+        // Connect socket
+        socket.connect();
 
-            return () => {
-                socket.disconnect();
-            };
-        }
+        // Join chat room
+        socket.emit("joinChat", chat_id);
+
+        // Handle incoming messages
+        const handleNewMessage = (newMessage: Message) => {
+            setMessages((prevMessages) => [...prevMessages, newMessage]);
+            scrollToBottom();
+        };
+
+        socket.on("message", handleNewMessage);
+
+        // Error handling
+        socket.on("connect_error", (err) => {
+            console.error("WebSocket connection error:", err);
+        });
+
+        // Cleanup WebSocket on unmount
+        return () => {
+            socket.off("message", handleNewMessage);
+            socket.off("connect_error");
+            socket.disconnect();
+        };
     }, [chat_id, userId]);
 
     const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
@@ -122,7 +137,7 @@ export default function Messages() {
         const fetchOtherUserData = async () => {
             try {
                 const response: AxiosResponse<UserData> = await axios.get(
-                    `${process.env.NEXT_PUBLIC_API_URL}/api/user/getOtherBychatId/${chatId}`,
+                    `${process.env.NEXT_PUBLIC_API_URL}/api/user/getOtherBychatId/${chat_id}`,
                     { withCredentials: true }
                 );
                 setOtherUserData(response.data);
@@ -131,7 +146,7 @@ export default function Messages() {
             }
         };
         fetchOtherUserData();
-    }, [chatId]);
+    }, [chat_id]);
 
     // Handle sending messages
     const handleSendMessage = async () => {
@@ -166,7 +181,7 @@ export default function Messages() {
                 {/* Top Bar */}
                 <div className="flex items-center justify-between gap-3 w-full h-[50px] border-b-2">
                     <div className="flex gap-3">
-                        <Button as={Link} href="/messages" className="text-cozy-green-light" isIconOnly radius="full" variant="light">
+                        <Button as={Link} onPress={() => router.back()} className="text-cozy-green-light" isIconOnly radius="full" variant="light">
                             <ArrowBackIosNew />
                         </Button>
 

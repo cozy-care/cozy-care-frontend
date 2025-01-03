@@ -8,6 +8,7 @@ import PatientCard from "./PatientCard";
 import { patientMock } from "./PatientMock";
 
 interface PatientData {
+  user_id: string;
   firstname: string;
   lastname: string;
   profile_image: string;
@@ -63,6 +64,7 @@ export default function Patient() {
           {patients.map((data, index) => (
             <PatientCard
               key={index}
+              user_id={data.user_id}
               name={`${data.firstname} ${data.lastname}`} // Combine firstname and lastname
               imgUrl={data.profile_image} // Patient profile image
               serviceNeed={data.type} // Type of service needed

@@ -3,6 +3,7 @@ import { Kanit } from "next/font/google";
 import "./globals.css";
 import NavBar from "@/components/NavBar";
 import { Providers } from "./providers";
+import { SocketProvider } from "./SocketContext";
 
 const inter = Kanit({
   subsets: ["latin"],
@@ -38,6 +39,7 @@ export default function RootLayout({
     `
   
   return (
+    <SocketProvider>
     <html lang="en" suppressHydrationWarning>
       <body className={`${inter.className} transition dark:bg-cozy-background-dark bg-white dark:text-white text-black`}>
         <script dangerouslySetInnerHTML={{ __html: setInitialTheme }} />
@@ -47,5 +49,6 @@ export default function RootLayout({
         </Providers>
       </body>
     </html>
+    </SocketProvider>
   );
 }

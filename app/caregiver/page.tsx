@@ -8,11 +8,12 @@ import CaregiverCard from "./CaregiverCard";
 import { caregiverMock } from "./caregiverMock";
 
 interface CaregiverData {
+  user_id: string;
   firstname: string;
   lastname: string;
   expert: string;
   available_time: string;
-  certification_image: string;
+  profile_image: string;
 }
 
 export default function Caregiver() {
@@ -62,8 +63,9 @@ export default function Caregiver() {
           {caregivers.map((data, index) => (
             <CaregiverCard
               key={index}
+              user_id={data.user_id}
               name={`${data.firstname} ${data.lastname}`} // Full name
-              imgUrl={data.certification_image} // Certification image as the profile image
+              imgUrl={data.profile_image} // Certification image as the profile image
               service={data.expert} // Service is the "expert" field
               skill="ขับรถ" // Fixed skill
               dateReady={data.available_time} // Available time
