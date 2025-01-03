@@ -4,7 +4,7 @@ import Footer from "@/components/Footer";
 import { FormEvent, useEffect, useState } from "react";
 import { AddCircleOutline, FilterList } from "@mui/icons-material";
 import { Input } from "@nextui-org/react";
-import PatientCard from "./PatientCard";
+import PatientCard from "./PatientCardOld";
 
 export default function Patient() {
   const [searchTerm, setSearchTerm] = useState("");
