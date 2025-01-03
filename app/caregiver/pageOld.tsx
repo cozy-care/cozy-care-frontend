@@ -4,7 +4,7 @@ import Footer from "@/components/Footer";
 import { AddCircleOutline, FilterList } from "@mui/icons-material";
 import { Input } from "@nextui-org/react";
 import { FormEvent, useEffect, useState } from "react";
-import CaregiverCard from "./CaregiverCard";
+import CaregiverCard from "./CaregiverCardOld";
 
 export default function Caregiver() {
   const [searchTerm, setSearchTerm] = useState("");
