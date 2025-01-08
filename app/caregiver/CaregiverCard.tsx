@@ -64,10 +64,7 @@ export default function CaregiverCard({
   };
 
   return (
-    <Card
-      shadow="sm"
-      className="w-[calc(100dvw-24px)] h-max dark:bg-cozy-background-dark"
-    >
+    <Card shadow="sm" className="w-[calc(100dvw-24px)] h-max dark:bg-cozy-background-dark lg:w-[1000px] lg:mx-auto">
       <CardBody className="flex flex-row gap-3">
         <div>
           <Image
