@@ -21,7 +21,7 @@ export default function InformationCard({
   edittedDate = "No date",
 }: Props) {
   return (
-    <Card shadow="sm" className="w-[calc(100dvw-24px)] h-max dark:bg-cozy-background-dark">
+    <Card shadow="sm" className="w-[calc(100dvw-24px)] h-max dark:bg-cozy-background-dark lg:w-[1000px] lg:mx-auto">
       <CardBody className="flex flex-row gap-3">
         <div className="">
           <Image
@@ -35,7 +35,7 @@ export default function InformationCard({
           />
         </div>
 
-        <div className="relative flex flex-col grow gap-0.5">
+        <div className="relative flex flex-col grow gap-0.5 ">
           <p className="font-bold text-base">{title}</p>
           <p className="text-xs">เกี่ยวกับ: {about}</p>
           <p className="text-xs">โดย: {by}</p>

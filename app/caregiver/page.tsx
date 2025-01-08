@@ -43,7 +43,7 @@ export default function Caregiver() {
     <main className="flex flex-col min-h-[100dvh]">
       <NavBar />
 
-      <div className="grow flex flex-col items-center mb-4">
+      <div className="grow flex flex-col items-center mb-4 lg:w-[1000px] lg:mx-auto">
         <div className="w-full h-max">
           <Image
             alt="Caregiver background image"

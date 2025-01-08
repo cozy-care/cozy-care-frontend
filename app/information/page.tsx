@@ -16,8 +16,8 @@ export default function Information() {
     return (
         <main className="flex flex-col min-h-[100dvh]">
             <NavBar />
-            <div className="grow flex flex-col items-center mb-4">
-                <div className="w-full h-max">
+            <div className="grow flex flex-col items-center mb-4 lg:w-[1000px] lg:mx-auto">
+                <div className=" w-full h-max">
                     <Image
                         alt="Information background image"
                         src="https://www.flinn.org/wp-content/uploads/2023/04/GME-1024x326.webp"
@@ -34,7 +34,7 @@ export default function Information() {
 
                 <div className="flex flex-col w-full items-center gap-4">
                     {informationMock.map((data, index) => (
-                        <InformationCard
+                        <InformationCard 
                             key={index}
                             title={data.title}
                             imgUrl={data.imgUrl}
