@@ -19,6 +19,7 @@ async function logoutUser(): Promise<{ success: boolean; message?: string;}> {
   try {
     const response: AxiosResponse = await axios.post(
       `${process.env.NEXT_PUBLIC_API_URL}/api/auth/logout`,
+      {},
       { withCredentials: true }
     );
 
@@ -26,7 +27,7 @@ async function logoutUser(): Promise<{ success: boolean; message?: string;}> {
 
     return { success: true, message };
   } catch (error) {
-    console.error("There was an error logging in!", error);
+    console.error("There was an error Logout!", error);
     return { success: false };
   }
 }
