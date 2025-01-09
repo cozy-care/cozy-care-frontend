@@ -7,7 +7,7 @@ import { useRouter } from "next/navigation";
 import axios from "axios";
 
 interface passwordResetCredentials {
-  input: string;
+  usernameOrEmail: string;
 }
 
 async function passwordResetUser(credentials: passwordResetCredentials): Promise<{ success: boolean; }> {
@@ -52,9 +52,9 @@ export default function passwordReset() {
   ): Promise<void> => {
     event.preventDefault();
     const form = event.target as HTMLFormElement;
-    const input = (form.elements.namedItem("usernameOrEmail") as HTMLInputElement).value;
+    const usernameOrEmail = (form.elements.namedItem("usernameOrEmail") as HTMLInputElement).value;
 
-    const success = await passwordResetUser({ input });
+    const success = await passwordResetUser({ usernameOrEmail });
 
     if (success && !isOpen) {
       onOpen();
@@ -91,7 +91,7 @@ export default function passwordReset() {
           />
 
           <Button className="px-8 font-bold self-center mt-8" color="primary" type="submit" radius="full">
-            ส่งอีเมลรีเซ็ตรหัสผ่าน
+            ส่งอีเมลเพื่อขอรหัสผ่าน
           </Button>
         </Form>
 

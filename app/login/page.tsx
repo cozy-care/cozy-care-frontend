@@ -8,7 +8,7 @@ import { useRouter } from "next/navigation";
 import axios, { AxiosResponse } from "axios";
 
 interface LoginCredentials {
-  username: string;
+  usernameOrEmail: string;
   password: string;
 }
 
@@ -56,13 +56,13 @@ export default function Login() {
   ): Promise<void> => {
     event.preventDefault();
     const form = event.target as HTMLFormElement;
-    const username = (form.elements.namedItem("user_name") as HTMLInputElement)
+    const usernameOrEmail = (form.elements.namedItem("user_name") as HTMLInputElement)
       .value;
     const password = (form.elements.namedItem("password") as HTMLInputElement)
       .value;
   
     // Use the updated loginUser function that returns success, isOTP, email, and userID
-    const { success, isOTP, email, userID } = await loginUser({ username, password });
+    const { success, isOTP, email, userID } = await loginUser({ usernameOrEmail, password });
 
     if (success) {
       if (isOTP) {
@@ -131,7 +131,7 @@ export default function Login() {
               placeholder="Password"
               type="password"
             />
-            <Link href={'/recovery'} underline="hover" className="text-cozy-gray-light dark:text-black self-end">ลืมรหัสผ่าน ? </Link>
+            <Link href={'/password_reset'} underline="hover" className="text-cozy-gray-light dark:text-black self-end">ลืมรหัสผ่าน ? </Link>
           </div>
 
           <Button className="px-16 font-bold self-center mt-8" color="primary" type="submit" radius="full">
