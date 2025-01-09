@@ -11,22 +11,12 @@ interface passwordResetCredentials {
 }
 
 async function passwordResetUser(credentials: passwordResetCredentials): Promise<{ success: boolean; }> {
-  const isEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(credentials.input);
-
   try {
-    if (isEmail) {
-      await axios.post(
-        `${process.env.NEXT_PUBLIC_API_URL}/api/auth/resetWithEmail`,
-        credentials,
-        { withCredentials: true }
-      );
-    } else {
-      await axios.post(
-        `${process.env.NEXT_PUBLIC_API_URL}/api/auth/resetWithUsername`,
-        credentials,
-        { withCredentials: true }
-      );
-    }
+    await axios.post(
+      `${process.env.NEXT_PUBLIC_API_URL}/api/auth/sendResetPasswordEmail`,
+      credentials,
+      { withCredentials: true }
+    );
 
     return { success: true };
   } catch (error) {
@@ -66,7 +56,7 @@ export default function passwordReset() {
 
     const success = await passwordResetUser({ input });
 
-    if (true && !isOpen) {
+    if (success && !isOpen) {
       onOpen();
     } else {
       console.log("Login failed");
@@ -106,33 +96,33 @@ export default function passwordReset() {
         </Form>
 
         <Modal isDismissable={false} isKeyboardDismissDisabled={true} isOpen={isOpen} onOpenChange={onOpenChange}>
-        <ModalContent>
-          {(onClose) => (
-            <>
-              <ModalHeader className="flex flex-col gap-1">Success!</ModalHeader>
-              <ModalBody>
-                <p>
-                  Your action was successful. Please click the button below to log in and continue.
-                </p>
-              </ModalBody>
-              <ModalFooter>
-                <Button color="danger" variant="light" onPress={onClose}>
-                  Close
-                </Button>
-                <Button
-                  color="primary"
-                  onPress={() => {
-                    onClose();
-                    router.push("/login"); // Redirect to login page
-                  }}
-                >
-                  Go to Login
-                </Button>
-              </ModalFooter>
-            </>
-          )}
-        </ModalContent>
-      </Modal>
+          <ModalContent>
+            {(onClose) => (
+              <>
+                <ModalHeader className="flex flex-col gap-1">Success!</ModalHeader>
+                <ModalBody>
+                  <p>
+                    Your action was successful. Please click the button below to log in and continue.
+                  </p>
+                </ModalBody>
+                <ModalFooter>
+                  <Button color="danger" variant="light" onPress={onClose}>
+                    Close
+                  </Button>
+                  <Button
+                    color="primary"
+                    onPress={() => {
+                      onClose();
+                      router.push("/login"); // Redirect to login page
+                    }}
+                  >
+                    Go to Login
+                  </Button>
+                </ModalFooter>
+              </>
+            )}
+          </ModalContent>
+        </Modal>
       </div>
 
       <div className="flex flex-col items-center justify-evenly bottom-0 w-screen h-[25vh] bg-cozy-lightblue-light dark:bg-cozy-green-light">
