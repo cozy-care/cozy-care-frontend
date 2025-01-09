@@ -72,8 +72,8 @@ export default function Home() {
           <div className="w-3/5 aspect-square rounded-full -ml-16 overflow-hidden">
             <img
               alt="Caregiver background image"
-              src="https://scontent.fbkk5-6.fna.fbcdn.net/v/t39.30808-6/470170514_519880561010740_7163064939504643033_n.jpg?_nc_cat=102&ccb=1-7&_nc_sid=aa7b47&_nc_ohc=0ehQIr86bLoQ7kNvgFWp5az&_nc_oc=AdiRwDo1tnyDEHFWk0guRnI80AsfhvDuyc7fI8ifC2nHBCjqwWHEMgKuyqSuL2Vy8-o&_nc_zt=23&_nc_ht=scontent.fbkk5-6.fna&_nc_gid=AqggWaFDLQXxODFKE7sUALE&oh=00_AYDIiATiuNrCWrWIeAEP7WYDTUfWZeMKOCpHHF1MWyzn1A&oe=677CBEEE"
-              className="w-full h-full object-cover object-[10%_30%]"
+              src="https://entertainmentcommunity.org/sites/default/files/styles/wide/public/images/SeniorCare_0.jpg?itok=0h2Zsr7R"
+              className="w-full h-full object-cover object-[20%_50%]"
             />
           </div>
           <div className="flex flex-col items-center justify-center w-4/5 rounded-full gap-2">
