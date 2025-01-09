@@ -95,20 +95,17 @@ export default function passwordReset() {
           </Button>
         </Form>
 
-        <Modal isDismissable={false} isKeyboardDismissDisabled={true} isOpen={isOpen} onOpenChange={onOpenChange}>
+        <Modal isDismissable={false} isKeyboardDismissDisabled={true} hideCloseButton={true} isOpen={isOpen} onOpenChange={onOpenChange}>
           <ModalContent>
             {(onClose) => (
               <>
-                <ModalHeader className="flex flex-col gap-1">Success!</ModalHeader>
+                <ModalHeader className="flex flex-col gap-1">สำเร็จ</ModalHeader>
                 <ModalBody>
                   <p>
-                    Your action was successful. Please click the button below to log in and continue.
+                    คำขอดูรหัสผ่านได้ถูกส่งไปที่อีเมล <b>example@hotmail.com</b> แล้ว
                   </p>
                 </ModalBody>
                 <ModalFooter>
-                  <Button color="danger" variant="light" onPress={onClose}>
-                    Close
-                  </Button>
                   <Button
                     color="primary"
                     onPress={() => {
@@ -116,7 +113,7 @@ export default function passwordReset() {
                       router.push("/login"); // Redirect to login page
                     }}
                   >
-                    Go to Login
+                    ไปที่หน้า Login
                   </Button>
                 </ModalFooter>
               </>
