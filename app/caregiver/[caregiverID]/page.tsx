@@ -1,8 +1,16 @@
 'use client'
 
 import NavBar from "@/components/NavBar";
-import { Button, Form, Input, Select } from "@nextui-org/react";
+import { Button, DatePicker, Form, Input, Select, SelectItem } from "@nextui-org/react";
+import { animate } from "framer-motion";
 import { useEffect } from "react";
+
+
+export const gender = [
+    { key: "man", label: "ผู้ชาย" },
+    { key: "woman", label: "ผู้หญิง" },
+
+];
 
 // อย่าลืมเปลี่ยนชื่อ Function
 export default function CaregiverDetail() {
@@ -21,40 +29,122 @@ export default function CaregiverDetail() {
                 <a className="w-[150px] h-[150px] bg-cozy-green-light rounded-2xl">
                     <img src="" alt="" />
                 </a>
-                <Form className="flex flex-row">
-                    <Input
-                        isRequired
-                        id="fistName"
-                        errorMessage="กรุณาใส่ชื่อจริง"
-                        label="ชื่อจริง"
-                        labelPlacement="outside"
-                        name="ชื่อจริง"
-                        placeholder="ชื่อจริง"
-                        type="firstName"
+                <Form className=" justify-center items-center">
+                    <div className="flex flex-row gap-3">
+                        <Input
+                            isRequired
+                            id="fistName"
+                            errorMessage="กรุณาใส่ชื่อจริง"
+                            label="ชื่อจริง"
+                            labelPlacement="outside"
+                            name="ชื่อจริง"
+                            placeholder="ชื่อจริง"
+                            type="text"
 
-                    />
-                    <Input
-                        isRequired
-                        id="password"
-                        errorMessage="กรุณาใส่รหัสผ่าน"
-                        label="รหัสผ่าน"
-                        labelPlacement="outside"
-                        name="password"
-                        placeholder="Password"
-                        type="password"
+                        />
+                        <Input
+                            id="middleName"
+                            label="ชื่อกลาง"
+                            labelPlacement="outside"
+                            name="password"
+                            placeholder="ชื่อกลาง(ถ้ามี)"
+                            type="text"
 
-                    />
-                    <Input
-                        isRequired
-                        id="password"
-                        errorMessage="กรุณาใส่รหัสผ่าน"
-                        label="รหัสผ่าน"
-                        labelPlacement="outside"
-                        name="password"
-                        placeholder="Password"
-                        type="password"
-                    />
-                    {/* <Select></Select> */}
+                        />
+                        <Input
+                            isRequired
+                            id="password"
+                            errorMessage="กรุณาใส่รหัสผ่าน"
+                            label="รหัสผ่าน"
+                            labelPlacement="outside"
+                            name="password"
+                            placeholder="Password"
+                            type="password"
+
+                        />
+                    </div>
+                    <div className="flex flex-row gap-3">
+                        <Select className="w-[190px]"
+                            isRequired
+                            items={gender}
+                            label="เพศสภาพ"
+                            labelPlacement="outside"
+                            placeholder="เพศ"
+                        >{(gender) => <SelectItem>{gender.label}</SelectItem>}</Select>
+                        <DatePicker isRequired labelPlacement="outside" className="w-[200px]" label="วัน/เดือน/ปี ที่เกิด"></DatePicker>
+                        <Input
+                            endContent={
+                                <div className="pointer-events-none flex items-center">
+                                    <span className="text-default-400 text-small">กก.</span>
+                                </div>
+                            }
+                            className="w-[90px]"
+                            isRequired
+                            id="weight"
+                            label="น้ำหนัก"
+                            labelPlacement="outside"
+                            name="weight"
+                            placeholder="xxx"
+                            type="number"
+                        />
+                        <Input
+                            endContent={
+                                <div className="pointer-events-none flex items-center">
+                                    <span className="text-default-400 text-small">กก.</span>
+                                </div>
+                            }
+                            className="w-[90px]"
+                            isRequired
+                            id="height"
+                            label="ส่วนสูง"
+                            labelPlacement="outside"
+                            name="height"
+                            placeholder="xxx"
+                            type="number"
+                        />
+                    </div>
+                </Form>
+
+                <Form className="justify-start">
+                    <h2>รายละเอียดเพิ่มเติมของผู้ดูแล</h2>
+                    <div className="bg-cozy-blue-dark ">
+                        <Input
+                            id="language"
+                            label="ภาษาที่สื่อสารได้"
+                            labelPlacement="outside"
+                            name="language"
+                            placeholder="เขียนความเชี่ยวชาญของคุณ (ถ้ามี)"
+                            type="text"
+
+                        />
+                        <Input
+                            id="experience"
+                            label="ประสบการณ์"
+                            labelPlacement="outside"
+                            name="experience"
+                            placeholder="เขียนประสบการณ์ของคุณ (ถ้ามี)"
+                            type="text"
+
+                        />
+                        <Input
+                            id="educationAndTraining"
+                            label="การศึกษาและการฝึกอบรม"
+                            labelPlacement="outside"
+                            name="educationAndTraining"
+                            placeholder="การศึกษาและการฝึกอบรม (ถ้ามี)"
+                            type="text"
+
+                        />
+                        <Input
+                            id="Certificate"
+                            label="ใบรังรองการประกอบวิชาชีพพยาบาล พร้อมลงนาม *"
+                            labelPlacement="outside"
+                            name="Certificate"
+                            placeholder="อัพโหลดไฟล์ของคุณ (pdf)"
+                            type="text"
+
+                        />
+                    </div>
                 </Form>
             </div>
 
