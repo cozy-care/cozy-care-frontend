@@ -1,7 +1,7 @@
 'use client'
 
 import NavBar from "@/components/NavBar";
-import { Button, DatePicker, Form, Input, Select, SelectItem } from "@nextui-org/react";
+import { Button, Checkbox, DatePicker, Form, Input, Select, SelectItem } from "@nextui-org/react";
 import { animate } from "framer-motion";
 import { useEffect } from "react";
 
@@ -106,8 +106,8 @@ export default function CaregiverDetail() {
                 </Form>
 
                 <Form className="justify-start">
-                    <h2>รายละเอียดเพิ่มเติมของผู้ดูแล</h2>
-                    <div className="bg-cozy-blue-dark ">
+                    <h2 className="font-bold ml-5 mt-5">รายละเอียดเพิ่มเติมของผู้ดูแล</h2>
+                    <div className="h-[350px] w-[650px] bg-cozy-blue-dark flex flex-col gap-3 justify-center items-center p-5 rounded-lg">
                         <Input
                             id="language"
                             label="ภาษาที่สื่อสารได้"
@@ -146,6 +146,15 @@ export default function CaregiverDetail() {
                         />
                     </div>
                 </Form>
+                <div className="mt-5">
+                    <Checkbox defaultSelected radius="sm">
+                        ยอมรับเงื่อนไข และนโยบายส่วนตัว.........................................
+                    </Checkbox>
+                </div>
+                <div className="flex flew-row gap-5 mt-5 ">
+                    <Button className="font-bold">ยกเลิก</Button>
+                    <Button className="bg-cozy-green-light text-cozy-lightblue-light font-bold">บันทึก</Button>
+                </div>
             </div>
 
 
