@@ -12,6 +12,21 @@ export const gender = [
 
 ];
 
+export const typesPatient = [
+    { key: "bedridden", label: "ผู้ป่วยติดเตียง" },
+    { key: "elderly", label: "ผู้สูงอายุ" },
+    { key: "child", label: "เด็กเล็ก" },
+
+];
+
+export const physicalCondition = [
+    { key: "normal", label: "ปกติ(เดินได้ กินได้)" },
+    { key: "limitedMobility", label: "เดินไม่ค่อยได้(กินได้ ต้องช่วยพยุง)" },
+    { key: "wheelchairBound", label: "เดินไม่ได้(กินได้ นั่งรถเข็น)" },
+    { key: "bedridden", label: "ติดเตียง(ต้องฟีดอาหาร ดูดเสมหะ)" },
+
+];
+
 // อย่าลืมเปลี่ยนชื่อ Function
 export default function PatientDetail() {
 
@@ -108,25 +123,27 @@ export default function PatientDetail() {
                 <Form className="justify-start">
                     <h2 className="font-bold ml-5 mt-5">รายละเอียดเพิ่มเติมของผู้รับการดูแล</h2>
                     <div className="h-[400px] w-[650px] bg-cozy-blue-dark flex flex-col gap-3 justify-center items-center p-5 rounded-lg">
-                        <Input
+                        <Select
                             isRequired
-                            id="typeOfPatient"
+                            items={typesPatient}
                             label="ประเภทของผู้ได้รับการดูแล"
                             labelPlacement="outside"
                             name="typeOfPatient"
                             placeholder="ประเภทของผู้ได้รับการดูแล"
-                            type="text"
+                        >{(typesPatient) => <SelectItem>{typesPatient.label}</SelectItem>}
 
-                        />
-                        <Input
-                            id="physicalCondition"
+                        </Select>
+
+                        <Select
+                            isRequired
+                            items={physicalCondition}
                             label="สถาวะทางร่างกาย"
                             labelPlacement="outside"
                             name="physicalCondition"
-                            placeholder="สภาวะทางร่าง"
-                            type="text"
+                            placeholder="สถาวะทางร่างกาย"
+                        >{(physicalCondition) => <SelectItem>{physicalCondition.label}</SelectItem>}
+                        </Select>
 
-                        />
                         <Input
                             id="chronicDiseases"
                             label="โรคประจำตัว"
