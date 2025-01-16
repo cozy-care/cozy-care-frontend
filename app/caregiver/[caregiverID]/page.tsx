@@ -12,11 +12,7 @@ import {
 } from "@nextui-org/react";
 import { animate } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
-
-export const gender = [
-  { key: "man", label: "ผู้ชาย" },
-  { key: "woman", label: "ผู้หญิง" },
-];
+import { gender } from "./caregiverIDMock";
 
 // อย่าลืมเปลี่ยนชื่อ Function
 export default function CaregiverDetail() {
