@@ -10,6 +10,7 @@ import {
   Select,
   SelectItem,
 } from "@nextui-org/react";
+import { animate } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 
 export const gender = [
@@ -17,6 +18,7 @@ export const gender = [
   { key: "woman", label: "ผู้หญิง" },
 ];
 
+// อย่าลืมเปลี่ยนชื่อ Function
 export default function CaregiverDetail() {
   const [profileImage, setProfileImage] = useState<string | null>(null);
   const fileInputRef = useRef<HTMLInputElement | null>(null);
@@ -35,6 +37,7 @@ export default function CaregiverDetail() {
     agreed: false,
   });
 
+  // อย่าลืมเปลี่ยน Title
   useEffect(() => {
     document.title = "CaregiverDetail - Cozy Care";
   }, []);
@@ -54,22 +57,21 @@ export default function CaregiverDetail() {
     }
   };
 
-  const handleInputChange = (
-    key: keyof typeof formData,
-    value: string | boolean | File | null
-  ) => {
+  const handleInputChange = (key: string, value: any) => {
     setFormData((prev) => ({ ...prev, [key]: value }));
   };
 
   const handleSave = () => {
+    // รวมข้อมูลทั้งหมดที่ต้องการบันทึก
     const dataToSave = {
       ...formData,
-      profileImage,
+      profileImage, // รูปโปรไฟล์ที่อัปโหลด
     };
+
     console.log("บันทึกข้อมูล:", dataToSave);
   };
-
   return (
+    //<main className="flex flex-col min-h-[calc(100svh-3.5rem)]">
     <main className="flex flex-col min-h-[100dvh]">
       <NavBar />
       <div className="grow flex flex-col items-center gap-3 lg:w-[1025px] lg:mx-auto">
@@ -98,7 +100,7 @@ export default function CaregiverDetail() {
           onChange={handleFileChange}
         />
 
-        <Form className="justify-center items-center">
+        <Form className=" justify-center items-center">
           <div className="flex flex-row gap-3">
             <Input
               isRequired
@@ -136,26 +138,21 @@ export default function CaregiverDetail() {
             <Select
               className="w-[190px]"
               isRequired
+              items={gender}
               label="เพศสภาพ"
               labelPlacement="outside"
               placeholder="เพศ"
               onChange={(key) => handleInputChange("gender", key)}
             >
-              {gender.map((item) => (
-                <SelectItem key={item.key} value={item.key}>
-                  {item.label}
-                </SelectItem>
-              ))}
+              {(gender) => <SelectItem>{gender.label}</SelectItem>}
             </Select>
             <DatePicker
               isRequired
               labelPlacement="outside"
               className="w-[200px]"
               label="วัน/เดือน/ปี ที่เกิด"
-              onChange={(date) =>
-                handleInputChange("birthDate", date?.toString() || "")
-              }
-            />
+              onChange={(date) => handleInputChange("birthDate", date)}
+            ></DatePicker>
             <Input
               endContent={
                 <div className="pointer-events-none flex items-center">
@@ -175,7 +172,7 @@ export default function CaregiverDetail() {
             <Input
               endContent={
                 <div className="pointer-events-none flex items-center">
-                  <span className="text-default-400 text-small">ซม.</span>
+                  <span className="text-default-400 text-small">กก.</span>
                 </div>
               }
               className="w-[90px]"
@@ -242,10 +239,11 @@ export default function CaregiverDetail() {
             radius="sm"
             onChange={(checked) => handleInputChange("agreed", checked)}
           >
-            ยอมรับเงื่อนไข และนโยบายส่วนตัว
+            ยอมรับเงื่อนไข
+            และนโยบายส่วนตัว.........................................
           </Checkbox>
         </div>
-        <div className="flex flex-row gap-5 mt-5">
+        <div className="flex flew-row gap-5 mt-5 ">
           <Button className="font-bold">ยกเลิก</Button>
           <Button
             className="bg-cozy-green-light text-cozy-lightblue-light font-bold"
