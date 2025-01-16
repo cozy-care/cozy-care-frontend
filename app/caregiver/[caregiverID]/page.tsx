@@ -12,7 +12,13 @@ import {
 } from "@nextui-org/react";
 import { useEffect, useRef, useState } from "react";
 
-export const gender = [
+type GenderOption = {
+  key: string;
+  label: string;
+};
+
+// กำหนดชนิดข้อมูลให้กับ gender
+export const gender: GenderOption[] = [
   { key: "man", label: "ผู้ชาย" },
   { key: "woman", label: "ผู้หญิง" },
 ];
