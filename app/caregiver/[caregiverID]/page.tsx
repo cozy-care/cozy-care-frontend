@@ -10,19 +10,35 @@ import {
   Select,
   SelectItem,
 } from "@nextui-org/react";
-import { animate } from "framer-motion";
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 
-export const gender = [
+// Gender options
+export const genderOptions = [
   { key: "man", label: "ผู้ชาย" },
   { key: "woman", label: "ผู้หญิง" },
 ];
 
-// อย่าลืมเปลี่ยนชื่อ Function
+// Define the type for formData
+interface FormData {
+  firstName: string;
+  middleName: string;
+  password: string;
+  gender: string;
+  birthDate: string;
+  weight: string;
+  height: string;
+  language: string;
+  experience: string;
+  educationAndTraining: string;
+  certificate: File | null;
+  agreed: boolean;
+}
+
+// Main Component
 export default function CaregiverDetail() {
   const [profileImage, setProfileImage] = useState<string | null>(null);
   const fileInputRef = useRef<HTMLInputElement | null>(null);
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<FormData>({
     firstName: "",
     middleName: "",
     password: "",
@@ -37,41 +53,48 @@ export default function CaregiverDetail() {
     agreed: false,
   });
 
-  // อย่าลืมเปลี่ยน Title
   useEffect(() => {
     document.title = "CaregiverDetail - Cozy Care";
   }, []);
 
-  const handleProfileImageUpload = () => {
+  const handleProfileImageUpload = useCallback(() => {
     fileInputRef.current?.click();
-  };
+  }, []);
 
-  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files?.[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onload = () => {
-        setProfileImage(reader.result as string);
-      };
-      reader.readAsDataURL(file);
-    }
-  };
+  const handleFileChange = useCallback(
+    (event: React.ChangeEvent<HTMLInputElement>) => {
+      const file = event.target.files?.[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = () => {
+          setProfileImage(reader.result as string);
+        };
+        reader.readAsDataURL(file);
+      }
+    },
+    []
+  );
 
-  const handleInputChange = (key: string, value: any) => {
+  const handleInputChange = useCallback((key: keyof FormData, value: any) => {
     setFormData((prev) => ({ ...prev, [key]: value }));
-  };
+  }, []);
 
-  const handleSave = () => {
-    // รวมข้อมูลทั้งหมดที่ต้องการบันทึก
+  const handleSave = useCallback(() => {
+    if (!formData.agreed) {
+      alert("กรุณายอมรับเงื่อนไขก่อนบันทึกข้อมูล");
+      return;
+    }
+
     const dataToSave = {
       ...formData,
-      profileImage, // รูปโปรไฟล์ที่อัปโหลด
+      profileImage,
     };
 
     console.log("บันทึกข้อมูล:", dataToSave);
-  };
+    alert("ข้อมูลถูกบันทึกเรียบร้อย!");
+  }, [formData, profileImage]);
+
   return (
-    //<main className="flex flex-col min-h-[calc(100svh-3.5rem)]">
     <main className="flex flex-col min-h-[100dvh]">
       <NavBar />
       <div className="grow flex flex-col items-center gap-3 lg:w-[1025px] lg:mx-auto">
@@ -104,11 +127,10 @@ export default function CaregiverDetail() {
           <div className="flex flex-row gap-3">
             <Input
               isRequired
-              id="fistName"
+              id="firstName"
               errorMessage="กรุณาใส่ชื่อจริง"
               label="ชื่อจริง"
               labelPlacement="outside"
-              name="ชื่อจริง"
               placeholder="ชื่อจริง"
               type="text"
               onChange={(e) => handleInputChange("firstName", e.target.value)}
@@ -117,8 +139,7 @@ export default function CaregiverDetail() {
               id="middleName"
               label="ชื่อกลาง"
               labelPlacement="outside"
-              name="middleName"
-              placeholder="ชื่อกลาง(ถ้ามี)"
+              placeholder="ชื่อกลาง (ถ้ามี)"
               type="text"
               onChange={(e) => handleInputChange("middleName", e.target.value)}
             />
@@ -128,7 +149,6 @@ export default function CaregiverDetail() {
               errorMessage="กรุณาใส่รหัสผ่าน"
               label="รหัสผ่าน"
               labelPlacement="outside"
-              name="password"
               placeholder="Password"
               type="password"
               onChange={(e) => handleInputChange("password", e.target.value)}
@@ -138,13 +158,13 @@ export default function CaregiverDetail() {
             <Select
               className="w-[190px]"
               isRequired
-              items={gender}
+              items={genderOptions}
               label="เพศสภาพ"
               labelPlacement="outside"
               placeholder="เพศ"
               onChange={(key) => handleInputChange("gender", key)}
             >
-              {(gender) => <SelectItem>{gender.label}</SelectItem>}
+              {(item) => <SelectItem key={item.key}>{item.label}</SelectItem>}
             </Select>
             <DatePicker
               isRequired
@@ -152,35 +172,21 @@ export default function CaregiverDetail() {
               className="w-[200px]"
               label="วัน/เดือน/ปี ที่เกิด"
               onChange={(date) => handleInputChange("birthDate", date)}
-            ></DatePicker>
+            />
             <Input
-              endContent={
-                <div className="pointer-events-none flex items-center">
-                  <span className="text-default-400 text-small">กก.</span>
-                </div>
-              }
-              className="w-[90px]"
               isRequired
               id="weight"
-              label="น้ำหนัก"
+              label="น้ำหนัก (กก.)"
               labelPlacement="outside"
-              name="weight"
               placeholder="xxx"
               type="number"
               onChange={(e) => handleInputChange("weight", e.target.value)}
             />
             <Input
-              endContent={
-                <div className="pointer-events-none flex items-center">
-                  <span className="text-default-400 text-small">กก.</span>
-                </div>
-              }
-              className="w-[90px]"
               isRequired
               id="height"
-              label="ส่วนสูง"
+              label="ส่วนสูง (ซม.)"
               labelPlacement="outside"
-              name="height"
               placeholder="xxx"
               type="number"
               onChange={(e) => handleInputChange("height", e.target.value)}
@@ -195,8 +201,7 @@ export default function CaregiverDetail() {
               id="language"
               label="ภาษาที่สื่อสารได้"
               labelPlacement="outside"
-              name="language"
-              placeholder="เขียนความเชี่ยวชาญของคุณ (ถ้ามี)"
+              placeholder="ภาษา"
               type="text"
               onChange={(e) => handleInputChange("language", e.target.value)}
             />
@@ -204,7 +209,6 @@ export default function CaregiverDetail() {
               id="experience"
               label="ประสบการณ์"
               labelPlacement="outside"
-              name="experience"
               placeholder="เขียนประสบการณ์ของคุณ (ถ้ามี)"
               type="text"
               onChange={(e) => handleInputChange("experience", e.target.value)}
@@ -213,7 +217,6 @@ export default function CaregiverDetail() {
               id="educationAndTraining"
               label="การศึกษาและการฝึกอบรม"
               labelPlacement="outside"
-              name="educationAndTraining"
               placeholder="การศึกษาและการฝึกอบรม (ถ้ามี)"
               type="text"
               onChange={(e) =>
@@ -221,11 +224,9 @@ export default function CaregiverDetail() {
               }
             />
             <Input
-              id="Certificate"
-              label="ใบรังรองการประกอบวิชาชีพพยาบาล พร้อมลงนาม *"
+              id="certificate"
+              label="อัปโหลดใบรับรอง (PDF)"
               labelPlacement="outside"
-              name="Certificate"
-              placeholder="อัพโหลดไฟล์ของคุณ (pdf)"
               type="file"
               onChange={(e) =>
                 handleInputChange("certificate", e.target.files?.[0] || null)
@@ -235,15 +236,14 @@ export default function CaregiverDetail() {
         </Form>
         <div className="mt-5">
           <Checkbox
-            defaultSelected
+            defaultSelected={formData.agreed}
             radius="sm"
             onChange={(checked) => handleInputChange("agreed", checked)}
           >
-            ยอมรับเงื่อนไข
-            และนโยบายส่วนตัว.........................................
+            ยอมรับเงื่อนไขและนโยบายส่วนตัว
           </Checkbox>
         </div>
-        <div className="flex flew-row gap-5 mt-5 ">
+        <div className="flex flex-row gap-5 mt-5">
           <Button className="font-bold">ยกเลิก</Button>
           <Button
             className="bg-cozy-green-light text-cozy-lightblue-light font-bold"
