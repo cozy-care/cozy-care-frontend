@@ -240,10 +240,18 @@ export default function CaregiverDetail() {
           </Checkbox>
         </div>
         <div className="flex flew-row gap-5 mt-5 ">
-          <Button className="font-bold">ยกเลิก</Button>
           <Button
-            className="bg-cozy-green-light text-cozy-lightblue-light font-bold"
-            onClick={handleSave}
+            radius="full"
+            className="font-bold"
+            onPress={handleSave}
+          >
+            ยกเลิก
+          </Button>
+          <Button
+            radius="full"
+            color="primary"
+            className="font-bold"
+            onPress={handleSave}
           >
             บันทึก
           </Button>
