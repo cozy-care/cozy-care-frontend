@@ -243,7 +243,7 @@ export default function CaregiverDetail() {
           <Button
             radius="full"
             className="font-bold"
-            onPress={handleSave}
+            // onPress={handleSave}
           >
             ยกเลิก
           </Button>
