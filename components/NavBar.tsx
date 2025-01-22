@@ -55,7 +55,7 @@ export default function NavBar() {
     <div className='sticky top-0 z-[99] h-max transition bg-white dark:bg-cozy-background-dark'>
       <Navbar height='56px' classNames={{wrapper:'px-3'}} className='transition dark:bg-cozy-background-dark bg-white z-50'>
         <NavbarBrand className='px-0'>
-          <Image src="/favicon.ico" width={40} height={40} alt="Logo" style={{ width: "auto", height: "auto" }} />
+          <Image src="/favicon.ico" width={40} height={40} alt="Logo" style={{ width: "auto", height: "auto" }} priority/>
           <p className="ml-2 font-bold text-lg text-cozy-blue-light dark:text-cozy-blue-dark">Cozy Care</p>
         </NavbarBrand>
         <NavbarContent justify="end">
