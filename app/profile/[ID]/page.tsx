@@ -26,7 +26,7 @@ export default function Profile() {
     <main className="flex flex-col min-h-[100dvh]">
       <NavBar />
       <div className="grow flex flex-col items-center w-full px-3 gap-3">
-        <div className="relative flex flex-col items-center justify-center w-full h-[250px]">
+        <div className="relative flex flex-col items-center justify-center w-full lg:w-[1000px] h-[250px]">
           <Switch
             size="lg"
             isSelected={darkMode}
@@ -53,7 +53,7 @@ export default function Profile() {
           <p className="text-cozy-blue-light">example@hotmail.com</p>
         </div>
 
-        <div className="flex flex-col gap-8 px-4 w-full h-[550px]">
+        <div className="flex flex-col gap-8 px-4 w-full sm:w-[400px] h-[550px]">
           <Button radius="full" className="flex justify-between shadow-lg bg-cozy-lightblue-light text-[#1F5670]">
             <div className="flex gap-5 items-center">
               <AccountBox />
