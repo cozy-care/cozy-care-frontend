@@ -71,7 +71,7 @@ export default function PatientDetail() {
     //<main className="flex flex-col min-h-[calc(100svh-3.5rem)]">
     <main className="flex flex-col min-h-[100dvh]">
       <NavBar />
-      <div className="grow flex flex-col items-center gap-3 lg:w-[1025px] lg:mx-auto">
+      <div className="grow flex flex-col justify-center items-center gap-3 ">
         <h1 className="font-bold">กรอกข้อมูลผู้รับการดูแล</h1>
         <div
           className="w-[150px] h-[150px] bg-cozy-green-light rounded-2xl flex items-center justify-center cursor-pointer"
@@ -89,6 +89,13 @@ export default function PatientDetail() {
             </span>
           )}
         </div>
+        <input
+          type="file"
+          accept="image/*"
+          ref={fileInputRef}
+          className="hidden"
+          onChange={handleFileChange}
+        />
 
         <Form className="flex flex-col items-center gap-3 w-[350px]">
           <Input
@@ -182,10 +189,10 @@ export default function PatientDetail() {
         </Form>
 
         <Form>
-          <h2 className="font-bold ml-5 mt-5">
+          <h2 className="font-bold mt-5">
             รายละเอียดเพิ่มเติมของผู้รับการดูแล
           </h2>
-          <div className="h-[400px] w-[650px] bg-cozy-blue-dark flex flex-col gap-3 justify-center items-center p-5 rounded-lg">
+          <div className="h-max w-[350px] bg-[#C1E2F2] flex flex-col gap-3 items-center p-5 rounded-lg">
             <Select
               isRequired
               items={typesPatient}
@@ -236,15 +243,30 @@ export default function PatientDetail() {
             />
           </div>
         </Form>
-        <div className="mt-5">
-          <Checkbox defaultSelected radius="sm">
+        <div className="">
+          <Checkbox
+            defaultSelected
+            radius="sm"
+            onChange={(checked) => handleInputChange("agreed", checked)}
+          >
             ยอมรับเงื่อนไข
             และนโยบายส่วนตัว.........................................
           </Checkbox>
         </div>
-        <div className="flex flew-row gap-5 mt-5 ">
-          <Button className="font-bold">ยกเลิก</Button>
-          <Button className="bg-cozy-green-light text-cozy-lightblue-light font-bold">
+        <div className="flex flew-row gap-5 mt-3 mb-5">
+          <Button
+            radius="full"
+            className="font-bold"
+            // onPress={handleSave}
+          >
+            ยกเลิก
+          </Button>
+          <Button
+            radius="full"
+            color="primary"
+            className="font-bold"
+            onPress={handleSave}
+          >
             บันทึก
           </Button>
         </div>
