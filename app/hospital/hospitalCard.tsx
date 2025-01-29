@@ -5,6 +5,8 @@ interface Props {
   title?: string;
   imgUrl?: string;
   type?: string;
+  expertise?: string;
+  emergencyNumbers?: string;
   phoneNumber?: string;
   distance?: string;
 }
@@ -13,6 +15,8 @@ export default function InformationCard({
   title = "No title",
   imgUrl = "",
   type = "No type",
+  expertise = "No expertise",
+  emergencyNumbers = "No emergency number",
   phoneNumber = "No phone number",
   distance = "No distance",
 }: Props) {
@@ -36,10 +40,12 @@ export default function InformationCard({
 
         <div className="relative flex flex-col grow gap-0.5 ">
           <p className="font-bold text-base">{title}</p>
-          <p className="text-xs">เกี่ยวกับ: {about}</p>
-          <p className="text-xs">โดย: {by}</p>
-          <p className="text-xs">วันที่เผยแพร่: {releaseDate}</p>
-          <p className="text-xs">แก้ไขล่าสุด: {edittedDate}</p>
+          <p className="text-xs">ประเภท : {type}</p>
+          <p className="text-xs">ความเชี่ยวชาญ : {expertise}</p>
+          <p className="text-xs">เบอร์โทรฉุกเฉิน : {emergencyNumbers}</p>
+          <p className="text-xs">เบอร์โทรโรงพยาบาล : {phoneNumber}</p>
+          <p className="text-xs">ระยะทาง : {distance}</p>
+
           <Button
             as={Link}
             href=""
