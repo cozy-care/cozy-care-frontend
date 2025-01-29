@@ -54,7 +54,7 @@ export default function InformationCard({
             radius="full"
             color="primary"
           >
-            กดเพื่ออ่าน
+            กดเพื่อค้นหาที่ตั้งบนแผนที่
           </Button>
         </div>
       </CardBody>

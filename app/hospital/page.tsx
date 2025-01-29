@@ -37,10 +37,11 @@ export default function Information() {
               key={index}
               title={data.title}
               imgUrl={data.imgUrl}
-              about={data.about}
-              by={data.by}
-              releaseDate={data.releaseDate}
-              edittedDate={data.edittedDate}
+              type={data.type}
+              expertise={data.expertise}
+              emergencyNumbers={data.emergencyNumbers}
+              phoneNumber={data.phoneNumber}
+              distance={data.distance}
             />
           ))}
         </div>
