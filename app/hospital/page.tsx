@@ -19,7 +19,7 @@ export default function Information() {
         <div className=" w-full h-max">
           <Image
             alt="Information background image"
-            src="https://www.flinn.org/wp-content/uploads/2023/04/GME-1024x326.webp"
+            src="https://mpics.mgronline.com/pics/Images/566000009044501.JPEG"
             width="100%"
             height={150}
             radius="none"
