@@ -70,7 +70,7 @@ export default function CaregiverDetail() {
     //<main className="flex flex-col min-h-[calc(100svh-3.5rem)]">
     <main className="flex flex-col min-h-[100dvh]">
       <NavBar />
-      <div className="grow flex flex-col items-center gap-3 lg:w-[1025px]">
+      <div className="grow flex flex-col justify-center items-center gap-3 ">
         <h1 className="font-bold">กรอกข้อมูลผู้ดูแล</h1>
         <div
           className="w-[150px] h-[150px] bg-cozy-green-light rounded-2xl flex items-center justify-center cursor-pointer"
@@ -243,7 +243,7 @@ export default function CaregiverDetail() {
             />
           </div>
         </Form>
-        
+
         <div className="">
           <Checkbox
             defaultSelected
