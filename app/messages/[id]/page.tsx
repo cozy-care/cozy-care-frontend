@@ -68,7 +68,7 @@ export default function Message() {
         setIsAuthenticated(true); // Set authenticated to true
       } catch (error) {
         console.error("User is not authenticated:", error);
-        router.push("/login"); // Redirect to login if not authenticated
+        // router.push("/login"); // Redirect to login if not authenticated
       }
     };
 
@@ -179,7 +179,7 @@ export default function Message() {
     <main className="flex flex-col h-[100dvh]">
       <div className="grow flex flex-col items-center">
         {/* Top Bar */}
-        <div className="flex items-center justify-between gap-3 w-full h-[50px] border-b-2">
+        <div className="flex items-center justify-between gap-3 w-full h-[50px]">
           <div className="flex gap-3">
             <Button as={Link} onPress={() => router.back()} className="text-cozy-green-light" isIconOnly radius="full" variant="light">
               <ArrowBackIosNew />
