@@ -6,6 +6,7 @@ import { Google } from '@mui/icons-material';
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import axios, { AxiosResponse } from "axios";
+import { encryptPassword } from '../../lib/utils';
 
 interface LoginCredentials {
   usernameOrEmail: string;
@@ -56,18 +57,13 @@ export default function Login() {
   ): Promise<void> => {
     event.preventDefault();
     const form = event.target as HTMLFormElement;
-    const usernameOrEmail = (form.elements.namedItem("user_name") as HTMLInputElement)
-      .value;
-    const password = (form.elements.namedItem("password") as HTMLInputElement)
-      .value;
+    const usernameOrEmail = (form.elements.namedItem("user_name") as HTMLInputElement).value;
+    const password = encryptPassword((form.elements.namedItem("password") as HTMLInputElement).value);
   
     // Use the updated loginUser function that returns success, isOTP, email, and userID
-    const { success, isOTP, email, userID } = await loginUser({ usernameOrEmail, password });
+    const { success, email, userID } = await loginUser({ usernameOrEmail, password });
 
     if (success) {
-      if (isOTP) {
-        router.push("/home");
-      } else {
         // Call the additional POST request to send email and userID
         try {
           await axios.post(
@@ -75,7 +71,7 @@ export default function Login() {
             { email, user_id: userID }, // Send email and userID in the body
             { withCredentials: true }
           );
-          console.log("POST request to /api/auth/sendEmailOtp successful!");
+          console.log("sendEmailOtp successful!");
         } catch (error) {
           console.error("Error during POST request to /api/auth/sendEmailOtp:", error);
           return; // Optionally prevent navigation if the POST fails
@@ -83,11 +79,11 @@ export default function Login() {
         localStorage.setItem("email", email as string);
         localStorage.setItem("userID", userID as string);
         router.push("/otp"); // Navigate to /otp after the POST request
-      }
+
     } else {
       console.log("Login failed");
     }
-  };  
+  };
 
   const handleGoogleLogin = () => {
     window.location.href = `${process.env.NEXT_PUBLIC_API_URL}/api/auth/google`;

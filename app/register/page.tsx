@@ -7,6 +7,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import axios from "axios";
+import { encryptPassword } from '../../lib/utils';
 
 interface FormData {
   username: string;
@@ -29,7 +30,7 @@ export default function Register() {
     email: '',
     password: '',
     confirmPassword: '',
-    alias: 'AJAY', // Default alias
+    alias: '',
     role: 'user',  // Default role
   });
 
@@ -49,20 +50,39 @@ export default function Register() {
       return;
     }
 
+    const hashedPassword = encryptPassword(formData.password);
+
     try {
       const response = await axios.post(
         `${process.env.NEXT_PUBLIC_API_URL}/api/auth/register`,
         {
           username: formData.username,
           email: formData.email,
-          password: formData.password,
+          password: hashedPassword,
           alias: formData.username,
           role: formData.role,
         }
       );
 
+      const userID = response.data.user.user_id
+      const email = response.data.user.email
+
       if (response.status === 201 || response.status === 200) {
-        router.push('/login'); // Redirect to login page upon success
+        
+        try {
+          await axios.post(
+            `${process.env.NEXT_PUBLIC_API_URL}/api/auth/sendEmailOtp`,
+            { email, user_id: userID }, // Send email and userID in the body
+            { withCredentials: true }
+          );
+          console.log("POST request to /api/auth/sendEmailOtp successful!");
+        } catch (error) {
+          console.error("Error during POST request to /api/auth/sendEmailOtp:", error);
+          return; // Optionally prevent navigation if the POST fails
+        }
+        localStorage.setItem("email", email as string);
+        localStorage.setItem("userID", userID as string);
+        router.push('/otp'); // Redirect to login page upon success
       }
     } catch (error: any) {
       setError(error.response?.data?.message || "Registration failed. Please try again.");
