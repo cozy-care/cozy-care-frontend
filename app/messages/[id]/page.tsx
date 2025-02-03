@@ -32,16 +32,11 @@ export default function Message() {
   const [messages, setMessages] = useState<Message[]>([]);
   const [messageText, setMessageText] = useState<string>("");
   const [userId, setUserId] = useState<string | null>(null);
-  const [isVisible, setIsVisible] = useState<boolean>(false);
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
   const [otherUserData, setOtherUserData] = useState<UserData | null>(null);
-  const chat_id = chatId.id;
+  const chat_id = chatId?.id ?? "";
 
   const messagesEndRef = useRef<HTMLDivElement | null>(null);
-
-  const toggleInfo = () => {
-    setIsVisible(!isVisible);
-  };
 
   useEffect(() => {
     document.title = "Someone name - Cozy Care";
@@ -198,7 +193,7 @@ export default function Message() {
             </div>
           </div>
 
-          <Button onPress={toggleInfo} className="text-cozy-green-light" isIconOnly radius="full" variant="light">
+          <Button as={Link} href={`/messages/${chat_id}/info`} className="text-cozy-green-light" isIconOnly radius="full" variant="light">
             <Info />
           </Button>
 
