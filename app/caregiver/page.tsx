@@ -60,7 +60,7 @@ export default function Caregiver() {
         </div>
 
         <div className="flex flex-col w-full items-center gap-4">
-          {caregivers.map((data, index) => (
+          {caregiverMock.map((data, index) => (
             <CaregiverCard
               key={index}
               user_id={data.user_id}
