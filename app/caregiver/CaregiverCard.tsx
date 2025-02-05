@@ -12,6 +12,12 @@ interface Props {
   skill?: string;
   dateReady?: string;
   distance?: number;
+  height?: number;
+  weight?: number;
+  study?: string;
+  price?: string;
+  used_language?: string;
+  experience?: string;
 }
 
 export default function CaregiverCard({
@@ -22,6 +28,12 @@ export default function CaregiverCard({
   skill = "Default Skill",
   dateReady = "Not Ready",
   distance = 0,
+  height,
+  weight,
+  study,
+  price,
+  used_language,
+  experience,
 }: Props) {
   const [isVisible, setIsVisible] = useState<boolean>(false);
   const [user1Id, setUser1Id] = useState<string | null>(null);
@@ -111,19 +123,19 @@ export default function CaregiverCard({
             <hr className="w-[95%] h-[3px] bg-cozy-green-light" />
             <div className="flex flex-col w-[95%] h-max gap-1 text-sm">
               <div className="flex w-full gap-1">
-                <p className="w-[35%]">ส่วนสูง : 185 ซม.</p>
-                <p className="w-[65%]">การศึกษา/ฝึกอบรม : ปริญญาตรีพยาบาลศาสตร์</p>
+                <p className="w-[35%]">ส่วนสูง : {height} ซม.</p>
+                <p className="w-[65%]">การศึกษา/ฝึกอบรม : {study}</p>
               </div>
               <div className="flex w-full gap-1">
-                <p className="w-[35%]">น้ำหนัก : 75 กก. </p>
-                <p className="w-[65%]">ราคา : 800-1600บาท/วัน , 9000-15000บาท/เดือน</p>
+                <p className="w-[35%]">น้ำหนัก : {weight} กก. </p>
+                <p className="w-[65%]">ราคา : {price} </p>
               </div>
               <div className="flex w-full gap-1">
-                <p className="w-[35%]">ภาษาที่สื่อสารได้ :<br />ไทย, อังกฤษ</p>
+                <p className="w-[35%]">ภาษาที่สื่อสารได้ :<br />{used_language}</p>
                 <p className="w-[65%]">คะแนนรีวิว : <Star /> 4.5 <Link onPress={readReview} size="sm" underline="always" className="ml-1 font-bold hover:cursor-pointer">อ่านรีวิว</Link></p>
               </div>
               <div className="flex w-full gap-1">
-                <p className="w-full">ประสบการณ์ : 5 ปี</p>
+                <p className="w-full">ประสบการณ์ : {experience}</p>
               </div>
             </div>
             <p className="text-cozy-blue-light self-start"><Verified className="mr-1" />บุคคลนี้ได้รับการยืนยันตัวตนแล้ว</p>

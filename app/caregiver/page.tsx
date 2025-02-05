@@ -9,11 +9,19 @@ import { caregiverMock } from "./caregiverMock";
 
 interface CaregiverData {
   user_id: string;
-  firstname: string;
-  lastname: string;
-  expert: string;
-  available_time: string;
-  profile_image: string;
+  firstname?: string;
+  lastname?: string;
+  profile_image?: string;
+  want_client_type?: string;
+  more_skill?: string;
+  available_time?: string;
+  distance_km?: number;
+  height?: number;
+  weight?: number;
+  study_experience?: string;
+  price?: string;
+  used_language?: string;
+  experience?: string;
 }
 
 export default function Caregiver() {
@@ -25,12 +33,17 @@ export default function Caregiver() {
     // Fetch caregiver data
     const fetchCaregivers = async () => {
       try {
-        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/caregiver/all`);
+        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/order/caregiver`);
         if (!response.ok) {
           throw new Error("Failed to fetch caregivers");
         }
         const data = await response.json();
-        setCaregivers(data);
+
+        const formattedData = data.map((caregiver: any) => ({
+          ...caregiver
+        }));
+
+        setCaregivers(formattedData);
       } catch (error) {
         console.error(error);
       }
@@ -60,16 +73,22 @@ export default function Caregiver() {
         </div>
 
         <div className="flex flex-col w-full items-center gap-4">
-          {caregiverMock.map((data, index) => (
+          {caregivers.map((data, index) => (
             <CaregiverCard
               key={index}
               user_id={data.user_id}
               name={`${data.firstname} ${data.lastname}`} // Full name
               imgUrl={data.profile_image} // Certification image as the profile image
-              service={data.expert} // Service is the "expert" field
-              skill="ขับรถ" // Fixed skill
+              service={data.want_client_type} // Service is the "expert" field
+              skill={data.more_skill} // Fixed skill
               dateReady={data.available_time} // Available time
-              distance={10} // Fixed distance
+              distance={data.distance_km} // Fixed distance
+              height={data.height}
+              weight={data.weight}
+              study={data.study_experience}
+              price={data.price}
+              used_language={data.used_language}
+              experience={data.experience}
             />
           ))}
         </div>
