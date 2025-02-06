@@ -2,6 +2,7 @@ import { Call, Facebook, Send } from "@mui/icons-material";
 import { Button } from "@nextui-org/react";
 import Link from "next/link";
 import Image from 'next/image';
+import { ThemeSwitcher } from "./ThemeSwitcher";
 
 export default function Footer() {
   return (
@@ -16,6 +17,10 @@ export default function Footer() {
           style={{ width: 'auto', height: 'auto' }}
           priority
         />
+        <div className="hidden">
+          <ThemeSwitcher />
+        </div>
+
       </div>
 
       <div className="flex flex-col gap-[2px] w-1/2 lg:pl-80 h-full text-sm">

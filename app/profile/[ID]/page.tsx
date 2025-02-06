@@ -100,14 +100,13 @@ export default function Profile() {
           <Switch
             size="lg"
             isSelected={darkMode}
-            onValueChange={setDarkMode}
+            onValueChange={(value) => {
+              setDarkMode(value);
+              setTheme(value ? "dark" : "light"); // Ensure theme updates properly
+            }}
             color="secondary"
             thumbIcon={({ isSelected, className }) =>
-              isSelected ? (
-                <DarkMode className={className} />
-              ) : (
-                <LightMode className={className} />
-              )
+              isSelected ? <DarkMode className={className} /> : <LightMode className={className} />
             }
             className="absolute right-0 top-3"
           />
