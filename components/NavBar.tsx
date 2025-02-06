@@ -19,6 +19,8 @@ import {
   Accessible,
   Announcement,
   Handshake,
+  Campaign,
+  DomainAdd,
 } from '@mui/icons-material';
 import { usePathname, useRouter } from 'next/navigation';
 import axios, { AxiosResponse } from 'axios';
@@ -68,41 +70,18 @@ export default function NavBar() {
         </NavbarBrand>
         <NavbarContent justify="end">
           <NavbarItem>
-            <Button
-              as={Link}
-              href="/messages"
-              className="font-bold dark:text-white"
-              isIconOnly
-              radius="full"
-              color="primary"
-              variant="light"
-            >
-              <Chat sx={{ width: '65%', height: '65%' }} />
+            <Button as={Link} href="/messages" className="font-bold dark:text-white" isIconOnly radius="full" color="primary" variant="light">
+              <Chat sx={{width:'30px', height:'auto'}} />
             </Button>
           </NavbarItem>
           <NavbarItem>
-            <Button
-              as={Link}
-              href="#"
-              className="font-bold dark:text-white"
-              isIconOnly
-              radius="full"
-              color="primary"
-              variant="light"
-            >
-              <Notifications sx={{ width: '70%', height: '70%' }} />
+            <Button as={Link} href="#" className="font-bold dark:text-white" isIconOnly radius="full" color="primary" variant="light">
+              <Notifications sx={{width:'30px', height:'auto'}} />
             </Button>
           </NavbarItem>
           <NavbarItem>
-            <Button
-              onPress={handlePersonClick} // Add onClick handler
-              className="font-bold dark:text-white"
-              isIconOnly
-              radius="full"
-              color="primary"
-              variant="light"
-            >
-              <Person sx={{ width: '75%', height: '75%' }} />
+            <Button as={Link} onPress={handlePersonClick} href="#" className="font-bold dark:text-white" isIconOnly radius="full" color="primary" variant="light">
+              <Person sx={{width:'30px', height:'auto'}} />
             </Button>
           </NavbarItem>
         </NavbarContent>
@@ -156,32 +135,14 @@ export default function NavBar() {
               <Accessible />
             </Button>
           </NavbarItem>
-          <NavbarItem className="w-1/5">
-            <Button
-              as={Link}
-              href="/information"
-              className={`font-bold w-full ${
-                pathname === '/information' &&
-                'bg-[#28789E] dark:bg-cozy-teal-dark text-white dark:text-black pointer-events-none'
-              }`}
-              isIconOnly
-              color="secondary"
-            >
-              <Announcement />
+          <NavbarItem className='w-1/5'>
+            <Button as={Link} href="/hospital" className={`font-bold w-full ${pathname === "/hospital" && "bg-[#28789E] dark:bg-cozy-teal-dark text-white dark:text-black pointer-events-none"}`} isIconOnly color="secondary">
+              <DomainAdd />
             </Button>
           </NavbarItem>
-          <NavbarItem className="w-1/5">
-            <Button
-              as={Link}
-              href="/donation"
-              className={`font-bold w-full ${
-                pathname === '/donation' &&
-                'bg-[#28789E] dark:bg-cozy-teal-dark text-white dark:text-black pointer-events-none'
-              }`}
-              isIconOnly
-              color="secondary"
-            >
-              <Handshake />
+          <NavbarItem className='w-1/5'>
+            <Button as={Link} href="/information" className={`font-bold w-full ${pathname === "/information" && "bg-[#28789E] dark:bg-cozy-teal-dark text-white dark:text-black pointer-events-none"}`} isIconOnly color="secondary">
+              <Campaign />
             </Button>
           </NavbarItem>
         </NavbarContent>

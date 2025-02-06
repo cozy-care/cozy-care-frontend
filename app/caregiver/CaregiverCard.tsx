@@ -120,7 +120,7 @@ export default function CaregiverCard({
 
         {isVisible && (
           <div className="flex flex-col items-center gap-3">
-            <hr className="w-[95%] h-[3px] bg-cozy-green-light" />
+            <hr className="w-[95%] h-[2px] bg-cozy-green-light" />
             <div className="flex flex-col w-[95%] h-max gap-1 text-sm">
               <div className="flex w-full gap-1">
                 <p className="w-[35%]">ส่วนสูง : {height} ซม.</p>
@@ -128,21 +128,21 @@ export default function CaregiverCard({
               </div>
               <div className="flex w-full gap-1">
                 <p className="w-[35%]">น้ำหนัก : {weight} กก. </p>
-                <p className="w-[65%]">ราคา : {price} </p>
+                <p className="w-[65%]">ราคา : {price} บาท</p>
               </div>
               <div className="flex w-full gap-1">
                 <p className="w-[35%]">ภาษาที่สื่อสารได้ :<br />{used_language}</p>
-                <p className="w-[65%]">คะแนนรีวิว : <Star /> 4.5 <Link onPress={readReview} size="sm" underline="always" className="ml-1 font-bold hover:cursor-pointer">อ่านรีวิว</Link></p>
+                <p className="flex items-center w-[65%] h-max">คะแนนรีวิว : <Star /> 4.5 <Link onPress={readReview} size="sm" underline="always" className="ml-1 font-bold hover:cursor-pointer">อ่านรีวิว</Link></p>
               </div>
               <div className="flex w-full gap-1">
                 <p className="w-full">ประสบการณ์ : {experience}</p>
               </div>
             </div>
-            <p className="text-cozy-blue-light self-start"><Verified className="mr-1" />บุคคลนี้ได้รับการยืนยันตัวตนแล้ว</p>
+            <p className="flex items-center text-cozy-blue-light self-start"><Verified className="mr-1" />บุคคลนี้ได้รับการยืนยันตัวตนแล้ว</p>
           </div>
         )}
 
-        <Link onPress={expandToggle} size="sm" className="absolute right-3 bottom-[14px] hover:cursor-pointer">กดเพื่อดู</Link>
+        <Link onPress={expandToggle} size="sm" className="absolute right-3 bottom-3 hover:cursor-pointer">{!isVisible ? (<p>กดเพื่อดู</p>) : (<p>กดเพื่อปิด</p>)}</Link>
       </CardBody>
     </Card>
   );
