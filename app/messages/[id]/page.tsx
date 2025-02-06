@@ -183,7 +183,7 @@ export default function Message() {
             <div className="flex gap-4 items-center">
               <Image
                 alt="Chat profile"
-                className="object-center object-cover rounded-full w-10"
+                className="w-[45px] aspect-square rounded-full overflow-hidden h-full object-cover object-center"
                 height={"auto"}
                 src={otherUserData?.profile_image || "https://cdn-icons-png.flaticon.com/512/3135/3135715.png"}
               />
