@@ -249,8 +249,14 @@ export default function PatientDetail() {
             radius="sm"
             onChange={(checked) => handleInputChange("agreed", checked)}
           >
-            ยอมรับเงื่อนไข
-            และนโยบายส่วนตัว.........................................
+            <span>
+              ยอมรับเงื่อนไข และ
+              <strong>
+                <a href="#" className="font-bold">
+                  นโยบายส่วนตัว(กดเพื่ออ่าน)
+                </a>
+              </strong>
+            </span>
           </Checkbox>
         </div>
         <div className="flex flew-row gap-5 mt-3 mb-5">
