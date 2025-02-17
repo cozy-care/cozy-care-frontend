@@ -90,9 +90,9 @@ export default function Profile() {
     "client": "ผู้ได้รับการดูแล",
   };
 
-  // if (!userData) {
-  //   return <div>Loading...</div>; // Show a loading state while fetching data
-  // }
+  if (!userData) {
+    return <div>Loading...</div>; // Show a loading state while fetching data
+  }
 
   return (
     <main className="flex flex-col min-h-[100dvh]">
