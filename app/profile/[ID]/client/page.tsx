@@ -9,14 +9,22 @@ import {
   SelectItem,
   TimeInput,
 } from "@nextui-org/react";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { services, employments } from "@/app/caregiver/add/addMock";
 import { ArrowBackIosNew } from "@mui/icons-material";
 import { useRouter } from "next/navigation";
+import ClientBotton from "./ClientBotton";
 
 import { Delete } from "@mui/icons-material";
+import { clientMock } from "./ClientMock";
+interface ClientData {
+  user_id: string;
+  firstname: string;
+  lastname: string;
+}
 
 export default function UserClient() {
+  const [client, setClient] = useState<ClientData[]>([]);
   const router = useRouter();
   useEffect(() => {
     document.title = "Client - Cozy Care";
@@ -42,10 +50,13 @@ export default function UserClient() {
         </div>
         <hr className="w-full  border-t-8 " />
         <div className="flex flex-col w-[80%] md:w-[50%] lg:w-[30%] rounded-full gap-y-5">
-          <Button className="justify-between">
-            นาย ริดเดช <Delete style={{ width: "25px", height: "auto" }} />
-          </Button>
-          <Button>ผู้รับการดูแล 2</Button>
+          {clientMock.map((data, index) => (
+            <ClientBotton
+              key={index}
+              firstname={data.firstname}
+              lastname={data.lastname}
+            />
+          ))}
         </div>
       </div>
     </main>
