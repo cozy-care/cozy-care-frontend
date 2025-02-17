@@ -12,25 +12,27 @@ import {
   PowerSettingsNew,
   LightMode,
   DarkMode,
+  Favorite,
 } from "@mui/icons-material";
-import { Button, Switch } from "@nextui-org/react";
+import { Button, Switch, Image } from "@nextui-org/react";
 import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 export default function Profile() {
   const { theme, setTheme } = useTheme();
   const [darkMode, setDarkMode] = useState<boolean>(false);
-  const [userData, setUserData] = useState<{
-    user_id: string;
-    username: string;
-    email: string;
-    role: string;
-    alias: string;
-    profile_image: string | null;
-    status: string;
-  } | null>(null);
+  const [userData, setUserData] = useState({
+    user_id: "dev-user-123",
+    username: "devuser",
+    email: "devuser@example.com",
+    role: "admin",
+    alias: "DevUser",
+    profile_image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQmRLRMXynnc7D6-xfdpeaoEUeon2FaU0XtPg&s",
+    status: "active",
+  });
   const router = useRouter();
 
   // Fetch user data on component mount
@@ -44,7 +46,7 @@ export default function Profile() {
         setUserData(response.data);
       } catch (error) {
         console.error("Error fetching user data:", error);
-        window.alert("Failed to fetch user data. Please try again.");
+        window.alert("Failed to fetch user data. Using default dev data.");
       }
     };
 
@@ -88,9 +90,9 @@ export default function Profile() {
     "client": "ผู้ได้รับการดูแล",
   };
 
-  if (!userData) {
-    return <div>Loading...</div>; // Show a loading state while fetching data
-  }
+  // if (!userData) {
+  //   return <div>Loading...</div>; // Show a loading state while fetching data
+  // }
 
   return (
     <main className="flex flex-col min-h-[100dvh]">
@@ -110,10 +112,15 @@ export default function Profile() {
             }
             className="absolute right-0 top-3"
           />
-          <div className="relative w-[110px] h-[110px] rounded-full bg-green-100">
+          <div className="relative w-[110px] h-[110px] rounded-full">
+            <Image
+              alt="Chat profile"
+              className="w-[150px] aspect-square rounded-full overflow-hidden object-cover object-center"
+              src={userData.profile_image}
+            />
             <Button
               href={`/profile/${userData.user_id}`}
-              className="absolute bottom-0 right-0 aspect-square"
+              className="absolute bottom-0 right-0 aspect-square z-10"
               color="primary"
               radius="full"
               isIconOnly
@@ -126,7 +133,7 @@ export default function Profile() {
           <p className="text-cozy-blue-light">{userData.email}</p>
         </div>
 
-        <div className="flex flex-col gap-8 px-4 w-full sm:w-[400px] h-[550px]">
+        <div className="flex flex-col gap-6 px-4 w-full sm:w-[400px] h-[550px]">
           <Button
             radius="full"
             className="flex justify-between shadow-lg bg-cozy-lightblue-light text-[#1F5670]"
@@ -139,6 +146,7 @@ export default function Profile() {
           </Button>
 
           <Button
+            isDisabled
             radius="full"
             className="flex justify-start shadow-lg bg-[#EFF0F0] text-black"
           >
@@ -148,7 +156,21 @@ export default function Profile() {
             </div>
           </Button>
 
+
           <Button
+            isDisabled
+            radius="full"
+            className="flex justify-start shadow-lg bg-[#EFF0F0] text-black"
+          >
+            <div className="flex gap-5 items-center">
+              <Favorite />
+              <p className="font-bold text-base">สิ่งที่ถูกใจ</p>
+            </div>
+          </Button>
+
+          <Button
+            as={Link}
+            href="/profile/privacy_and_security"
             radius="full"
             className="flex justify-start shadow-lg bg-[#EFF0F0] text-black"
           >
@@ -159,6 +181,8 @@ export default function Profile() {
           </Button>
 
           <Button
+            as={Link}
+            href={`/profile/${userData.user_id}/history`}
             radius="full"
             className="flex justify-start shadow-lg bg-[#EFF0F0] text-black"
           >
@@ -169,12 +193,14 @@ export default function Profile() {
           </Button>
 
           <Button
+            as={Link}
+            href="/profile/support"
             radius="full"
             className="flex justify-start shadow-lg bg-[#EFF0F0] text-black"
           >
             <div className="flex gap-5 items-center">
               <HeadsetMic />
-              <p className="font-bold text-base">ความช่วยเหลือและการสนับสนุน</p>
+              <p className="font-bold text-base">ความช่วยเหลือ</p>
             </div>
           </Button>
 
