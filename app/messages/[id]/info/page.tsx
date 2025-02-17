@@ -30,9 +30,9 @@ export default function Info() {
         });
 
         setUser({
-          userId: response.data.user_id,
+          userId: response.data.user_id || "defaultUserID",
           alias: response.data.alias || "ไม่ทราบชื่อ",
-          profileImage: response.data.profile_image || "https://www.civictheatre.ie/wp-content/uploads/2016/05/blank-profile-picture-973460_960_720.png",
+          profileImage: response.data.profile_image || "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQmRLRMXynnc7D6-xfdpeaoEUeon2FaU0XtPg&s",
         });
       } catch (err) {
         console.error("Error fetching user info:", err);
@@ -59,7 +59,17 @@ export default function Info() {
         {loading ? (
           <Spinner className="mt-10" color="primary" />
         ) : error ? (
-          <p className="text-red-500 mt-5">{error}</p>
+          <div className="flex flex-col gap-4 items-center mt-5">
+            <Image
+              alt="Chat profile"
+              className="w-[150px] aspect-square rounded-full overflow-hidden h-full object-cover object-center"
+              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQmRLRMXynnc7D6-xfdpeaoEUeon2FaU0XtPg&s"
+            />
+            <div className="flex gap-2 items-center">
+              <p className="text-xl font-bold">defaultUserName</p>
+              <Verified className="text-cozy-green-light" />
+            </div>
+          </div>
         ) : (
           <div className="flex flex-col gap-4 items-center mt-5">
             <Image
@@ -92,13 +102,13 @@ export default function Info() {
 
         {/* Long Buttons column */}
         <div className="flex flex-col items-center gap-4 w-[90%]">
-          <Button radius="full" className="flex justify-start w-full shadow-md bg-[#EFF0F0] text-black font-bold text-base">
+          <Button isDisabled radius="full" className="flex justify-start w-full shadow-md bg-[#EFF0F0] text-black font-bold text-base">
             สื่อ, ไฟล์และลิงค์
           </Button>
-          <Button radius="full" className="flex justify-start w-full shadow-md bg-[#EFF0F0] text-black font-bold text-base">
+          <Button as={Link} href={`/messages/${chatId}/info/privacy_and_support`} radius="full" className="flex justify-start w-full shadow-md bg-[#EFF0F0] text-black font-bold text-base">
             ความเป็นส่วนตัวและความปลอดภัย
           </Button>
-          <Button radius="full" className="flex justify-start w-full shadow-md bg-[#EFF0F0] text-black font-bold text-base">
+          <Button isDisabled radius="full" className="flex justify-start w-full shadow-md bg-[#EFF0F0] text-black font-bold text-base">
             รายงานปัญหาทางเทคนิค
           </Button>
         </div>
