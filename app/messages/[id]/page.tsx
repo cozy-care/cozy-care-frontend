@@ -32,16 +32,11 @@ export default function Message() {
   const [messages, setMessages] = useState<Message[]>([]);
   const [messageText, setMessageText] = useState<string>("");
   const [userId, setUserId] = useState<string | null>(null);
-  const [isVisible, setIsVisible] = useState<boolean>(false);
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
   const [otherUserData, setOtherUserData] = useState<UserData | null>(null);
-  const chat_id = chatId.id;
+  const chat_id = chatId?.id ?? "";
 
   const messagesEndRef = useRef<HTMLDivElement | null>(null);
-
-  const toggleInfo = () => {
-    setIsVisible(!isVisible);
-  };
 
   useEffect(() => {
     document.title = "Someone name - Cozy Care";
@@ -188,7 +183,7 @@ export default function Message() {
             <div className="flex gap-4 items-center">
               <Image
                 alt="Chat profile"
-                className="object-center object-cover rounded-full w-10"
+                className="w-[45px] aspect-square rounded-full overflow-hidden h-full object-cover object-center"
                 height={"auto"}
                 src={otherUserData?.profile_image || "https://cdn-icons-png.flaticon.com/512/3135/3135715.png"}
               />
@@ -198,7 +193,7 @@ export default function Message() {
             </div>
           </div>
 
-          <Button onPress={toggleInfo} className="text-cozy-green-light" isIconOnly radius="full" variant="light">
+          <Button as={Link} href={`/messages/${chat_id}/info`} className="text-cozy-green-light" isIconOnly radius="full" variant="light">
             <Info />
           </Button>
 
