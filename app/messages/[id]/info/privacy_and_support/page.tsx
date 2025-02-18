@@ -1,7 +1,7 @@
 'use client'
 
 import { ArrowBackIosNew, Block, Feedback, InfoOutlined, NavigateNext, NoAccounts } from "@mui/icons-material";
-import { Button, Switch } from "@nextui-org/react";
+import { Button, Link, Switch } from "@nextui-org/react";
 import { useParams, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
@@ -20,7 +20,7 @@ export default function Messages_privacy_and_support() {
   }
 
   const typingToggle = () => {
-    setTypingSelected(!readSelected);
+    setTypingSelected(!typingSelected);
   }
 
   return (
@@ -28,6 +28,9 @@ export default function Messages_privacy_and_support() {
       <div className="grow flex flex-col items-center gap-6">
         {/* Top Bar */}
         <div className="flex relative items-center gap-3 w-full h-[50px]">
+          <h1 className="absolute w-full flex text-lg font-bold justify-center items-center ">
+            ความเป็นส่วนตัวและความปลอดภัย
+          </h1>
           <Button
             onPress={() => router.back()}
             className="text-cozy-green-light"
@@ -37,15 +40,14 @@ export default function Messages_privacy_and_support() {
           >
             <ArrowBackIosNew />
           </Button>
-          <h1 className="absolute  w-full flex text-lg font-bold justify-center items-center ">
-            ความเป็นส่วนตัวและความปลอดภัย
-          </h1>
         </div>
 
-        <div className="flex flex-col w-full h-[300px] gap-4 px-4">
+        <div className="flex flex-col w-full gap-4 px-4">
           <p>นาย น่ารักที่สุด</p>
 
           <Button
+            as={Link}
+            href={`/messages/${chatId}/info/privacy_and_support/about`}
             radius="lg"
             variant="light"
             className="flex justify-between items-center p-3 py-5 text-black"
@@ -63,7 +65,7 @@ export default function Messages_privacy_and_support() {
           <Button onPress={acceptReadToggle} radius="lg" className="flex justify-between w-full h-max p-3 shadow-md bg-[#EFF0F0] text-black">
             <div className="flex flex-col items-start gap-1 h-max">
               <p className="font-bold text-lg">ใบตอบรับการเปิดอ่าน</p>
-              <p className="font-normal text-sm">คนอื่นๆ จะไม่เห็นเมื่อคุณอ่านข้อความของพวกเขาแล้ว</p>
+              <p className="font-normal text-xs">คนอื่นๆ จะไม่เห็นเมื่อคุณอ่านข้อความของพวกเขาแล้ว</p>
             </div>
 
             <Switch isSelected={readSelected} onValueChange={setReadSelected} />
@@ -94,7 +96,7 @@ export default function Messages_privacy_and_support() {
             <NavigateNext />
           </Button>
 
-          
+
           <Button
             radius="lg"
             variant="light"
