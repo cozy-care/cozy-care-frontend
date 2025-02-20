@@ -252,11 +252,12 @@ export default function CaregiverDetail() {
           >
             <span>
               ยอมรับเงื่อนไข และ
-              <strong>
-                <a href="#" className="font-bold">
-                  นโยบายส่วนตัว(กดเพื่ออ่าน)
-                </a>
-              </strong>
+              <a
+                href="/app/profile/privacy_and_security/privacy"
+                className="font-bold z-50 cursor-pointer text-blue-500 underline"
+              >
+                นโยบายส่วนตัว(กดเพื่ออ่าน)
+              </a>
             </span>
           </Checkbox>
         </div>
