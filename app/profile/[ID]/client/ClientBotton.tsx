@@ -5,13 +5,13 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { Delete } from "@mui/icons-material";
 interface Props {
-  user_id?: string;
+  userId?: string;
   firstname?: string;
   lastname?: string;
 }
 
 export default function ClientBotton({
-  user_id = "",
+  userId = "",
   firstname = "",
   lastname = "",
 }: Props) {
@@ -20,6 +20,8 @@ export default function ClientBotton({
 
   return (
     <Button
+      as={Link}
+      href={`/profile/${userId}`}
       className="justify-between"
       endContent={<Delete style={{ width: "25px", height: "auto" }} />}
     >

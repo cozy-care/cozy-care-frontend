@@ -7,6 +7,7 @@ import {
   DatePicker,
   Form,
   Input,
+  Link,
   Select,
   SelectItem,
 } from "@nextui-org/react";
@@ -252,12 +253,15 @@ export default function CaregiverDetail() {
           >
             <span>
               ยอมรับเงื่อนไข และ
-              <a
-                href="/app/profile/privacy_and_security/privacy"
-                className="font-bold z-50 cursor-pointer text-blue-500 underline"
+              <Button
+                disableAnimation
+                as={Link}
+                variant="light"
+                href="/profile/privacy_and_security/privacy"
+                className="font-bold z-50 cursor-pointer text-blue-500 underline p-0 "
               >
                 นโยบายส่วนตัว(กดเพื่ออ่าน)
-              </a>
+              </Button>
             </span>
           </Checkbox>
         </div>
