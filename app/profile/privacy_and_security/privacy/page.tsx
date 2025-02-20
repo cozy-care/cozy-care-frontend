@@ -27,6 +27,9 @@ export default function Privacy() {
     <main className="flex flex-col min-h-[100dvh]">
       <div className="grow flex flex-col items-center px-6 gap-6 mb-6">
         <div className="flex relative items-center gap-3 w-full h-[50px]">
+          <h1 className="absolute  w-full flex text-lg font-bold justify-center items-center ">
+            นโยบายความเป็นส่วนตัว
+          </h1>
           <Button
             as={Link}
             onPress={() => router.back()}
@@ -37,9 +40,6 @@ export default function Privacy() {
           >
             <ArrowBackIosNew />
           </Button>
-          <h1 className="absolute  w-full flex text-lg font-bold justify-center items-center ">
-            นโยบายความเป็นส่วนตัว
-          </h1>
         </div>
         <hr className="w-full  border-t-8 " />
         <ol className="text-white list-decimal space-y-4">
