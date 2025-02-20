@@ -15,7 +15,7 @@ import { ArrowBackIosNew } from "@mui/icons-material";
 import { useRouter } from "next/navigation";
 import ClientBotton from "./ClientBotton";
 
-import { Delete } from "@mui/icons-material";
+import { Delete, AddCircle } from "@mui/icons-material";
 import { clientMock } from "./ClientMock";
 interface ClientData {
   user_id: string;
@@ -57,6 +57,9 @@ export default function UserClient() {
               lastname={data.lastname}
             />
           ))}
+        </div>
+        <div>
+          <Button endContent={<AddCircle />}>เพิ่มผู้รับการดูแล</Button>
         </div>
       </div>
     </main>
