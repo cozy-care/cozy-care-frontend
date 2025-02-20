@@ -116,7 +116,7 @@ export default function Profile() {
             <Image
               alt="Chat profile"
               className="w-[150px] aspect-square rounded-full overflow-hidden object-cover object-center"
-              src={userData.profile_image}
+              src={userData.profile_image || "https://cdn-icons-png.flaticon.com/512/3135/3135715.png"}
             />
             <Button
               href={`/profile/${userData.user_id}`}

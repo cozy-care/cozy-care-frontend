@@ -4,7 +4,7 @@ import { Form, Input, Button, Link} from "@nextui-org/react";
 import { useEffect, useState } from "react";
 import { Google } from '@mui/icons-material';
 import Image from "next/image";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import axios, { AxiosResponse } from "axios";
 import { encryptPassword } from '../../lib/utils';
 
@@ -47,10 +47,18 @@ async function checkAuth(router: any): Promise<void> {
 
 export default function Login() {
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   useEffect(() => {
     document.title = "Login - Cozy Care";
-  }, []);
+
+    // Check for error messages in the URL query parameters
+    const error = searchParams.get('error');
+    if (error) {
+      setErrorMessage(error);
+    }
+  }, [searchParams]);
 
   const handleLogin = async (
     event: React.FormEvent<HTMLFormElement>
@@ -99,6 +107,12 @@ export default function Login() {
             COZY CARE
           </div>
         </div>
+
+        {errorMessage && (
+          <div className="text-red-500 text-center">
+            {errorMessage}
+          </div>
+        )}
 
         <Form
           className="w-full max-w-xs flex flex-col gap-4"
