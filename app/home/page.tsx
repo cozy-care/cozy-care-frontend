@@ -33,8 +33,8 @@ export default function Home() {
           <Link href="" className="flex flex-col items-center w-1/2 gap-2">
             <div className="w-full h-[130px] lg:h-[150px] rounded-2xl overflow-hidden">
               <img
-                alt="Caregiver background image"
-                src="https://landmarkresearchjournals.org/wp-content/uploads/2021/04/shutterstock_1052428820-360x292.jpg"
+                alt="Client background image"
+                src="https://anmj.org.au/wp-content/uploads/2020/03/Older-patient-specialling-in-acute-MAIN-WEB.jpg"
                 className="w-full h-full object-cover object-[50%_30%]"
               />
             </div>
