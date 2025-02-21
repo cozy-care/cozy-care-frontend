@@ -3,15 +3,21 @@
 import { ArrowBackIosNew, History, ThumbDown, ThumbUp } from "@mui/icons-material";
 import { Button } from "@nextui-org/react";
 import { useParams, useRouter } from "next/navigation";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 export default function AppointmentHistory() {
   const router = useRouter();
   const { id: chatId } = useParams() as { id: string };
+  const [isToggle, setIsToggle] = useState<boolean>(false);
 
   useEffect(() => {
     document.title = "History - Cozy Care";
   }, []);
+
+  
+  const cardToggle = () => {
+    setIsToggle(!isToggle);
+  };
 
   return (
     <main className="flex flex-col min-h-[100dvh]">
@@ -32,32 +38,18 @@ export default function AppointmentHistory() {
           </Button>
         </div>
 
-        <div className="flex flex-col w-full gap-4 px-4">
-          <Button disableAnimation radius="md" className="flex justify-between w-full h-max bg-white shadow-lg p-3">
-            <div className="w-max h-max flex justify-start"><History /></div>
+        <div className="flex flex-col w-full gap-6 px-4">
+          <Button onPress={cardToggle} disableAnimation radius="md" className="flex justify-start w-full h-max bg-white shadow-lg p-3 gap-3">
+            <div className="w-[30px] h-auto aspect-square flex self-start"><History sx={{width:'auto', height:'auto'}}/></div>
 
-            <div className="flex flex-col justify-self-start h-max gap-2">
+            <div className="flex flex-col items-start h-max gap-2 text-base">
               <p>วันที่ 11 ธันวาคม 2024</p>
               <p>รายละเอียดงาน : พาไปหาหมอ</p>
               <p>ราคา : 1000 บาท/วัน</p>
             </div>
 
-            <div className="w-max h-max text-[#09D810]"><ThumbUp /></div>
-          </Button>
-        </div>
-
-        
-        <div className="flex flex-col w-full gap-4 px-4">
-          <Button disableAnimation radius="md" className="flex justify-between w-full h-max bg-white shadow-lg p-3">
-            <div className="w-max h-max flex justify-start"><History /></div>
-
-            <div className="flex flex-col justify-self-start h-max gap-2">
-              <p>วันที่ 11 ธันวาคม 2024</p>
-              <p>รายละเอียดงาน : พาไปหาหมอ</p>
-              <p>ราคา : 1000 บาท/วัน</p>
-            </div>
-
-            <div className="w-max h-max text-[#FF0101]"><ThumbDown /></div>
+            <div className="w-[30px] h-auto aspect-square text-[#09D810] self-end ml-auto"><ThumbUp sx={{width:'auto', height:'auto'}}/></div>
+            {/* <div className="w-[30px] h-auto aspect-square text-[#FF0101] self-end ml-auto"><ThumbDown sx={{width:'auto', height:'auto'}}/></div> */}
           </Button>
         </div>
       </div>
