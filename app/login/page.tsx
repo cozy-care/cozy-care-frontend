@@ -1,12 +1,13 @@
 'use client';
 
-import { Form, Input, Button, Link} from "@nextui-org/react";
+import { Form, Input, Button, Link } from "@nextui-org/react";
 import { useEffect, useState } from "react";
 import { Google } from '@mui/icons-material';
 import Image from "next/image";
 import { useRouter, useSearchParams } from "next/navigation";
 import axios, { AxiosResponse } from "axios";
 import { encryptPassword } from '../../lib/utils';
+import { Suspense } from 'react';
 
 interface LoginCredentials {
   usernameOrEmail: string;
@@ -20,10 +21,7 @@ async function loginUser(credentials: LoginCredentials): Promise<{ success: bool
       credentials,
       { withCredentials: true }
     );
-
-    // Extract isOTP, userID, and email from the response
     const { isOTP, userID, email } = response.data;
-
     return { success: true, isOTP, userID, email };
   } catch (error) {
     console.error("There was an error logging in!", error);
@@ -45,51 +43,42 @@ async function checkAuth(router: any): Promise<void> {
   }
 }
 
-export default function Login() {
+function LoginContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   useEffect(() => {
     document.title = "Login - Cozy Care";
-
-    // Check for error messages in the URL query parameters
     const error = searchParams.get('error');
     if (error) {
       setErrorMessage(error);
     }
   }, [searchParams]);
 
-  const handleLogin = async (
-    event: React.FormEvent<HTMLFormElement>
-  ): Promise<void> => {
+  const handleLogin = async (event: React.FormEvent<HTMLFormElement>): Promise<void> => {
     event.preventDefault();
     const form = event.target as HTMLFormElement;
     const usernameOrEmail = (form.elements.namedItem("user_name") as HTMLInputElement).value;
     const password = encryptPassword((form.elements.namedItem("password") as HTMLInputElement).value);
-  
-    // Use the updated loginUser function that returns success, isOTP, email, and userID
+
     const { success, email, userID } = await loginUser({ usernameOrEmail, password });
 
     if (success) {
-        // Call the additional POST request to send email and userID
-        try {
-          await axios.post(
-            `${process.env.NEXT_PUBLIC_API_URL}/api/auth/sendEmailOtp`,
-            { email, user_id: userID }, // Send email and userID in the body
-            { withCredentials: true }
-          );
-          console.log("sendEmailOtp successful!");
-        } catch (error) {
-          console.error("Error during POST request to /api/auth/sendEmailOtp:", error);
-          return; // Optionally prevent navigation if the POST fails
-        }
+      try {
+        await axios.post(
+          `${process.env.NEXT_PUBLIC_API_URL}/api/auth/sendEmailOtp`,
+          { email, user_id: userID },
+          { withCredentials: true }
+        );
         localStorage.setItem("email", email as string);
         localStorage.setItem("userID", userID as string);
-        router.push("/otp"); // Navigate to /otp after the POST request
-
+        router.push("/otp");
+      } catch (error) {
+        console.error("Error during POST request to /api/auth/sendEmailOtp:", error);
+      }
     } else {
-      console.log("Login failed");
+      setErrorMessage("Login failed. Please try again.");
     }
   };
 
@@ -97,35 +86,30 @@ export default function Login() {
     window.location.href = `${process.env.NEXT_PUBLIC_API_URL}/api/auth/google`;
   };
 
-  checkAuth(router);
+  useEffect(() => {
+    checkAuth(router);
+  }, [router]);
+
   return (
     <main className="flex flex-col min-h-[100dvh] max-h-[100dvh] overflow-hidden">
       <div className="grow flex flex-col gap-8 items-center justify-center">
         <div className="flex flex-col items-center">
-          <Image src="/favicon.ico" width={80} height={80} alt="Logo" style={{width: "auto" , height: "auto"}} priority />
+          <Image src="/favicon.ico" width={80} height={80} alt="Logo" style={{ width: "auto", height: "auto" }} priority />
           <div className="font-bold text-2xl text-cozy-blue-light dark:text-cozy-blue-dark mt-2">
             COZY CARE
           </div>
         </div>
 
-        {errorMessage && (
-          <div className="text-red-500 text-center">
-            {errorMessage}
-          </div>
-        )}
+        {errorMessage && <div className="text-red-500 text-center">{errorMessage}</div>}
 
-        <Form
-          className="w-full max-w-xs flex flex-col gap-4"
-          validationBehavior="native"
-          onSubmit={handleLogin}
-        >
+        <Form className="w-full max-w-xs flex flex-col gap-4" validationBehavior="native" onSubmit={handleLogin}>
           <Input
             isRequired
             id="user_name"
             errorMessage="กรุณาใส่ชื่อผู้ใช้"
             label="ชื่อผู้ใช้"
             labelPlacement="outside"
-            name="username"
+            name="user_name"
             placeholder="Username"
             type="text"
           />
@@ -137,11 +121,11 @@ export default function Login() {
               errorMessage="กรุณาใส่รหัสผ่าน"
               label="รหัสผ่าน"
               labelPlacement="outside"
-              name="email"
+              name="password"
               placeholder="Password"
               type="password"
             />
-            <Link href={'/password_reset'} underline="hover" className="text-cozy-gray-light dark:text-black self-end">ลืมรหัสผ่าน ? </Link>
+            <Link href={'/password_reset'} underline="hover" className="text-cozy-gray-light dark:text-black self-end">ลืมรหัสผ่าน ?</Link>
           </div>
 
           <Button className="px-16 font-bold self-center mt-8" color="primary" type="submit" radius="full">
@@ -154,7 +138,14 @@ export default function Login() {
         <Button onPress={handleGoogleLogin} className="font-bold bg-cozy-blue-light dark:bg-cozy-teal-dark text-white dark:text-black" radius="full" color="secondary" startContent={<Google />}>เข้าสู่ระบบด้วย Google</Button>
         <Link href={'/register'} underline="hover" className="text-cozy-gray-light dark:text-black">ยังไม่มีบัญชี ? [ลงทะเบียน]</Link>
       </div>
-
     </main>
-  )
+  );
+}
+
+export default function Login() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <LoginContent />
+    </Suspense>
+  );
 }
