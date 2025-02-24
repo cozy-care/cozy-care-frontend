@@ -4,16 +4,20 @@ import NavBar from "@/components/NavBar";
 import {
   Button,
   Checkbox,
-  DatePicker,
   Form,
   Input,
   Link,
   Select,
   SelectItem,
 } from "@nextui-org/react";
+import { DatePicker } from "@mui/x-date-pickers/DatePicker";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import { DemoContainer, DemoItem } from "@mui/x-date-pickers/internals/demo";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { animate } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 import { gender } from "./caregiverIDMock";
+import dayjs from "dayjs";
 
 // อย่าลืมเปลี่ยนชื่อ Function
 export default function CaregiverDetail() {
@@ -145,13 +149,21 @@ export default function CaregiverDetail() {
             {(gender) => <SelectItem>{gender.label}</SelectItem>}
           </Select>
 
-          <DatePicker
+          <LocalizationProvider dateAdapter={AdapterDayjs}>
+            <DemoContainer components={["DatePicker"]}>
+              <DemoItem label="วัน/เดือน/ปี ที่เกิด">
+                <DatePicker defaultValue={dayjs()} />
+              </DemoItem>
+            </DemoContainer>
+          </LocalizationProvider>
+
+          {/* <DatePicker
             className=""
             isRequired
             labelPlacement="outside"
             label="วัน/เดือน/ปี ที่เกิด"
             onChange={(date) => handleInputChange("birthDate", date)}
-          ></DatePicker>
+          ></DatePicker> */}
           <div className="justify-center items-center flex gap-3 w-full">
             <Input
               endContent={
