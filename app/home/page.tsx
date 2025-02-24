@@ -10,12 +10,65 @@ import {
   TaskAlt,
 } from "@mui/icons-material";
 import { Button, Link } from "@nextui-org/react";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import Swal from "sweetalert2";
+import { useRouter } from "next/navigation";
+import axios, { AxiosResponse } from "axios";
+
+async function checkAuth(router: any, setUserId: (id: string) => void): Promise<void> {
+  try {
+    const response = await axios.get(
+      `${process.env.NEXT_PUBLIC_API_URL}/api/user/me`,
+      { withCredentials: true }
+    );
+    setUserId(response.data.user_id); // Store the userID in state
+  } catch (error) {
+    console.log("User not logged in or authentication failed.");
+  }
+}
 
 export default function Home() {
+  const router = useRouter();
+  const [userId, setUserId] = useState<string | null>(null);
+
   useEffect(() => {
     document.title = "Home - Cozy Care";
-  }, []);
+    checkAuth(router, setUserId);
+  }, [router]);
+
+  const handleClientConfirmation = (event: React.MouseEvent<HTMLAnchorElement>) => {
+    event.preventDefault();
+    Swal.fire({
+      title: "ยืนยันการสมัคร",
+      text: "คุณยืนยันหรือไม่ที่จะสมัครเป็นผู้ได้รับการดูแล หากกดยืนยันจะไม่สามารถเปลี่ยนได้",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonText: "ยืนยัน",
+      cancelButtonText: "ยกเลิก",
+      width: "400px",
+    }).then((result: { isConfirmed: any; }) => {
+      if (result.isConfirmed && userId) {
+        router.push(`/patient/${userId}`);
+      }
+    });
+  };
+
+  const handleCaregiverConfirmation = (event: React.MouseEvent<HTMLAnchorElement>) => {
+    event.preventDefault();
+    Swal.fire({
+      title: "ยืนยันการสมัคร",
+      text: "คุณยืนยันหรือไม่ที่จะสมัครเป็นผู้ดูแล หากกดยืนยันจะไม่สามารถเปลี่ยนได้",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonText: "ยืนยัน",
+      cancelButtonText: "ยกเลิก",
+      width: "400px",
+    }).then((result) => {
+      if (result.isConfirmed && userId) {
+        router.push(`/caregiver/${userId}`);
+      }
+    });
+  };
 
   return (
     <main className="flex flex-col min-h-[100dvh]">
@@ -30,10 +83,10 @@ export default function Home() {
           />
         </div>
         <div className="flex justify-between w-full gap-3 -mt-3">
-          <Link href="" className="flex flex-col items-center w-1/2 gap-2">
+          <Link href="" onClick={handleClientConfirmation} className="flex flex-col items-center w-1/2 gap-2">
             <div className="w-full h-[130px] lg:h-[150px] rounded-2xl overflow-hidden">
               <img
-                alt="Client background image"
+                alt="Client background button image"
                 src="https://anmj.org.au/wp-content/uploads/2020/03/Older-patient-specialling-in-acute-MAIN-WEB.jpg"
                 className="w-full h-full object-cover object-[50%_30%]"
               />
@@ -43,10 +96,10 @@ export default function Home() {
             </p>
           </Link>
 
-          <Link href="" className="flex flex-col items-center w-1/2 gap-2">
+          <Link href="" onClick={handleCaregiverConfirmation} className="flex flex-col items-center w-1/2 gap-2">
             <div className="w-full h-[130px] lg:h-[150px] rounded-2xl overflow-hidden">
               <img
-                alt="Caregiver background image"
+                alt="Caregiver background button image"
                 src="https://artistsinbuffalo.org/wp-content/uploads/2023/01/istockphoto-1374010907-612x612-1.jpg"
                 className="w-full h-full object-cover object-[50%_20%]"
               />
