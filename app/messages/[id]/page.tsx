@@ -4,10 +4,11 @@ import { useEffect, useRef, useState } from "react";
 import MyChatBox from "./MyChatBox";
 import { io, Socket } from "socket.io-client";
 import TheirChatBox from "./TheirChatBox";
-import { AddCircle, AddPhotoAlternate, ArrowBackIosNew, Info, Send } from '@mui/icons-material';
-import { Button, Link, Image, Input } from "@nextui-org/react";
+import { AddPhotoAlternate, ArrowBackIosNew, Info, KeyboardArrowDown, KeyboardArrowUp, Send } from '@mui/icons-material';
+import { Button, Link, Image, Input, DateRangePicker } from "@nextui-org/react";
 import axios, { AxiosResponse } from "axios";
 import { useParams, useRouter } from "next/navigation";
+import { parseDate, getLocalTimeZone } from "@internationalized/date";
 
 interface Message {
   message_id: string;
@@ -170,6 +171,26 @@ export default function Message() {
     (a, b) => new Date(b.sent_at).getTime() - new Date(a.sent_at).getTime()
   );
 
+  const [menuToggle, setMenuToggle] = useState<boolean>(false);
+  const menuToggleHandle = () => {
+    setMenuToggle(!menuToggle);
+    setDateRangeToggle(false);
+  };
+
+  const [dateRangeToggle, setDateRangeToggle] = useState<boolean>(false);
+  const dateRangeToggleHandle = () => {
+    setDateRangeToggle(!dateRangeToggle);
+  };
+
+  const [dateRange, setDateRange] = useState({
+    start: parseDate("2024-04-01"),
+    end: parseDate("2024-04-08"),
+  });
+  const dateRangeHandle = () => {
+    console.log(dateRange.start.toDate(getLocalTimeZone()));
+    console.log(dateRange.end.toDate(getLocalTimeZone()));
+  };
+
   return (
     <main className="flex flex-col h-[100dvh]">
       <div className="grow flex flex-col items-center">
@@ -221,10 +242,14 @@ export default function Message() {
 
         {/* Message Input */}
         <div className="flex items-center px-2 gap-3 w-full h-[50px] border-t-2">
-          <Button type="button" className="text-cozy-blue-light dark:text-cozy-teal-dark" isIconOnly radius="full" variant="light">
-            <AddCircle sx={{ fontSize: 30 }} />
+          <Button onPress={menuToggleHandle} type="button" className="text-cozy-blue-light dark:text-cozy-teal-dark" isIconOnly radius="full" variant="light">
+            {menuToggle ? (
+              <KeyboardArrowDown sx={{ fontSize: 30 }} />
+            ) : (
+              <KeyboardArrowUp sx={{ fontSize: 30 }} />
+            )}
           </Button>
-          <Button type="button" className="text-cozy-blue-light dark:text-cozy-teal-dark" isIconOnly radius="full" variant="light">
+          <Button isDisabled type="button" className="text-cozy-blue-light dark:text-cozy-teal-dark" isIconOnly radius="full" variant="light">
             <AddPhotoAlternate sx={{ fontSize: 30 }} />
           </Button>
           <Input
@@ -244,6 +269,40 @@ export default function Message() {
           >
             <Send sx={{ fontSize: 30 }} />
           </Button>
+
+          {menuToggle ? (
+            <>
+              <div className="absolute flex items-center justify-center left-0 bottom-[50px] px-4 w-full h-[75px] bg-[#C1E2F2]">
+                <Button onPress={dateRangeToggleHandle} radius="full" className="w-full font-bold text-base bg-white">
+                  เริ่มต้นการนัดหมาย
+                </Button>
+              </div>
+              {dateRangeToggle ? (
+                <div className="absolute flex flex-col items-center justify-center gap-2 left-0 bottom-[125px] w-full h-max py-4 px-4 bg-[#addbe9]">
+                  <p className="font-bold text-xl self-start">เลือกวันที่นัดหมาย</p>
+
+                  <DateRangePicker
+                    value={dateRange}
+                    onChange={(value) => {
+                      if (value) setDateRange(value);
+                    }}
+                    isRequired
+                    radius="full"
+                    className="w-full"
+                  />
+
+                  <div className="flex justify-between w-full">
+                    <Button onPress={menuToggleHandle} radius="full" className="font-bold text-base bg-[#FCF3F2] border-[#EB0000] border-2 text-[#EB0000]">
+                      ยกเลิก
+                    </Button>
+                    <Button onPress={dateRangeHandle} radius="full" className="font-bold text-base bg-[#E7F1DA] border-[#01AC46] border-2 text-[#01AC46]">
+                      ตกลง
+                    </Button>
+                  </div>
+                </div>
+              ) : (<div className="hidden" />)}
+            </>
+          ) : (<div className="hidden" />)}
         </div>
       </div>
     </main>
