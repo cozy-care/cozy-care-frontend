@@ -74,7 +74,7 @@ export default function CaregiverDetail() {
       <div className="grow flex flex-col justify-center items-center gap-3 ">
         <h1 className="font-bold">กรอกข้อมูลผู้ดูแล</h1>
         <div
-          className="w-[150px] h-[150px] bg-cozy-green-light rounded-2xl flex items-center justify-center cursor-pointer"
+          className="w-[150px] h-[150px] md:w-[180px] md:h-[180px] lg:w-[220px] lg:h-[220px] bg-cozy-green-light rounded-2xl flex items-center justify-center cursor-pointer"
           onClick={handleProfileImageUpload}
         >
           {profileImage ? (
@@ -97,7 +97,7 @@ export default function CaregiverDetail() {
           onChange={handleFileChange}
         />
 
-        <Form className="flex flex-col items-center gap-3 w-[350px]">
+        <Form className="flex flex-col items-center gap-3 w-[350px] md:w-[400px] lg:w-[450px]">
           <Input
             className=""
             isRequired
@@ -190,7 +190,7 @@ export default function CaregiverDetail() {
 
         <Form>
           <h2 className="font-bold mt-5">รายละเอียดเพิ่มเติมของผู้ดูแล</h2>
-          <div className="h-max w-[350px] bg-[#C1E2F2] flex flex-col gap-3 items-center p-5 rounded-lg">
+          <div className="h-max w-[350px] md:w-[400px] lg:w-[450px] bg-[#C1E2F2] flex flex-col gap-3 items-center p-5 rounded-lg">
             <Input
               id="language"
               label="ภาษาที่สื่อสารได้"
