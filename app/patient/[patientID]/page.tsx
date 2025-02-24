@@ -1,10 +1,10 @@
 "use client";
+import dayjs from "dayjs";
 
 import NavBar from "@/components/NavBar";
 import {
   Button,
   Checkbox,
-  DatePicker,
   Form,
   Input,
   Select,
@@ -13,6 +13,10 @@ import {
 import { animate } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 import { gender, typesPatient, physicalCondition } from "./patientIDMock";
+import { DatePicker } from "@mui/x-date-pickers/DatePicker";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import { DemoContainer, DemoItem } from "@mui/x-date-pickers/internals/demo";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 
 // อย่าลืมเปลี่ยนชื่อ Function
 export default function PatientDetail() {
@@ -74,7 +78,7 @@ export default function PatientDetail() {
       <div className="grow flex flex-col justify-center items-center gap-3 ">
         <h1 className="font-bold">กรอกข้อมูลผู้รับการดูแล</h1>
         <div
-          className="w-[150px] h-[150px] bg-cozy-green-light rounded-2xl flex items-center justify-center cursor-pointer"
+          className="w-[150px] h-[150px] md:w-[180px] md:h-[180px] lg:w-[220px] lg:h-[220px] bg-cozy-green-light rounded-2xl flex items-center justify-center cursor-pointer"
           onClick={handleProfileImageUpload}
         >
           {profileImage ? (
@@ -97,7 +101,7 @@ export default function PatientDetail() {
           onChange={handleFileChange}
         />
 
-        <Form className="flex flex-col items-center gap-3 w-[350px]">
+        <Form className="flex flex-col items-center gap-3 w-[350px]  md:w-[400px] lg:w-[450px]">
           <Input
             className=""
             isRequired
@@ -145,13 +149,21 @@ export default function PatientDetail() {
             {(gender) => <SelectItem>{gender.label}</SelectItem>}
           </Select>
 
-          <DatePicker
+          <LocalizationProvider dateAdapter={AdapterDayjs}>
+            <DemoContainer components={["DatePicker"]}>
+              <DemoItem label="วัน/เดือน/ปี ที่เกิด">
+                <DatePicker defaultValue={dayjs()} />
+              </DemoItem>
+            </DemoContainer>
+          </LocalizationProvider>
+
+          {/* <DatePicker
             className=""
             isRequired
             labelPlacement="outside"
             label="วัน/เดือน/ปี ที่เกิด"
             onChange={(date) => handleInputChange("birthDate", date)}
-          ></DatePicker>
+          ></DatePicker> */}
           <div className="justify-center items-center flex gap-3 w-full">
             <Input
               endContent={
@@ -192,7 +204,7 @@ export default function PatientDetail() {
           <h2 className="font-bold mt-5">
             รายละเอียดเพิ่มเติมของผู้รับการดูแล
           </h2>
-          <div className="h-max w-[350px] bg-[#C1E2F2] flex flex-col gap-3 items-center p-5 rounded-lg">
+          <div className="h-max w-[350px] md:w-[400px] lg:w-[450px] bg-[#C1E2F2] flex flex-col gap-3 items-center p-5 rounded-lg">
             <Select
               isRequired
               items={typesPatient}
