@@ -4,8 +4,8 @@ import { useEffect, useRef, useState } from "react";
 import MyChatBox from "./MyChatBox";
 import { io, Socket } from "socket.io-client";
 import TheirChatBox from "./TheirChatBox";
-import { AddPhotoAlternate, ArrowBackIosNew, Info, KeyboardArrowDown, KeyboardArrowUp, Send } from '@mui/icons-material';
-import { Button, Link, Image, Input, DateRangePicker } from "@nextui-org/react";
+import { AddPhotoAlternate, ArrowBackIosNew, Info, KeyboardArrowDown, KeyboardArrowUp, Send, StarBorderRounded, StarRounded } from '@mui/icons-material';
+import { Button, Link, Image, Input, DateRangePicker, RadioGroup, Radio } from "@nextui-org/react";
 import axios, { AxiosResponse } from "axios";
 import { useParams, useRouter } from "next/navigation";
 import { parseDate, getLocalTimeZone } from "@internationalized/date";
@@ -38,6 +38,9 @@ export default function Message() {
   const chat_id = chatId?.id ?? "";
 
   const messagesEndRef = useRef<HTMLDivElement | null>(null);
+
+  const userRole: string = "client"; // "caregiver", "client"
+  const hasAppointment: string = "has"; // "none", "pending", "has"
 
   useEffect(() => {
     document.title = "Someone name - Cozy Care";
@@ -174,12 +177,12 @@ export default function Message() {
   const [menuToggle, setMenuToggle] = useState<boolean>(false);
   const menuToggleHandle = () => {
     setMenuToggle(!menuToggle);
-    setDateRangeToggle(false);
+    setSubMenu(false);
   };
 
-  const [dateRangeToggle, setDateRangeToggle] = useState<boolean>(false);
-  const dateRangeToggleHandle = () => {
-    setDateRangeToggle(!dateRangeToggle);
+  const [subMenu, setSubMenu] = useState<boolean>(false);
+  const subMenuHandle = () => {
+    setSubMenu(!subMenu);
   };
 
   const [dateRange, setDateRange] = useState({
@@ -189,6 +192,30 @@ export default function Message() {
   const dateRangeHandle = () => {
     console.log(dateRange.start.toDate(getLocalTimeZone()));
     console.log(dateRange.end.toDate(getLocalTimeZone()));
+  };
+
+  const [reviewPanel, setReviewPanel] = useState<boolean>(false);
+  const finishServiceButtonHandle = () => {
+    setReviewPanel(!reviewPanel);
+    setCancelPenal(false);
+  };
+
+  const [cancelPenal, setCancelPenal] = useState<boolean>(false);
+  const cancelServiceButtonHandle = () => {
+    setCancelPenal(!cancelPenal);
+    setReviewPanel(false);
+  };
+
+  const [star, setStar] = useState<number>(1);
+
+  const [reviewText, setReviewText] = useState<string>("");
+  const finishReviewButtonHandle = () => {
+    console.log(reviewText + " with " + star + " star");
+  };
+
+  const [cancelReason, setCancelReason] = useState<string>("");
+  const finishCancelButtonHandle = () => {
+    console.log(cancelReason);
   };
 
   return (
@@ -270,37 +297,152 @@ export default function Message() {
             <Send sx={{ fontSize: 30 }} />
           </Button>
 
-          {menuToggle ? (
+          {menuToggle && hasAppointment !== "has" ? (
             <>
               <div className="absolute flex items-center justify-center left-0 bottom-[50px] px-4 w-full h-[75px] bg-[#C1E2F2]">
-                <Button onPress={dateRangeToggleHandle} radius="full" className="w-full font-bold text-base bg-white">
-                  เริ่มต้นการนัดหมาย
+                <Button isDisabled={userRole === "caregiver" && hasAppointment === "none"} onPress={subMenuHandle} radius="full" className="w-full font-bold text-base bg-white">
+                  {hasAppointment === "pending" ? (<p>ตรวจสอบการนัดหมาย</p>) : (<>{userRole === "client" ? (<p>เริ่มต้นการนัดหมาย</p>) : (<p>ยังไม่มีการนัดหมาย</p>)}</>)}
                 </Button>
               </div>
-              {dateRangeToggle ? (
-                <div className="absolute flex flex-col items-center justify-center gap-2 left-0 bottom-[125px] w-full h-max py-4 px-4 bg-[#addbe9]">
-                  <p className="font-bold text-xl self-start">เลือกวันที่นัดหมาย</p>
+              {subMenu ? (
+                <div className="absolute flex items-center justify-center left-0 bottom-[125px] w-full h-max py-4 px-4 bg-[#8AB9C9] opacity-95 rounded-t-large">
+                  <div className="flex flex-col items-center justify-center gap-4 w-full h-max p-4 bg-[#EDF8FC] rounded-large shadow-md">
+                    {userRole === "client" && hasAppointment === "none" ? (
+                      <>
+                        <p className="font-bold text-xl self-start">เลือกวันที่นัดหมาย</p>
+                        <DateRangePicker
+                          classNames={{ inputWrapper: ["bg-white"] }}
+                          value={dateRange}
+                          onChange={(value) => {
+                            if (value) setDateRange(value);
+                          }}
+                          isRequired
+                          radius="full"
+                          className="w-full"
+                        />
+                        <div className="flex justify-between w-full">
+                          <Button onPress={menuToggleHandle} radius="full" className="font-bold text-base bg-[#FCF3F2] border-[#EB0000] border-2 text-[#EB0000]">
+                            ยกเลิก
+                          </Button>
+                          <Button onPress={dateRangeHandle} radius="full" className="font-bold text-base bg-[#E7F1DA] border-[#01AC46] border-2 text-[#01AC46]">
+                            ตกลง
+                          </Button>
+                        </div>
+                      </>
+                    ) : hasAppointment === "pending" ? (
+                      <>
+                        <p className="font-bold text-xl self-start">วันนัดหมายที่ท่านเลือก</p>
 
-                  <DateRangePicker
-                    value={dateRange}
-                    onChange={(value) => {
-                      if (value) setDateRange(value);
-                    }}
-                    isRequired
-                    radius="full"
-                    className="w-full"
-                  />
+                        <div className="flex justify-between gap-4 items-center w-full text-base"><p className="flex justify-center grow p-2 rounded-full bg-white">9 กุมภาพันธ์ 2025 </p> <p className="w-max">ถึง</p> <p className="flex justify-center grow p-2 rounded-full bg-white">11 กุมภาพันธ์ 2025 </p></div>
 
-                  <div className="flex justify-between w-full">
-                    <Button onPress={menuToggleHandle} radius="full" className="font-bold text-base bg-[#FCF3F2] border-[#EB0000] border-2 text-[#EB0000]">
-                      ยกเลิก
-                    </Button>
-                    <Button onPress={dateRangeHandle} radius="full" className="font-bold text-base bg-[#E7F1DA] border-[#01AC46] border-2 text-[#01AC46]">
-                      ตกลง
-                    </Button>
+                        {userRole === "client" ? (
+                          <>
+                            <div className="w-max h-[150px] rounded-lg overflow-hidden">
+                              <video
+                                autoPlay
+                                loop
+                                muted
+                                className="w-full h-full"
+                              >
+                                <source src="/Hourglass.mp4" type="video/mp4" />
+                                Your browser does not support the video tag.
+                              </video>
+                            </div>
+
+                            <p className="flex justify-center w-full py-4 bg-white rounded-md shadow-md">โปรดรอผู้ดูแลตรวจสอบเพื่อยืนยันการนัดหมาย</p>
+                          </>
+                        ) : (
+                          <div className="flex justify-between w-full">
+                            <Button onPress={menuToggleHandle} radius="full" className="font-bold text-base bg-[#FCF3F2] border-[#EB0000] border-2 text-[#EB0000]">
+                              ยกเลิก
+                            </Button>
+                            <Button onPress={dateRangeHandle} radius="full" className="font-bold text-base bg-[#E7F1DA] border-[#01AC46] border-2 text-[#01AC46]">
+                              ตกลง
+                            </Button>
+                          </div>
+                        )}
+                      </>
+                    ) : (<div className="hidden" />)}
                   </div>
                 </div>
               ) : (<div className="hidden" />)}
+            </>
+          ) : menuToggle && hasAppointment === "has" ? (
+            <>
+              <div className="absolute flex items-center justify-center left-0 bottom-[50px] w-full h-[75px]">
+                {userRole === "client" ? (
+                  <Button onPress={finishServiceButtonHandle} radius="none" className="w-full h-full font-bold text-base bg-[#F3FBFF]">
+                    สิ้นสุดบริการ
+                  </Button>
+                ) : (<div className="hidden" />)}
+                <Button onPress={cancelServiceButtonHandle} radius="none" className="w-full h-full font-bold text-base bg-[#C1E2F2]">
+                  ยกเลิกการนัดหมาย
+                </Button>
+              </div>
+
+
+              <div className="absolute flex items-center justify-center left-0 bottom-[125px] w-full h-max py-4 px-4 bg-[#8AB9C9] opacity-95 rounded-t-large">
+                <div className="flex flex-col items-center justify-center gap-4 w-full h-max p-4 bg-[#EDF8FC] rounded-large shadow-md">
+                  {!reviewPanel && !cancelPenal ? (
+                    <>
+                      <p className="font-bold text-xl self-start">วันที่นัดหมาย</p>
+
+                      <div className="flex justify-between gap-4 items-center w-full text-base"><p className="flex justify-center grow p-2 rounded-full bg-white">9 กุมภาพันธ์ 2025 </p> <p className="w-max">ถึง</p> <p className="flex justify-center grow p-2 rounded-full bg-white">11 กุมภาพันธ์ 2025 </p></div>
+                    </>
+                  ) : reviewPanel && !cancelPenal ? (
+                    <>
+                      <p className="font-bold text-xl self-start">กรุณารีวิวก่อนสิ้นสุดบริการ</p>
+
+                      <div className="flex flex-row justify-between w-full gap-2">
+                        <Link onPress={() => setStar(1)} className="flex flex-col items-center">
+                          <StarRounded className="text-cozy-green-light w-[60px] h-auto" />
+                          <p className="text-black dark:text-white -mt-[7px]">1</p>
+                        </Link>
+                        <Link onPress={() => setStar(2)} className="flex flex-col items-center">
+                          {star >= 2 ? (<StarRounded className="text-cozy-green-light w-[60px] h-auto" />) : (<StarBorderRounded className="text-cozy-green-light w-[60px] h-auto" />)}
+                          <p className="text-black dark:text-white -mt-[7px]">2</p>
+                        </Link>
+                        <Link onPress={() => setStar(3)} className="flex flex-col items-center">
+                          {star >= 3 ? (<StarRounded className="text-cozy-green-light w-[60px] h-auto" />) : (<StarBorderRounded className="text-cozy-green-light w-[60px] h-auto" />)}
+                          <p className="text-black dark:text-white -mt-[7px]">3</p>
+                        </Link>
+                        <Link onPress={() => setStar(4)} className="flex flex-col items-center">
+                          {star >= 4 ? (<StarRounded className="text-cozy-green-light w-[60px] h-auto" />) : (<StarBorderRounded className="text-cozy-green-light w-[60px] h-auto" />)}
+                          <p className="text-black dark:text-white -mt-[7px]">4</p>
+                        </Link>
+                        <Link onPress={() => setStar(5)} className="flex flex-col items-center">
+                          {star >= 5 ? (<StarRounded className="text-cozy-green-light w-[60px] h-auto" />) : (<StarBorderRounded className="text-cozy-green-light w-[60px] h-auto" />)}
+                          <p className="text-black dark:text-white -mt-[7px]">5</p>
+                        </Link>
+                      </div>
+
+                      <Input value={reviewText} onValueChange={setReviewText} radius="lg" classNames={{ inputWrapper: ["bg-white"] }} placeholder="แสดงความคิดเห็นของท่าน...." type="ความคิดเห็น" />
+
+                      <div className="flex justify-end w-full">
+                        <Button onPress={finishReviewButtonHandle} radius="full" className="font-bold text-base bg-[#E7F1DA] border-[#01AC46] border-2 text-[#01AC46]">
+                          ยืนยัน
+                        </Button>
+                      </div>
+                    </>
+                  ) : (
+                    <>
+                      <p className="font-bold text-xl self-start">กรุณาบอกเหตุผลในการยกเลิก</p>
+                      
+                      <RadioGroup isRequired value={cancelReason} onValueChange={setCancelReason}>
+                        <Radio value="ทุจริตต่อหน้าที่ กระทำผิดอาญาโดยเจตนาแก่นายจ้าง">ทุจริตต่อหน้าที่ กระทำผิดอาญาโดยเจตนาแก่นายจ้าง</Radio>
+                        <Radio value="การบริการที่ไม่ได้คุณภาพ">การบริการที่ไม่ได้คุณภาพ</Radio>
+                        <Radio value="มาสาย/ขาดงานเกินข้อตกลง">มาสาย/ขาดงานเกินข้อตกลง</Radio>
+                      </RadioGroup>
+                      
+                      <div className="flex justify-end w-full">
+                        <Button isDisabled={cancelReason === ""} onPress={finishCancelButtonHandle} radius="full" className="font-bold text-base bg-[#E7F1DA] border-[#01AC46] border-2 text-[#01AC46]">
+                          ยืนยัน
+                        </Button>
+                      </div>
+                    </>
+                  )}
+                </div>
+              </div>
             </>
           ) : (<div className="hidden" />)}
         </div>
