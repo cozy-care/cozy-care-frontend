@@ -36,9 +36,13 @@ export default function Home() {
     checkAuth(router, setUserId);
   }, [router]);
 
-  const handleClientConfirmation = (event: React.MouseEvent<HTMLAnchorElement>) => {
-    event.preventDefault();
-    Swal.fire({
+  const handleClientConfirmation = async () => {
+    if (!userId) {
+      await Swal.fire("เกิดข้อผิดพลาด", "กรุณาเข้าสู่ระบบก่อนดำเนินการ", "error");
+      return;
+    }
+  
+    const result = await Swal.fire({
       title: "ยืนยันการสมัคร",
       text: "คุณยืนยันหรือไม่ที่จะสมัครเป็นผู้ได้รับการดูแล หากกดยืนยันจะไม่สามารถเปลี่ยนได้",
       icon: "warning",
@@ -46,16 +50,20 @@ export default function Home() {
       confirmButtonText: "ยืนยัน",
       cancelButtonText: "ยกเลิก",
       width: "400px",
-    }).then((result: { isConfirmed: any; }) => {
-      if (result.isConfirmed && userId) {
-        router.push(`/patient/${userId}`);
-      }
     });
+  
+    if (result.isConfirmed) {
+      router.push(`/patient/${userId}`);
+    }
   };
-
-  const handleCaregiverConfirmation = (event: React.MouseEvent<HTMLAnchorElement>) => {
-    event.preventDefault();
-    Swal.fire({
+  
+  const handleCaregiverConfirmation = async () => {
+    if (!userId) {
+      await Swal.fire("เกิดข้อผิดพลาด", "กรุณาเข้าสู่ระบบก่อนดำเนินการ", "error");
+      return;
+    }
+  
+    const result = await Swal.fire({
       title: "ยืนยันการสมัคร",
       text: "คุณยืนยันหรือไม่ที่จะสมัครเป็นผู้ดูแล หากกดยืนยันจะไม่สามารถเปลี่ยนได้",
       icon: "warning",
@@ -63,11 +71,11 @@ export default function Home() {
       confirmButtonText: "ยืนยัน",
       cancelButtonText: "ยกเลิก",
       width: "400px",
-    }).then((result) => {
-      if (result.isConfirmed && userId) {
-        router.push(`/caregiver/${userId}`);
-      }
     });
+  
+    if (result.isConfirmed) {
+      router.push(`/caregiver/${userId}`);
+    }
   };
 
   return (
@@ -83,7 +91,7 @@ export default function Home() {
           />
         </div>
         <div className="flex justify-between w-full gap-3 -mt-3">
-          <Link href="" onClick={handleClientConfirmation} className="flex flex-col items-center w-1/2 gap-2">
+          <button onClick={handleClientConfirmation} className="flex flex-col items-center w-1/2 gap-2">
             <div className="w-full h-[130px] lg:h-[150px] rounded-2xl overflow-hidden">
               <img
                 alt="Client background button image"
@@ -94,9 +102,9 @@ export default function Home() {
             <p className="text-sm text-black dark:text-white font-semibold">
               เริ่มต้นเป็นผู้รับการดูแล
             </p>
-          </Link>
+          </button>
 
-          <Link href="" onClick={handleCaregiverConfirmation} className="flex flex-col items-center w-1/2 gap-2">
+          <button onClick={handleCaregiverConfirmation} className="flex flex-col items-center w-1/2 gap-2">
             <div className="w-full h-[130px] lg:h-[150px] rounded-2xl overflow-hidden">
               <img
                 alt="Caregiver background button image"
@@ -107,7 +115,7 @@ export default function Home() {
             <p className="text-sm text-black dark:text-white font-semibold">
               เริ่มต้นเป็นผู้ดูแลสุขภาพ
             </p>
-          </Link>
+          </button>
         </div>
 
         <div className="flex flex-col items-center w-full gap-2">

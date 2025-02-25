@@ -1,45 +1,61 @@
 "use client";
 import dayjs from "dayjs";
-
 import NavBar from "@/components/NavBar";
 import {
   Button,
   Checkbox,
-  Form,
   Input,
   Select,
   SelectItem,
 } from "@nextui-org/react";
-import { animate } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 import { gender, typesPatient, physicalCondition } from "./patientIDMock";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
-import { DemoContainer, DemoItem } from "@mui/x-date-pickers/internals/demo";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import axios from "axios";
+import Swal from "sweetalert2";
+import { useRouter } from "next/navigation";
 
-// อย่าลืมเปลี่ยนชื่อ Function
+async function checkAuth(setUserId: (id: string) => void): Promise<void> {
+  try {
+    const response = await axios.get(
+      `${process.env.NEXT_PUBLIC_API_URL}/api/user/me`,
+      { withCredentials: true }
+    );
+    setUserId(response.data.user_id);
+  } catch (error) {
+    console.log("User not logged in or authentication failed.");
+  }
+}
+
 export default function PatientDetail() {
-  const [profileImage, setProfileImage] = useState<string | null>(null);
+  const router = useRouter();
   const fileInputRef = useRef<HTMLInputElement | null>(null);
-  const [formData, setFormData] = useState({
-    firstName: "",
-    middleName: "",
-    password: "",
-    gender: "",
-    birthDate: "",
+  const [profileImage, setProfileImage] = useState<string | null>(null);
+  const [selectedFile, setSelectedFile] = useState<File | null>(null);
+  const [userId, setUserId] = useState<string | null>(null);
+  const [errors, setErrors] = useState<Record<string, boolean>>({});
+  const [formData, setFormData] = useState<{ [key: string]: any }>({
+    firstname: "",
+    middlename: "",
+    lastname: "",
+    sex: "",
+    birth_date: dayjs().format("YYYY-MM-DD"),
     weight: "",
     height: "",
-    language: "",
-    experience: "",
-    educationAndTraining: "",
-    certificate: null,
-    agreed: false,
+    client_type: "",
+    phy_con: "",
+    con_dis: "",
+    drug_all: "",
+    drug_used: "",
+    is_term: true,
+    profile_image: "",
   });
 
-  // อย่าลืมเปลี่ยน Title
   useEffect(() => {
     document.title = "PatientDetail - Cozy Care";
+    checkAuth(setUserId);
   }, []);
 
   const handleProfileImageUpload = () => {
@@ -49,6 +65,7 @@ export default function PatientDetail() {
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (file) {
+      setSelectedFile(file);
       const reader = new FileReader();
       reader.onload = () => {
         setProfileImage(reader.result as string);
@@ -57,22 +74,81 @@ export default function PatientDetail() {
     }
   };
 
-  const handleInputChange = (key: string, value: any) => {
+  const handleInputChange = (key: keyof typeof formData, value: any) => {
     setFormData((prev) => ({ ...prev, [key]: value }));
+    setErrors((prev) => ({ ...prev, [key]: false }));
   };
 
-  const handleSave = () => {
-    // รวมข้อมูลทั้งหมดที่ต้องการบันทึก
-    const dataToSave = {
-      ...formData,
-      profileImage, // รูปโปรไฟล์ที่อัปโหลด
-    };
+  const handleSave = async () => {
+    const requiredFields = ["firstname", "lastname", "sex", "client_type", "phy_con"];
+    const newErrors: Record<string, boolean> = {};
+    let firstErrorField: string | null = null;
 
-    console.log("บันทึกข้อมูล:", dataToSave);
+    requiredFields.forEach((field) => {
+      if (!formData[field]) {
+        newErrors[field] = true;
+        if (!firstErrorField) {
+          firstErrorField = field;
+        }
+      }
+    });
+
+    if (Object.keys(newErrors).length > 0) {
+      setErrors(newErrors);
+      if (firstErrorField) {
+        const element = document.getElementById(firstErrorField);
+        if (element) {
+          element.scrollIntoView({ behavior: "smooth", block: "center" });
+        }
+      }
+      return;
+    }
+
+    try {
+      let imgPath = "";
+      if (selectedFile) {
+        const uploadForm = new FormData();
+        uploadForm.append("file", selectedFile);
+
+        const uploadRes = await axios.post(
+          `${process.env.NEXT_PUBLIC_API_URL}/api/upload`,
+          uploadForm
+        );
+
+        imgPath = uploadRes.data.filePath;
+      }
+
+      const dataToSave = {
+        ...formData,
+        profile_image: imgPath,
+        user_id: userId,
+      };
+
+      await axios.post(
+        `${process.env.NEXT_PUBLIC_API_URL}/api/client/create-sub-client`,
+        dataToSave
+      );
+
+      Swal.fire({
+        icon: "success",
+        title: "สมัครเป็นผู้รับการดูแลสำเร็จแล้ว",
+        text: "ข้อมูลของคุณถูกบันทึกเรียบร้อย",
+        confirmButtonText: "ตกลง",
+      }).then(() => {
+        router.push(`/profile/${userId}/client`);
+      });
+    } catch (error) {
+      console.error("❌ เกิดข้อผิดพลาด:", error);
+      Swal.fire({
+        icon: "error",
+        title: "เกิดข้อผิดพลาด",
+        text: "ไม่สามารถบันทึกข้อมูลได้ กรุณาลองใหม่",
+        confirmButtonText: "ตกลง",
+      });
+    }
   };
 
   return (
-    //<main className="flex flex-col min-h-[calc(100svh-3.5rem)]">
     <main className="flex flex-col min-h-[100dvh]">
       <NavBar />
       <div className="grow flex flex-col justify-center items-center gap-3 ">
@@ -89,7 +165,7 @@ export default function PatientDetail() {
             />
           ) : (
             <span className="text-cozy-lightblue-light font-bold text-center">
-              คลิกเพื่ออัปโหลดรูปภาพ
+              คลิกเพื่ออัปโหลดรูปภาพผู้รับการดูแล
             </span>
           )}
         </div>
@@ -101,190 +177,152 @@ export default function PatientDetail() {
           onChange={handleFileChange}
         />
 
-        <Form className="flex flex-col items-center gap-3 w-[350px]  md:w-[400px] lg:w-[450px]">
+        {/* ✅ ฟอร์มกรอกข้อมูล */}
+        <div className="flex flex-col items-center gap-3 w-[350px] md:w-[400px] lg:w-[450px]">
           <Input
-            className=""
             isRequired
-            id="fistName"
-            errorMessage="กรุณาใส่ชื่อจริง"
-            label="ชื่อจริง"
             labelPlacement="outside"
-            name="fistName"
+            label="ชื่อจริง"
+            name="firstname"
             placeholder="ชื่อจริง"
             type="text"
-            onChange={(e) => handleInputChange("firstName", e.target.value)}
+            className={errors.firstname ? "border-red-500" : ""}
+            onChange={(e) => handleInputChange("firstname", e.target.value)}
           />
           <Input
-            className=""
-            id="middleName"
+            labelPlacement="outside"
             label="ชื่อกลาง"
-            labelPlacement="outside"
-            name="middleName"
-            placeholder="ชื่อกลาง(ถ้ามี)"
+            name="middlename"
+            placeholder="ชื่อกลาง (ถ้ามี)"
             type="text"
-            onChange={(e) => handleInputChange("middleName", e.target.value)}
+            onChange={(e) => handleInputChange("middlename", e.target.value)}
           />
-
           <Input
-            className=""
             isRequired
-            id="lastname"
-            errorMessage="กรุณาใส่นามสกุล"
-            label="นามสกุล"
             labelPlacement="outside"
+            label="นามสกุล"
             name="lastname"
             placeholder="นามสกุล"
             type="text"
+            className={errors.lastname ? "border-red-500" : ""}
             onChange={(e) => handleInputChange("lastname", e.target.value)}
           />
+
+          {/* ✅ Select เพศ */}
           <Select
-            className=""
             isRequired
-            items={gender}
-            label="เพศสภาพ"
             labelPlacement="outside"
-            placeholder="เพศ"
-            onChange={(key) => handleInputChange("gender", key)}
+            items={gender}
+            label="เพศ"
+            placeholder="เลือกเพศ"
+            className={errors.sex ? "border-red-500" : ""}
+            onSelectionChange={(selectedKey) => {
+              const key = Array.from(selectedKey as Set<string>)[0];
+              // ส่ง key โดยตรงแทน label
+              handleInputChange("sex", key);
+            }}
           >
-            {(gender) => <SelectItem>{gender.label}</SelectItem>}
+            {(gender) => <SelectItem key={gender.key}>{gender.label}</SelectItem>}
           </Select>
 
+          {/* ✅ Date Picker วันเกิด */}
           <LocalizationProvider dateAdapter={AdapterDayjs}>
-            <DemoContainer components={["DatePicker"]}>
-              <DemoItem label="วัน/เดือน/ปี ที่เกิด">
-                <DatePicker defaultValue={dayjs()} />
-              </DemoItem>
-            </DemoContainer>
+            <DatePicker
+              label="วัน/เดือน/ปี ที่เกิด"
+              defaultValue={dayjs()}
+              onChange={(date) =>
+                handleInputChange("birth_date", dayjs(date).format("YYYY-MM-DD"))
+              }
+            />
           </LocalizationProvider>
 
-          {/* <DatePicker
-            className=""
-            isRequired
-            labelPlacement="outside"
-            label="วัน/เดือน/ปี ที่เกิด"
-            onChange={(date) => handleInputChange("birthDate", date)}
-          ></DatePicker> */}
-          <div className="justify-center items-center flex gap-3 w-full">
+          {/* ✅ Input น้ำหนักและส่วนสูง */}
+          <div className="flex gap-3 w-full">
             <Input
-              endContent={
-                <div className="pointer-events-none flex items-center">
-                  <span className="text-default-400 text-small">กก.</span>
-                </div>
-              }
-              className=""
-              isRequired
-              id="weight"
-              label="น้ำหนัก"
               labelPlacement="outside"
-              name="weight"
-              placeholder="xxx"
+              label="น้ำหนัก (kg)"
               type="number"
+              placeholder="(เช่น 55.50)"
               onChange={(e) => handleInputChange("weight", e.target.value)}
             />
             <Input
-              endContent={
-                <div className="pointer-events-none flex items-center">
-                  <span className="text-default-400 text-small">กก.</span>
-                </div>
-              }
-              className=""
-              isRequired
-              id="height"
-              label="ส่วนสูง"
               labelPlacement="outside"
-              name="height"
-              placeholder="xxx"
+              label="ส่วนสูง (cm)"
               type="number"
+              placeholder="(เช่น 165.75)"
               onChange={(e) => handleInputChange("height", e.target.value)}
             />
           </div>
-        </Form>
-
-        <Form>
-          <h2 className="font-bold mt-5">
-            รายละเอียดเพิ่มเติมของผู้รับการดูแล
-          </h2>
-          <div className="h-max w-[350px] md:w-[400px] lg:w-[450px] bg-[#C1E2F2] flex flex-col gap-3 items-center p-5 rounded-lg">
-            <Select
-              isRequired
-              items={typesPatient}
-              label="ประเภทของผู้ได้รับการดูแล"
-              labelPlacement="outside"
-              name="typeOfPatient"
-              placeholder="ประเภทของผู้ได้รับการดูแล"
-            >
-              {(typesPatient) => <SelectItem>{typesPatient.label}</SelectItem>}
-            </Select>
-
-            <Select
-              isRequired
-              items={physicalCondition}
-              label="สถาวะทางร่างกาย"
-              labelPlacement="outside"
-              name="physicalCondition"
-              placeholder="สถาวะทางร่างกาย"
-            >
-              {(physicalCondition) => (
-                <SelectItem>{physicalCondition.label}</SelectItem>
-              )}
-            </Select>
-
-            <Input
-              id="chronicDiseases"
-              label="โรคประจำตัว"
-              labelPlacement="outside"
-              name="chronicDiseases"
-              placeholder="โรคประจำตัว (ถ้ามี)"
-              type="text"
-            />
-            <Input
-              id="drugAllergyHistory"
-              label="ประวัติการแพ้ยา"
-              labelPlacement="outside"
-              name="drugAllergyHistory"
-              placeholder="ประวัติการแพ้ยา (ถ้ามี)"
-              type="text"
-            />
-            <Input
-              id="listOfRegularMedications"
-              label="รายการยาที่ต้องใช้ประจำ"
-              labelPlacement="outside"
-              name="listOfRegularMedications"
-              placeholder="รายการยาที่ต้องใช้ประจำ (ถ้ามี)"
-              type="text"
-            />
-          </div>
-        </Form>
-        <div className="">
-          <Checkbox
-            defaultSelected
-            radius="sm"
-            onChange={(checked) => handleInputChange("agreed", checked)}
-          >
-            <span>
-              ยอมรับเงื่อนไข และ
-              <strong>
-                <a href="#" className="font-bold">
-                  นโยบายส่วนตัว(กดเพื่ออ่าน)
-                </a>
-              </strong>
-            </span>
-          </Checkbox>
         </div>
-        <div className="flex flew-row gap-5 mt-3 mb-5">
-          <Button
-            radius="full"
-            className="font-bold"
-            // onPress={handleSave}
+
+        {/* ✅ รายละเอียดเพิ่มเติม */}
+        <div className="w-[350px] md:w-[400px] lg:w-[450px] bg-[#C1E2F2] flex flex-col gap-3 items-center p-5 rounded-lg">
+          <Select
+            labelPlacement="outside"
+            isRequired
+            items={typesPatient}
+            label="ประเภทของผู้ได้รับการดูแล"
+            placeholder="เลือกประเภท"
+            className={errors.client_type ? "border-red-500" : ""}
+            onSelectionChange={(selectedKey) => {
+              const key = Array.from(selectedKey as Set<string>)[0];
+              // ส่ง key โดยตรงแทน label
+              handleInputChange("client_type", key);
+            }}
           >
-            ยกเลิก
-          </Button>
-          <Button
-            radius="full"
-            color="primary"
-            className="font-bold"
-            onPress={handleSave}
+            {(typesPatient) => <SelectItem key={typesPatient.key}>{typesPatient.label}</SelectItem>}
+          </Select>
+
+          <Select
+            labelPlacement="outside"
+            isRequired
+            items={physicalCondition}
+            label="สถาวะทางร่างกาย"
+            placeholder="เลือกสถาวะ"
+            className={errors.phy_con ? "border-red-500" : ""}
+            onSelectionChange={(selectedKey) => {
+              const key = Array.from(selectedKey as Set<string>)[0];
+              // ส่ง key โดยตรงแทน label
+              handleInputChange("phy_con", key);
+            }}
           >
+            {(physicalCondition) => <SelectItem key={physicalCondition.key}>{physicalCondition.label}</SelectItem>}
+          </Select>
+
+          <Input
+            labelPlacement="outside"
+            label="โรคประจำตัว"
+            placeholder="โรคประจำตัว (ถ้ามี)"
+            type="text"
+            onChange={(e) => handleInputChange("con_dis", e.target.value)}
+          />
+          <Input
+            labelPlacement="outside"
+            label="ประวัติการแพ้ยา"
+            placeholder="ประวัติการแพ้ยา (ถ้ามี)"
+            type="text"
+            onChange={(e) => handleInputChange("drug_all", e.target.value)}
+          />
+          <Input
+            labelPlacement="outside"
+            label="รายการยาที่ต้องใช้ประจำ"
+            placeholder="รายการยา (ถ้ามี)"
+            type="text"
+            onChange={(e) => handleInputChange("drug_used", e.target.value)}
+          />
+        </div>
+
+        {/* ✅ Checkbox ยอมรับเงื่อนไข */}
+        <Checkbox
+          onChange={(e) => handleInputChange("is_term", e.target.checked)}
+        >
+          ยอมรับเงื่อนไขและ <strong><a href="#">นโยบายส่วนตัว</a></strong>
+        </Checkbox>
+
+        {/* ✅ ปุ่มบันทึก */}
+        <div className="flex gap-5 mt-3 mb-5">
+          <Button radius="full" onClick={() => router.back()}>ยกเลิก</Button>
+          <Button radius="full" color="primary" onPress={handleSave}>
             บันทึก
           </Button>
         </div>

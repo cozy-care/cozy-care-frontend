@@ -1,6 +1,6 @@
 export const gender = [
-  { key: "man", label: "ผู้ชาย" },
-  { key: "woman", label: "ผู้หญิง" },
+  { key: "male", label: "ชาย" },
+  { key: "female", label: "หญิง" },
 
 ];
 

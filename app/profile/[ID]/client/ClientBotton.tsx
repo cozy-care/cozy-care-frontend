@@ -1,29 +1,55 @@
-import { Card, CardBody, Image, Button } from "@nextui-org/react";
+import { Button } from "@nextui-org/react";
 import Link from "next/link";
 import axios from "axios";
-import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
 import { Delete } from "@mui/icons-material";
+
 interface Props {
-  userId?: string;
+  sub_client_id?: string;
   firstname?: string;
   lastname?: string;
+  onDelete?: (sub_client_id: string) => void; // เพิ่ม callback สำหรับลบข้อมูล
 }
 
 export default function ClientBotton({
-  userId = "",
+  sub_client_id = "",
   firstname = "",
   lastname = "",
+  onDelete,
 }: Props) {
-  const [user1Id, setUser1Id] = useState<string | null>(null);
-  const router = useRouter();
+
+  // ฟังก์ชันลบ SubClient
+  const handleDelete = async (event: React.MouseEvent) => {
+    event.preventDefault(); // ป้องกันการนำทางไปหน้า `/patient/${sub_client_id}`
+
+    if (!sub_client_id) return;
+
+    try {
+      await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/api/client/delete-sub-client`, {
+        sub_client_id
+      });
+
+      console.log(`Deleted sub_client_id: ${sub_client_id}`);
+
+      // ถ้ามี `onDelete` ให้เรียกใช้งานเพื่ออัปเดต UI
+      if (onDelete) {
+        onDelete(sub_client_id);
+      }
+    } catch (error) {
+      console.error("Error deleting sub client:", error);
+    }
+  };
 
   return (
     <Button
       as={Link}
-      href={`/profile/${userId}`}
+      href={`/patient/${sub_client_id}/edit`}
       className="justify-between"
-      endContent={<Delete style={{ width: "25px", height: "auto" }} />}
+      endContent={
+        <Delete
+          style={{ width: "25px", height: "auto" }}
+          onClick={handleDelete} // เรียกใช้ฟังก์ชันลบเมื่อคลิก
+        />
+      }
     >
       {firstname} {lastname}
     </Button>

@@ -141,6 +141,7 @@ export default function Profile() {
           <Button
             radius="full"
             className="flex justify-between shadow-lg bg-cozy-lightblue-light text-[#1F5670]"
+            onPress={() => router.push(`/profile/${userData.user_id}/client`)}
           >
             <div className="flex gap-5 items-center">
               <AccountBox />
