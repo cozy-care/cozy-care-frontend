@@ -43,7 +43,10 @@ export default function Profile() {
           `${process.env.NEXT_PUBLIC_API_URL}/api/user/me`,
           { withCredentials: true }
         );
-        setUserData(response.data);
+        setUserData({
+          ...response.data,
+          profile_image: `${process.env.NEXT_PUBLIC_API_URL}${response.data.profile_image}`,
+        });
       } catch (error) {
         console.error("Error fetching user data:", error);
         window.alert("Failed to fetch user data. Using default dev data.");
@@ -119,7 +122,8 @@ export default function Profile() {
               src={userData.profile_image || "https://cdn-icons-png.flaticon.com/512/3135/3135715.png"}
             />
             <Button
-              href={`/profile/${userData.user_id}`}
+              as={Link}
+              href={`/profile/${userData.user_id}/edit`}
               className="absolute bottom-0 right-0 aspect-square z-10"
               color="primary"
               radius="full"
