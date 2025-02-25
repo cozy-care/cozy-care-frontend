@@ -43,7 +43,7 @@ export default function Message() {
   const hasAppointment: string = "has"; // "none", "pending", "has"
 
   useEffect(() => {
-    document.title = "Someone name - Cozy Care";
+    document.title = "Message - Cozy Care";
   }, []);
 
   // Scroll to the bottom of the chat when a new message is added
