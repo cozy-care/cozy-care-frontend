@@ -10,8 +10,9 @@ import {
   TimeInput,
 } from "@nextui-org/react";
 import { useEffect } from "react";
-import { services, employments } from "@/app/caregiver/add/addMockCaregiver";
-import { ArrowBackIosNew } from "@mui/icons-material";
+import { employments } from "@/app/caregiver/add/addMockCaregiver";
+import { clientName } from "./addMockPatient";
+import { AddCircle, ArrowBackIosNew } from "@mui/icons-material";
 import { useRouter } from "next/navigation";
 
 import { LocationOn, Edit } from "@mui/icons-material";
@@ -19,7 +20,7 @@ import { LocationOn, Edit } from "@mui/icons-material";
 export default function Add() {
   const router = useRouter();
   useEffect(() => {
-    document.title = "Caregiver Add - Cozy Care";
+    document.title = "Patient Add - Cozy Care";
   }, []);
 
   return (
@@ -37,21 +38,20 @@ export default function Add() {
             <ArrowBackIosNew />
           </Button>
           <h1 className="absolute  w-full flex text-lg font-bold justify-center items-center ">
-            เพิ่มข้อมูลผู้ดูแล
+            เพิ่มข้อมูลผู้รับการดูแล
           </h1>
         </div>
         <div className="flex flex-col w-full md:w-[45%] lg:w-[50%] gap-1">
-          <h2>เลือกบริการที่ต้องการรับการดูแล</h2>
-          <Select
-            className="w-full"
-            placeholder="สามารถเลือกได้มากกว่า 1 รายการ"
-            selectionMode="multiple"
-          >
-            {services.map((service) => (
-              <SelectItem key={service.key}>{service.label}</SelectItem>
+          <h2>เลือกบุคคลที่ต้องการรับการดูแล</h2>
+          <Select className="w-full" placeholder="เลือกบุคคลที่คุณต้องการดูแล">
+            {clientName.map((clientName) => (
+              <SelectItem key={clientName.key}>
+                {`${clientName.firstname} ${clientName.lastname}`}
+              </SelectItem>
             ))}
           </Select>
         </div>
+        <Button endContent={<AddCircle />}>เพิ่มผู้รับการดูแล</Button>
         <div className="bg-cozy-green-dark rounded-full flex flex-row p-2 px-3 gap-2 justify-between items-center w-full md:w-[45%] lg:w-[50%]">
           <p className="w-max text-nowrap">เริ่มต้น</p>
           <DatePicker radius="full" size="sm" className="grow"></DatePicker>
@@ -96,6 +96,8 @@ export default function Add() {
         <div className="w-full flex flex-col gap-2 md:w-[45%] lg:w-[50%]">
           <h3 className="font-bold gap-1">ความต้องการเพิ่มเติม</h3>
           <div className="text-black flex flex-col w-full  h-full gap-1 bg-cozy-lightblue-light rounded-2xl p-2">
+            <p>ภาษาที่สื่อสารได้</p>
+            <Input className="w-full" placeholder="เช่น ไทย อังกฤษ"></Input>
             <p>การจ้างงาน</p>
             <Select
               className="w-full"
@@ -109,13 +111,21 @@ export default function Add() {
             <p className="w-full">ราคา</p>
             <Input
               className="w-full"
-              placeholder="เช่น 800-1,600บาท/วัน , 9,000-15,000บาท/เดือน, ไม่ระบุ"
+              placeholder="ระบุ (หรือไม่ระบุก็ได้)"
+            ></Input>
+            <h4>ความสามารถเพิ่มเติม</h4>
+            <Input
+              className=""
+              placeholder="เช่น ขับรถ (มีรถ), ทำอาหาร"
             ></Input>
           </div>
         </div>
         <div className="flex flex-col w-full h-full gap-1 bg-[#1F5670] rounded-2xl p-2 md:w-[45%] lg:w-[50%]">
-          <h4>ความสามารถเพิ่มเติม</h4>
-          <Input className="" placeholder="เช่น ขับรถ (มีรถ), ทำอาหาร"></Input>
+          <h4>สิ่งที่เพิ่มเติมให้</h4>
+          <Input
+            className=""
+            placeholder="เช่น มีที่พักให้ มีมื้ออาหารให้"
+          ></Input>
         </div>
         <Button
           radius="full"
