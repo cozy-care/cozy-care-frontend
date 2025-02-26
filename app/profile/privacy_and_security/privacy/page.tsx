@@ -10,7 +10,7 @@ import {
   TimeInput,
 } from "@nextui-org/react";
 import { useEffect } from "react";
-import { services, employments } from "@/app/caregiver/add/addMock";
+import { services, employments } from "@/app/caregiver/add/addMockCaregiver";
 import { ArrowBackIosNew } from "@mui/icons-material";
 import { useRouter } from "next/navigation";
 
