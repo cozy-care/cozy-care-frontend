@@ -11,8 +11,8 @@ interface Chat {
   chatId: number;
   profileImage: string;
   username: string;
-  lastMessage?: string; // Make lastMessage optional
-  lastMessageTime?: string; // Make lastMessageTime optional
+  lastMessage?: string;
+  lastMessageTime?: string;
 }
 
 export default function Message() {
@@ -27,16 +27,15 @@ export default function Message() {
     const fetchChats = async () => {
       try {
         const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/chat/me`, {
-          withCredentials: true, // Ensure token is included
+          withCredentials: true,
         });
 
-        // Map API response to match the UI structure
         const mappedChats: Chat[] = response.data.map((chat: any) => ({
           chatId: chat.chat_id,
           profileImage: chat.profile_image || "https://cdn-icons-png.flaticon.com/512/3135/3135715.png",
           username: chat.full_name || "ไม่ทราบชื่อ",
-          lastMessage: chat.content || null, // Ensure null if no message
-          lastMessageTime: chat.last_time_sent || null, // Ensure null if no timestamp
+          lastMessage: chat.content || null,
+          lastMessageTime: chat.last_time_sent || null,
         }));
 
         setChatData(mappedChats);
@@ -48,9 +47,30 @@ export default function Message() {
     fetchChats();
   }, []);
 
-  // Navigate to the chat page when clicking a chat
-  const handleChatClick = (chatId: number) => {
-    router.push(`/messages/${chatId}`);
+  // แปลง lastMessageTime ให้อยู่ในรูปแบบที่อ่านง่าย
+  const formatTime = (timeString: string | null) => {
+    if (!timeString) return null;
+  
+    // ตรวจสอบว่า timeString มีคำว่า "ชั่วโมง" หรือไม่
+    if (!timeString.includes("ชั่วโมง")) {
+      return timeString; // ถ้าไม่ใช่ชั่วโมง ให้คืนค่าตามที่ได้รับจาก Backend
+    }
+  
+    // ดึงตัวเลขชั่วโมงจากข้อความ (เช่น "473 ชั่วโมง" → 473)
+    const match = timeString.match(/\d+/);
+    if (!match) return timeString; // ถ้าไม่มีตัวเลข ให้คืนค่าตามที่ได้รับ
+  
+    const hours = parseInt(match[0], 10);
+    const days = Math.floor(hours / 24);
+    const months = Math.floor(days / 30);
+  
+    if (hours < 24) {
+      return `${hours} ชั่วโมงที่แล้ว`;
+    } else if (days < 30) {
+      return `${days} วันที่แล้ว`;
+    } else {
+      return `${months} เดือนที่แล้ว`;
+    }
   };
 
   const filteredChat = chatData.filter((data) =>
@@ -94,7 +114,7 @@ export default function Message() {
                 variant="light"
                 fullWidth
                 className="flex gap-3 h-[90px]"
-                onPress={() => handleChatClick(data.chatId)} // Navigate on click
+                onPress={() => router.push(`/messages/${data.chatId}`)}
               >
                 <div className="w-[70px] aspect-square rounded-full overflow-hidden">
                   <img
@@ -106,10 +126,12 @@ export default function Message() {
 
                 <div className="flex flex-col items-start grow">
                   <p className="text-xl font-bold">{data.username}</p>
-                  
-                  {/* Display only if lastMessage exists */}
+
+                  {/* แสดงข้อความล่าสุดและเวลาที่ถูกแปลง */}
                   {data.lastMessage && data.lastMessageTime && (
-                    <p className="text-base">{data.lastMessage} • {data.lastMessageTime}</p>
+                    <p className="text-base">
+                      {data.lastMessage} • {formatTime(data.lastMessageTime)}
+                    </p>
                   )}
                 </div>
 
