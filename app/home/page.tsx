@@ -15,13 +15,14 @@ import Swal from "sweetalert2";
 import { useRouter } from "next/navigation";
 import axios, { AxiosResponse } from "axios";
 
-async function checkAuth(router: any, setUserId: (id: string) => void): Promise<void> {
+async function checkAuth(setUserId: (id: string) => void, setUserRole: (role: string) => void) {
   try {
     const response = await axios.get(
       `${process.env.NEXT_PUBLIC_API_URL}/api/user/me`,
       { withCredentials: true }
     );
-    setUserId(response.data.user_id); // Store the userID in state
+    setUserId(response.data.user_id);
+    setUserRole(response.data.role); // Store role
   } catch (error) {
     console.log("User not logged in or authentication failed.");
   }
@@ -30,15 +31,21 @@ async function checkAuth(router: any, setUserId: (id: string) => void): Promise<
 export default function Home() {
   const router = useRouter();
   const [userId, setUserId] = useState<string | null>(null);
+  const [userRole, setUserRole] = useState<string | null>(null);
 
   useEffect(() => {
     document.title = "Home - Cozy Care";
-    checkAuth(router, setUserId);
+    checkAuth(setUserId, setUserRole);
   }, [router]);
 
   const handleClientConfirmation = async () => {
     if (!userId) {
       await Swal.fire("เกิดข้อผิดพลาด", "กรุณาเข้าสู่ระบบก่อนดำเนินการ", "error");
+      return;
+    }
+
+    if (userRole !== "user") {
+      await Swal.fire("ไม่สามารถดำเนินการได้", "เนื่องจากคุณได้ทำการสมัครไปแล้ว", "warning");
       return;
     }
   
@@ -60,6 +67,11 @@ export default function Home() {
   const handleCaregiverConfirmation = async () => {
     if (!userId) {
       await Swal.fire("เกิดข้อผิดพลาด", "กรุณาเข้าสู่ระบบก่อนดำเนินการ", "error");
+      return;
+    }
+
+    if (userRole !== "user") {
+      await Swal.fire("ไม่สามารถดำเนินการได้", "เนื่องจากคุณได้ทำการสมัครไปแล้ว", "warning");
       return;
     }
   

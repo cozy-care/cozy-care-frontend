@@ -141,7 +141,15 @@ export default function Profile() {
           <Button
             radius="full"
             className="flex justify-between shadow-lg bg-cozy-lightblue-light text-[#1F5670]"
-            onPress={() => router.push(`/profile/${userData.user_id}/client`)}
+            onPress={() => {
+              if (userData.role === "client") {
+                router.push(`/profile/${userData.user_id}/client`);
+              } else if (userData.role === "caregiver") {
+                router.push(`/caregiver/${userData.user_id}/edit`);
+              } else {
+                router.push(`/profile/${userData.user_id}`); // Default profile page
+              }
+            }}
           >
             <div className="flex gap-5 items-center">
               <AccountBox />
