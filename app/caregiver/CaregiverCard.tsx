@@ -132,7 +132,7 @@ export default function CaregiverCard({
               </div>
               <div className="flex w-full gap-1">
                 <p className="w-[35%]">ภาษาที่สื่อสารได้ :<br />{used_language}</p>
-                <p className="flex items-center w-[65%] h-max">คะแนนรีวิว : <Star /> 4.5 <Link onPress={readReview} size="sm" underline="always" className="ml-1 font-bold hover:cursor-pointer">อ่านรีวิว</Link></p>
+                <p className="flex items-center w-[65%] h-max">คะแนนรีวิว : <Star /> 4.5 <Link href={`caregiver/${user_id}/review`} size="sm" underline="always" className="ml-1 font-bold hover:cursor-pointer">อ่านรีวิว</Link></p>
               </div>
               <div className="flex w-full gap-1">
                 <p className="w-full">ประสบการณ์ : {experience}</p>
