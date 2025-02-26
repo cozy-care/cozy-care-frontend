@@ -1,11 +1,13 @@
 'use client';
 
-import { Image } from "@nextui-org/react";
+import { Image, Input, Link, useDisclosure } from "@nextui-org/react";
 import Footer from "@/components/Footer";
 import NavBar from "@/components/NavBar";
 import { useEffect, useState } from "react";
 import PatientCard from "./PatientCard";
 import axios from 'axios';
+import { FilterAlt, Search } from "@mui/icons-material";
+import { patientMock } from "./PatientMock";
 
 interface PatientData {
   user_id: string;
@@ -19,6 +21,8 @@ interface PatientData {
 
 export default function Patient() {
   const [patients, setPatients] = useState<PatientData[]>([]);
+  const [searchTerm, setSearchTerm] = useState("");
+  const { isOpen, onOpen, onClose } = useDisclosure();
 
   useEffect(() => {
     document.title = "Patient - Cozy Care";
@@ -48,6 +52,10 @@ export default function Patient() {
 
     fetchPatients();
   }, []);
+  
+  const filteredPatients = patients.filter((data) =>
+    data.firstname?.toLowerCase().includes(searchTerm.toLowerCase())
+  );
 
   return (
     <main className="flex flex-col min-h-[100dvh]">
@@ -57,7 +65,7 @@ export default function Patient() {
         <div className="w-full h-max">
           <Image
             alt="Patient background image"
-            src="https://modernformhealthcare.co.th/wp-content/uploads/2023/05/%E0%B9%80%E0%B8%95%E0%B8%B5%E0%B8%A2%E0%B8%87%E0%B8%84%E0%B8%99%E0%B9%84%E0%B8%82%E0%B9%89-3-%E0%B9%84%E0%B8%81%E0%B8%A3%E0%B9%8C-%E0%B8%AA%E0%B8%B2%E0%B8%A1%E0%B8%B2%E0%B8%A3%E0%B8%96%E0%B8%9B%E0%B8%A3%E0%B8%B1%E0%B8%9A%E0%B8%9F%E0%B8%A3%E0%B8%B0%E0%B8%94%E0%B8%B1%E0%B8%9A.png"
+            src="https://wp.en.aleteia.org/wp-content/uploads/sites/2/2020/03/web3-woman-elder-grandmother-sick-hospital-shutterstock_590369135.jpg"
             width="100%"
             height={150}
             radius="none"
@@ -65,12 +73,17 @@ export default function Patient() {
           />
         </div>
 
-        <div className="flex justify-center sticky top-[111px] w-full z-[99] transition bg-white dark:bg-cozy-background-dark">
-          Search bar here
+        <div className="flex justify-center items-center gap-3 py-2 sticky top-[111px] w-full h-max z-[99] transition bg-white dark:bg-cozy-background-dark">
+          <Link href="/patient/add" className="w-max text-sm">เพิ่มข้อมูลผู้รับการดูแล</Link>
+          <Input placeholder="ค้นหาผู้ดูแล" size="sm" value={searchTerm} onValueChange={setSearchTerm} isClearable startContent={<Search className="text-xl text-default-400 pointer-events-none flex-shrink-0" />} className="w-1/2" />
+
+          <Link isDisabled onPress={onOpen} type="button" className="text-cozy-green-light dark:text-cozy-blue-dark hover:cursor-pointer">
+            <FilterAlt sx={{ fontSize: 25 }} />
+          </Link>
         </div>
 
         <div className="flex flex-col w-full items-center gap-4">
-          {patients.map((data, index) => (
+          {filteredPatients.map((data, index) => (
             <PatientCard
               key={index}
               user_id={data.user_id}
