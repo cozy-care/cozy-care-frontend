@@ -40,7 +40,7 @@ export default function Add() {
             เพิ่มข้อมูลผู้ดูแล
           </h1>
         </div>
-        <div className="flex flex-col w-full md:w-[40%] lg:w-[50%] gap-1">
+        <div className="flex flex-col w-full md:w-[45%] lg:w-[50%] gap-1">
           <h2>เลือกบริการที่ต้องการรับการดูแล</h2>
           <Select
             className="w-full"
@@ -52,7 +52,7 @@ export default function Add() {
             ))}
           </Select>
         </div>
-        <div className="bg-cozy-green-dark rounded-full flex flex-row p-2 px-3 gap-2 justify-between items-center w-full md:w-[40%] lg:w-[50%]">
+        <div className="bg-cozy-green-dark rounded-full flex flex-row p-2 px-3 gap-2 justify-between items-center w-full md:w-[45%] lg:w-[50%]">
           <p className="w-max text-nowrap">เริ่มต้น</p>
           <DatePicker radius="full" size="sm" className="grow"></DatePicker>
           <TimeInput
@@ -63,7 +63,7 @@ export default function Add() {
             className="w-max"
           ></TimeInput>
         </div>
-        <div className="bg-cozy-green-dark rounded-full flex flex-row p-2 px-3 gap-2 justify-between items-center w-full md:w-[40%] lg:w-[50%]">
+        <div className="bg-cozy-green-dark rounded-full flex flex-row p-2 px-3 gap-2 justify-between items-center w-full md:w-[45%] lg:w-[50%]">
           <p className="w-max text-nowrap">สิ้นสุด</p>
           <DatePicker radius="full" size="sm" className="grow"></DatePicker>
           <TimeInput
@@ -75,7 +75,7 @@ export default function Add() {
           ></TimeInput>
         </div>
 
-        <div className="w-full flex flex-col justify-center items-center  rounded-full md:w-[40%] lg:w-[50%]">
+        <div className="w-full flex flex-col justify-center items-center  rounded-full md:w-[45%] lg:w-[50%]">
           <p className="w-full flex bg-cozy-blue-light rounded-t-xl p-1 justify-between items-center px-4">
             <LocationOn style={{ width: "30px", height: "auto" }} />
             เลือกตำแหน่งที่ต้องการจ้างงาน
@@ -93,7 +93,7 @@ export default function Add() {
             </p>
           </div>
         </div>
-        <div className="w-full flex flex-col gap-2 md:w-[40%] lg:w-[50%]">
+        <div className="w-full flex flex-col gap-2 md:w-[45%] lg:w-[50%]">
           <h3 className="font-bold gap-1">ความต้องการเพิ่มเติม</h3>
           <div className="text-black flex flex-col w-full  h-full gap-1 bg-cozy-lightblue-light rounded-2xl p-2">
             <p>การจ้างงาน</p>
@@ -113,7 +113,7 @@ export default function Add() {
             ></Input>
           </div>
         </div>
-        <div className="flex flex-col w-full h-full gap-1 bg-[#1F5670] rounded-2xl p-2 md:w-[40%] lg:w-[50%]">
+        <div className="flex flex-col w-full h-full gap-1 bg-[#1F5670] rounded-2xl p-2 md:w-[45%] lg:w-[50%]">
           <h4>ความสามารถเพิ่มเติม</h4>
           <Input className="" placeholder="เช่น ขับรถ (มีรถ), ทำอาหาร"></Input>
         </div>
