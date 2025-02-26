@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { Card, CardBody, Image, Button, Link } from "@nextui-org/react";
 import axios from "axios";
-import { Star, Verified } from "@mui/icons-material";
+import { StarRounded, Verified } from "@mui/icons-material";
 
 interface Props {
   user_id: string;
@@ -121,7 +121,7 @@ export default function CaregiverCard({
         {isVisible && (
           <div className="flex flex-col items-center gap-3">
             <hr className="w-[95%] h-[2px] bg-cozy-green-light" />
-            <div className="flex flex-col w-[95%] h-max gap-1 text-sm">
+            <div className="flex flex-col w-[95%] h-max gap-2 text-sm">
               <div className="flex w-full gap-1">
                 <p className="w-[35%]">ส่วนสูง : {height} ซม.</p>
                 <p className="w-[65%]">การศึกษา/ฝึกอบรม : {study}</p>
@@ -132,10 +132,10 @@ export default function CaregiverCard({
               </div>
               <div className="flex w-full gap-1">
                 <p className="w-[35%]">ภาษาที่สื่อสารได้ :<br />{used_language}</p>
-                <p className="flex items-center w-[65%] h-max">คะแนนรีวิว : <Star /> 4.5 <Link href={`caregiver/${user_id}/review`} size="sm" underline="always" className="ml-1 font-bold hover:cursor-pointer">อ่านรีวิว</Link></p>
+                <p className="flex items-center w-[65%] h-max">คะแนนรีวิว : <StarRounded /> 4.5 <Link href={`caregiver/${user_id}/review`} size="sm" underline="always" className="ml-1 font-bold hover:cursor-pointer">อ่านรีวิว</Link></p>
               </div>
               <div className="flex w-full gap-1">
-                <p className="w-full">ประสบการณ์ : {experience}</p>
+                <p className="w-full">ประสบการณ์ : {experience} ปี</p>
               </div>
             </div>
             <p className="flex items-center text-cozy-blue-light self-start"><Verified className="mr-1" />บุคคลนี้ได้รับการยืนยันตัวตนแล้ว</p>

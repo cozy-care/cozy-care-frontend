@@ -78,7 +78,7 @@ export default function PatientCard({
             width={130}
             height={130}
             radius="sm"
-            className="w-full h-full object-cover object-center"
+            className="object-cover object-center"
           />
         </div>
 

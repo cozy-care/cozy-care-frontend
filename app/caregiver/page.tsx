@@ -79,7 +79,7 @@ export default function Caregiver() {
           <Link href="/caregiver/add" className="w-max text-sm">เพิ่มข้อมูลผู้ดูแล</Link>
           <Input placeholder="ค้นหาผู้ดูแล" size="sm" value={searchTerm} onValueChange={setSearchTerm} isClearable startContent={<Search className="text-xl text-default-400 pointer-events-none flex-shrink-0" />} className="w-1/2" />
 
-          <Link onPress={onOpen} type="button" className="text-cozy-green-light dark:text-cozy-blue-dark hover:cursor-pointer">
+          <Link isDisabled onPress={onOpen} type="button" className="text-cozy-green-light dark:text-cozy-blue-dark hover:cursor-pointer">
             <FilterAlt sx={{ fontSize: 25 }} />
           </Link>
         </div>
