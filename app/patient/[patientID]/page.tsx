@@ -1,13 +1,7 @@
 "use client";
 import dayjs from "dayjs";
 import NavBar from "@/components/NavBar";
-import {
-  Button,
-  Checkbox,
-  Input,
-  Select,
-  SelectItem,
-} from "@nextui-org/react";
+import { Button, Checkbox, Input, Select, SelectItem } from "@nextui-org/react";
 import { useEffect, useRef, useState } from "react";
 import { gender, typesPatient, physicalCondition } from "./patientIDMock";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
@@ -80,7 +74,13 @@ export default function PatientDetail() {
   };
 
   const handleSave = async () => {
-    const requiredFields = ["firstname", "lastname", "sex", "client_type", "phy_con"];
+    const requiredFields = [
+      "firstname",
+      "lastname",
+      "sex",
+      "client_type",
+      "phy_con",
+    ];
     const newErrors: Record<string, boolean> = {};
     let firstErrorField: string | null = null;
 
@@ -222,7 +222,9 @@ export default function PatientDetail() {
               handleInputChange("sex", key);
             }}
           >
-            {(gender) => <SelectItem key={gender.key}>{gender.label}</SelectItem>}
+            {(gender) => (
+              <SelectItem key={gender.key}>{gender.label}</SelectItem>
+            )}
           </Select>
 
           {/* ✅ Date Picker วันเกิด */}
@@ -231,8 +233,23 @@ export default function PatientDetail() {
               label="วัน/เดือน/ปี ที่เกิด"
               defaultValue={dayjs()}
               onChange={(date) =>
-                handleInputChange("birth_date", dayjs(date).format("YYYY-MM-DD"))
+                handleInputChange(
+                  "birth_date",
+                  dayjs(date).format("YYYY-MM-DD")
+                )
               }
+              slotProps={{
+                textField: {
+                  sx: {
+                    width: "100%",
+                    borderRadius: "12px",
+                    backgroundColor: "#f5f5f5", // ปรับสีให้ใกล้เคียง
+                    "& .MuiOutlinedInput-root": { borderRadius: "5px" },
+                    "& .MuiOutlinedInput-notchedOutline": { border: "none" },
+                    "& .MuiInputBase-input": { padding: "10px" }, // ปรับ padding ให้อ่านง่ายขึ้น
+                  },
+                },
+              }}
             />
           </LocalizationProvider>
 
@@ -270,7 +287,11 @@ export default function PatientDetail() {
               handleInputChange("client_type", key);
             }}
           >
-            {(typesPatient) => <SelectItem key={typesPatient.key}>{typesPatient.label}</SelectItem>}
+            {(typesPatient) => (
+              <SelectItem key={typesPatient.key}>
+                {typesPatient.label}
+              </SelectItem>
+            )}
           </Select>
 
           <Select
@@ -286,7 +307,11 @@ export default function PatientDetail() {
               handleInputChange("phy_con", key);
             }}
           >
-            {(physicalCondition) => <SelectItem key={physicalCondition.key}>{physicalCondition.label}</SelectItem>}
+            {(physicalCondition) => (
+              <SelectItem key={physicalCondition.key}>
+                {physicalCondition.label}
+              </SelectItem>
+            )}
           </Select>
 
           <Input
@@ -316,12 +341,17 @@ export default function PatientDetail() {
         <Checkbox
           onChange={(e) => handleInputChange("is_term", e.target.checked)}
         >
-          ยอมรับเงื่อนไขและ <strong><a href="#">นโยบายส่วนตัว</a></strong>
+          ยอมรับเงื่อนไขและ{" "}
+          <strong>
+            <a href="#">นโยบายส่วนตัว</a>
+          </strong>
         </Checkbox>
 
         {/* ✅ ปุ่มบันทึก */}
         <div className="flex gap-5 mt-3 mb-5">
-          <Button radius="full" onClick={() => router.back()}>ยกเลิก</Button>
+          <Button radius="full" onClick={() => router.back()}>
+            ยกเลิก
+          </Button>
           <Button radius="full" color="primary" onPress={handleSave}>
             บันทึก
           </Button>
