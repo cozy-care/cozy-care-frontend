@@ -218,7 +218,7 @@ export default function CaregiverDetail() {
 
         <Form>
           <h2 className="font-bold mt-5">รายละเอียดเพิ่มเติมของผู้ดูแล</h2>
-          <div className="bg-[#C1E2F2] flex flex-col gap-3 p-5 rounded-lg">
+          <div className="w-[350px] md:w-[400px] lg:w-[450px] bg-[#C1E2F2] flex flex-col gap-3 p-5 rounded-lg">
             <Input
               label="ภาษาที่สื่อสารได้"
               labelPlacement="outside"
