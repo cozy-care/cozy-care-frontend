@@ -74,16 +74,16 @@ export default function CaregiverDetail() {
       if (formData.certification_image) {
         const uploadData = new FormData();
         uploadData.append("file", formData.certification_image);
-  
+
         const uploadResponse = await axios.post(
           `${process.env.NEXT_PUBLIC_API_URL}/api/upload`,
           uploadData,
           { headers: { "Content-Type": "multipart/form-data" } }
         );
-  
+
         filePath = uploadResponse.data.filePath;
       }
-  
+
       // Prepare the payload without the raw file object
       const payload = {
         user_id: userId,
@@ -175,7 +175,22 @@ export default function CaregiverDetail() {
             <DatePicker
               label="วัน/เดือน/ปี ที่เกิด"
               value={dayjs(formData.birth_date)}
-              onChange={(date) => handleInputChange("birth_date", date?.format("YYYY-MM-DD"))}
+              onChange={(date) =>
+                handleInputChange("birth_date", date?.format("YYYY-MM-DD"))
+              }
+              slotProps={{
+                textField: {
+                  sx: {
+                    width: "100%",
+                    borderRadius: "12px",
+                    backgroundColor: "#f5f5f5",
+                    "& .MuiOutlinedInput-root": { borderRadius: "5px" },
+                    "& .MuiOutlinedInput-notchedOutline": { border: "none" },
+                    "& .MuiInputBase-input": { padding: "10px" },
+                    my: 3,
+                  },
+                },
+              }}
             />
           </LocalizationProvider>
 
@@ -209,7 +224,9 @@ export default function CaregiverDetail() {
               labelPlacement="outside"
               name="used_language"
               placeholder="(เช่น ไทย, อังกฤษ, จีน)"
-              onChange={(e) => handleInputChange("used_language", e.target.value)}
+              onChange={(e) =>
+                handleInputChange("used_language", e.target.value)
+              }
             />
             <Input
               label="ประสบการณ์"
@@ -223,7 +240,9 @@ export default function CaregiverDetail() {
               labelPlacement="outside"
               name="study_experience"
               placeholder="(เช่น หลักสูตรอบรมการดูแลผู้สูงอายุ)"
-              onChange={(e) => handleInputChange("study_experience", e.target.value)}
+              onChange={(e) =>
+                handleInputChange("study_experience", e.target.value)
+              }
             />
             <Input
               label="อัปโหลดใบรับรอง (PDF, JPG) *ชื่อไฟล์ต้องเป็นภาษาอังกฤษเท่านั้น"
@@ -231,7 +250,10 @@ export default function CaregiverDetail() {
               name="certification_image"
               type="file"
               onChange={(e) =>
-                handleInputChange("certification_image", e.target.files?.[0] || null)
+                handleInputChange(
+                  "certification_image",
+                  e.target.files?.[0] || null
+                )
               }
             />
           </div>
@@ -246,7 +268,10 @@ export default function CaregiverDetail() {
         >
           <span>
             ยอมรับเงื่อนไข และ
-            <Link href="/profile/privacy_and_security/privacy" className="text-blue-500 underline">
+            <Link
+              href="/profile/privacy_and_security/privacy"
+              className="text-blue-500 underline"
+            >
               นโยบายส่วนตัว
             </Link>
           </span>
@@ -256,7 +281,12 @@ export default function CaregiverDetail() {
           <Button radius="full" onClick={() => router.back()}>
             ยกเลิก
           </Button>
-          <Button radius="full" color="primary" onClick={handleSubmit} disabled={!isChecked}>
+          <Button
+            radius="full"
+            color="primary"
+            onClick={handleSubmit}
+            disabled={!isChecked}
+          >
             บันทึก
           </Button>
         </div>
