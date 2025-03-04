@@ -243,10 +243,11 @@ export default function PatientDetail() {
                   sx: {
                     width: "100%",
                     borderRadius: "12px",
-                    backgroundColor: "#f5f5f5", // ปรับสีให้ใกล้เคียง
+                    backgroundColor: "#f5f5f5",
                     "& .MuiOutlinedInput-root": { borderRadius: "5px" },
                     "& .MuiOutlinedInput-notchedOutline": { border: "none" },
-                    "& .MuiInputBase-input": { padding: "10px" }, // ปรับ padding ให้อ่านง่ายขึ้น
+                    "& .MuiInputBase-input": { padding: "10px" }, //
+                    my: 3,
                   },
                 },
               }}
