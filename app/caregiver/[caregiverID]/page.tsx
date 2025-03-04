@@ -178,6 +178,7 @@ export default function CaregiverDetail() {
               onChange={(date) =>
                 handleInputChange("birth_date", date?.format("YYYY-MM-DD"))
               }
+              
               slotProps={{
                 textField: {
                   sx: {
