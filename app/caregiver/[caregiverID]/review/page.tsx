@@ -2,36 +2,92 @@
 
 import { ArrowBackIosNew, StarRounded } from "@mui/icons-material";
 import { Button, Progress } from "@nextui-org/react";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
 import ReviewCard from "./reviewCard";
+import { format, parse } from "date-fns";
+import { th } from "date-fns/locale";
+
+interface ReviewType {
+  review_id: string;
+  client_id: string;
+  rating: number;
+  comment: string;
+  review_time: string; // "25-03-2025 17:19:44"
+  alias: string;
+}
 
 export default function Review() {
   const router = useRouter();
-  const { caregiverID: userID } = useParams() as { caregiverID: string };
+  const { caregiverID } = useParams();
+  const userID: string = typeof caregiverID === "string" ? caregiverID : "";
 
-  const star1Total = 0;
-  const star2Total = 5;
-  const star3Total = 10;
-  const star4Total = 38;
-  const star5Total = 562;
-  const total = star1Total+ star2Total + star3Total + star4Total + star5Total;
-  const rawAverage = (((star5Total * 5) + (star4Total * 4) + (star3Total * 3) + (star2Total * 2) + (star1Total * 1)) / total);
-
-  // เช็คว่ามีทศนิยมมั้ย ถ้ามี ให้เก็บทศนิยมไว้จุดเดียว
-  const averageStar: string = Number.isInteger(rawAverage) 
-  ? rawAverage.toString() 
-  : rawAverage.toFixed(1);
+  const [reviews, setReviews] = useState<ReviewType[]>([]);
+  const [ratingCounts, setRatingCounts] = useState<{
+    1: number;
+    2: number;
+    3: number;
+    4: number;
+    5: number;
+  }>({
+    1: 0,
+    2: 0,
+    3: 0,
+    4: 0,
+    5: 0,
+  });
+  const [averageStar, setAverageStar] = useState("0");
 
   useEffect(() => {
     document.title = "Review - Cozy Care";
-  }, []);
+
+    async function fetchReviews() {
+      try {
+        const res = await fetch(
+          `${process.env.NEXT_PUBLIC_API_URL}/api/review/get-review-by-user/${userID}`
+        );
+        const data: ReviewType[] = await res.json();
+
+        setReviews(data);
+
+        const ratingMap: { 1: number; 2: number; 3: number; 4: number; 5: number } = {
+          1: 0,
+          2: 0,
+          3: 0,
+          4: 0,
+          5: 0,
+        };
+        let sum = 0;
+
+        data.forEach((review) => {
+          const roundedRating = Math.round(review.rating) as 1 | 2 | 3 | 4 | 5;
+          ratingMap[roundedRating]++;
+          sum += review.rating;
+        });
+
+        setRatingCounts(ratingMap);
+
+        const total = data.length;
+        const average = total > 0 ? sum / total : 0;
+        setAverageStar(Number.isInteger(average) ? average.toString() : average.toFixed(1));
+      } catch (err) {
+        console.error("Failed to fetch reviews:", err);
+      }
+    }
+
+    if (userID) {
+      fetchReviews();
+    }
+  }, [userID]);
+
+  const total = Object.values(ratingCounts).reduce((acc, val) => acc + val, 0);
+  const stars: (1 | 2 | 3 | 4 | 5)[] = [5, 4, 3, 2, 1];
 
   return (
     <main className="flex flex-col items-center h-[100dvh]">
       {/* Top Bar */}
       <div className="flex relative items-center gap-3 w-full h-[50px]">
-        <h1 className="absolute  w-full flex text-lg font-bold justify-center items-center ">
+        <h1 className="absolute w-full flex text-lg font-bold justify-center items-center">
           รายละเอียดรีวิว
         </h1>
         <Button
@@ -45,6 +101,7 @@ export default function Review() {
         </Button>
       </div>
 
+      {/* Rating Summary */}
       <div className="flex w-full h-max py-3 border-b-2 border-gray-200">
         <div className="flex flex-col items-center justify-center w-[28%]">
           <p className="font-bold text-3xl">{averageStar}</p>
@@ -52,44 +109,48 @@ export default function Review() {
         </div>
 
         <div className="flex flex-col w-[72%]">
-          <div className="flex items-center text-yellow-500">
-            <StarRounded /><StarRounded /><StarRounded /><StarRounded /><StarRounded />
-            <Progress aria-label="Loading..." size="sm" value={star5Total / total * 100} className="w-[100px]" /> {/* Changed value to percentage */}
-            <p className="text-black font-medium ml-2">{star5Total}</p>
-          </div>
-          <div className="flex items-center text-yellow-500">
-            <StarRounded /><StarRounded /><StarRounded /><StarRounded /><StarRounded className="text-[#EEEEEE]" />
-            <Progress aria-label="Loading..." size="sm" value={star4Total / total * 100} className="w-[100px]" /> {/* Changed value to percentage */}
-            <p className="text-black font-medium ml-2">{star4Total}</p>
-          </div>
-          <div className="flex items-center text-yellow-500">
-            <StarRounded /><StarRounded /><StarRounded /><StarRounded className="text-[#EEEEEE]" /><StarRounded className="text-[#EEEEEE]" />
-            <Progress aria-label="Loading..." size="sm" value={star3Total / total * 100} className="w-[100px]" /> {/* Changed value to percentage */}
-            <p className="text-black font-medium ml-2">{star3Total}</p>
-          </div>
-          <div className="flex items-center text-yellow-500">
-            <StarRounded /><StarRounded /><StarRounded className="text-[#EEEEEE]" /><StarRounded className="text-[#EEEEEE]" /><StarRounded className="text-[#EEEEEE]" />
-            <Progress aria-label="Loading..." size="sm" value={star2Total / total * 100} className="w-[100px]" /> {/* Changed value to percentage */}
-            <p className="text-black font-medium ml-2">{star2Total}</p>
-          </div>
-          <div className="flex items-center text-yellow-500">
-            <StarRounded /><StarRounded className="text-[#EEEEEE]" /><StarRounded className="text-[#EEEEEE]" /><StarRounded className="text-[#EEEEEE]" /><StarRounded className="text-[#EEEEEE]" />
-            <Progress aria-label="Loading..." size="sm" value={star1Total / total * 100} className="w-[100px]" /> {/* Changed value to 0 */}
-            <p className="text-black font-medium ml-2">{star1Total}</p>
-          </div>
+          {stars.map((star) => (
+            <div key={star} className="flex items-center text-yellow-500">
+              {[...Array(5)].map((_, i) => (
+                <StarRounded key={i} className={i < star ? "" : "text-[#EEEEEE]"} />
+              ))}
+              <Progress
+                aria-label={`Star ${star} rating`}
+                size="sm"
+                value={(ratingCounts[star] / total) * 100 || 0}
+                className="w-[100px]"
+              />
+              <p className="text-black font-medium ml-2">{ratingCounts[star]}</p>
+            </div>
+          ))}
         </div>
       </div>
 
-      <div className="overflow-y-scroll w-full">
-        <ReviewCard />
-        <ReviewCard />
-        <ReviewCard />
-        <ReviewCard />
-        <ReviewCard />
-        <ReviewCard />
-        <ReviewCard />
-        <ReviewCard />
+      {/* Review Cards */}
+      <div className="overflow-y-scroll w-full flex flex-col items-center py-4">
+        {reviews.length === 0 ? (
+          <p className="text-gray-500 text-center">ยังไม่มีรีวิว</p>
+        ) : (
+          reviews.map((review) => {
+            let displayDate = "ไม่ทราบวันที่";
+            const parsedDate = parse(review.review_time, "dd-MM-yyyy HH:mm:ss", new Date());
+
+            if (!isNaN(parsedDate.getTime())) {
+              displayDate = format(parsedDate, "dd MMM yyyy", { locale: th });
+            }
+
+            return (
+              <ReviewCard
+                key={review.review_id}
+                username={`${review.alias}`}
+                date={displayDate}
+                star={Math.round(review.rating)}
+                comment={review.comment}
+              />
+            );
+          })
+        )}
       </div>
     </main>
-  )
+  );
 }

@@ -59,7 +59,7 @@ export default function Message() {
       messagesEndRef.current.scrollIntoView({ behavior: "smooth" });
     }
   };
-
+  
   // Check for token and user authentication
   useEffect(() => {
     const checkAuthentication = async () => {
@@ -129,7 +129,6 @@ export default function Message() {
                 setEndDate(formattedEndDate); // Store formatted end_time
             }
         } catch (error) {
-            console.error("Failed to fetch task status:", error);
         }
     };
 
@@ -238,45 +237,87 @@ export default function Message() {
 
   const dateRangeHandle = async () => {
     try {
-        // Ensure user is authenticated
-        if (!userId) {
-            console.error("User is not authenticated.");
-            return;
-        }
+      if (!userId || !otherUserData?.user_id) {
+        console.error("Missing user ID or caregiver ID.");
+        return;
+      }
+  
+      // Get role to verify client permission
+      const authResponse = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/user/me`, {
+        withCredentials: true,
+      });
+  
+      const userRole = authResponse.data.role;
+      if (userRole !== "client") {
+        console.error("Only clients can create a task.");
+        return;
+      }
+  
+      // Task data to send to API
+      const taskData = {
+        user_id: userId,
+        other_user_id: otherUserData.user_id,
+        task_title: "Caregiving Appointment",
+        task_status: "pending",
+        start_time: dateRange.start.toDate(getLocalTimeZone()),
+        end_time: dateRange.end.toDate(getLocalTimeZone()),
+      };
+  
+      // Create the task via REST API
+      const response = await axios.post(
+        `${process.env.NEXT_PUBLIC_API_URL}/api/task/create`,
+        taskData,
+        { withCredentials: true }
+      );
+  
+      const createdTask = {
+        ...taskData,
+        task_id: response.data?.task_id || null,
+      };
+  
+      console.log(response)
 
-        // Call API to get user role
-        const authResponse = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/user/me`, {
-            withCredentials: true,
-        });
+      // ✅ Convert start_time and end_time to readable date format
+      const startDateObj = new Date(dateRange.start.toDate(getLocalTimeZone()));
+      const endDateObj = new Date(dateRange.end.toDate(getLocalTimeZone()));
 
-        const userRole = authResponse.data.role; // Get user role
+      // Format to Thai date
+      const options: Intl.DateTimeFormatOptions = {
+          day: "numeric",
+          month: "long",
+          year: "numeric",
+      };
 
-        if (userRole !== "client") {
-            console.error("Only clients can create a task.");
-            return;
-        }
+      const formattedStartDate = startDateObj.toLocaleDateString("th-TH", options);
+      const formattedEndDate = endDateObj.toLocaleDateString("th-TH", options);
 
-        // Prepare task data
-        const taskData = {
-            other_user_id: otherUserData?.user_id, // Assign caregiver ID from chat
-            user_id: userId, // Assign client ID
-            task_title: "Caregiving Appointment", // Adjust as needed
-            task_status: "pending", // Default status
-            start_time: dateRange.start.toDate(getLocalTimeZone()), // Convert to Date format
-            end_time: dateRange.end.toDate(getLocalTimeZone()),
-        };
-
-        // Send request to create task
-        const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/api/task/create`, taskData);
-
+      setStartDate(formattedStartDate); // Store formatted start_time
+      setEndDate(formattedEndDate); // Store formatted end_time
+  
+      console.log("✅ Task created and WebSocket event emitted");
+      setHasAppointment("pending");
+      // ✅ Show success alert
+      Swal.fire({
+        icon: 'success',
+        title: 'Success',
+        text: 'Task created successfully!',
+      });
+  
     } catch (error) {
-        console.error("Failed to create task:", error);
+      console.error("❌ Failed to create task:", error);
+  
+      // ❌ Optional: Show error alert too
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: 'Failed to create task. Please try again.',
+      });
     }
   };
 
   const confirmHandle = async () => {
     try {
-      if (!taskId) {
+      if (!taskId || !otherUserData?.user_id) {
         console.warn("❌ Task ID is missing, cannot confirm task.");
         return;
       }
@@ -285,16 +326,29 @@ export default function Message() {
   
       const response = await axios.put(
         `${process.env.NEXT_PUBLIC_API_URL}/api/task/${taskId}`,
-        { task_status: "has" },
+        { task_status: "has" }
       );
   
       console.log("✅ Task confirmed successfully:", response.data);
-      
-      // อัปเดต State หรือ UI ตามต้องการ เช่น เปลี่ยน hasAppointment เป็น "has"
+  
+      // Update local state/UI
       setHasAppointment("has");
   
+      // Optional: Show success alert
+      Swal.fire({
+        icon: 'success',
+        title: 'Success',
+        text: 'Appointment confirmed!',
+      });
+
     } catch (error) {
       console.error("❌ Error confirming task:", error);
+  
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: 'Failed to confirm task.',
+      });
     }
   };
 
@@ -338,9 +392,62 @@ export default function Message() {
   const [star, setStar] = useState<number>(1);
 
   const [reviewText, setReviewText] = useState<string>("");
-  const finishReviewButtonHandle = () => {
-    console.log(reviewText + " with " + star + " star");
-    deleteTask("สิ้นสุดบริการเรียบร้อยแล้ว");
+  const finishReviewButtonHandle = async () => {
+    try {
+      if (!userId || !otherUserData?.user_id || !reviewText.trim()) {
+        Swal.fire("กรุณากรอกรีวิวให้ครบถ้วน", "", "warning");
+        return;
+      }
+  
+      // Step 1: Get client_id from API
+      const clientRes = await axios.post(
+        `${process.env.NEXT_PUBLIC_API_URL}/api/client/get-client-id`,
+        { user_id: userId },
+        { withCredentials: true }
+      );
+
+      const caregiverRes = await axios.post(
+        `${process.env.NEXT_PUBLIC_API_URL}/api/caregiver/get-caregiver-id`,
+        { user_id: otherUserData.user_id },
+        { withCredentials: true }
+      );
+  
+      const client_id = clientRes.data.client?.client_id;
+      const caregiver_id = caregiverRes.data.caregiver?.caregiver_id;
+  
+      if (!client_id) {
+        Swal.fire("ไม่พบ client_id", "", "error");
+        return;
+      }
+  
+      // Step 2: Prepare payload
+      const payload = {
+        client_id,
+        caregiver_id: caregiver_id,
+        rating: star,
+        comment: reviewText.trim(),
+      };
+  
+      console.log("📦 Payload to submit:", payload);
+  
+      // Step 3: Send to create-review
+      const response = await axios.post(
+        `${process.env.NEXT_PUBLIC_API_URL}/api/review/create-review`,
+        payload,
+        { withCredentials: true }
+      );
+  
+      console.log("✅ Review submitted:", response.data);
+  
+      Swal.fire("ขอบคุณสำหรับการรีวิว!", "", "success");
+  
+      // Step 4: Delete the task
+      deleteTask("สิ้นสุดบริการเรียบร้อยแล้ว");
+  
+    } catch (error) {
+      console.error("❌ Failed to submit review:", error);
+      Swal.fire("เกิดข้อผิดพลาด", "ไม่สามารถส่งรีวิวได้", "error");
+    }
   };
 
   const [cancelReason, setCancelReason] = useState<string>("");

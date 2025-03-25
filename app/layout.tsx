@@ -4,6 +4,7 @@ import "./globals.css";
 import NavBar from "@/components/NavBar";
 import { Providers } from "./providers";
 import { SocketProvider } from "./SocketContext";
+import 'leaflet/dist/leaflet.css';
 
 const inter = Kanit({
   subsets: ["latin"],

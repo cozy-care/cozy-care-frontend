@@ -38,6 +38,23 @@ export default function CaregiverCard({
   const [isVisible, setIsVisible] = useState<boolean>(false);
   const [user1Id, setUser1Id] = useState<string | null>(null);
   const router = useRouter();
+  const [averageRating, setAverageRating] = useState<number | null>(null);
+
+  useEffect(() => {
+    const fetchAverageRating = async () => {
+      try {
+        const response = await axios.post(
+          `${process.env.NEXT_PUBLIC_API_URL}/api/review/get-average-rating`,
+          { user_id: user_id }
+        );
+        setAverageRating(response.data.average_rating); // จะเป็น null ได้
+      } catch (error) {
+        console.error("Error fetching average rating:", error);
+      }
+    };
+  
+    fetchAverageRating();
+  }, [user_id]);
 
   useEffect(() => {
     const fetchUserData = async () => {
@@ -128,14 +145,27 @@ export default function CaregiverCard({
               </div>
               <div className="flex w-full gap-1">
                 <p className="w-[35%]">น้ำหนัก : {weight} กก. </p>
-                <p className="w-[65%]">ราคา : {price} บาท</p>
+                <p className="w-[65%]">ราคา : {price} </p>
               </div>
               <div className="flex w-full gap-1">
                 <p className="w-[35%]">ภาษาที่สื่อสารได้ :<br />{used_language}</p>
-                <p className="flex items-center w-[65%] h-max">คะแนนรีวิว : <StarRounded /> 4.5 <Link href={`caregiver/${user_id}/review`} size="sm" underline="always" className="ml-1 font-bold hover:cursor-pointer">อ่านรีวิว</Link></p>
+                <p className="flex items-center w-[65%] h-max">
+                  คะแนนรีวิว : <StarRounded />
+                  {averageRating !== null && averageRating !== undefined
+                    ? ` ${averageRating}`
+                    : " ไม่มี"}
+                  <Link
+                    href={`caregiver/${user_id}/review`}
+                    size="sm"
+                    underline="always"
+                    className="ml-1 font-bold hover:cursor-pointer"
+                  >
+                    อ่านรีวิว
+                  </Link>
+                </p>
               </div>
               <div className="flex w-full gap-1">
-                <p className="w-full">ประสบการณ์ : {experience} ปี</p>
+                <p className="w-full">ประสบการณ์ : {experience} </p>
               </div>
             </div>
             <p className="flex items-center text-cozy-blue-light self-start"><Verified className="mr-1" />บุคคลนี้ได้รับการยืนยันตัวตนแล้ว</p>
