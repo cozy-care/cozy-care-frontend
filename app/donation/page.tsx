@@ -3,11 +3,42 @@
 import { Image } from "@nextui-org/react";
 import Footer from "@/components/Footer";
 import NavBar from "@/components/NavBar";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+
+// ✅ กำหนด type ข้อมูลผู้บริจาค
+interface Donation {
+  name: string;
+  amount: number;
+}
 
 export default function Donation() {
+  const [donations, setDonations] = useState<Donation[]>([]);
+
   useEffect(() => {
     document.title = "Donation - Cozy Care";
+
+    fetch("https://api.sheetbest.com/sheets/6340dc49-d62f-4335-ba4a-716704258a4c")
+      .then((res) => res.json())
+      .then((data: any[]) => {
+        const sorted: Donation[] = data
+          .filter((item) => item.Amount) // ✅ กรองเฉพาะแถวที่มี Amount
+          .map((item) => {
+            const firstName = item["Name"]?.trim() || "";
+            const lastName = item["Surname"]?.trim() || "";
+            const name = `${firstName} ${lastName}`.trim() || "ไม่ระบุชื่อ";
+
+            const amount = parseInt(item["Amount"]?.replace(/[^0-9]/g, "") || "0");
+
+            return { name, amount };
+          })
+          .sort((a, b) => b.amount - a.amount)
+          .slice(0, 5);
+
+        setDonations(sorted);
+      })
+      .catch((error) => {
+        console.error("เกิดข้อผิดพลาดในการดึงข้อมูล:", error);
+      });
   }, []);
 
   return (
@@ -33,74 +64,67 @@ export default function Donation() {
         <div className="flex flex-col gap-2 justify-center rounded-2xl shadow-md w-[95%] lg:w-[1000px] lg:mx-auto px-5 py-4">
           <h2 className="font-bold text-lg">5 รายชื่อที่บริจาคสูงสุด</h2>
 
-          <div className="flex justify-between text-[#808080]">
-            <p>นายเอ บีซี</p>
-            <p>10,000 บาท</p>
-          </div>
-
-          <div className="flex justify-between text-[#808080]">
-            <p>นายสมชาย ลำเนาได้</p>
-            <p>8,000 บาท</p>
-          </div>
-
-          <div className="flex justify-between text-[#808080]">
-            <p>นายสาวสมหญิง จริงจังมาก</p>
-            <p>8,000 บาท</p>
-          </div>
-
-          <div className="flex justify-between text-[#808080]">
-            <p>ไม่ประสงค์ออกนาม</p>
-            <p>5,000 บาท</p>
-          </div>
-
-          <div className="flex justify-between text-[#808080]">
-            <p>ไม่ประสงค์ออกนาม</p>
-            <p>4,000 บาท</p>
-          </div>
+          {donations.length === 0 ? (
+            <p className="text-center text-[#999]">กำลังโหลดข้อมูล...</p>
+          ) : (
+            donations.map((donor, index) => (
+              <div key={index} className="flex justify-between text-[#808080]">
+                <p>{donor.name}</p>
+                <p>{donor.amount.toLocaleString()} บาท</p>
+              </div>
+            ))
+          )}
         </div>
 
         <h1 className="text-lg">ร่วมสนับสนุนพวกเรา</h1>
 
-        <div className="border-2 aspect-square w-[150px] rounded-xl"></div>
+        <a
+          href="https://forms.gle/25UEikzaXYMiwoJK8"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <Image
+            alt="QR สำหรับบริจาคเงิน"
+            src="https://cdn.discordapp.com/attachments/1053233122336051280/1354501831526715714/cozyQR.png?ex=67e585a2&is=67e43422&hm=6924c177f763b3a99d223ec7cd230747a35581d2dbf57c122afff1aad26b8dbf&"
+            width={300}
+            height={300}
+            className="object-contain aspect-square rounded-xl cursor-pointer hover:opacity-90 transition"
+          />
+        </a>
 
-        <p>
+        <p className="list-decimal space-y-2 ml-5">
           การสนับสนุนที่ท่านมอบให้ผ่านการบริจาคนี้ ช่วยให้เราสามารถดำเนินการ
           และพัฒนาเว็บไซต์ให้ดียิ่งขึ้น
         </p>
 
         <p>เงินบริจาคของท่านถูกนำไปใช้ในด้านต่างๆ เช่น:</p>
 
-        <ol className="list-decimal">
-          <li>การพัฒนาเว็บไซต์</li>
-          <ul className="mx-10">
-            <li>เพิ่มประสิทธิภาพการใช้งาน</li>
-            <li>
-              พัฒนาฟีเจอร์ใหม่ๆ เพื่อให้ผู้ใช้งานได้รับประสบการณ์ที่ดียิ่งขึ้น
-            </li>
-          </ul>
-          <li>ค่าเซิร์ฟเวอร์และโครงสร้างพื้นฐาน</li>
-          <ul className="mx-10">
-            <li>ค่าใช้จ่ายในการเช่าเซิร์ฟเวอร์ที่มีประสิทธิภาพและปลอดภัย</li>
-            <li>บำรุงรักษาระบบให้พร้อมใช้งานตลอดเวลา</li>
-          </ul>
-          <li>การสนับสนุนด้านเทคนิค</li>
-          <ul className="mx-10">
-            <li>
-              การจ้างทีมพัฒนาและผู้ดูแลระบบ
-              เพื่อช่วยให้เว็บไซต์ทำงานได้อย่างราบรื่น
-            </li>
-          </ul>
+        <ol className="list-decimal space-y-2 ml-5">
+          <li>
+            การพัฒนาเว็บไซต์
+            <ul className="list-disc ml-6 mt-1 space-y-1">
+              <li>เพิ่มประสิทธิภาพการใช้งาน</li>
+              <li>พัฒนาฟีเจอร์ใหม่ๆ เพื่อให้ผู้ใช้งานได้รับประสบการณ์ที่ดียิ่งขึ้น</li>
+            </ul>
+          </li>
+          <li>
+            ค่าเซิร์ฟเวอร์และโครงสร้างพื้นฐาน
+            <ul className="list-disc ml-6 mt-1 space-y-1">
+              <li>ค่าใช้จ่ายในการเช่าเซิร์ฟเวอร์ที่มีประสิทธิภาพและปลอดภัย</li>
+              <li>บำรุงรักษาระบบให้พร้อมใช้งานตลอดเวลา</li>
+            </ul>
+          </li>
+          <li>
+            การสนับสนุนด้านเทคนิค
+            <ul className="list-disc ml-6 mt-1 space-y-1">
+              <li>การจ้างทีมพัฒนาและผู้ดูแลระบบ เพื่อช่วยให้เว็บไซต์ทำงานได้อย่างราบรื่น</li>
+            </ul>
+          </li>
         </ol>
 
-        <p>
+        <p className="list-decimal space-y-2 ml-5">
           เราให้ความสำคัญกับความโปร่งใส ท่านสามารถตรวจสอบรายงานการใช้
           เงินบริจาคได้ที่
-          <a
-            href=""
-            className="text-cozy-darkblue-dark dark:text-cozy-blue-dark font-bold"
-          >
-            &nbsp;[ลิงก์ไปยังรายงานหรือรายละเอียดเพิ่มเติม]
-          </a>
         </p>
       </div>
 

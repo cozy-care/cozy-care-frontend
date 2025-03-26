@@ -49,7 +49,7 @@ export default function Add() {
   const [lng, setLng] = useState<number | null>(null);
 
   const [addressInput, setAddressInput] = useState("");
-  const [wantClientType, setWantClientType] = useState("");
+  const [wantClientType, setWantClientType] = useState<string[]>([]);
   const [paymentType, setPaymentType] = useState("");
   const [priceInput, setPriceInput] = useState("");
   const [moreSkillInput, setMoreSkillInput] = useState("");
@@ -57,6 +57,14 @@ export default function Add() {
   const [startTimeValue, setStartTimeValue] = useState<any>(null);
   const [endDate, setEndDate] = useState<any>(null);
   const [endTimeValue, setEndTimeValue] = useState<any>(null);
+
+  const services = [
+    { key: "elder", label: "ดูแลผู้สูงอายุ" },
+    { key: "bedridden", label: "ดูแลผู้ป่วยติดเตียง" },
+    { key: "child", label: "ดูแลเด็กเล็ก" },
+    { key: "takeToHospital", label: "พาไปโรงพยาบาล" },
+    { key: "takeToSpecifiled", label: "พาไปส่งตามที่ระบุ" },
+  ];
 
   useEffect(() => {
     document.title = "Caregiver Add - Cozy Care";
@@ -96,7 +104,7 @@ export default function Add() {
         caregiver_id,
         address: addressInput,
         geocode: lat && lng ? `${lat},${lng}` : null,
-        want_client_type: wantClientType,
+        want_client_type: wantClientType.join(', '),
         payment_type: paymentType,
         price: priceInput,
         more_skill: moreSkillInput || null,
@@ -128,6 +136,23 @@ export default function Add() {
     }
   };
 
+  const handleSelectChange = (keys: any) => {
+    const selectedKeys = Array.from(keys); // แปลง SharedSelection → string[]
+    const selectedLabels = services
+      .filter((s) => selectedKeys.includes(s.key))
+      .map((s) => s.label);
+  
+    setWantClientType(selectedLabels);
+  };
+
+  const handlePaymentTypeChange = (keys: any) => {
+    const selectedKey = Array.from(keys)[0]; // เพราะเลือกได้แค่ 1 ค่า
+    const selectedEmployment = employments.find((e) => e.key === selectedKey);
+    if (selectedEmployment) {
+      setPaymentType(selectedEmployment.label);
+    }
+  };
+
   return (
     <main className="flex flex-col min-h-[100dvh]">
       <div className="grow flex flex-col items-center px-6 gap-6 mb-6">
@@ -151,16 +176,16 @@ export default function Add() {
         {/* เลือกบริการ */}
         <div className="flex flex-col w-full md:w-[45%] lg:w-[50%] gap-1">
           <h2>เลือกบริการที่ต้องการรับการดูแล</h2>
-          <Select
-            className="w-full"
-            placeholder="สามารถเลือกได้มากกว่า 1 รายการ"
-            selectionMode="multiple"
-            onChange={(e) => setWantClientType(e.target.value)}
-          >
-            {services.map((service) => (
-              <SelectItem key={service.key}>{service.label}</SelectItem>
-            ))}
-          </Select>
+            <Select
+              className="w-full"
+              placeholder="สามารถเลือกได้มากกว่า 1 รายการ"
+              selectionMode="multiple"
+              onSelectionChange={handleSelectChange}
+            >
+              {services.map((service) => (
+                <SelectItem key={service.key}>{service.label}</SelectItem>
+              ))}
+            </Select>                                                             
         </div>
 
         {/* เริ่มต้น / สิ้นสุด */}
@@ -227,8 +252,9 @@ export default function Add() {
               <Select
                 className="w-full"
                 placeholder="เลือกรูปแบบการจ้างงาน"
-                selectedKeys={paymentType ? [paymentType] : []}
-                onChange={(e) => setPaymentType(e.target.value)}
+                selectionMode="single"
+                selectedKeys={paymentType ? [paymentType] : []} // ถ้า paymentType เป็น label ต้องแมปกลับ
+                onSelectionChange={handlePaymentTypeChange}
               >
                 {employments.map((employment) => (
                   <SelectItem key={employment.key}>{employment.label}</SelectItem>

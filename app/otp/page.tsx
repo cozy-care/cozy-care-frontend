@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { NavigateBefore } from '@mui/icons-material';
 import { useRouter } from "next/navigation";
 import axios, { AxiosError } from 'axios';
+import Swal from 'sweetalert2'; // ✅ Import SweetAlert2
 
 interface ApiResponse {
   message?: string;
@@ -62,7 +63,13 @@ export default function Otp() {
       );
 
       if (response.status === 200) {
-        console.log("OTP verification successful!");
+        await Swal.fire({
+          icon: 'success',
+          title: 'รหัส OTP ถูกต้อง',
+          text: 'กำลังเข้าสู่ระบบ...',
+          timer: 1500,
+          showConfirmButton: false,
+        });
         router.push("/home");
       }
     } catch (error: unknown) {

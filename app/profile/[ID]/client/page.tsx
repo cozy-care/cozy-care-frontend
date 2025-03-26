@@ -68,14 +68,15 @@ export default function UserClient() {
 
   return (
     <main className="flex flex-col min-h-[100dvh]">
+        <div
+          onClick={handleClick} // เมื่อคลิกที่ไอคอน จะไปที่หน้าของผู้ใช้
+          className="text-cozy-green-light cursor-pointer p-3" // เพิ่ม padding และ cursor pointer
+        >
+          <ArrowBackIosNew style={{ fontSize: "30px" }} /> {/* ขนาดไอคอน */}
+        </div>
       <div className="grow flex flex-col items-center px-6 gap-6 mb-6">
         <div className="flex relative items-center gap-3 w-full h-[50px]">
-          <div
-            onClick={handleClick} // เมื่อคลิกที่ไอคอน จะไปที่หน้าของผู้ใช้
-            className="text-cozy-green-light cursor-pointer p-3" // เพิ่ม padding และ cursor pointer
-          >
-            <ArrowBackIosNew style={{ fontSize: "30px" }} /> {/* ขนาดไอคอน */}
-          </div>
+
           <h1 className="absolute w-full flex text-lg font-bold justify-center items-center">
             ผู้รับการดูแล
           </h1>

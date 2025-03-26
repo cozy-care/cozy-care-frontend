@@ -3,7 +3,7 @@ export const services = [
   { key: "bedridden", label: "ดูแลผู้ป่วยติดเตียง" },
   { key: "child", label: "ดูแลเด็กเล็ก" },
   { key: "takeToHospital", label: "พาไปโรงพยาบาล" },
-  { key: "takeToSpecifiled", label: "ขับรถไปส่งตามที่ระบุ" },
+  { key: "takeToSpecifiled", label: "พาไปส่งตามที่ระบุ" },
 ];
 
 export const employments = [
