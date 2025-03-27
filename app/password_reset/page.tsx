@@ -10,18 +10,34 @@ interface passwordResetCredentials {
   usernameOrEmail: string;
 }
 
-async function passwordResetUser(credentials: passwordResetCredentials): Promise<{ success: boolean; }> {
+type PasswordResetResponse = {
+  success: boolean;
+  message?: string;
+  email?: string;
+};
+
+async function passwordResetUser(credentials: passwordResetCredentials): Promise<PasswordResetResponse> {
   try {
-    await axios.post(
+    const response = await axios.post(
       `${process.env.NEXT_PUBLIC_API_URL}/api/auth/sendResetPasswordEmail`,
       credentials,
       { withCredentials: true }
     );
 
-    return { success: true };
-  } catch (error) {
+    return {
+      success: true,
+      message: response.data?.message || 'Password reset email sent.',
+      email: response.data?.email,
+    };
+  } catch (error: any) {
     console.error("There was an error password resetting!", error);
-    return { success: false };
+    
+    const errorMessage = error?.response?.data?.error || "Unknown error occurred";
+
+    return {
+      success: false,
+      message: errorMessage,
+    };
   }
 }
 
@@ -42,6 +58,7 @@ async function checkAuth(router: any): Promise<void> {
 export default function passwordReset() {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const router = useRouter();
+  const [resetEmail, setResetEmail] = useState<string>("");
 
   useEffect(() => {
     document.title = "Password Reset - Cozy Care";
@@ -54,12 +71,13 @@ export default function passwordReset() {
     const form = event.target as HTMLFormElement;
     const usernameOrEmail = (form.elements.namedItem("usernameOrEmail") as HTMLInputElement).value;
 
-    const success = await passwordResetUser({ usernameOrEmail });
+    const result = await passwordResetUser({ usernameOrEmail });
 
-    if (success && !isOpen) {
+    if (result.success && result.email) {
+      setResetEmail(result.email);
       onOpen();
     } else {
-      console.log("Login failed");
+      console.log("Password reset failed:", result.message);
     }
   };
 
@@ -102,7 +120,7 @@ export default function passwordReset() {
                 <ModalHeader className="flex flex-col gap-1">สำเร็จ</ModalHeader>
                 <ModalBody>
                   <p>
-                    คำขอดูรหัสผ่านได้ถูกส่งไปที่อีเมล <b>example@hotmail.com</b> แล้ว
+                    คำขอดูรหัสผ่านได้ถูกส่งไปที่อีเมล <b>{resetEmail}</b> แล้ว
                   </p>
                 </ModalBody>
                 <ModalFooter>
