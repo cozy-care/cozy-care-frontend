@@ -121,7 +121,7 @@ export default function NavBar() {
               <Add />
             </Button>
           </NavbarItem>
-          <NavbarItem className="w-1/5">
+          {/* <NavbarItem className="w-1/5">
             <Button
               as={Link}
               href="/patient"
@@ -132,7 +132,7 @@ export default function NavBar() {
             >
               <Accessible />
             </Button>
-          </NavbarItem>
+          </NavbarItem> */}
           <NavbarItem className='w-1/5'>
             <Button as={Link} href="/hospital" className={`font-bold w-full ${pathname === "/hospital" && "bg-[#28789E] dark:bg-cozy-teal-dark text-white dark:text-black pointer-events-none"}`} isIconOnly color="secondary">
               <DomainAdd />
