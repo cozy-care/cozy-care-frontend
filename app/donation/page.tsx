@@ -85,7 +85,7 @@ export default function Donation() {
         >
           <Image
             alt="QR สำหรับบริจาคเงิน"
-            src="https://cdn.discordapp.com/attachments/1053233122336051280/1354501831526715714/cozyQR.png?ex=67e585a2&is=67e43422&hm=6924c177f763b3a99d223ec7cd230747a35581d2dbf57c122afff1aad26b8dbf&"
+            src="/cozyQR.png"
             width={300}
             height={300}
             className="object-contain aspect-square rounded-xl cursor-pointer hover:opacity-90 transition"
