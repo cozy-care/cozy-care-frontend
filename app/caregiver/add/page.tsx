@@ -19,6 +19,7 @@ import Swal from 'sweetalert2';
 import { Textarea } from "@nextui-org/react";
 import { getLocalTimeZone } from "@internationalized/date";
 import { CalendarDateTime } from "@internationalized/date";
+import type { Selection } from "@nextui-org/react";
 
 // ✅ dynamic import แบบ ssr: false
 const MapPicker = dynamic(() => import("../../../components/MapPicker"), {
@@ -51,6 +52,7 @@ export default function Add() {
   const [addressInput, setAddressInput] = useState("");
   const [wantClientType, setWantClientType] = useState<string[]>([]);
   const [paymentType, setPaymentType] = useState("");
+  const [paymentTypeKey, setPaymentTypeKey] = useState("");
   const [priceInput, setPriceInput] = useState("");
   const [moreSkillInput, setMoreSkillInput] = useState("");
   const [startDate, setStartDate] = useState<any>(null);
@@ -100,12 +102,15 @@ export default function Add() {
       );
       const caregiver_id = caregiverRes.data.caregiver.caregiver_id;
 
+      const selectedEmployment = employments.find(e => e.key === paymentTypeKey);
+      const paymentType = selectedEmployment?.label || ""; // label ที่จะส่ง
+      
       const body = {
         caregiver_id,
         address: addressInput,
         geocode: lat && lng ? `${lat},${lng}` : null,
         want_client_type: wantClientType.join(', '),
-        payment_type: paymentType,
+        payment_type: paymentType, // ✅ label ที่ต้องการ
         price: priceInput,
         more_skill: moreSkillInput || null,
         start_time: combineDateAndTime(startDate, startTimeValue),
@@ -145,11 +150,10 @@ export default function Add() {
     setWantClientType(selectedLabels);
   };
 
-  const handlePaymentTypeChange = (keys: any) => {
-    const selectedKey = Array.from(keys)[0]; // เพราะเลือกได้แค่ 1 ค่า
-    const selectedEmployment = employments.find((e) => e.key === selectedKey);
-    if (selectedEmployment) {
-      setPaymentType(selectedEmployment.label);
+  const handlePaymentTypeChange = (keys: Selection) => {
+    const selectedKey = Array.from(keys).at(0);
+    if (typeof selectedKey === 'string') {
+      setPaymentTypeKey(selectedKey);
     }
   };
 
@@ -253,7 +257,7 @@ export default function Add() {
                 className="w-full"
                 placeholder="เลือกรูปแบบการจ้างงาน"
                 selectionMode="single"
-                selectedKeys={paymentType ? [paymentType] : []} // ถ้า paymentType เป็น label ต้องแมปกลับ
+                selectedKeys={paymentTypeKey ? [paymentTypeKey] : []}
                 onSelectionChange={handlePaymentTypeChange}
               >
                 {employments.map((employment) => (
