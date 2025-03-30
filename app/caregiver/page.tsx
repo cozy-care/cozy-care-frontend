@@ -188,6 +188,7 @@ export default function Caregiver() {
           />
         </div>
 
+        {!isOpen && (
         <div className="flex justify-center items-center gap-3 py-2 sticky top-[111px] w-full h-max z-[99] transition bg-white dark:bg-cozy-background-dark">
           <Link onPress={handleAddCaregiver} className="w-max text-sm hover:cursor-pointer">
             เพิ่มข้อมูลผู้ดูแล
@@ -197,6 +198,7 @@ export default function Caregiver() {
             <FilterAlt sx={{ fontSize: 25 }} />
           </Link>
         </div>
+        )}
 
         <div className="flex flex-col w-full items-center gap-4">
           {filteredCaregivers.map((data, index) => (
@@ -221,7 +223,7 @@ export default function Caregiver() {
       </div>
 
 
-      <Modal isOpen={isOpen} onOpenChange={onClose}>
+      <Modal isOpen={isOpen} onOpenChange={onClose} scrollBehavior="inside">
         <ModalContent>
           {(onClose) => (
             <>
