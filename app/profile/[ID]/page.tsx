@@ -195,6 +195,7 @@ export default function Profile() {
 
           <Button
             as={Link}
+            isDisabled
             href={`/profile/${userData.user_id}/history`}
             radius="full"
             className="flex justify-start shadow-lg bg-[#EFF0F0] text-black"
